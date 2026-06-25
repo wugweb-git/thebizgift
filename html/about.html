@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story | The Biz Gift</title>
+  <meta name="description" content="Discover why The Biz Gift was founded to change corporate gifting in India from an afterthought into a purposeful business decision.">
+  
+  <link rel="icon" type="image/png" href="image/TBG Logo New.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PAGE-SPECIFIC OVERRIDES & ABOUT LAYOUTS */
+    
+    :root {
+      /* CRITICAL UPDATE: This hex code is calibrated to match the specific 
+         background color of 'TBG Logo New.png' so the logo blends perfectly 
+         and can be scaled up without looking like a box.
+      */
+      --bg-charcoal: #292929; 
+    }
+
+    /* Increased Logo Sizing for the Header */
+    .brand-identity img {
+      height: 80px; /* Increased from 45px */
+      width: auto;
+      display: block;
+      /* Smooth blending backup */
+      mix-blend-mode: normal; 
+    }
+
+    /* About Us Hero Section */
+    .about-hero {
+      background-color: var(--bg-charcoal);
+      color: #FFFFFF;
+      padding: 8rem var(--space-layout) 10rem var(--space-layout);
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .about-hero h1 {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .about-hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* The Core Brand Story Grid */
+    .brand-story-section {
+      padding: 10rem var(--space-layout);
+      background-color: #FFFFFF;
+    }
+    .story-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .story-text-block h2 {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+    }
+    .story-text-block p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .story-image-block {
+      background-color: var(--bg-ivory);
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+    .story-image-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Point of View (POV) Banner */
+    .pov-banner {
+      background-color: var(--bg-ivory);
+      padding: 10rem var(--space-layout);
+      text-align: center;
+      border-top: 1px solid #EAEAE6;
+      border-bottom: 1px solid #EAEAE6;
+    }
+    .pov-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pov-container h3 {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+      line-height: 1.3;
+    }
+    .pov-container p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .story-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .story-image-block { aspect-ratio: 16 / 9; }
+    }
+    @media (max-width: 768px) {
+      .about-hero h1 { font-size: 3rem; }
+      .story-text-block h2 { font-size: 2.5rem; }
+      .pov-container h3 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-identity">
+        <a href="/">
+          <img src="image/TBG Logo New.png" alt="The Biz Gift | Premium B2B Corporate Gifting">
+        </a>
+      </div>
+      
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="/explore/" class="nav-link">Explore Hampers</a>
+        <a href="/customisation.html" class="nav-link">Customisation</a>
+        <a href="/about.html" class="nav-link" style="color: var(--accent-bronze);">Our Story</a>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="/quote.html" class="btn-action btn-quote-header">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-hero">
+      <div class="about-hero-container">
+        <h1>The intent behind the box.</h1>
+        <p>Curated, purposeful, and a little bit memorable. Here is why we started The Biz Gift.</p>
+      </div>
+    </section>
+
+    <section class="brand-story-section">
+      <div class="story-grid">
+        <div class="story-text-block">
+          <h2>Corporate gifting in India had become an afterthought.</h2>
+          <p>The Biz Gift was founded on a simple observation: the industry was filled with generic hampers, last-minute bulk orders, and zero personality. We were seeing gifts that employees and clients forgot the exact moment they were unwrapped.</p>
+          <p>Companies genuinely wanted to thank their people and partners, but the ready-made gifting options available rarely felt thoughtful enough to actually communicate that gratitude.</p>
+          <p>We built this brand to change that standard. Today, we work with companies across India to turn routine corporate gifting into a physical touchpoint that people actually look forward to receiving.</p>
+        </div>
+        <div class="story-image-block">
+          <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="The Biz Gift Curated Aesthetic">
+        </div>
+      </div>
+    </section>
+
+    <section class="pov-banner">
+      <div class="pov-container">
+        <h3>"A well-chosen gift builds loyalty in a way that an email or a bonus line item never will."</h3>
+        <p>A gift is rarely just a gift. It's a message—about how much a relationship matters, and how much thought went into showing it. In most organizations, gifting is treated as a checkbox. A vendor is picked in a hurry, a generic hamper goes out, and the moment passes.</p>
+        <p>But the companies that get this right understand something simple: employees remember who made them feel valued. Clients remember who made the effort personal.</p>
+        <p>This matters more, not less, in a world that runs on emails, deadlines, and back-to-back video meetings. A thoughtful gift breaks that pattern—it tells someone they were seen as a person, not just a stakeholder in a transaction. That belief is exactly why we are here.</p>
+      </div>
+    </section>
+
+    <section class="closing-cta-banner">
+      <div class="closing-container">
+        <h2>Ready to upgrade your gifting strategy?</h2>
+        <p>Let's align on your upcoming corporate gifting brief. No transactional walls, just direct collaborative curation.</p>
+        <div class="closing-actions">
+          <a href="/quote.html" class="btn-action" style="background-color: var(--bg-charcoal); color: #FFF;">Request Custom Quote</a>
+          <a href="

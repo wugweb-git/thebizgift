@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Biz Gift | Showroom</title>
+  <link rel="icon" type="image/png" href="../image/TBG Logo New.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .catalog-header { background-color: var(--bg-ivory); padding: 4rem var(--space-layout); text-align: center; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; padding: 5rem var(--space-layout); max-width: 1400px; margin: 0 auto; }
+    @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="catalog-header">
+      <h1 id="taxonomy-title">Loading...</h1>
+    </section>
+
+    <section class="catalog-main">
+      <div class="catalog-grid" id="taxonomy-grid">
+        <p>Loading products for this category...</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/components.js"></script>
+  <script>
+    // 1. Load Global Components
+    // We use '../' because this file is in /explore/ and header.html is in root
+    window.addEventListener('DOMContentLoaded', () => {
+      loadComponent('header-placeholder', '../header.html');
+      loadComponent('footer-placeholder', '../footer.html');
+      initTaxonomy();
+    });
+
+    // 2. Dynamic Taxonomy Engine
+    async function initTaxonomy() {
+      const params = new URLSearchParams(window.location.search);
+      const activeTag = params.get('tag');
+      
+      if (!activeTag) {
+        document.getElementById('taxonomy-title').innerText = "Showroom";
+        return;
+      }
+
+      document.getElementById('taxonomy-title').innerText = activeTag;
+
+      try {
+        const res = await fetch('/api/get-hampers');
+        const data = await res.json();
+        
+        const filtered = data.filter(item => 
+          item.category.includes(activeTag) || 
+          item.occasion.includes(activeTag) ||
+          item.curationTag === activeTag
+        );
+
+        const grid = document.getElementById('taxonomy-grid');
+        if (filtered.length > 0) {
+          grid.innerHTML = filtered.map(item => `
+            <a href="../hamper/${item.slug}" class="hamper-card">
+              <div class="card-media"><img src="${item.image}" alt="${item.name}"></div>
+              <h3>${item.name}</h3>
+            </a>
+          `).join('');
+        } else {
+          grid.innerHTML = '<p>No products found for this tag.</p>';
+        }
+      } catch (e) {
+        console.error("Failed to load taxonomy data", e);
+      }
+    }
+  </script>
+</body>
+</html>

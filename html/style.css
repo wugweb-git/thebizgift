@@ -1,0 +1,350 @@
+/* --------------------------------------------------------------------------
+   1. CORE DESIGN TOKENS (BRAND SYSTEM VARIABLES)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --bg-charcoal: #1A1A1A;       /* Deep dark brand base */
+  --bg-ivory: #FAFAF7;          /* Ultra-premium light canvas surface */
+  --accent-bronze: #C59A7F;     /* Strategic branding touchpoint accent */
+  --text-dark: #2C2C2A;         /* Primary readable body color */
+  --text-muted: #706F6C;        /* Supporting editorial text gray */
+  
+  /* Font Families */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  
+  /* Structural Spacing & Layout */
+  --space-layout: 4rem;         /* Enforces whitespace padding constraints */
+  --grid-gap: 4rem;             /* Wide structural grid card columns */
+  
+  /* Motion & Interaction Curves */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); /* Luxury motion timing */
+  --transition-fast: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Global Reset Logic */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-ivory);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   2. REUSABLE MICRO-INTERACTIVE UTILITIES (BUTTONS & LINKS)
+   -------------------------------------------------------------------------- */
+.btn-action {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid var(--accent-bronze);
+  color: var(--accent-bronze);
+  padding: 1.1rem 2.75rem;
+  display: inline-block;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+  transition: color var(--transition-fast);
+}
+
+/* Sophisticated solid slide-up reveal interaction on hover */
+.btn-action::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: var(--accent-bronze);
+  z-index: -1;
+  transition: height var(--transition-fast);
+}
+
+.btn-action:hover {
+  color: var(--bg-charcoal);
+}
+
+.btn-action:hover::before {
+  height: 100%;
+}
+
+/* Minimalist Navigation Link Micro-Underlines */
+.nav-link {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent-bronze);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--accent-bronze);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --------------------------------------------------------------------------
+   3. STRUCTURAL GLOBAL SECTIONS (HEADER & FOOTER)
+   -------------------------------------------------------------------------- */
+.site-header {
+  background-color: var(--bg-charcoal);
+  padding: 1.5rem var(--space-layout);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-identity img {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3.5rem;
+}
+
+.nav-links .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.header-actions .btn-quote-header {
+  padding: 0.6rem 1.75rem;
+  font-size: 0.8rem;
+}
+
+.site-footer {
+  background-color: var(--bg-charcoal);
+  color: #FFFFFF;
+  padding: 8rem var(--space-layout) 3rem var(--space-layout);
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: var(--grid-gap);
+  padding-bottom: 5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-brand-summary img {
+  height: 42px;
+  width: auto;
+  margin-bottom: 1.5rem;
+}
+
+.footer-brand-summary p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 300;
+  max-width: 280px;
+  line-height: 1.7;
+}
+
+.footer-links-column h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-bronze);
+  margin-bottom: 1.75rem;
+}
+
+.footer-links-column a {
+  display: block;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+  margin-bottom: 0.85rem;
+  font-weight: 300;
+  transition: color var(--transition-fast);
+}
+
+.footer-links-column a:hover {
+  color: #FFFFFF;
+  padding-left: 2px; /* Very micro displacement response */
+}
+
+.footer-utility-strip {
+  max-width: 1400px;
+  margin: 2.5rem auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 300;
+}
+
+.utility-links a {
+  color: inherit;
+  margin-left: 2.5rem;
+  transition: color var(--transition-fast);
+}
+
+.utility-links a:hover {
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   4. VIEW COMPONENT SECTION SPECIFICS (HOMEPAGE STYLES)
+   -------------------------------------------------------------------------- */
+/* Hero Layer */
+.hero-section {
+  background-color: var(--bg-charcoal);
+  color: #FFFFFF;
+  padding: 11rem var(--space-layout) 13rem var(--space-layout);
+  text-align: center;
+}
+
+.hero-container {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: 4.2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: luxuryFadeReveal 1.2s var(--ease-premium) forwards; /* Smooth structural entrance on load */
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 650px;
+  margin: 0 auto 3.5rem auto;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: luxuryFadeReveal 1.2s var(--ease-premium) 0.2s forwards; /* Slight stagger lag offset */
+}
+
+/* Introduction Narrative Block */
+.intro-story {
+  padding: 9rem var(--space-layout);
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EAEAE6;
+}
+
+.story-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-bronze);
+  margin-bottom: 1.5rem;
+  display: block;
+  font-weight: 600;
+}
+
+.story-container h2 {
+  font-family:
+  
+  
+  /* Sticky Header logic */
+.site-header {
+  /* Change this hex code to the exact background of your TBG Logo New.png */
+  background-color: #292929; 
+  padding: 1.5rem var(--space-layout);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Footer corner aesthetics */
+.site-footer {
+  background-color: var(--bg-charcoal);
+  color: #FFFFFF;
+  padding: 7rem var(--space-layout) 3rem var(--space-layout);
+  /* This creates the aesthetic corner curves */
+  border-top-left-radius: 40px; 
+  border-top-right-radius: 40px;
+}
+
+/* Sticky Header Logic */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #292929; /* Single solid color */
+  transition: all 0.3s ease;
+  padding: 1.5rem var(--space-layout);
+}
+
+/* Shrink effect when scrolled */
+.site-header.scrolled {
+  padding: 0.8rem var(--space-layout);
+}
+
+/* Footer Social Icons */
+.footer-socials {
+  margin: 1rem 0;
+  display: flex;
+  gap: 15px;
+}
+.footer-socials a {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+.footer-socials a:hover {
+  color: #C59A7F; /* Accent bronze */
+}

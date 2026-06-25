@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customisation Capabilities | The Biz Gift</title>
+  <meta name="description" content="Elevate your corporate gifting with bespoke logo branding, custom-colored ribbons, and personalized notes.">
+  
+  <!-- Favicon Integration using your Logo -->
+  <link rel="icon" type="image/png" href="image/TBG Logo New.png">
+  
+  <!-- Premium Typography Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Link to global stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PAGE-SPECIFIC OVERRIDES & CUSTOMISATION LAYOUTS */
+    
+    :root {
+      /* Matching the logo's specific background color */
+      --bg-charcoal: #292929; 
+    }
+
+    .brand-identity img {
+      height: 80px; 
+      width: auto;
+      display: block;
+      mix-blend-mode: normal; 
+    }
+
+    /* Customisation Hero Section */
+    .custom-hero {
+      background-color: var(--bg-ivory);
+      color: var(--text-dark);
+      padding: 10rem var(--space-layout) 6rem var(--space-layout);
+      text-align: center;
+      border-bottom: 1px solid #EAEAE6;
+    }
+    .custom-hero h1 {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .custom-hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* Alternating Editorial Feature Blocks */
+    .capabilities-matrix {
+      background-color: #FFFFFF;
+      padding: 6rem 0;
+    }
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem var(--space-layout);
+      gap: 6rem;
+    }
+    /* Reverses the grid layout for every even row to create an editorial rhythm */
+    .feature-row:nth-child(even) .feature-text {
+      order: -1; 
+    }
+    
+    .feature-text {
+      padding: 2rem 0;
+    }
+    .feature-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-bronze);
+      margin-bottom: 1.5rem;
+      display: block;
+      font-weight: 600;
+    }
+    .feature-text h2 {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+    .feature-text p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    
+    .feature-image {
+      background-color: var(--bg-ivory);
+      aspect-ratio: 4 / 4;
+      overflow: hidden;
+      border: 1px solid #EAEAE6;
+    }
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--transition-smooth);
+    }
+    .feature-row:hover .feature-image img {
+      transform: scale(1.03);
+    }
+
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .feature-row { grid-template-columns: 1fr; gap: 3rem; padding: 4rem var(--space-layout); }
+      .feature-row:nth-child(even) .feature-text { order: 0; } /* Reset order on mobile */
+      .feature-image { aspect-ratio: 16 / 10; }
+    }
+    @media (max-width: 768px) {
+      .custom-hero h1 { font-size: 3.2rem; }
+      .feature-text h2 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL SYSTEM HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-identity">
+        <a href="/">
+          <img src="image/TBG Logo New.png" alt="The Biz Gift | Premium B2B Corporate Gifting">
+        </a>
+      </div>
+      
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="/explore/" class="nav-link">Explore Hampers</a>
+        <a href="/customisation.html" class="nav-link" style="color: var(--accent-bronze);">Customisation</a>
+        <a href="/about.html" class="nav-link">Our Story</a>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="/quote.html" class="btn-action btn-quote-header">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="custom-hero">
+      <div class="hero-container">
+        <h1>Make it undeniably yours.</h1>
+        <p>A corporate gift should feel like a seamless extension of your brand. We offer refined, understated customisation options that elevate the unboxing experience without making it feel like a billboard.</p>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES MATRIX -->
+    <section class="capabilities-matrix">
+      
+      <!-- Feature 1: Logo Branding -->
+      <div class="feature-row" id="logo">
+        <div class="feature-image">
+          <!-- The white bottle from your assets is perfect to show clean logo placement -->
+          <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Precision Logo Branding on Premium Drinkware">
+        </div>
+        <div class="feature-text">
+          <span class="feature-tag">01. Logo Branding</span>
+          <h2>Precision identity integration.</h2>
+          <p>We apply your corporate identity to physical products using high-end techniques like laser engraving, subtle screen printing, and debossing. The goal is a premium, retail-quality finish that employees and clients are proud to carry into a boardroom.</p>
+          <a href="/explore/" class="btn-action">View Brandable Items</a>
+        </div>
+      </div>
+
+      <!-- Feature 2: Custom Packaging & Ribbons -->
+      <div class="feature-row" id="packaging">
+        <div class="feature-image">
+          <!-- The BCC Box shows the ribbon and external branding beautifully -->
+          <img src="image/BCC Hamper 2.png" alt="Custom Ribbon and Branded Box Packaging">
+        </div>
+        <div class="feature-text">
+          <span class="feature-tag">02. The Unboxing Experience</span>
+          <h2>Bespoke packaging & colorways.</h2>
+          <p>The unboxing moment sets the tone. We offer custom-printed outer sleeves, rigid box branding, and hand-tied ribbons color-coordinated to match your exact brand guidelines. It ensures your corporate identity is felt before the box is even opened.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3: Personalized Notes -->
+      <div class="feature-row" id="inserts">
+        <div class="feature-image">
+          <!-- The Heritage Box shows custom internal sleeves and beautiful layout -->
+          <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Personalized Corporate Greeting Cards and Inserts">
+        </div>
+        <div class="feature-text">
+          <span class="feature-tag">03. The Human Touch</span>
+          <h2>Personalized notes & inserts.</h2>
+          <p>Gifting is about connection. We design and print high-GSM custom greeting cards, founder letters, and specialized insert guides (like brewing instructions or welcome messages) that fit perfectly within the internal architecture of your chosen hamper.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CLOSING ACTION FRAME -->
+    <section class="closing-cta-banner">
+      <div class="closing-container">
+        <h2>Have a specific brief in mind?</h2>
+        <p>Let's discuss how we can map your corporate identity onto our curated showroom products.</p>
+        <div class="closing-actions">
+          <a href="/quote.html" class="btn-action" style="background-color: var(--bg-charcoal); color: #FFF;">Request Custom Quote</a>
+          <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20custom%20branding%20options" class="btn-action" target="_blank" rel="noopener">Chat via WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- GLOBAL FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-summary">
+        <img src="image/TBG Logo New.png" alt="The Biz Gift" style="height: 60px;">
+        <p>We design hampers with care and intentionality—curated, purposeful, and a little bit memorable.</p>
+      </div>
+      
+      <div class="footer-links-column">
+        <h4>Showroom</h4>
+        <a href="/explore/">All Gift Hampers</a>
+        <a href="/explore/employee-joining-kits">Onboarding Kits</a>
+        <a href="/explore/event-giveaways">Event Giveaways</a>
+      </div>
+      
+      <div class="footer-links-column">
+        <h4>Capabilities</h4>
+        <a href="#logo">Logo Branding Options</a>
+        <a href="#packaging">Packaging & Curation</a>
+        <a href="/quote.html#sla">Response Commitment Window</a>
+      </div>
+      
+      <div class="footer-links-column">
+        <h4>Connect</h4>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn Networks</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram Curation</a>
+        <a href="https://wa.me/919999999999" target="_blank" rel="noopener">Direct WhatsApp Line</a>
+      </div>
+    </div>
+    
+    <div class="footer-utility-strip">
+      <p>&copy; 2026 The Biz Gift. All rights reserved.</p>
+      <div class="utility-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms & Conditions</a>
+        <a href="/sitemap.html">Sitemap Matrix</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PERSISTENT WHATSAPP WIDGET -->
+  <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20looking%20to%20explore%20customisation%20options" class="whatsapp-sticky-widget" target="_blank" rel="noopener">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+    <span>Discuss on WhatsApp</span>
+  </a>
+
+</body>
+</html>

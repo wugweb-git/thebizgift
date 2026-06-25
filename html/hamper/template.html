@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The "BCC" Hamper | The Biz Gift</title>
+  <meta name="description" content="Curated Coffee & Calm Blend. View minimum order quantities, branding options, and request a custom corporate quote.">
+  
+  <!-- Favicon Integration -->
+  <link rel="icon" type="image/png" href="../image/TBG Logo New.png">
+  
+  <!-- Component Integration -->
+  <script src="/components.js" defer></script> 
+
+  <!-- Fontawesome Integration -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Premium Typography Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Link to global stylesheet -->
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* PAGE-SPECIFIC OVERRIDES & PDP LAYOUTS */
+    
+    :root {
+      --bg-charcoal: #292929; 
+    }
+
+    .brand-identity img {
+      height: 80px; 
+      width: auto;
+      display: block;
+      mix-blend-mode: normal; 
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumbs {
+      padding: 2rem var(--space-layout) 0 var(--space-layout);
+      background-color: #FFFFFF;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+    .breadcrumbs a {
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent-bronze);
+    }
+    .breadcrumbs span {
+      margin: 0 0.5rem;
+    }
+
+    /* Main Product Split Layout */
+    .product-showcase {
+      background-color: #FFFFFF;
+      padding: 3rem var(--space-layout) 8rem var(--space-layout);
+    }
+    .product-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+      align-items: flex-start;
+    }
+
+    /* Left Column: Media Gallery */
+    .product-gallery {
+      position: sticky;
+      top: 120px; /* Sticks the image while scrolling through details */
+    }
+    .main-image {
+      background-color: var(--bg-ivory);
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border: 1px solid #EAEAE6;
+      margin-bottom: 1rem;
+    }
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Right Column: Details & Form */
+    .product-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .product-title {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .product-tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    /* B2B Specification Matrix */
+    .spec-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      border-top: 1px solid #EAEAE6;
+      border-bottom: 1px solid #EAEAE6;
+      padding: 2rem 0;
+      margin-bottom: 3rem;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .spec-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .spec-value {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    
+    /* Branding Option Pills */
+    .branding-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .branding-pill {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--accent-bronze);
+      color: var(--accent-bronze);
+      border-radius: 50px;
+    }
+
+    .product-description {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    /* Product-Specific Inline Form */
+    .inline-quote-form {
+      background-color: var(--bg-ivory);
+      padding: 3rem;
+      border: 1px solid #EAEAE6;
+    }
+    .inline-quote-form h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .inline-quote-form > p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.full {
+      grid-column: span 2;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .form-group input, 
+    .form-group select {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      padding: 0.8rem;
+      border: 1px solid #D1D1CD;
+      background-color: #FFFFFF;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .form-group input:focus, 
+    .form-group select:focus {
+      border-color: var(--accent-bronze);
+    }
+    .btn-submit-inline {
+      grid-column: span 2;
+      background-color: var(--bg-charcoal);
+      color: #FFFFFF;
+      border: none;
+      padding: 1.1rem;
+      font-family: var(--font-sans);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color var(--transition-fast);
+    }
+    .btn-submit-inline:hover {
+      background-color: var(--accent-bronze);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .product-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .product-gallery { position: relative; top: 0; }
+    }
+    @media (max-width: 768px) {
+      .product-title { font-size: 2.8rem; }
+      .spec-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
+      .inline-quote-form { padding: 2rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .btn-submit-inline { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL SYSTEM HEADER (Paths point up one level) -->
+  <div id="header-placeholder"></div>
+
+  <main>
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs">
+      <a href="../index.html">Home</a> <span>/</span> 
+      <a href="../explore/index.html">Showroom</a> <span>/</span> 
+      <span id="breadcrumb-current">The BCC Hamper</span>
+    </div>
+
+    <!-- MAIN PRODUCT SECTION -->
+    <section class="product-showcase">
+      <div class="product-grid">
+        
+        <!-- Sticky Media Gallery -->
+        <div class="product-gallery">
+          <div class="main-image">
+            <img src="../image/BCC Hamper 2.png" alt="The BCC Hamper Set View" id="product-main-image">
+          </div>
+        </div>
+
+        <!-- Product Data & Conversion Area -->
+        <div class="product-details">
+          <h1 class="product-title" id="product-title">The "BCC" Hamper</h1>
+          <p class="product-tagline" id="product-tagline">Curated Coffee & Calm Blend</p>
+          
+          <p class="product-description" id="product-description">
+            A sophisticated curation designed for the modern professional. This hamper strikes the perfect balance between high-focus workplace tools and relaxation rituals. Packaged in our signature premium rigid box, it serves as an exceptional joining kit or high-tier client appreciation gift.
+          </p>
+
+          <!-- Dynamic Spec Matrix pulled from Airtable columns -->
+          <div class="spec-matrix">
+            <div class="spec-item">
+              <span class="spec-label">Minimum Order Qty (MOQ)</span>
+              <span class="spec-value" id="product-moq">50 Units</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Core Materials</span>
+              <span class="spec-value" id="product-material">Ceramic, Kraft Paper, Metal</span>
+            </div>
+            <div class="spec-item" style="grid-column: span 2;">
+              <span class="spec-label">Available Branding Options</span>
+              <div class="branding-tags" id="product-branding">
+                <span class="branding-pill">Screen Printing</span>
+                <span class="branding-pill">Custom Ribbons</span>
+                <span class="branding-pill">Logo Greeting Card</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product-Specific Inline Lead Form -->
+          <div class="inline-quote-form">
+            <h3>Request this Hamper</h3>
+            <p>Submit your details and our team will provide a tailored quote within hours.</p>
+            
+            <form class="form-grid" action="#" method="POST">
+              <!-- Hidden input to pass product context to CRM -->
+              <input type="hidden" name="interested_product" value="The BCC Hamper">
+              
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" required>
+              </div>
+              <div class="form-group full">
+                <label for="email">Work Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="qty">Target Qty</label>
+                <input type="number" id="qty" name="qty" min="50" placeholder="Min. 50">
+              </div>
+              <div class="form-group">
+                <label for="timeline">Timeline</label>
+                <select id="timeline" name="timeline">
+                  <option value="ASAP">ASAP (Under 2 weeks)</option>
+                  <option value="1 Month">Within 1 Month</option>
+                  <option value="Planning">Just Planning</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-submit-inline">Submit Inquiry</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- GLOBAL Newsletter ( -->
+<div id="newsletter-placeholder"></div>
+
+  <!-- GLOBAL FOOTER (Paths point up one level) -->
+ <div id="footer-placeholder"></div>
+ 
+  <!-- PERSISTENT WHATSAPP WIDGET -->
+  <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20interested%20in%20The%20BCC%20Hamper" class="whatsapp-sticky-widget" target="_blank" rel="noopener">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+    <span>Discuss on WhatsApp</span>
+  </a>
+
+</body>
+</html>
+
+```
