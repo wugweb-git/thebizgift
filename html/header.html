@@ -1,23 +1,96 @@
-<header class="site-header" id="main-header">
+ on <header class="site-header" id="siteHeader">
   <div class="header-container">
     <div class="brand-identity">
-      <a href="/index.html"><img src="/image/TBG Logo New.png" alt="Logo" style="height: 60px;"></a>
+      <a href="/">
+        <img src="image/TBG Logo New.png" alt="The Biz Gift | Premium B2B Corporate Gifting">
+      </a>
     </div>
-    <nav class="nav-links">
-      <a href="/explore/index.html" class="nav-link">Explore Hampers</a>
+    
+    <nav class="nav-links" aria-label="Main Navigation">
+      <a href="/" class="nav-link">Home</a>
+      
+      <div class="nav-item-dropdown">
+        <a href="/explore/" class="nav-link dropdown-toggle">Explore Gifts</a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-section">
+            <span class="nav-dropdown-label">By Occasion</span>
+            <a href="/explore/employee-joining-kits">Employee Joining Kits</a>
+            <a href="/explore/event-giveaways">Event Giveaways</a>
+          </div>
+          <div class="nav-dropdown-section">
+            <span class="nav-dropdown-label">By Category</span>
+            <a href="/explore/">Office Essentials</a>
+            <a href="/explore/">Drinkware</a>
+            <a href="/explore/">Office Accessories</a>
+            <a href="/explore/">Combo Gifts</a>
+            <a href="/explore/">Bags & Accessories</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-item-dropdown">
+        <a href="/explore/" class="nav-link dropdown-toggle">Collections</a>
+        <div class="nav-dropdown">
+          <a href="/explore/">Best Sellers</a>
+          <a href="/explore/">Premium Picks</a>
+          <a href="/explore/">Budget Gifting</a>
+          <a href="/explore/">Sustainable Choices</a>
+          <a href="/explore/">Trending Products</a>
+          <a href="/explore/">Under ₹500</a>
+          <a href="/explore/">Minimalist Gifts</a>
+        </div>
+      </div>
+      
       <a href="/customisation.html" class="nav-link">Customisation</a>
-      <a href="/about.html" class="nav-link">Our Story</a>
+      <a href="/about.html" class="nav-link">About</a>
+      <a href="/quote.html" class="nav-link">Get A Quote</a>
     </nav>
+    
     <div class="header-actions">
-      <a href="/quote.html" class="btn-action">Get a Quote</a>
+      <a href="/quote.html" class="btn-action btn-quote-header">Request A Proposal</a>
+      <button class="hamburger-toggle" id="hamburgerToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </div>
-</header>
 
-<script>
-  window.addEventListener('scroll', function() {
-    const header = document.getElementById('main-header');
-    if (window.scrollY > 50) { header.classList.add('scrolled'); } 
-    else { header.classList.remove('scrolled'); }
-  });
-</script>
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <a href="/">Home</a>
+    <span class="nav-dropdown-label">By Occasion</span>
+    <a href="/explore/employee-joining-kits" class="mobile-sub-link">Employee Joining Kits</a>
+    <a href="/explore/event-giveaways" class="mobile-sub-link">Event Giveaways</a>
+    <span class="nav-dropdown-label">By Category</span>
+    <a href="/explore/" class="mobile-sub-link">Office Essentials</a>
+    <a href="/explore/" class="mobile-sub-link">Drinkware</a>
+    <a href="/explore/" class="mobile-sub-link">Office Accessories</a>
+    <a href="/explore/" class="mobile-sub-link">Combo Gifts</a>
+    <a href="/explore/" class="mobile-sub-link">Bags & Accessories</a>
+    <span class="nav-dropdown-label">Collections</span>
+    <a href="/explore/" class="mobile-sub-link">Best Sellers</a>
+    <a href="/explore/" class="mobile-sub-link">Premium Picks</a>
+    <a href="/explore/" class="mobile-sub-link">Budget Gifting</a>
+    <a href="/explore/" class="mobile-sub-link">Sustainable Choices</a>
+    <a href="/explore/" class="mobile-sub-link">Trending Products</a>
+    <a href="/explore/" class="mobile-sub-link">Under ₹500</a>
+    <a href="/explore/" class="mobile-sub-link">Minimalist Gifts</a>
+    <a href="/customisation.html">Customisation</a>
+    <a href="/about.html">About</a>
+    <a href="/quote.html">Get A Quote</a>
+  </div>
+
+  <script>
+    // Sticky header scroll effect
+    const header = document.getElementById('siteHeader');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</header>

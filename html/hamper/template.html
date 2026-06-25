@@ -1,361 +1,432 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The "BCC" Hamper | The Biz Gift</title>
-  <meta name="description" content="Curated Coffee & Calm Blend. View minimum order quantities, branding options, and request a custom corporate quote.">
+  <title>The CC Hamper | The Biz Gift</title>
+  <meta name="description" content="A thoughtfully curated coffee experience designed for employee appreciation, client gifting and meaningful moments of connection.">
   
-  <!-- Favicon Integration -->
   <link rel="icon" type="image/png" href="../image/TBG Logo New.png">
-  
-  <!-- Component Integration -->
-  <script src="/components.js" defer></script> 
-
-  <!-- Fontawesome Integration -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Premium Typography Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Link to global stylesheet -->
+  
   <link rel="stylesheet" href="../style.css">
-
-  <style>
-    /* PAGE-SPECIFIC OVERRIDES & PDP LAYOUTS */
-    
-    :root {
-      --bg-charcoal: #292929; 
-    }
-
-    .brand-identity img {
-      height: 80px; 
-      width: auto;
-      display: block;
-      mix-blend-mode: normal; 
-    }
-
-    /* Breadcrumb Navigation */
-    .breadcrumbs {
-      padding: 2rem var(--space-layout) 0 var(--space-layout);
-      background-color: #FFFFFF;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-    }
-    .breadcrumbs a {
-      color: var(--text-dark);
-      text-decoration: none;
-      transition: color var(--transition-fast);
-    }
-    .breadcrumbs a:hover {
-      color: var(--accent-bronze);
-    }
-    .breadcrumbs span {
-      margin: 0 0.5rem;
-    }
-
-    /* Main Product Split Layout */
-    .product-showcase {
-      background-color: #FFFFFF;
-      padding: 3rem var(--space-layout) 8rem var(--space-layout);
-    }
-    .product-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 5rem;
-      align-items: flex-start;
-    }
-
-    /* Left Column: Media Gallery */
-    .product-gallery {
-      position: sticky;
-      top: 120px; /* Sticks the image while scrolling through details */
-    }
-    .main-image {
-      background-color: var(--bg-ivory);
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border: 1px solid #EAEAE6;
-      margin-bottom: 1rem;
-    }
-    .main-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Right Column: Details & Form */
-    .product-details {
-      display: flex;
-      flex-direction: column;
-    }
-    .product-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-    .product-tagline {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-    }
-
-    /* B2B Specification Matrix */
-    .spec-matrix {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      border-top: 1px solid #EAEAE6;
-      border-bottom: 1px solid #EAEAE6;
-      padding: 2rem 0;
-      margin-bottom: 3rem;
-    }
-    .spec-item {
-      display: flex;
-      flex-direction: column;
-    }
-    .spec-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .spec-value {
-      font-size: 1.05rem;
-      color: var(--text-dark);
-    }
-    
-    /* Branding Option Pills */
-    .branding-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.25rem;
-    }
-    .branding-pill {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.4rem 0.8rem;
-      border: 1px solid var(--accent-bronze);
-      color: var(--accent-bronze);
-      border-radius: 50px;
-    }
-
-    .product-description {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 3rem;
-    }
-
-    /* Product-Specific Inline Form */
-    .inline-quote-form {
-      background-color: var(--bg-ivory);
-      padding: 3rem;
-      border: 1px solid #EAEAE6;
-    }
-    .inline-quote-form h3 {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-    .inline-quote-form > p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    .form-group.full {
-      grid-column: span 2;
-    }
-    .form-group label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .form-group input, 
-    .form-group select {
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      padding: 0.8rem;
-      border: 1px solid #D1D1CD;
-      background-color: #FFFFFF;
-      outline: none;
-      transition: border-color var(--transition-fast);
-    }
-    .form-group input:focus, 
-    .form-group select:focus {
-      border-color: var(--accent-bronze);
-    }
-    .btn-submit-inline {
-      grid-column: span 2;
-      background-color: var(--bg-charcoal);
-      color: #FFFFFF;
-      border: none;
-      padding: 1.1rem;
-      font-family: var(--font-sans);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 500;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background-color var(--transition-fast);
-    }
-    .btn-submit-inline:hover {
-      background-color: var(--accent-bronze);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 1024px) {
-      .product-grid { grid-template-columns: 1fr; gap: 4rem; }
-      .product-gallery { position: relative; top: 0; }
-    }
-    @media (max-width: 768px) {
-      .product-title { font-size: 2.8rem; }
-      .spec-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
-      .inline-quote-form { padding: 2rem 1.5rem; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: span 1; }
-      .btn-submit-inline { grid-column: span 1; }
-    }
-  </style>
+  <link rel="stylesheet" href="../pages.css">
 </head>
 <body>
 
-  <!-- GLOBAL SYSTEM HEADER (Paths point up one level) -->
   <div id="header-placeholder"></div>
 
   <main>
-    <!-- BREADCRUMBS -->
-    <div class="breadcrumbs">
-      <a href="../index.html">Home</a> <span>/</span> 
-      <a href="../explore/index.html">Showroom</a> <span>/</span> 
-      <span id="breadcrumb-current">The BCC Hamper</span>
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../explore/index.html">Explore</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">The CC Hamper</span>
+        </nav>
+      </div>
     </div>
 
-    <!-- MAIN PRODUCT SECTION -->
-    <section class="product-showcase">
-      <div class="product-grid">
-        
-        <!-- Sticky Media Gallery -->
-        <div class="product-gallery">
-          <div class="main-image">
-            <img src="../image/BCC Hamper 2.png" alt="The BCC Hamper Set View" id="product-main-image">
+    <!-- SECTION 01: PRODUCT HERO (55/45 Split) -->
+    <section class="hamper-hero">
+      <div class="hamper-hero-container">
+        <div class="hamper-hero-image">
+          <img src="../image/BCC Hamper 2.png" alt="The CC Hamper - Premium Coffee & Calm Collection">
+        </div>
+        <div class="hamper-hero-content">
+          <span class="collection-label">Premium Collection</span>
+          <h1>The CC Hamper</h1>
+          <p class="hero-story">A thoughtfully curated coffee experience designed for employee appreciation, client gifting and meaningful moments of connection.</p>
+          
+          <div class="hero-tags">
+            <span class="tag-pill">Employee Gifting</span>
+            <span class="tag-pill">Client Appreciation</span>
+            <span class="tag-pill">Premium Picks</span>
+          </div>
+          
+          <div class="hero-actions">
+            <a href="#quote" class="btn-action btn-primary">Request Proposal</a>
+            <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20interested%20in%20The%20CC%20Hamper" class="btn-action btn-secondary" target="_blank" rel="noopener">WhatsApp Us</a>
+          </div>
+          
+          <div class="quick-info">
+            <div class="info-item">
+              <span class="info-label">MOQ</span>
+              <span class="info-value">50+</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Branding</span>
+              <span class="info-value">Available</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Delivery</span>
+              <span class="info-value">Pan India</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Lead Time</span>
+              <span class="info-value">7–14 Days</span>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Product Data & Conversion Area -->
-        <div class="product-details">
-          <h1 class="product-title" id="product-title">The "BCC" Hamper</h1>
-          <p class="product-tagline" id="product-tagline">Curated Coffee & Calm Blend</p>
-          
-          <p class="product-description" id="product-description">
-            A sophisticated curation designed for the modern professional. This hamper strikes the perfect balance between high-focus workplace tools and relaxation rituals. Packaged in our signature premium rigid box, it serves as an exceptional joining kit or high-tier client appreciation gift.
-          </p>
-
-          <!-- Dynamic Spec Matrix pulled from Airtable columns -->
-          <div class="spec-matrix">
-            <div class="spec-item">
-              <span class="spec-label">Minimum Order Qty (MOQ)</span>
-              <span class="spec-value" id="product-moq">50 Units</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Core Materials</span>
-              <span class="spec-value" id="product-material">Ceramic, Kraft Paper, Metal</span>
-            </div>
-            <div class="spec-item" style="grid-column: span 2;">
-              <span class="spec-label">Available Branding Options</span>
-              <div class="branding-tags" id="product-branding">
-                <span class="branding-pill">Screen Printing</span>
-                <span class="branding-pill">Custom Ribbons</span>
-                <span class="branding-pill">Logo Greeting Card</span>
-              </div>
-            </div>
+    <!-- SECTION 02: WHY THIS GIFT EXISTS -->
+    <section class="hamper-why">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-content">
+            <h2>Designed For Meaningful Moments</h2>
+            <p>The CC Hamper was created for occasions where appreciation deserves more than a standard corporate gift.</p>
+            <p>Built around the ritual of coffee and moments of pause, this collection brings together thoughtfully selected products that encourage relaxation, reflection and everyday enjoyment.</p>
+            <p>Whether used for employee rewards, client appreciation or festive gifting, the experience is designed to feel personal, useful and memorable.</p>
           </div>
+          <div class="why-image">
+            <img src="../image/BCC Hamper.png" alt="Premium Coffee Experience">
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Product-Specific Inline Lead Form -->
-          <div class="inline-quote-form">
-            <h3>Request this Hamper</h3>
-            <p>Submit your details and our team will provide a tailored quote within hours.</p>
+    <!-- SECTION 03: WHAT'S INSIDE -->
+    <section class="hamper-contents">
+      <div class="container">
+        <div class="section-header">
+          <h2>Inside The Experience</h2>
+          <p class="section-intro">Every item has been chosen with intention.</p>
+        </div>
+        
+        <div class="contents-grid">
+          <div class="content-item">
+            <div class="content-image">
+              <img src="../image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Premium Coffee">
+            </div>
+            <h4>Premium Coffee</h4>
+            <p>A carefully selected blend designed for everyday enjoyment and moments of pause.</p>
+          </div>
+          
+          <div class="content-item">
+            <div class="content-image">
+              <img src="../image/Gemini_Generated_Image_70tv9o70tv9o70tv.png" alt="Ceramic Mug">
+            </div>
+            <h4>Ceramic Mug</h4>
+            <p>Crafted for both utility and presentation, perfect for the modern workplace.</p>
+          </div>
+          
+          <div class="content-item">
+            <div class="content-image">
+              <img src="../image/Gemini_Generated_Image_ate3jcate3jcate3.png" alt="Artisan Treats">
+            </div>
+            <h4>Artisan Treats</h4>
+            <p>Thoughtful additions that elevate the coffee experience.</p>
+          </div>
+          
+          <div class="content-item">
+            <div class="content-image">
+              <img src="../image/Gemini_Generated_Image_bemqj4bemqj4bemq.png" alt="Custom Note Card">
+            </div>
+            <h4>Custom Note Card</h4>
+            <p>A personal touch that makes the gift memorable and meaningful.</p>
+          </div>
+          
+          <div class="content-item">
+            <div class="content-image">
+              <img src="../image/BCC Hamper 2.png" alt="Presentation Box">
+            </div>
+            <h4>Presentation Box</h4>
+            <p>Premium rigid box packaging that impresses from the first moment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: RECOMMENDED FOR -->
+    <section class="hamper-occasions">
+      <div class="container">
+        <div class="section-header">
+          <h2>Perfect For</h2>
+          <p class="section-intro">Help buyers understand use cases and discover the right moment.</p>
+        </div>
+        
+        <div class="occasion-grid">
+          <a href="../explore/employee-joining-kits" class="occasion-card">
+            <div class="occasion-image">
+              <img src="../image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kits">
+            </div>
+            <div class="occasion-content">
+              <h4>Employee Joining Kits</h4>
+              <span>Creating memorable first impressions from day one.</span>
+            </div>
+          </a>
+          
+          <a href="../explore/event-giveaways" class="occasion-card">
+            <div class="occasion-image">
+              <img src="../image/Bottle Hamper.png" alt="Client Appreciation">
+            </div>
+            <div class="occasion-content">
+              <h4>Client Appreciation</h4>
+              <span>Strengthening partnerships beyond the transaction.</span>
+            </div>
+          </a>
+          
+          <a href="../explore/" class="occasion-card">
+            <div class="occasion-image">
+              <img src="../image/BCC Hamper.png" alt="Leadership Gifts">
+            </div>
+            <div class="occasion-content">
+              <h4>Leadership Gifts</h4>
+              <span>Executive recognition that speaks volumes.</span>
+            </div>
+          </a>
+          
+          <a href="../explore/" class="occasion-card">
+            <div class="occasion-image">
+              <img src="../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Gifting">
+            </div>
+            <div class="occasion-content">
+              <h4>Festive Gifting</h4>
+              <span>Diwali, Christmas and festive moments.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: CUSTOMISATION STUDIO -->
+    <section class="hamper-customisation">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2>Make It Yours</h2>
+          <p class="section-intro">Every gifting experience can be tailored to reflect your brand, campaign or occasion.</p>
+        </div>
+        
+        <div class="customisation-showcase">
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Logo Branding">
+            </div>
+            <h4>Custom Logo Branding</h4>
+            <p>Subtle and premium logo integration.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_70tv9o70tv9o70tv.png" alt="Laser Engraving">
+            </div>
+            <h4>Laser Engraving</h4>
+            <p>Clean, permanent and refined finish.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_ate3jcate3jcate3.png" alt="Screen Printing">
+            </div>
+            <h4>Screen Printing</h4>
+            <p>Reliable, scalable branding for larger programs.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_bemqj4bemqj4bemq.png" alt="UV Branding">
+            </div>
+            <h4>UV Branding</h4>
+            <p>Full-colour branding with strong visual impact.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_dpv57edpv57edpv5.png" alt="Custom Packaging">
+            </div>
+            <h4>Custom Packaging</h4>
+            <p>Bespoke sleeves and rigid box branding.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Hamper 3.png" alt="Corporate Colour Matching">
+            </div>
+            <h4>Corporate Colour Matching</h4>
+            <p>Packaging designed around your brand colours.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/BCC Hamper.png" alt="Welcome Cards">
+            </div>
+            <h4>Welcome Cards</h4>
+            <p>High-GSM custom greeting cards.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/BCC Hamper 2.png" alt="Gift Notes">
+            </div>
+            <h4>Gift Notes</h4>
+            <p>Personalised inserts that add a human touch.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Custom Inserts">
+            </div>
+            <h4>Custom Inserts</h4>
+            <p>Branded inserts, guides and collateral.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: PLANNING INFORMATION -->
+    <section class="hamper-planning">
+      <div class="container">
+        <div class="section-header">
+          <h2>Planning Information</h2>
+        </div>
+        
+        <div class="planning-grid">
+          <div class="planning-item">
+            <span class="planning-label">MOQ</span>
+            <span class="planning-value">50 Units</span>
+          </div>
+          <div class="planning-item">
+            <span class="planning-label">Branding Methods</span>
+            <span class="planning-value">Screen Print, Laser Engraving, UV Print</span>
+          </div>
+          <div class="planning-item">
+            <span class="planning-label">Lead Time</span>
+            <span class="planning-value">7–14 Business Days</span>
+          </div>
+          <div class="planning-item">
+            <span class="planning-label">Delivery</span>
+            <span class="planning-value">Pan India</span>
+          </div>
+          <div class="planning-item">
+            <span class="planning-label">Category</span>
+            <span class="planning-value">Office Essentials</span>
+          </div>
+          <div class="planning-item">
+            <span class="planning-label">Collection</span>
+            <span class="planning-value">Premium Picks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: SIMILAR EXPERIENCES -->
+    <section class="hamper-related">
+      <div class="container">
+        <div class="section-header">
+          <h2>You May Also Like</h2>
+        </div>
+        
+        <div class="related-grid">
+          <a href="../hamper/executive-welcome-kit" class="related-card">
+            <div class="related-image">
+              <img src="../image/BCC Hamper.png" alt="Executive Welcome Kit">
+            </div>
+            <h4>Executive Welcome Kit</h4>
+          </a>
+          
+          <a href="../explore/" class="related-card">
+            <div class="related-image">
+              <img src="../image/BCC Hamper 2.png" alt="Coffee & Calm">
+            </div>
+            <h4>Coffee & Calm</h4>
+          </a>
+          
+          <a href="../hamper/heritage-box" class="related-card">
+            <div class="related-image">
+              <img src="../image/Hamper 3.png" alt="Heritage Box">
+            </div>
+            <h4>Heritage Box</h4>
+          </a>
+          
+          <a href="../explore/" class="related-card">
+            <div class="related-image">
+              <img src="../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebration Box">
+            </div>
+            <h4>Festive Celebration Box</h4>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: PROPOSAL BLOCK -->
+    <section class="hamper-proposal" id="quote">
+      <div class="container">
+        <div class="proposal-card">
+          <h2>Interested In This Experience?</h2>
+          <p>Tell us your quantity, timeline and branding requirements and we'll curate a proposal tailored to your needs.</p>
+          
+          <form class="proposal-form" action="#" method="POST">
+            <input type="hidden" name="productName" value="The CC Hamper">
+            <input type="hidden" name="productUrl" value="https://thebizgift.com/hamper/cc-hamper">
+            <input type="hidden" name="collectionName" value="Premium Picks">
+            <input type="hidden" name="category" value="Premium Corporate Gifting">
+            <input type="hidden" name="sourcePage" value="https://thebizgift.com/hamper/cc-hamper">
             
-            <form class="form-grid" action="#" method="POST">
-              <!-- Hidden input to pass product context to CRM -->
-              <input type="hidden" name="interested_product" value="The BCC Hamper">
-              
+            <div class="form-row">
               <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Name *</label>
                 <input type="text" id="name" name="name" required>
               </div>
               <div class="form-group">
-                <label for="company">Company</label>
+                <label for="company">Company *</label>
                 <input type="text" id="company" name="company" required>
               </div>
-              <div class="form-group full">
-                <label for="email">Work Email</label>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email *</label>
                 <input type="email" id="email" name="email" required>
               </div>
               <div class="form-group">
-                <label for="qty">Target Qty</label>
-                <input type="number" id="qty" name="qty" min="50" placeholder="Min. 50">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
               </div>
-              <div class="form-group">
-                <label for="timeline">Timeline</label>
-                <select id="timeline" name="timeline">
-                  <option value="ASAP">ASAP (Under 2 weeks)</option>
-                  <option value="1 Month">Within 1 Month</option>
-                  <option value="Planning">Just Planning</option>
-                </select>
-              </div>
-              <button type="submit" class="btn-submit-inline">Submit Inquiry</button>
-            </form>
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" placeholder="Approximate quantity" min="50">
+            </div>
+            
+            <div class="form-submit">
+              <button type="submit" class="btn-submit">Request Proposal</button>
+            </div>
+          </form>
+          
+          <div class="proposal-actions">
+            <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20interested%20in%20The%20CC%20Hamper" class="btn-whatsapp-large" target="_blank" rel="noopener">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+              WhatsApp Us
+            </a>
           </div>
-
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION 09: FINAL STATEMENT -->
+    <section class="hamper-statement">
+      <div class="container">
+        <h2>The best gifts don't begin with products.<br>They begin with purpose.</h2>
       </div>
     </section>
   </main>
 
-  <!-- GLOBAL Newsletter ( -->
-<div id="newsletter-placeholder"></div>
-
-  <!-- GLOBAL FOOTER (Paths point up one level) -->
- <div id="footer-placeholder"></div>
- 
-  <!-- PERSISTENT WHATSAPP WIDGET -->
-  <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20interested%20in%20The%20BCC%20Hamper" class="whatsapp-sticky-widget" target="_blank" rel="noopener">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
-    <span>Discuss on WhatsApp</span>
+  <!-- STICKY CONVERSION BAR -->
+  <a href="#quote" class="sticky-conversion-bar">
+    <span>Request Proposal</span>
   </a>
 
+  <div id="footer-placeholder"></div>
+
+  <script src="../components.js"></script>
 </body>
 </html>
-
-```

@@ -1,1 +1,8 @@
 # Ignore local environment files
+.env
+.DS_Store
+node_modules/
+dist/
+.vscode/
+# Ignore sensitive API configs
+config.js

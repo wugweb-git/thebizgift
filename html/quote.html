@@ -1,335 +1,253 @@
-<!DOCTYPE html>
+ase a<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get a Quote | The Biz Gift</title>
-  <meta name="description" content="Start a conversation with our corporate gifting team. Request a custom quote for your upcoming employee or client gifting needs.">
-  
-  <!-- Favicon Integration -->
   <link rel="icon" type="image/png" href="image/TBG Logo New.png">
-  
-  <!-- Premium Typography Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Link to global stylesheet -->
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* PAGE-SPECIFIC OVERRIDES & FORM LAYOUTS */
-    
-    :root {
-      --bg-charcoal: #292929; 
-    }
-
-    .brand-identity img {
-      height: 80px; 
-      width: auto;
-      display: block;
-      mix-blend-mode: normal; 
-    }
-
-    /* Page Header */
-    .quote-hero {
-      background-color: var(--bg-ivory);
-      padding: 8rem var(--space-layout) 4rem var(--space-layout);
-      text-align: center;
-    }
-    .quote-hero h1 {
-      font-family: var(--font-serif);
-      font-size: 4rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      margin-bottom: 1rem;
-    }
-    .quote-hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Split Form Layout */
-    .quote-section {
-      padding: 4rem var(--space-layout) 10rem var(--space-layout);
-      background-color: var(--bg-ivory);
-    }
-    .quote-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 6rem;
-      background-color: #FFFFFF;
-      border: 1px solid #EAEAE6;
-      padding: 5rem;
-    }
-
-    /* Form Styles */
-    .unified-lead-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    .form-group.full-width {
-      grid-column: span 2;
-    }
-    .form-group label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .form-group input, 
-    .form-group select, 
-    .form-group textarea {
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      padding: 1rem;
-      border: 1px solid #EAEAE6;
-      background-color: var(--bg-ivory);
-      color: var(--text-dark);
-      outline: none;
-      transition: border-color var(--transition-fast);
-    }
-    .form-group input:focus, 
-    .form-group select:focus, 
-    .form-group textarea:focus {
-      border-color: var(--accent-bronze);
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-    .form-submit {
-      grid-column: span 2;
-      margin-top: 1rem;
-    }
-    .btn-submit {
-      width: 100%;
-      background-color: var(--bg-charcoal);
-      color: #FFFFFF;
-      border: none;
-      padding: 1.25rem;
-      font-family: var(--font-sans);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color var(--transition-fast);
-    }
-    .btn-submit:hover {
-      background-color: var(--accent-bronze);
-    }
-
-    /* Contact Context & SLA Panel */
-    .contact-context {
-      display: flex;
-      flex-direction: column;
-      gap: 3.5rem;
-    }
-    .context-block h3 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      margin-bottom: 1rem;
-    }
-    .context-block p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-    .whatsapp-direct {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      background-color: #25D366;
-      color: #FFFFFF;
-      padding: 1rem 2rem;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
-      transition: background-color var(--transition-fast);
-    }
-    .whatsapp-direct:hover {
-      background-color: #20BA56;
-    }
-
-    /* Mobile Responsive Adjustments */
-    @media (max-width: 1024px) {
-      .quote-container { grid-template-columns: 1fr; padding: 4rem; gap: 4rem; }
-      .contact-context { border-top: 1px solid #EAEAE6; padding-top: 4rem; }
-    }
-    @media (max-width: 768px) {
-      .quote-hero h1 { font-size: 3rem; }
-      .quote-container { padding: 2rem; border: none; background: transparent; }
-      .unified-lead-form { grid-template-columns: 1fr; }
-      .form-group.full-width { grid-column: span 1; }
-      .form-submit { grid-column: span 1; }
-    }
-  </style>
+  <link rel="stylesheet" href="pages.css">
 </head>
 <body>
 
-  <!-- GLOBAL SYSTEM HEADER -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand-identity">
-        <a href="/">
-          <img src="image/TBG Logo New.png" alt="The Biz Gift | Premium Corporate Gifting">
-        </a>
-      </div>
-      
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="/explore/" class="nav-link">Explore Hampers</a>
-        <a href="/customisation.html" class="nav-link">Customisation</a>
-        <a href="/about.html" class="nav-link">Our Story</a>
-      </nav>
-      
-      <div class="header-actions">
-        <a href="/quote.html" class="btn-action btn-quote-header" style="background-color: var(--accent-bronze); color: var(--bg-charcoal);">Get a Quote</a>
-      </div>
-    </div>
-  </header>
+  <div id="header-placeholder"></div>
 
   <main>
-    <!-- PAGE HERO -->
-    <section class="quote-hero">
-      <h1>Start a conversation.</h1>
-      <p>Fill out the brief below to request a tailored quote, or jump straight into WhatsApp to chat with our procurement team.</p>
+    <!-- SECTION 01: HERO -->
+    <section class="quote-hero-section">
+      <div class="quote-hero-container">
+        <h1>Request A Proposal</h1>
+        <p class="hero-subtitle">Tell us about your gifting requirement and we'll curate recommendations tailored to your occasion, audience and budget.</p>
+        <p class="response-time">We typically respond within a few business hours.</p>
+        <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20a%20corporate%20gifting%20requirement" class="btn-whatsapp-hero" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
     </section>
 
-    <!-- FORM & SLA MATRIX -->
-    <section class="quote-section">
-      <div class="quote-container">
-        
-        <!-- The Unified B2B Lead Form -->
-        <div class="form-wrapper">
-          <!-- Note: When you connect this to Formspree/Netlify Forms, add the action URL here -->
-          <form class="unified-lead-form" action="#" method="POST" id="corporate-lead-form">
-            
-            <div class="form-group">
-              <label for="fullName">Full Name *</label>
-              <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
+    <!-- SECTION 02: FORM -->
+    <section class="quote-form-section">
+      <div class="quote-form-wrapper">
+        <div class="form-card">
+          <h2>Let's Get Started</h2>
+          <p class="form-subtitle">A few details will help us recommend the right gifting experience.</p>
+          
+          <form class="quote-form" action="#" method="POST" id="quote-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
+              </div>
+              
+              <div class="form-group">
+                <label for="companyName">Company Name *</label>
+                <input type="text" id="companyName" name="companyName" required placeholder="Acme Corp">
+              </div>
             </div>
             
-            <div class="form-group">
-              <label for="companyName">Company Name *</label>
-              <input type="text" id="companyName" name="companyName" required placeholder="Acme Corp">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="workEmail">Work Email *</label>
+                <input type="email" id="workEmail" name="workEmail" required placeholder="jane@acmecorp.com">
+              </div>
+              
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number *</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+91 99999 99999">
+              </div>
             </div>
             
-            <div class="form-group">
-              <label for="workEmail">Work Email *</label>
-              <input type="email" id="workEmail" name="workEmail" required placeholder="jane@acmecorp.com">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quantity">Approximate Quantity *</label>
+                <select id="quantity" name="quantity" required>
+                  <option value="" disabled selected>Select quantity range</option>
+                  <option value="10-25">10–25</option>
+                  <option value="25-50">25–50</option>
+                  <option value="50-100">50–100</option>
+                  <option value="100-250">100–250</option>
+                  <option value="250-500">250–500</option>
+                  <option value="500+">500+</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="requiredByDate">Required By Date</label>
+                <input type="date" id="requiredByDate" name="requiredByDate">
+              </div>
             </div>
             
-            <div class="form-group">
-              <label for="phoneNumber">Phone Number</label>
-              <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+91 99999 99999">
-            </div>
-            
-            <div class="form-group">
-              <label for="quantity">Approximate Quantity *</label>
-              <input type="number" id="quantity" name="quantity" required placeholder="e.g. 150" min="1">
-            </div>
-            
-            <div class="form-group">
-              <label for="occasion">Occasion / Purpose</label>
-              <select id="occasion" name="occasion">
-                <option value="" disabled selected>Select an occasion...</option>
-                <option value="Employee Joining Kits">Employee Joining Kits</option>
-                <option value="Event Giveaways">Event Giveaways</option>
-                <option value="Festive Gifting">Festive Gifting (Diwali, etc.)</option>
-                <option value="Client Appreciation">Client Appreciation</option>
-                <option value="Other">Other / Custom</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="occasion">Occasion *</label>
+                <select id="occasion" name="occasion" required>
+                  <option value="" disabled selected>Select occasion</option>
+                  <option value="Employee Joining Kits">Employee Joining Kits</option>
+                  <option value="Event Giveaways">Event Giveaways</option>
+                  <option value="Client Appreciation">Client Appreciation</option>
+                  <option value="Festive Gifting">Festive Gifting</option>
+                  <option value="Leadership Gifts">Leadership Gifts</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="budget">Estimated Budget</label>
+                <select id="budget" name="budget">
+                  <option value="" disabled selected>Select budget range</option>
+                  <option value="under-500">Under ₹500</option>
+                  <option value="500-1000">₹500–₹1,000</option>
+                  <option value="1000-2500">₹1,000–₹2,500</option>
+                  <option value="2500-5000">₹2,500–₹5,000</option>
+                  <option value="5000+">₹5,000+</option>
+                  <option value="not-sure">Not Sure</option>
+                </select>
+              </div>
             </div>
             
             <div class="form-group full-width">
-              <label for="message">Additional Requirements (Optional)</label>
-              <textarea id="message" name="message" placeholder="Tell us about your brand guidelines, budget expectations, or specific hamper preferences..."></textarea>
+              <label>Branding Required?</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="branding" value="yes">
+                  <span>Yes</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="branding" value="no">
+                  <span>No</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="branding" value="not-sure" checked>
+                  <span>Not Sure</span>
+                </label>
+              </div>
             </div>
             
+            <div class="form-group full-width">
+              <label for="message">Tell Us More</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your audience, timeline, branding requirements, delivery locations, or any specific ideas you have in mind."></textarea>
+            </div>
+            
+            <!-- Hidden fields for product context -->
+            <input type="hidden" name="sourceProduct" id="sourceProduct">
+            <input type="hidden" name="productUrl" id="productUrl">
+            <input type="hidden" name="collectionName" id="collectionName">
+            <input type="hidden" name="sourcePage" id="sourcePage">
+            
             <div class="form-submit">
-              <button type="submit" class="btn-submit">Submit Inquiry</button>
+              <button type="submit" class="btn-submit">Request Proposal</button>
             </div>
           </form>
         </div>
+      </div>
+    </section>
 
-        <!-- The SLA Reassurance & WhatsApp Alternative -->
-        <div class="contact-context">
-          
-          <div class="context-block" id="sla">
-            <h3>Our Response Commitment</h3>
-            <p>In most organizations, corporate gifting is managed on tight deadlines. We respect your timeline. Submit your brief, and <strong>our team will respond with a tailored proposal within a few operational hours.</strong></p>
+    <!-- SECTION 03: WHAT HAPPENS NEXT -->
+    <section class="quote-process">
+      <div class="container">
+        <h2>What Happens Next</h2>
+        <div class="process-steps">
+          <div class="process-step">
+            <span class="step-number">1</span>
+            <p>We review your requirements.</p>
           </div>
-          
-          <div class="context-block">
-            <h3>Need it faster?</h3>
-            <p>Skip the form entirely. Connect directly with our B2B procurement team on WhatsApp for immediate assistance and catalog walkthroughs.</p>
-            <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20have%20an%20urgent%20corporate%20gifting%20requirement" class="whatsapp-direct" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
-              Chat on WhatsApp
-            </a>
+          <div class="process-step">
+            <span class="step-number">2</span>
+            <p>We curate suitable gifting options.</p>
           </div>
-
+          <div class="process-step">
+            <span class="step-number">3</span>
+            <p>We share recommendations, branding possibilities and timelines.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-number">4</span>
+            <p>We refine the proposal together.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: WHATSAPP ALTERNATIVE -->
+    <section class="quote-whatsapp">
+      <div class="container">
+        <div class="whatsapp-card">
+          <h2>Prefer A Conversation?</h2>
+          <p>Some gifting projects are easier to discuss than describe. If you'd rather talk through your requirements, we're happy to help.</p>
+          <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20a%20corporate%20gifting%20requirement" class="btn-whatsapp-large" target="_blank" rel="noopener">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: VISUAL REASSURANCE -->
+    <section class="quote-visuals">
+      <div class="container">
+        <div class="visual-grid">
+          <div class="visual-item">
+            <div class="visual-image">
+              <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kit">
+            </div>
+            <p>Employee Joining</p>
+          </div>
+          <div class="visual-item">
+            <div class="visual-image">
+              <img src="image/Bottle Hamper.png" alt="Executive Gift Box">
+            </div>
+            <p>Client Appreciation</p>
+          </div>
+          <div class="visual-item">
+            <div class="visual-image">
+              <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Hamper">
+            </div>
+            <p>Festive Gifting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: FINAL STATEMENT -->
+    <section class="quote-statement">
+      <div class="container">
+        <h2>The best gifts don't begin with products.<br>They begin with purpose.</h2>
       </div>
     </section>
   </main>
 
-  <!-- GLOBAL FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand-summary">
-        <img src="image/TBG Logo New.png" alt="The Biz Gift" style="height: 60px;">
-        <p>We design hampers with care and intentionality—curated, purposeful, and a little bit memorable.</p>
-      </div>
-      
-      <div class="footer-links-column">
-        <h4>Showroom</h4>
-        <a href="/explore/">All Gift Hampers</a>
-        <a href="/explore/employee-joining-kits">Onboarding Kits</a>
-        <a href="/explore/event-giveaways">Event Giveaways</a>
-      </div>
-      
-      <div class="footer-links-column">
-        <h4>Capabilities</h4>
-        <a href="/customisation.html#logo">Logo Branding Options</a>
-        <a href="/customisation.html#packaging">Packaging & Curation</a>
-        <a href="#sla">Response Commitment Window</a>
-      </div>
-      
-      <div class="footer-links-column">
-        <h4>Connect</h4>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn Networks</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram Curation</a>
-        <a href="https://wa.me/919999999999" target="_blank" rel="noopener">Direct WhatsApp Line</a>
-      </div>
-    </div>
-    
-    <div class="footer-utility-strip">
-      <p>&copy; 2026 The Biz Gift. All rights reserved.</p>
-      <div class="utility-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms & Conditions</a>
-        <a href="/sitemap.html">Sitemap Matrix</a>
-      </div>
-    </div>
-  </footer>
+  <div id="footer-placeholder"></div>
 
+  <script src="components.js"></script>
+  <script>
+    // Capture product context from URL params
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sourceProduct = urlParams.get('product');
+      const productUrl = window.location.href;
+      const sourcePage = document.referrer || window.location.href;
+      
+      if (sourceProduct) {
+        document.getElementById('sourceProduct').value = sourceProduct;
+      }
+      if (productUrl) {
+        document.getElementById('productUrl').value = productUrl;
+      }
+      if (sourcePage) {
+        document.getElementById('sourcePage').value = sourcePage;
+      }
+      
+      // Try to get from pathname if hamper page
+      const path = window.location.pathname;
+      if (path.includes('/hamper/')) {
+        const productName = path.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        document.getElementById('sourceProduct').value = productName;
+        document.getElementById('productUrl').value = window.location.href;
+      }
+    });
+  </script>
 </body>
 </html>

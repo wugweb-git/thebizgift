@@ -13,186 +13,169 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* PAGE-SPECIFIC OVERRIDES & ABOUT LAYOUTS */
-    
-    :root {
-      /* CRITICAL UPDATE: This hex code is calibrated to match the specific 
-         background color of 'TBG Logo New.png' so the logo blends perfectly 
-         and can be scaled up without looking like a box.
-      */
-      --bg-charcoal: #292929; 
-    }
-
-    /* Increased Logo Sizing for the Header */
-    .brand-identity img {
-      height: 80px; /* Increased from 45px */
-      width: auto;
-      display: block;
-      /* Smooth blending backup */
-      mix-blend-mode: normal; 
-    }
-
-    /* About Us Hero Section */
-    .about-hero {
-      background-color: var(--bg-charcoal);
-      color: #FFFFFF;
-      padding: 8rem var(--space-layout) 10rem var(--space-layout);
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .about-hero h1 {
-      font-family: var(--font-serif);
-      font-size: 4.5rem;
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-    .about-hero p {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.7);
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 300;
-    }
-
-    /* The Core Brand Story Grid */
-    .brand-story-section {
-      padding: 10rem var(--space-layout);
-      background-color: #FFFFFF;
-    }
-    .story-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .story-text-block h2 {
-      font-family: var(--font-serif);
-      font-size: 3.2rem;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--text-dark);
-      margin-bottom: 2.5rem;
-    }
-    .story-text-block p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .story-image-block {
-      background-color: var(--bg-ivory);
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-    }
-    .story-image-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Point of View (POV) Banner */
-    .pov-banner {
-      background-color: var(--bg-ivory);
-      padding: 10rem var(--space-layout);
-      text-align: center;
-      border-top: 1px solid #EAEAE6;
-      border-bottom: 1px solid #EAEAE6;
-    }
-    .pov-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .pov-container h3 {
-      font-family: var(--font-serif);
-      font-size: 2.8rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      margin-bottom: 2.5rem;
-      line-height: 1.3;
-    }
-    .pov-container p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Mobile Responsive Adjustments */
-    @media (max-width: 1024px) {
-      .story-grid { grid-template-columns: 1fr; gap: 4rem; }
-      .story-image-block { aspect-ratio: 16 / 9; }
-    }
-    @media (max-width: 768px) {
-      .about-hero h1 { font-size: 3rem; }
-      .story-text-block h2 { font-size: 2.5rem; }
-      .pov-container h3 { font-size: 2.2rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="pages.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand-identity">
-        <a href="/">
-          <img src="image/TBG Logo New.png" alt="The Biz Gift | Premium B2B Corporate Gifting">
-        </a>
-      </div>
-      
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="/explore/" class="nav-link">Explore Hampers</a>
-        <a href="/customisation.html" class="nav-link">Customisation</a>
-        <a href="/about.html" class="nav-link" style="color: var(--accent-bronze);">Our Story</a>
-      </nav>
-      
-      <div class="header-actions">
-        <a href="/quote.html" class="btn-action btn-quote-header">Get a Quote</a>
-      </div>
-    </div>
-  </header>
+  <div id="header-placeholder"></div>
 
   <main>
-    <section class="about-hero">
+    <!-- SECTION 01: HERO -->
+    <section class="about-hero-section">
       <div class="about-hero-container">
-        <h1>The intent behind the box.</h1>
-        <p>Curated, purposeful, and a little bit memorable. Here is why we started The Biz Gift.</p>
+        <span class="hero-eyebrow">THE BIZ GIFT</span>
+        <h1>Our Story</h1>
+        <p class="hero-subtitle">Intentional gifting for the modern workplace.</p>
       </div>
     </section>
 
-    <section class="brand-story-section">
-      <div class="story-grid">
-        <div class="story-text-block">
-          <h2>Corporate gifting in India had become an afterthought.</h2>
-          <p>The Biz Gift was founded on a simple observation: the industry was filled with generic hampers, last-minute bulk orders, and zero personality. We were seeing gifts that employees and clients forgot the exact moment they were unwrapped.</p>
-          <p>Companies genuinely wanted to thank their people and partners, but the ready-made gifting options available rarely felt thoughtful enough to actually communicate that gratitude.</p>
-          <p>We built this brand to change that standard. Today, we work with companies across India to turn routine corporate gifting into a physical touchpoint that people actually look forward to receiving.</p>
+    <!-- SECTION 02: ORIGIN -->
+    <section class="about-origin">
+      <div class="origin-grid">
+        <div class="origin-image">
+          <img src="image/BCC Hamper.png" alt="Executive Premium Hamper">
         </div>
-        <div class="story-image-block">
-          <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="The Biz Gift Curated Aesthetic">
+        <div class="origin-content">
+          <h2>It Started With A Simple Observation.</h2>
+          <div class="origin-text">
+            <p>The Biz Gift was founded on a simple observation: corporate gifting in India had become an afterthought. Generic hampers, last-minute bulk orders, and zero personality.</p>
+            <p>We were seeing gifts that employees and clients forgot the exact moment they were unwrapped.</p>
+            <p>Companies genuinely wanted to thank their people and partners, but the ready-made gifting options available rarely felt thoughtful enough to actually communicate that gratitude.</p>
+            <p>We built this brand to change that standard. Today, we work with companies across India to turn routine corporate gifting into a physical touchpoint that people actually look forward to receiving.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="pov-banner">
+    <!-- SECTION 03: POV PANEL -->
+    <section class="about-pov">
       <div class="pov-container">
-        <h3>"A well-chosen gift builds loyalty in a way that an email or a bonus line item never will."</h3>
-        <p>A gift is rarely just a gift. It's a message—about how much a relationship matters, and how much thought went into showing it. In most organizations, gifting is treated as a checkbox. A vendor is picked in a hurry, a generic hamper goes out, and the moment passes.</p>
-        <p>But the companies that get this right understand something simple: employees remember who made them feel valued. Clients remember who made the effort personal.</p>
-        <p>This matters more, not less, in a world that runs on emails, deadlines, and back-to-back video meetings. A thoughtful gift breaks that pattern—it tells someone they were seen as a person, not just a stakeholder in a transaction. That belief is exactly why we are here.</p>
+        <div class="copper-accent"></div>
+        <blockquote>
+          <p>"A gift is rarely just a gift. It's a message about how much a relationship matters, and how much thought went into showing it."</p>
+        </blockquote>
       </div>
     </section>
 
-    <section class="closing-cta-banner">
-      <div class="closing-container">
-        <h2>Ready to upgrade your gifting strategy?</h2>
-        <p>Let's align on your upcoming corporate gifting brief. No transactional walls, just direct collaborative curation.</p>
-        <div class="closing-actions">
-          <a href="/quote.html" class="btn-action" style="background-color: var(--bg-charcoal); color: #FFF;">Request Custom Quote</a>
-          <a href="
+    <!-- SECTION 04: PHILOSOPHY -->
+    <section class="about-philosophy">
+      <div class="container">
+        <div class="philosophy-grid">
+          <div class="philosophy-card">
+            <h3>Curated</h3>
+            <p>We don't believe in catalogues that feel like warehouses. We select. We refine. We edit.</p>
+          </div>
+          
+          <div class="philosophy-card">
+            <h3>Purposeful</h3>
+            <p>Every gifting experience begins with understanding why the gift exists.</p>
+          </div>
+          
+          <div class="philosophy-card">
+            <h3>Memorable</h3>
+            <p>The best corporate gifts should not simply be received. They should be remembered.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: WHAT WE CREATE -->
+    <section class="about-moments">
+      <div class="container">
+        <div class="section-header">
+          <h2>The Moments We Help Create</h2>
+        </div>
+        
+        <div class="moments-grid">
+          <a href="/explore/employee-joining-kits" class="moment-card">
+            <div class="moment-image">
+              <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kits">
+            </div>
+            <h4>Employee Joining Kits</h4>
+            <p>Creating memorable first impressions from day one.</p>
+          </a>
+          
+          <a href="/explore/event-giveaways" class="moment-card">
+            <div class="moment-image">
+              <img src="image/BCC Hamper 2.png" alt="Event Giveaways">
+            </div>
+            <h4>Event Giveaways</h4>
+            <p>Thoughtful takeaways that keep your brand remembered.</p>
+          </a>
+          
+          <a href="/explore/" class="moment-card">
+            <div class="moment-image">
+              <img src="image/Bottle Hamper.png" alt="Client Appreciation">
+            </div>
+            <h4>Client Appreciation</h4>
+            <p>Strengthening relationships beyond the transaction.</p>
+          </a>
+          
+          <a href="/explore/" class="moment-card">
+            <div class="moment-image">
+              <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Gifting">
+            </div>
+            <h4>Festive Gifting</h4>
+            <p>Celebrating important moments with intention.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: THE CRAFT -->
+    <section class="about-craft">
+      <div class="craft-grid">
+        <div class="craft-image">
+          <img src="image/Hamper 3.png" alt="Premium Packaging Detail">
+        </div>
+        <div class="craft-content">
+          <h2>Details Matter.</h2>
+          <p>Branding. Packaging. Presentation.</p>
+          <p>The smallest details often create the strongest impressions. From the texture of the ribbon to the precision of the engraving, every element is considered.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: TODAY -->
+    <section class="about-today">
+      <div class="container">
+        <div class="today-content">
+          <h2>Today</h2>
+          <p>Today, we work with companies across India to transform routine gifting into experiences employees and clients genuinely look forward to receiving.</p>
+          <p>We are proud to partner with forward-thinking organisations who understand that thoughtful gifting is an investment in relationships, not just an expense.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: STATEMENT -->
+    <section class="about-statement">
+      <div class="container">
+        <h2>We Don't Curate Gifts.<br>We Curate The Moments Around Them.</h2>
+      </div>
+    </section>
+
+    <!-- SECTION 09: CTA -->
+    <section class="about-cta">
+      <div class="container">
+        <h2>Let's Create Something Memorable</h2>
+        <p>Tell us about your team, your culture, and what you want to celebrate. We'll curate gifting options that feel unmistakably you.</p>
+        <div class="cta-actions">
+          <a href="/quote.html" class="btn-action btn-primary btn-large">Request A Proposal</a>
+          <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20a%20corporate%20gifting%20requirement" class="btn-action btn-secondary btn-large" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/>
+            </svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="newsletter-placeholder"></div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="components.js"></script>
+</body>
+</html>

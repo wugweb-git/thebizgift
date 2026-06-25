@@ -3,22 +3,26 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Color Palette */
-  --bg-charcoal: #1A1A1A;       /* Deep dark brand base */
-  --bg-ivory: #FAFAF7;          /* Ultra-premium light canvas surface */
-  --accent-bronze: #C59A7F;     /* Strategic branding touchpoint accent */
-  --text-dark: #2C2C2A;         /* Primary readable body color */
-  --text-muted: #706F6C;        /* Supporting editorial text gray */
+  --bg-charcoal: #1A1A1A;
+  --bg-charcoal-light: #2A2A2A;
+  --bg-ivory: #FAFAF7;
+  --accent-bronze: #C59A7F;
+  --accent-copper: #B87333;
+  --text-dark: #2C2C2A;
+  --text-muted: #706F6C;
+  --text-light: #FFFFFF;
   
   /* Font Families */
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   
   /* Structural Spacing & Layout */
-  --space-layout: 4rem;         /* Enforces whitespace padding constraints */
-  --grid-gap: 4rem;             /* Wide structural grid card columns */
+  --space-layout: 4rem;
+  --grid-gap: 4rem;
+  --container-max: 1400px;
   
   /* Motion & Interaction Curves */
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); /* Luxury motion timing */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -50,6 +54,12 @@ img {
   display: block;
 }
 
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-layout);
+}
+
 /* --------------------------------------------------------------------------
    2. REUSABLE MICRO-INTERACTIVE UTILITIES (BUTTONS & LINKS)
    -------------------------------------------------------------------------- */
@@ -70,7 +80,6 @@ img {
   transition: color var(--transition-fast);
 }
 
-/* Sophisticated solid slide-up reveal interaction on hover */
 .btn-action::before {
   content: '';
   position: absolute;
@@ -91,6 +100,42 @@ img {
   height: 100%;
 }
 
+.btn-primary {
+  background-color: var(--accent-bronze);
+  color: var(--bg-charcoal);
+}
+
+.btn-primary::before {
+  background-color: var(--bg-charcoal);
+}
+
+.btn-primary:hover {
+  color: var(--text-light);
+}
+
+.btn-secondary {
+  border-color: var(--text-light);
+  color: var(--text-light);
+}
+
+.btn-secondary::before {
+  background-color: var(--text-light);
+}
+
+.btn-secondary:hover {
+  color: var(--bg-charcoal);
+}
+
+.btn-large {
+  padding: 1.3rem 3.5rem;
+  font-size: 0.9rem;
+}
+
+.btn-small {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+}
+
 /* Minimalist Navigation Link Micro-Underlines */
 .nav-link {
   position: relative;
@@ -98,6 +143,8 @@ img {
   font-weight: 400;
   letter-spacing: 0.05em;
   padding: 0.25rem 0;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color var(--transition-fast);
 }
 
 .nav-link::after {
@@ -132,10 +179,16 @@ img {
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s ease;
+}
+
+.site-header.scrolled {
+  padding: 0.8rem var(--space-layout);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-container {
-  max-width: 1400px;
+  max-width: var(--container-max);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -146,11 +199,17 @@ img {
   height: 45px;
   width: auto;
   display: block;
+  transition: height 0.3s ease;
+}
+
+.site-header.scrolled .brand-identity img {
+  height: 38px;
 }
 
 .nav-links {
   display: flex;
   gap: 3.5rem;
+  align-items: center;
 }
 
 .nav-links .nav-link {
@@ -162,14 +221,85 @@ img {
   font-size: 0.8rem;
 }
 
+/* Dropdown Navigation */
+.nav-item-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  content: ' ▾';
+  font-size: 0.7em;
+  margin-left: 0.3rem;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: var(--bg-charcoal-light);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 2rem;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.nav-item-dropdown:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown a {
+  display: block;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  font-weight: 300;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-dropdown a:last-child {
+  margin-bottom: 0;
+}
+
+.nav-dropdown a:hover {
+  color: var(--accent-bronze);
+  padding-left: 4px;
+}
+
+.nav-dropdown-section {
+  margin-bottom: 1rem;
+}
+
+.nav-dropdown-section:last-child {
+  margin-bottom: 0;
+}
+
+.nav-dropdown-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-bronze);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
 .site-footer {
   background-color: var(--bg-charcoal);
   color: #FFFFFF;
-  padding: 8rem var(--space-layout) 3rem var(--space-layout);
+  padding: 7rem var(--space-layout) 3rem var(--space-layout);
 }
 
 .footer-grid {
-  max-width: 1400px;
+  max-width: var(--container-max);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr repeat(3, 1fr);
@@ -211,17 +341,23 @@ img {
 
 .footer-links-column a:hover {
   color: #FFFFFF;
-  padding-left: 2px; /* Very micro displacement response */
+  padding-left: 2px;
 }
 
-.footer-utility-strip {
-  max-width: 1400px;
+.footer-bottom {
+  max-width: var(--container-max);
   margin: 2.5rem auto 0 auto;
   display: flex;
   justify-content: space-between;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.35);
   font-weight: 300;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .utility-links a {
@@ -234,117 +370,323 @@ img {
   color: #FFFFFF;
 }
 
+/* Footer Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-socials a:hover {
+  border-color: var(--accent-bronze);
+  color: var(--accent-bronze);
+  transform: translateY(-2px);
+}
+
 /* --------------------------------------------------------------------------
-   4. VIEW COMPONENT SECTION SPECIFICS (HOMEPAGE STYLES)
+   4. HOMEPAGE SECTIONS
    -------------------------------------------------------------------------- */
-/* Hero Layer */
+/* Hero Section */
 .hero-section {
   background-color: var(--bg-charcoal);
   color: #FFFFFF;
-  padding: 11rem var(--space-layout) 13rem var(--space-layout);
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.7) 100%);
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
 }
 
 .hero-container {
-  max-width: 850px;
-  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 0 var(--space-layout);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 4.2rem;
+  font-size: 4.5rem;
   font-weight: 400;
   line-height: 1.15;
   margin-bottom: 2rem;
   opacity: 0;
-  transform: translateY(20px);
-  animation: luxuryFadeReveal 1.2s var(--ease-premium) forwards; /* Smooth structural entrance on load */
+  transform: translateY(30px);
+  animation: luxuryFadeReveal 1.2s var(--ease-premium) forwards;
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 650px;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 700px;
   margin: 0 auto 3.5rem auto;
   font-weight: 300;
   opacity: 0;
-  transform: translateY(20px);
-  animation: luxuryFadeReveal 1.2s var(--ease-premium) 0.2s forwards; /* Slight stagger lag offset */
+  transform: translateY(30px);
+  animation: luxuryFadeReveal 1.2s var(--ease-premium) 0.2s forwards;
 }
 
-/* Introduction Narrative Block */
-.intro-story {
-  padding: 9rem var(--space-layout);
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EAEAE6;
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: luxuryFadeReveal 1.2s var(--ease-premium) 0.4s forwards;
 }
 
-.story-container {
-  max-width: 800px;
-  margin: 0 auto;
+@keyframes luxuryFadeReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.story-tag {
+/* --------------------------------------------------------------------------
+   5. SCROLL REVEAL ANIMATIONS
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered reveal delay helpers */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* --------------------------------------------------------------------------
+   6. ADDITIONAL HOVER & INTERACTION EFFECTS
+   -------------------------------------------------------------------------- */
+/* Card subtle border glow */
+.create-card,
+.collection-editorial-card,
+.trust-card,
+.philosophy-card,
+.moment-card {
+  transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium), border-color 0.4s ease;
+}
+
+.create-card:hover,
+.collection-editorial-card:hover,
+.trust-card:hover,
+.philosophy-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border-color: var(--accent-bronze);
+}
+
+.moment-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Occasion card image zoom */
+.occasion-image img {
+  transition: transform 0.8s var(--ease-premium);
+}
+
+.occasion-card:hover .occasion-image img {
+  transform: scale(1.08);
+}
+
+/* Image border subtle frame effect */
+.selected-image {
+  transition: box-shadow 0.4s var(--ease-premium);
+}
+
+.selected-card:hover .selected-image {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* WhatsApp widget pulse animation */
+.whatsapp-sticky-widget {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+.whatsapp-sticky-widget:hover {
+  animation: none;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.15);
+  }
+  50% {
+    box-shadow: 0 6px 35px rgba(37, 211, 102, 0.35);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. MOBILE HAMBURGER MENU
+   -------------------------------------------------------------------------- */
+.hamburger-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+  color: var(--text-light);
+}
+
+.hamburger-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-light);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.hamburger-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-charcoal);
+  z-index: 998;
+  padding: 6rem var(--space-layout) 3rem;
+  overflow-y: auto;
+}
+
+.mobile-nav-overlay.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-overlay a {
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.75rem;
+  font-family: var(--font-serif);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-overlay a:hover,
+.mobile-nav-overlay a.active {
+  color: var(--accent-bronze);
+}
+
+.mobile-nav-overlay .nav-dropdown-label {
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
-  margin-bottom: 1.5rem;
-  display: block;
-  font-weight: 600;
+  padding-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.story-container h2 {
-  font-family:
-  
-  
-  /* Sticky Header logic */
-.site-header {
-  /* Change this hex code to the exact background of your TBG Logo New.png */
-  background-color: #292929; 
-  padding: 1.5rem var(--space-layout);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-/* Footer corner aesthetics */
-.site-footer {
-  background-color: var(--bg-charcoal);
-  color: #FFFFFF;
-  padding: 7rem var(--space-layout) 3rem var(--space-layout);
-  /* This creates the aesthetic corner curves */
-  border-top-left-radius: 40px; 
-  border-top-right-radius: 40px;
-}
-
-/* Sticky Header Logic */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #292929; /* Single solid color */
-  transition: all 0.3s ease;
-  padding: 1.5rem var(--space-layout);
-}
-
-/* Shrink effect when scrolled */
-.site-header.scrolled {
-  padding: 0.8rem var(--space-layout);
-}
-
-/* Footer Social Icons */
-.footer-socials {
-  margin: 1rem 0;
-  display: flex;
-  gap: 15px;
-}
-.footer-socials a {
-  color: #fff;
+.mobile-nav-overlay .mobile-sub-link {
   font-size: 1.2rem;
-  transition: color 0.3s;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  padding: 0.6rem 0;
+  border-bottom: none;
+  padding-left: 1rem;
 }
-.footer-socials a:hover {
-  color: #C59A7F; /* Accent bronze */
+
+@media (max-width: 768px) {
+  .hamburger-toggle {
+    display: block;
+  }
 }

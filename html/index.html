@@ -1,464 +1,22 @@
-I have re-read the creative brief carefully to make sure we aren't just hitting the layout basics, but actually weaving the *exact* messaging, brand story, copy, trust markers, and tone directly into the code.
-
-Here are the key enhancements integrated into this updated production-ready `index.html`:
-
-* **True Visual Direction Integration:** Proposes a warm, luxurious editorial base palette (Charcoal, Ivory, and Muted Bronze/Gold) that lets photography breathe.
-
-
-* **Exact Copy Placement:** Dropped in the precise brand narrative, the core about block, and the "Why corporate gifting matters" point of view essay word-for-word into the page sections.
-
-
-* **Sophisticated Typography Rules:** Set up the exact high-contrast serif headers for editorial signaling, paired with clean geometric body text.
-
-
-
-Save this code directly into your root directory alongside your `image` folder:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Biz Gift | Curated, Purposeful Corporate Gifting</title>
-  <meta name="description" content="We design hampers with the same care and intentionality that goes into any good business decision—curated, purposeful, and a little bit memorable.">
+  <meta name="description" content="Thoughtful corporate gifting designed to be remembered. Curated hampers, branded merchandise and employee kits for modern businesses.">
   
-  <!-- Premium Typography: High-Contrast Serif + Minimalist Sans-Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* --------------------------------------------------------------------------
-       1. BRAND DESIGN TOKENS (PREMIUM / MINIMAL NEUTRAL PALETTE)
-       -------------------------------------------------------------------------- */
-    :root {
-      --bg-charcoal: #1A1A1A;       /* Dominant sophisticated base dark */
-      --bg-ivory: #FAFAF7;          /* Crisp neutral showroom canvas */
-      --accent-bronze: #C59A7F;     /* Elegant bronze/gold touchpoint accent */
-      --text-dark: #2C2C2A;         /* Primary body text readability */
-      --text-muted: #706F6C;        /* Secondary supporting editorial text */
-      
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Plus Jakarta Sans', sans-serif;
-      
-      --space-layout: 4rem;         /* Enforces strict, luxury white space margins */
-      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Reset Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background-color: var(--bg-ivory);
-      color: var(--text-dark);
-      font-family: var(--font-sans);
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Core UI Elements */
-    .btn-action {
-      font-family: var(--font-sans);
-      font-weight: 500;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border: 1px solid var(--accent-bronze);
-      color: var(--accent-bronze);
-      padding: 1rem 2.5rem;
-      display: inline-block;
-      transition: all 0.4s var(--transition-smooth);
-    }
-    .btn-action:hover {
-      background-color: var(--accent-bronze);
-      color: var(--bg-charcoal);
-    }
-
-    /* --------------------------------------------------------------------------
-       2. GLOBAL HEADER ARCHITECTURE
-       -------------------------------------------------------------------------- */
-    .site-header {
-      background-color: var(--bg-charcoal);
-      padding: 1.5rem var(--space-layout);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .header-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .brand-identity img {
-      height: 45px;
-      width: auto;
-      display: block;
-    }
-    .nav-links {
-      display: flex;
-      gap: 3.5rem;
-    }
-    .nav-link {
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.75);
-      letter-spacing: 0.05em;
-      transition: color 0.3s ease;
-    }
-    .nav-link:hover {
-      color: var(--accent-bronze);
-    }
-    .header-actions .btn-quote-header {
-      padding: 0.6rem 1.75rem;
-      font-size: 0.8rem;
-    }
-
-    /* --------------------------------------------------------------------------
-       3. HOMEPAGE CONTENT ARCHITECTURE
-       -------------------------------------------------------------------------- */
-    /* Hero Frame */
-    .hero-section {
-      background-color: var(--bg-charcoal);
-      color: #FFFFFF;
-      padding: 10rem var(--space-layout) 12rem var(--space-layout);
-      text-align: center;
-    }
-    .hero-container {
-      max-width: 850px;
-      margin: 0 auto;
-    }
-    .hero-title {
-      font-family: var(--font-serif);
-      font-size: 4.2rem;
-      font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 2rem;
-    }
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.65);
-      max-width: 650px;
-      margin: 0 auto 3.5rem auto;
-      font-weight: 300;
-    }
-
-    /* Brand Story Intro Section */
-    .intro-story {
-      padding: 9rem var(--space-layout);
-      background-color: #FFFFFF;
-      border-bottom: 1px solid #EAEAE6;
-    }
-    .story-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .story-tag {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent-bronze);
-      margin-bottom: 1.5rem;
-      display: block;
-      font-weight: 600;
-    }
-    .story-container h2 {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 400;
-      line-height: 1.25;
-      color: var(--text-dark);
-      margin-bottom: 2.5rem;
-    }
-    .story-paragraphs p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-      line-height: 1.75;
-    }
-
-    /* Spacious Featured Hampers Strip */
-    .featured-showcase {
-      padding: 9rem var(--space-layout);
-    }
-    .section-header {
-      max-width: 1400px;
-      margin: 0 auto 5rem auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .section-header h2 {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 400;
-    }
-    .section-header-link {
-      color: var(--text-dark);
-      border-bottom: 1px solid var(--text-dark);
-      padding-bottom: 3px;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-    }
-    .showcase-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4rem; /* Wide column gutter spacing to preserve minimal elegance */
-    }
-    
-    /* Product Room Cards */
-    .hamper-card {
-      background-color: #FFFFFF;
-      border: 1px solid #EAEAE6;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.4s ease;
-    }
-    .hamper-card:hover {
-      border-color: var(--accent-bronze);
-    }
-    .card-media {
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      background-color: var(--bg-ivory);
-      margin-bottom: 2rem;
-    }
-    .card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s var(--transition-smooth);
-    }
-    .hamper-card:hover .card-media img {
-      transform: scale(1.02);
-    }
-    .card-meta-metrics {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-    .card-hamper-title {
-      font-family: var(--font-serif);
-      font-size: 1.9rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      margin-bottom: 0.35rem;
-    }
-    .card-hamper-tagline {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-weight: 300;
-    }
-
-    /* "Why Corporate Gifting Matters" Editorial Essay Section */
-    .gifting-point-of-view {
-      background-color: #FFFFFF;
-      padding: 9rem var(--space-layout);
-      border-top: 1px solid #EAEAE6;
-      border-bottom: 1px solid #EAEAE6;
-    }
-    .pov-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .pov-heading h3 {
-      font-family: var(--font-serif);
-      font-size: 3.2rem;
-      font-weight: 400;
-      line-height: 1.15;
-    }
-    .pov-content p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    /* Trust, Capabilities & Commitments Strip */
-    .trust-metrics-section {
-      padding: 6rem var(--space-layout);
-      background-color: var(--bg-ivory);
-    }
-    .trust-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5rem;
-    }
-    .trust-block h3 {
-      font-family: var(--font-serif);
-      font-size: 1.7rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-    .trust-block p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.7;
-    }
-
-    /* Closing Action Frame */
-    .closing-cta-banner {
-      padding: 10rem var(--space-layout);
-      text-align: center;
-      background-color: #FFFFFF;
-      border-top: 1px solid #EAEAE6;
-    }
-    .closing-container h2 {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
-    .closing-container p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 3.5rem;
-      font-weight: 300;
-    }
-    .closing-actions {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    /* --------------------------------------------------------------------------
-       4. GLOBAL FOOTER NAVIGATION SYSTEM
-       -------------------------------------------------------------------------- */
-    .site-footer {
-      background-color: var(--bg-charcoal);
-      color: #FFFFFF;
-      padding: 7rem var(--space-layout) 3rem var(--space-layout);
-    }
-    .footer-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr repeat(3, 1fr);
-      gap: 5rem;
-      padding-bottom: 5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .footer-brand-summary img {
-      height: 42px;
-      width: auto;
-      margin-bottom: 1.5rem;
-    }
-    .footer-brand-summary p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.45);
-      font-weight: 300;
-      max-width: 280px;
-      line-height: 1.7;
-    }
-    .footer-links-column h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent-bronze);
-      margin-bottom: 1.75rem;
-    }
-    .footer-links-column a {
-      display: block;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.95rem;
-      margin-bottom: 0.85rem;
-      font-weight: 300;
-      transition: color 0.3s ease;
-    }
-    .footer-links-column a:hover {
-      color: #FFFFFF;
-    }
-    .footer-utility-strip {
-      max-width: 1400px;
-      margin: 2.5rem auto 0 auto;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.35);
-      font-weight: 300;
-    }
-    .utility-links a {
-      color: inherit;
-      margin-left: 2.5rem;
-    }
-
-    /* Fixed Conversion Widget Overlay */
-    .whatsapp-sticky-widget {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 2.5rem;
-      background-color: #25D366;
-      color: #FFFFFF;
-      padding: 0.85rem 1.75rem;
-      border-radius: 50px;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      z-index: 999;
-      transition: transform 0.3s var(--transition-smooth);
-    }
-    .whatsapp-sticky-widget:hover {
-      transform: translateY(-2px);
-    }
-
-    /* --------------------------------------------------------------------------
-       5. RESPONSIVE MEDIA BREAKPOINTS (MOBILE-FIRST TUNING)
-       -------------------------------------------------------------------------- */
-    @media (max-width: 1100px) {
-      :root { --space-layout: 2.5rem; }
-      .showcase-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
-      .pov-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 3.5rem; }
-    }
-    @media (max-width: 768px) {
-      .nav-links { display: none; } /* Targets raw menu viewport bypass */
-      .hero-title { font-size: 2.8rem; }
-      .showcase-grid { grid-template-columns: 1fr; }
-      .closing-actions { flex-direction: column; gap: 1.25rem; align-items: center; }
-      .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-utility-strip { flex-direction: column; gap: 1.25rem; text-align: center; }
-      .utility-links a { margin: 0 1rem; }
-    }
-  </style>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
 </head>
 <body>
 
   <!-- GLOBAL SYSTEM HEADER -->
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="header-container">
       <div class="brand-identity">
         <a href="/">
@@ -467,229 +25,592 @@ Save this code directly into your root directory alongside your `image` folder:
       </div>
       
       <nav class="nav-links" aria-label="Main Navigation">
-        <a href="/explore/" class="nav-link">Explore Hampers</a>
+        <a href="/" class="nav-link">Home</a>
+        
+        <div class="nav-item-dropdown">
+          <a href="/explore/" class="nav-link dropdown-toggle">Explore Gifts</a>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-section">
+              <span class="nav-dropdown-label">By Occasion</span>
+              <a href="/explore/employee-joining-kits">Employee Joining Kits</a>
+              <a href="/explore/event-giveaways">Event Giveaways</a>
+            </div>
+            <div class="nav-dropdown-section">
+              <span class="nav-dropdown-label">By Category</span>
+              <a href="/explore/">Office Essentials</a>
+              <a href="/explore/">Drinkware</a>
+              <a href="/explore/">Office Accessories</a>
+              <a href="/explore/">Combo Gifts</a>
+              <a href="/explore/">Bags & Accessories</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="nav-item-dropdown">
+          <a href="/explore/" class="nav-link dropdown-toggle">Collections</a>
+          <div class="nav-dropdown">
+            <a href="/explore/">Best Sellers</a>
+            <a href="/explore/">Premium Picks</a>
+            <a href="/explore/">Budget Gifting</a>
+            <a href="/explore/">Sustainable Choices</a>
+            <a href="/explore/">Trending Products</a>
+            <a href="/explore/">Under ₹500</a>
+            <a href="/explore/">Minimalist Gifts</a>
+          </div>
+        </div>
+        
         <a href="/customisation.html" class="nav-link">Customisation</a>
-        <a href="/about.html" class="nav-link">Our Story</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/quote.html" class="nav-link">Get A Quote</a>
       </nav>
       
       <div class="header-actions">
-        <a href="/quote.html" class="btn-action btn-quote-header">Get a Quote</a>
+        <a href="/quote.html" class="btn-action btn-quote-header">Request A Proposal</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO SECTOR VIEW FRAME -->
+    <!-- HERO SECTION -->
     <section class="hero-section">
+      <div class="hero-media">
+        <img src="image/BCC Hamper.png" alt="Black Luxury Tech Hamper">
+      </div>
       <div class="hero-container">
-        <h2 class="hero-title">Because the best corporate gifts shouldn't just be given. They should be talked about.</h2>
-        <p class="hero-subtitle">We design hampers with the same care and intentionality that goes into any good business decision—curated, purposeful, and a little bit memorable.</p>
-        <a href="/explore/" class="btn-action">Explore Hampers</a>
+        <h1 class="hero-title">Thoughtful Corporate Gifting,<br>Designed To Be Remembered</h1>
+        <p class="hero-subtitle">Curated gifting experiences, branded merchandise and employee kits for modern businesses.</p>
+        <div class="hero-actions">
+          <a href="/quote.html" class="btn-action btn-primary">Request A Proposal</a>
+          <a href="/explore/" class="btn-action btn-secondary">Explore Collections</a>
+        </div>
       </div>
     </section>
 
-    <!-- THE BRAND STORY / CONTEXT NARRATIVE MIGRATION -->
-    <section class="intro-story" aria-label="Brand Story Narrative">
-      <div class="story-container">
-        <span class="story-tag">Our Foundational Observation</span>
-        <h2>Corporate gifting in India had become an afterthought. Generic hampers, last-minute orders, and zero personality—gifts that employees and clients forgot the moment they were unwrapped.</h2>
+    <!-- WHAT WE CREATE -->
+    <section class="section-what-we-create">
+      <div class="container">
+        <div class="section-header">
+          <h2>What We Create</h2>
+          <p class="section-intro">Four core gifting solutions for every business moment.</p>
+        </div>
         
-        <div class="story-paragraphs">
-          <p>Companies wanted to genuinely thank their people and partners, but the gifting options available rarely felt thoughtful enough to do that.</p>
-          <p>The Biz Gift was built to change that. Today, we work with companies across India to turn routine corporate gifting into something employees and clients actually look forward to.</p>
+        <div class="create-grid">
+          <a href="/explore/employee-joining-kits" class="create-card">
+            <div class="create-card-image">
+              <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kits">
+            </div>
+            <h3>Employee Joining Kits</h3>
+            <p>Make new hires feel welcome from day one with thoughtfully curated onboarding experiences.</p>
+          </a>
+          
+          <a href="/explore/event-giveaways" class="create-card">
+            <div class="create-card-image">
+              <img src="image/BCC Hamper 2.png" alt="Event Giveaways">
+            </div>
+            <h3>Event Giveaways</h3>
+            <p>Leave lasting impressions at conferences, meetings and corporate events.</p>
+          </a>
+          
+          <a href="/explore/" class="create-card">
+            <div class="create-card-image">
+              <img src="image/Bottle Hamper.png" alt="Premium Corporate Gifts">
+            </div>
+            <h3>Premium Corporate Gifts</h3>
+            <p>Elevated gifting for clients, partners and leadership that speaks volumes.</p>
+          </a>
+          
+          <a href="/customisation.html" class="create-card">
+            <div class="create-card-image">
+              <img src="image/Hamper 3.png" alt="Custom Branded Merchandise">
+            </div>
+            <h3>Custom Branded Merchandise</h3>
+            <p>Logo printing, laser engraving and fully branded gifting at scale.</p>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CORE DATABASE FEATURED SHOWCASE LOOP -->
-    <section class="featured-showcase">
-      <div class="section-header">
-        <h2>Curated Showroom Highlights</h2>
-        <a href="/explore/" class="section-header-link">Explore the Full Showroom Hub &rarr;</a>
-      </div>
-      
-      <div class="showcase-grid" id="featured-airtable-target">
+    <!-- FEATURED COLLECTIONS -->
+    <section class="section-featured-collections">
+      <div class="container">
+        <div class="section-header">
+          <h2>Featured Collections</h2>
+        </div>
         
-        <!-- Hamper Card Record 1: The BCC Hamper -->
-        <a href="/hamper/bcc-hamper" class="hamper-card">
-          <div class="card-media">
-            <img src="image/BCC Hamper 2.png" alt="The BCC Hamper Set View">
+        <!-- Collection 1: Coffee & Calm -->
+        <div class="collection-row collection-row--reverse">
+          <div class="collection-image">
+            <img src="image/BCC Hamper 2.png" alt="Coffee & Calm Collection">
           </div>
-          <div class="card-details">
-            <div class="card-meta-metrics">
-              <span>Premium Choice</span>
-              <span>MOQ: 50 Units</span>
-            </div>
-            <h3 class="card-hamper-title">The "BCC" Hamper</h3>
-            <p class="card-hamper-tagline">Curated Coffee & Calm Blend</p>
+          <div class="collection-content">
+            <span class="collection-tag">Relaxation</span>
+            <h3>Coffee & Calm</h3>
+            <p>Premium coffee blends paired with calming essentials for thoughtful moments of pause.</p>
+            <a href="/explore/" class="btn-action">View Collection</a>
           </div>
-        </a>
-
-        <!-- Hamper Card Record 2: The CC Hamper -->
-        <a href="/hamper/cc-hamper" class="hamper-card">
-          <div class="card-media">
-            <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="The CC Workplace Integration Suite Hamper">
-          </div>
-          <div class="card-details">
-            <div class="card-meta-metrics">
-              <span>Onboarding Kits</span>
-              <span>MOQ: 100 Units</span>
-            </div>
-            <h3 class="card-hamper-title">The "CC" Hamper</h3>
-            <p class="card-hamper-tagline">Essential Workplace Integration Suite</p>
-          </div>
-        </a>
-
-        <!-- Hamper Card Record 3: The Heritage Box -->
-        <a href="/hamper/heritage-box" class="hamper-card">
-          <div class="card-media">
-            <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="The Heritage Box Traditional Culture Set">
-          </div>
-          <div class="card-details">
-            <div class="card-meta-metrics">
-              <span>Sustainable Premium</span>
-              <span>MOQ: 35 Units</span>
-            </div>
-            <h3 class="card-hamper-title">The Heritage Box</h3>
-            <p class="card-hamper-tagline">Artisanal Metalwork & Calm Rituals</p>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- POINT OF VIEW EDITORIAL ESSAY PANEL -->
-    <section class="gifting-point-of-view" aria-label="Editorial Point of View">
-      <div class="pov-grid">
-        <div class="pov-heading">
-          <h3>Why corporate gifting matters.</h3>
         </div>
-        <div class="pov-content">
-          <p>A gift is rarely just a gift. It's a message—about how much a relationship matters, and how much thought went into showing it.</p>
-          <p>In most organizations, gifting is treated as a checkbox. A vendor is picked in a hurry, a generic hamper goes out, and the moment passes without anyone really feeling it. But the companies that get this right understand something simple: a well-chosen gift builds loyalty in a way that an email or a bonus line item never will. Employees remember who made them feel valued. Clients remember who made the effort personal.</p>
-          <p>This matters more, not less, in a world that runs on emails, deadlines, and back-to-back meetings. A thoughtful gift breaks that pattern—it tells someone they were seen as a person, not just a stakeholder in a transaction.</p>
+        
+        <!-- Collection 2: Executive Essentials -->
+        <div class="collection-row">
+          <div class="collection-image">
+            <img src="image/BCC Hamper.png" alt="Executive Essentials Collection">
+          </div>
+          <div class="collection-content">
+            <span class="collection-tag">Premium</span>
+            <h3>Executive Essentials</h3>
+            <p>Sophisticated tech and workspace essentials for the modern executive.</p>
+            <a href="/explore/" class="btn-action">View Collection</a>
+          </div>
+        </div>
+        
+        <!-- Collection 3: Festive Celebrations -->
+        <div class="collection-row collection-row--reverse">
+          <div class="collection-image">
+            <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebrations Collection">
+          </div>
+          <div class="collection-content">
+            <span class="collection-tag">Celebration</span>
+            <h3>Festive Celebrations</h3>
+            <p>Traditional meets contemporary in our Diwali and festive gifting hampers.</p>
+            <a href="/explore/" class="btn-action">View Collection</a>
+          </div>
+        </div>
+        
+        <!-- Collection 4: Wellness & Self Care -->
+        <div class="collection-row">
+          <div class="collection-image">
+            <img src="image/Self Care Hamper V2.png" alt="Wellness & Self Care Collection">
+          </div>
+          <div class="collection-content">
+            <span class="collection-tag">Wellness</span>
+            <h3>Wellness & Self Care</h3>
+            <p>Curated wellness baskets for employees who go the extra mile.</p>
+            <a href="/explore/" class="btn-action">View Collection</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CREDIBILITY & CAPABILITY METRICS -->
-    <section class="trust-metrics-section" aria-label="Showroom Structural Assurances">
-      <div class="trust-container">
-        <div class="trust-block">
-          <h3>Pan-India Infrastructure</h3>
-          <p>Seamless premium logistics networks engineered to drop batch updates safely to remote employees and national corporate hubs without delivery fragmentation.</p>
+    <!-- CUSTOMISATION STUDIO -->
+    <section class="section-customisation-studio">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2>Customisation Studio</h2>
+          <p class="section-intro">Brand touchpoints that make every gift unmistakably yours.</p>
         </div>
-        <div class="trust-block">
-          <h3>Bespoke Customisation</h3>
-          <p>Clear, tailored options for prominent corporate logo placement branding, personalized gift note inserts, and matching packaging accent color configurations.</p>
+        
+        <div class="customisation-showcase">
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Logo Printing">
+            </div>
+            <h4>Logo Printing</h4>
+            <p>High-quality logo imprinting on premium surfaces.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="image/Gemini_Generated_Image_70tv9o70tv9o70tv.png" alt="Laser Engraving">
+            </div>
+            <h4>Laser Engraving</h4>
+            <p>Precision etching for lasting brand presence.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="image/Gemini_Generated_Image_ate3jcate3jcate3.png" alt="Custom Sleeves">
+            </div>
+            <h4>Custom Sleeves</h4>
+            <p>Bespoke packaging sleeves in your brand colours.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="image/Gemini_Generated_Image_bemqj4bemqj4bemq.png" alt="Custom Notes">
+            </div>
+            <h4>Custom Notes</h4>
+            <p>Personalised messages for meaningful connections.</p>
+          </div>
+          
+          <div class="customisation-item">
+            <div class="customisation-image">
+              <img src="image/Gemini_Generated_Image_dpv57edpv57edpv5.png" alt="Premium Packaging">
+            </div>
+            <h4>Premium Packaging</h4>
+            <p>Luxury unboxing experiences that impress.</p>
+          </div>
         </div>
-        <div class="trust-block">
-          <h3>Senior Professional SLAs</h3>
-          <p>We work with enterprise urgency parameters. Every showroom blueprint entry or custom inquiry routes to an executive inbox for prompt turnaround feedback.</p>
+        
+        <div class="section-footer">
+          <a href="/customisation.html" class="btn-action">Explore Customisation</a>
         </div>
       </div>
     </section>
 
-    <!-- CLOSING ACTION FRAME -->
-    <section class="closing-cta-banner">
-      <div class="closing-container">
-        <h2>Start a conversation.</h2>
-        <p>B2B buyers want to open an inquiry loop, not navigate a messy checkout transaction. Let's align on your upcoming corporate gifting brief.</p>
-        <div class="closing-actions">
-          <a href="/quote.html" class="btn-action" style="background-color: var(--bg-charcoal); color: #FFF;">Request Custom Quote</a>
-          <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20a%20corporate%20gifting%20requirement" class="btn-action" target="_blank" rel="noopener">Chat via WhatsApp</a>
+    <!-- BROWSE BY OCCASION -->
+    <section class="section-browse-occasion">
+      <div class="container">
+        <div class="section-header">
+          <h2>Browse By Occasion</h2>
+          <p class="section-intro">Find the perfect gift for every business moment.</p>
+        </div>
+        
+        <div class="occasion-grid">
+          <a href="/explore/employee-joining-kits" class="occasion-card">
+            <div class="occasion-image">
+              <img src="image/Gemini_Generated_Image_xwgzv4xwgzv4xwgz.png" alt="Employee Joining Kits">
+            </div>
+            <div class="occasion-content">
+              <h4>Employee Joining Kits</h4>
+              <span>Welcome new talent</span>
+            </div>
+          </a>
+          
+          <a href="/explore/event-giveaways" class="occasion-card">
+            <div class="occasion-image">
+              <img src="image/Gemini_Generated_Image_sx0cy0sx0cy0sx0c.png" alt="Event Giveaways">
+            </div>
+            <div class="occasion-content">
+              <h4>Event Giveaways</h4>
+              <span>Conferences & meetings</span>
+            </div>
+          </a>
+          
+          <a href="/explore/" class="occasion-card">
+            <div class="occasion-image">
+              <img src="image/Bottle Hamper.png" alt="Client Appreciation">
+            </div>
+            <div class="occasion-content">
+              <h4>Client Appreciation</h4>
+              <span>Strengthen partnerships</span>
+            </div>
+          </a>
+          
+          <a href="/explore/" class="occasion-card">
+            <div class="occasion-image">
+              <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Gifting">
+            </div>
+            <div class="occasion-content">
+              <h4>Festive Gifting</h4>
+              <span>Diwali, Christmas & more</span>
+            </div>
+          </a>
+          
+          <a href="/explore/" class="occasion-card">
+            <div class="occasion-image">
+              <img src="image/BCC Hamper.png" alt="Leadership Gifts">
+            </div>
+            <div class="occasion-content">
+              <h4>Leadership Gifts</h4>
+              <span>Executive recognition</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BROWSE BY COLLECTION -->
+    <section class="section-browse-collection">
+      <div class="container">
+        <div class="section-header">
+          <h2>Browse By Collection</h2>
+        </div>
+        
+        <div class="collection-editorial-grid">
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Best Sellers</h4>
+            <p>Most-loved gifts by businesses</p>
+          </a>
+          
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Premium Picks</h4>
+            <p>Luxury gifting for special occasions</p>
+          </a>
+          
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Sustainable Choices</h4>
+            <p>Eco-conscious corporate gifting</p>
+          </a>
+          
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Budget Gifting</h4>
+            <p>Thoughtful gifts at every budget</p>
+          </a>
+          
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Trending Products</h4>
+            <p>Latest additions to our showroom</p>
+          </a>
+          
+          <a href="/explore/" class="collection-editorial-card">
+            <h4>Under ₹500</h4>
+            <p>Budget-friendly corporate gifts</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED GIFTS -->
+    <section class="section-selected-gifts">
+      <div class="container">
+        <div class="section-header">
+          <h2>Selected Gifts</h2>
+          <p class="section-intro">Handpicked favourites from our showroom.</p>
+        </div>
+        
+        <div class="selected-grid">
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Bamboo Diary">
+            </div>
+            <h4>Bamboo Diary</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+          
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Cork Notebook">
+            </div>
+            <h4>Cork Notebook</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+          
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/Bottle Hamper.png" alt="Executive Bottle">
+            </div>
+            <h4>Executive Bottle</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+          
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/BCC Hamper 2.png" alt="Premium Mug">
+            </div>
+            <h4>Premium Mug</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+          
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/Hamper 3.png" alt="Desk Set">
+            </div>
+            <h4>Desk Set</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+          
+          <div class="selected-card">
+            <div class="selected-image">
+              <img src="image/Self Care Hamper V2.png" alt="Corporate Combo">
+            </div>
+            <h4>Corporate Combo</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY COMPANIES CHOOSE THEBIZGIFT -->
+    <section class="section-why-us">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2>Why Companies Choose TheBizGift</h2>
+        </div>
+        
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="trust-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h4>Thoughtfully Curated</h4>
+            <p>Every gift is selected with intention, ensuring quality and relevance for your team and clients.</p>
+          </div>
+          
+          <div class="trust-card">
+            <div class="trust-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h4>Pan India Fulfilment</h4>
+            <p>Reliable logistics network delivering to employees and clients across the country.</p>
+          </div>
+          
+          <div class="trust-card">
+            <div class="trust-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 9h6v6H9z"/>
+              </svg>
+            </div>
+            <h4>Custom Branding</h4>
+            <p>Logo printing, engraving and packaging that makes every item uniquely yours.</p>
+          </div>
+          
+          <div class="trust-card">
+            <div class="trust-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h4>Dedicated Account Support</h4>
+            <p>A single point of contact for all your gifting needs, from concept to delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE BIZ GIFT STORY -->
+    <section class="section-brand-story">
+      <div class="container">
+        <div class="story-block">
+          <span class="story-tag">Our Story</span>
+          <p>The Biz Gift was founded with a simple belief: corporate gifting should feel as considered as your business itself. Today, we work with companies across India to transform routine gifting into memorable moments that strengthen relationships, build culture, and leave lasting impressions—one thoughtful hamper at a time.</p>
+          <a href="/about.html" class="story-link">Read our full story →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section-final-cta">
+      <div class="container">
+        <h2>Let's Create Something Memorable</h2>
+        <p>Tell us your occasion, quantity and budget. We'll curate gifting options tailored to your team.</p>
+        <div class="cta-actions">
+          <a href="/quote.html" class="btn-action btn-primary btn-large">Request A Proposal</a>
+          <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20would%20like%20to%20discuss%20a%20corporate%20gifting%20requirement" class="btn-action btn-secondary btn-large" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- GLOBAL FOOTER BAR LINKS SYSTEM -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand-summary">
-        <img src="image/TBG Logo New.png" alt="The Biz Gift Footer Identity">
+        <img src="image/TBG Logo New.png" alt="The Biz Gift">
         <p>We design hampers with care and intentionality—curated, purposeful, and a little bit memorable.</p>
       </div>
       
       <div class="footer-links-column">
-        <h4>Showroom</h4>
+        <h4>Explore</h4>
         <a href="/explore/">All Gift Hampers</a>
-        <a href="/explore/employee-joining-kits">Onboarding Kits</a>
-        <a href="/explore/event-giveaways">Event Giveaways</a>
+        <a href="/explore/">Office Essentials</a>
+        <a href="/explore/">Drinkware</a>
+        <a href="/explore/">Combo Gifts</a>
+        <a href="/explore/">Office Accessories</a>
+        <a href="/explore/">Bags</a>
       </div>
       
       <div class="footer-links-column">
-        <h4>Capabilities</h4>
-        <a href="/customisation.html#logo">Logo Branding Options</a>
-        <a href="/customisation.html#packaging">Packaging & Curation</a>
-        <a href="/quote.html#sla">Response Commitment Window</a>
+        <h4>Collections</h4>
+        <a href="/explore/">Best Sellers</a>
+        <a href="/explore/">Premium Picks</a>
+        <a href="/explore/">Budget Gifting</a>
+        <a href="/explore/">Sustainable Choices</a>
+      </div>
+      
+      <div class="footer-links-column">
+        <h4>Corporate Gifting</h4>
+        <a href="/explore/employee-joining-kits">Employee Joining Kits</a>
+        <a href="/explore/event-giveaways">Event Giveaways</a>
+        <a href="/customisation.html">Customisation</a>
+        <a href="/quote.html">Bulk Orders</a>
+      </div>
+      
+      <div class="footer-links-column">
+        <h4>Company</h4>
+        <a href="/about.html">About</a>
+        <a href="/quote.html">Get A Quote</a>
+        <a href="mailto:hello@thebizgift.com">hello@thebizgift.com</a>
+        <a href="tel:+918888000216">8888000216</a>
       </div>
       
       <div class="footer-links-column">
         <h4>Connect</h4>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn Networks</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram Curation</a>
-        <a href="https://wa.me/919999999999" target="_blank" rel="noopener">Direct WhatsApp Line</a>
+        <div class="footer-socials">
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.628 0 12-5.373 12-12 0-6.628-5.372-12-12-12z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
     
-    <div class="footer-utility-strip">
-      <p>&copy; 2026 The Biz Gift. All rights reserved.</p>
-      <div class="utility-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms & Conditions</a>
-        <a href="/sitemap.html">Sitemap Matrix</a>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 The Biz Gift. All rights reserved.</p>
+        <div class="utility-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms & Conditions</a>
+          <a href="/sitemap.html">Sitemap Matrix</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- PERSISTENT MOBILE-FIRST WHATSAPPWidget FLOAT ACCENT -->
+  <!-- WHATSAPP STICKY WIDGET -->
   <a href="https://wa.me/919999999999?text=Hi%20The%20Biz%20Gift%20team%20I%20am%20looking%20to%20explore%20options" class="whatsapp-sticky-widget" target="_blank" rel="noopener">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/>
+    </svg>
     <span>Discuss on WhatsApp</span>
   </a>
 
-  <!-- DYNAMIC API ASSET INTEGRATION ROUTER -->
   <script>
-    async function loadFeaturedAirtableHampers() {
-      const targetGrid = document.getElementById('featured-airtable-target');
+    // Sticky header scroll effect
+    const header = document.getElementById('siteHeader');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
       
-      try {
-        const response = await fetch('/api/get-featured-hampers');
-        if (!response.ok) throw new Error('Proxy validation failure querying Airtable view items.');
-        
-        const hampers = await response.json();
-        
-        if(hampers && hampers.length > 0) {
-          targetGrid.innerHTML = '';
-          
-          hampers.forEach(hamper => {
-            const cardHtml = `
-              <a href="/hamper/${hamper.slug}" class="hamper-card">
-                <div class="card-media">
-                  <img src="image/${hamper.image || 'placeholder-blank.jpg'}" alt="${hamper.name} Showroom Item Close-up">
-                </div>
-                <div class="card-details">
-                  <div class="card-meta-metrics">
-                    <span>${hamper.curatedTag || 'Curated Selection'}</span>
-                    <span>MOQ: ${hamper.moq || 'Contact'} Units</span>
-                  </div>
-                  <h3 class="card-hamper-title">${hamper.name}</h3>
-                  <p class="card-hamper-tagline">${hamper.tagline || ''}</p>
-                </div>
-              </a>
-            `;
-            targetGrid.insertAdjacentHTML('beforeend', cardHtml);
-          });
-        }
-      } catch (error) {
-        console.warn('Airtable system offline - preserving high-fidelity semantic design defaults:', error);
+      if (currentScroll > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Megamenu dropdown
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const megamenu = document.querySelector('.megamenu');
+    
+    if (dropdownToggle && megamenu) {
+      dropdownToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        megamenu.classList.toggle('active');
+      });
+      
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!dropdownToggle.contains(e.target) && !megamenu.contains(e.target)) {
+          megamenu.classList.remove('active');
+        }
+      });
     }
-
-    document.addEventListener('DOMContentLoaded', loadFeaturedAirtableHampers);
   </script>
 </body>
 </html>
-
-```
