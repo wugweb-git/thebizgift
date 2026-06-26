@@ -1,0 +1,51 @@
+{
+  "easing": {
+    "premium": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "standard": "cubic-bezier(0.25, 1, 0.5, 1)",
+    "smooth": "cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  "duration": {
+    "instant": "0ms",
+    "fast": "150ms",
+    "normal": "300ms",
+    "slow": "600ms",
+    "hero": "900ms"
+  },
+  "transition": {
+    "fast": {
+      "duration": "0.3s",
+      "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+    },
+    "slow": {
+      "duration": "0.8s",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)"
+    }
+  },
+  "animation": {
+    "fadeUp": {
+      "from": { "opacity": "0", "transform": "translateY(40px)" },
+      "to": { "opacity": "1", "transform": "translateY(0)" },
+      "duration": "800ms",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)"
+    },
+    "fadeIn": {
+      "from": { "opacity": "0" },
+      "to": { "opacity": "1" },
+      "duration": "400ms"
+    },
+    "scaleUp": {
+      "from": { "transform": "scale(0.95)" },
+      "to": { "transform": "scale(1)" },
+      "duration": "600ms"
+    }
+  },
+  "stagger": {
+    "fast": "80ms",
+    "normal": "120ms",
+    "slow": "200ms"
+  },
+  "observer": {
+    "threshold": 0.15,
+    "rootMargin": "0px 0px -50px 0px"
+  }
+}

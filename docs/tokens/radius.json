@@ -1,0 +1,35 @@
+{
+  "borderRadius": {
+    "none": "0",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "24px",
+    "xl": "32px",
+    "2xl": "48px",
+    "full": "9999px"
+  },
+  "component": {
+    "button": "full",
+    "input": "full",
+    "card": "lg",
+    "dropdown": "lg",
+    "badge": "full",
+    "chip": "full",
+    "image": "lg",
+    "modal": "xl",
+    "megaMenu": "lg"
+  },
+  "border": {
+    "default": "1px solid rgba(44, 44, 42, 0.1)",
+    "strong": "2px solid #C59A7F",
+    "subtle": "1px solid rgba(255, 255, 255, 0.1)"
+  },
+  "icon": {
+    "stroke": "1.75px"
+  },
+  "focus": {
+    "ringWidth": "3px",
+    "ringColor": "#C59A7F",
+    "ringGlow": "rgba(197, 154, 127, 0.2)"
+  }
+}

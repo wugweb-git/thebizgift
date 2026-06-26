@@ -1,0 +1,103 @@
+{
+  "fontFamily": {
+    "serif": {
+      "name": "Cormorant Garamond",
+      "stack": "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+      "usage": ["headlines", "display-text", "hero", "section-headers"]
+    },
+    "sans": {
+      "name": "Plus Jakarta Sans",
+      "stack": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      "usage": ["body-text", "buttons", "ui-elements", "navigation", "captions"]
+    }
+  },
+  "fontSize": {
+    "hero": {
+      "desktop": "4.5rem",
+      "tablet": "3.2rem",
+      "mobile": "2.8rem",
+      "lineHeight": "1.1",
+      "letterSpacing": "-0.02em"
+    },
+    "h2": {
+      "desktop": "3.5rem",
+      "tablet": "2.8rem",
+      "mobile": "2.5rem",
+      "lineHeight": "1.15",
+      "letterSpacing": "-0.01em"
+    },
+    "h3": {
+      "desktop": "2.75rem",
+      "tablet": "2.25rem",
+      "mobile": "2rem",
+      "lineHeight": "1.2",
+      "letterSpacing": "0"
+    },
+    "h4": {
+      "desktop": "2rem",
+      "tablet": "1.75rem",
+      "mobile": "1.5rem",
+      "lineHeight": "1.3",
+      "letterSpacing": "0"
+    },
+    "body": {
+      "desktop": "1.0625rem",
+      "tablet": "1rem",
+      "mobile": "1rem",
+      "lineHeight": "1.7",
+      "letterSpacing": "0"
+    },
+    "small": {
+      "desktop": "0.9375rem",
+      "tablet": "0.875rem",
+      "mobile": "0.875rem",
+      "lineHeight": "1.6",
+      "letterSpacing": "0.01em"
+    },
+    "caption": {
+      "desktop": "0.8125rem",
+      "tablet": "0.8125rem",
+      "mobile": "0.75rem",
+      "lineHeight": "1.5",
+      "letterSpacing": "0.02em"
+    },
+    "button": {
+      "desktop": "0.875rem",
+      "tablet": "0.875rem",
+      "mobile": "0.8125rem",
+      "lineHeight": "1",
+      "letterSpacing": "0.08em"
+    }
+  },
+  "fontWeight": {
+    "light": 300,
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700
+  },
+  "lineHeight": {
+    "tight": "1.1",
+    "snug": "1.3",
+    "normal": "1.5",
+    "relaxed": "1.7",
+    "loose": "2"
+  },
+  "letterSpacing": {
+    " tighter": "-0.02em",
+    "tight": "-0.01em",
+    "normal": "0",
+    "wide": "0.05em",
+    "wider": "0.08em",
+    "widest": "0.12em"
+  },
+  "editorial": {
+    "maxReadingWidth": "680px",
+    "heroTitleMaxChars": 55,
+    "heroSubtitleMaxChars": 120,
+    "productDescriptionMinWords": 150,
+    "productDescriptionMaxWords": 250,
+    "uspMaxChars": 80,
+    "faqMaxItems": 8
+  }
+}

@@ -6,3 +6,5 @@ dist/
 .vscode/
 # Ignore sensitive API configs
 config.js
+CLAUDE.local.md
+claude.md

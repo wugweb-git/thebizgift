@@ -1,0 +1,58 @@
+{
+  "primitive": {
+    "neutral": {
+      "900": "#1A1A1A",
+      "800": "#2A2A2A",
+      "100": "#FAFAF7",
+      "50": "#FFFFFF"
+    },
+    "brand": {
+      "bronze": {
+        "500": "#C59A7F",
+        "600": "#B87333"
+      }
+    },
+    "text": {
+      "dark": "#2C2C2A",
+      "muted": "#706F6C",
+      "light": "#FFFFFF"
+    },
+    "functional": {
+      "whatsapp": "#25D366",
+      "error": "#DC2626",
+      "success": "#16A34A"
+    }
+  },
+  "alias": {
+    "bg-charcoal": "#1A1A1A",
+    "bg-charcoal-light": "#2A2A2A",
+    "bg-ivory": "#FAFAF7",
+    "accent-bronze": "#C59A7F",
+    "accent-copper": "#B87333",
+    "text-dark": "#2C2C2A",
+    "text-muted": "#706F6C",
+    "text-light": "#FFFFFF"
+  },
+  "semantic": {
+    "background": {
+      "primary": "#FAFAF7",
+      "secondary": "#1A1A1A",
+      "tertiary": "#2A2A2A"
+    },
+    "text": {
+      "primary": "#2C2C2A",
+      "secondary": "#706F6C",
+      "inverse": "#FFFFFF"
+    },
+    "accent": {
+      "primary": "#C59A7F",
+      "secondary": "#B87333",
+      "hover": "#B08A6F"
+    },
+    "border": {
+      "default": "rgba(44, 44, 42, 0.1)",
+      "strong": "#C59A7F",
+      "subtle": "rgba(255, 255, 255, 0.1)"
+    }
+  }
+}
