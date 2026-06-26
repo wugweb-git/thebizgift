@@ -5,7 +5,7 @@
   "description": "The Biz Gift - Premium B2B Corporate Gifting Platform",
   "scripts": {
     "dev": "python3 -m http.server 4321 --directory html",
-    "test": "echo \"Open http://localhost:4321 in browser\" && exit 0"
+    "test": "echo 'Open http://localhost:4321 in browser' && exit 0"
   },
   "engines": {
     "node": ">=18.0.0"
