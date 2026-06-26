@@ -1,5 +1,4 @@
-ce airtable integration is done# The Biz Gift 🎁
-
+# The Biz Gift 🎁
 The Biz Gift is a B2B corporate gifting platform designed to help companies in India thank their people and partners with curated, purposeful, and memorable hampers.
 
 ## Brand Story
