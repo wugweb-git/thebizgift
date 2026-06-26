@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get a Quote | The Biz Gift</title>
-  <link rel="icon" type="image/png" href="image/TBG Logo New.png">
+  <link rel="icon" type="/image/png" href="/image/TBG Logo New.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="pages.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/pages.css">
 </head>
 <body>
 
@@ -36,7 +36,8 @@
           <h2>Let's Get Started</h2>
           <p class="form-subtitle">A few details will help us recommend the right gifting experience.</p>
           
-          <form class="quote-form" action="#" method="POST" id="quote-form">
+          <form class="quote-form" action="/api/submit-lead" method="POST" id="quote-form" novalidate>
+            <div class="quote-error" id="quote-error" role="alert"></div>
             <div class="form-row">
               <div class="form-group">
                 <label for="fullName">Full Name *</label>
@@ -139,9 +140,15 @@
             <input type="hidden" name="sourcePage" id="sourcePage">
             
             <div class="form-submit">
-              <button type="submit" class="btn-submit">Request Proposal</button>
+              <button type="submit" class="btn-submit" id="quote-submit">Request Proposal</button>
             </div>
           </form>
+
+          <div class="quote-success" id="quote-success" hidden>
+            <div class="success-icon">✓</div>
+            <h3>Thank You</h3>
+            <p>Your request has been received. Our team will review your requirements and get back to you within 4 hours during business hours. For anything urgent, reach us on WhatsApp.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -191,19 +198,19 @@
         <div class="visual-grid">
           <div class="visual-item">
             <div class="visual-image">
-              <img src="image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kit">
+              <img src="/image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Employee Joining Kit">
             </div>
             <p>Employee Joining</p>
           </div>
           <div class="visual-item">
             <div class="visual-image">
-              <img src="image/Bottle Hamper.png" alt="Executive Gift Box">
+              <img src="/image/Bottle Hamper.png" alt="Executive Gift Box">
             </div>
             <p>Client Appreciation</p>
           </div>
           <div class="visual-item">
             <div class="visual-image">
-              <img src="image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Hamper">
+              <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Hamper">
             </div>
             <p>Festive Gifting</p>
           </div>
@@ -221,7 +228,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="components.js"></script>
+  <script src="/components.js"></script>
   <script>
     // Capture product context from URL params
     document.addEventListener('DOMContentLoaded', function() {
@@ -254,6 +261,66 @@
           const collectionName = collectionId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
           document.getElementById('collectionName').value = collectionName;
         }
+      }
+
+      // --- Submit handler -> /api/submit-lead (Airtable) ---
+      const form = document.getElementById('quote-form');
+      const errorBox = document.getElementById('quote-error');
+      const successBox = document.getElementById('quote-success');
+      const submitBtn = document.getElementById('quote-submit');
+      const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 || location.protocol === 'file:';
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          errorBox.classList.remove('visible');
+          errorBox.textContent = '';
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.classList.add('loading');
+          submitBtn.textContent = 'Submitting...';
+
+          const payload = { type: 'quote' };
+          new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+          if (window.dataLayer) {
+            window.dataLayer.push({ event: 'quote_submit', occasion: payload.occasion || '' });
+          }
+
+          const showSuccess = function () {
+            form.hidden = true;
+            successBox.hidden = false;
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          };
+          const showError = function (msg) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+            submitBtn.textContent = 'Request Proposal';
+            errorBox.textContent = msg || 'Something went wrong. Please try again or reach us on WhatsApp.';
+            errorBox.classList.add('visible');
+          };
+
+          if (IS_LOCAL) {
+            setTimeout(showSuccess, 800);
+            return;
+          }
+
+          fetch('/api/submit-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).then(function (res) {
+            if (res.ok) { showSuccess(); }
+            else { showError(); }
+          }).catch(function () {
+            showError('Network error. Please check your connection or reach us on WhatsApp.');
+          });
+        });
       }
     });
   </script>

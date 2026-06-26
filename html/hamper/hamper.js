@@ -9,8 +9,12 @@
   /* -----------------------------------------------------------------------
      CONFIG
      ----------------------------------------------------------------------- */
+  // Use mock data only during local development; production hits the live API.
+  const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(window.location.hostname) !== -1 ||
+                   window.location.protocol === 'file:';
+
   const CONFIG = {
-    USE_MOCK: true,
+    USE_MOCK: IS_LOCAL,
     API_ENDPOINT: '/api/get-hamper',
     WHATSAPP_NUMBER: '919999999999',
     SKELETON_DELAY: 400,
@@ -990,7 +994,7 @@
       }
 
       var formData = new FormData(form);
-      var payload = {};
+      var payload = { type: 'proposal' };
       formData.forEach(function (value, key) { payload[key] = value; });
 
       if (CONFIG.USE_MOCK) {
@@ -1003,7 +1007,7 @@
         }, 1500);
       } else {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/submit-proposal', true);
+        xhr.open('POST', '/api/submit-lead', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function () {
           submitBtn.disabled = false;

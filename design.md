@@ -254,7 +254,6 @@ IF no usp              → Omit USP paragraph in Introduction
 | Home | `html/index.html` | 10 |
 | About | `html/about.html` | 9 |
 | Explore Hub | `html/explore/index.html` | 7 |
-| Explore Template | `html/explore/template.html` | 7 |
 | Hamper Detail | `html/hamper/template.html` | 9 |
 | Customisation | `html/customisation.html` | 10 |
 | Quote | `html/quote.html` | 6 |
@@ -268,3 +267,787 @@ IF no usp              → Omit USP paragraph in Introduction
 | 1400px+ | Max container width |
 | 1100px | Reduce spacing, 2-col grids, 3-col occasion |
 | 768px | Stack columns, smaller headings, hamburger nav |
+
+
+
+
+
+
+**✅ `design.md` v1.0 — Final Frozen Version**
+
+I have applied your three final observations and standardized the header across the document.
+
+Here is the **complete, final `design.md`**:
+
+```markdown:disable-run
+# The Biz Gift Design System
+
+**Version:** 1.0  
+**Status:** Frozen  
+**Owner:** Wugweb  
+**Last Updated:** June 2026  
+**Related Documents:** master-brand-document.md, content-architecture.md  
+
+**Purpose:** This is the canonical single source of truth for all visual, interaction, content, and experience decisions for The Biz Gift. It guides designers, developers, Cursor, Figma, and future contributors to maintain premium consistency.  
+**Style:** Restrained luxury editorial — warm neutrals, bronze accents, generous whitespace, high-quality photography.
+
+## Design Principles (Litmus Test)
+
+1. Photography over interface  
+2. Story over specification  
+3. Discovery over browsing  
+4. Consultation over transaction  
+5. Editorial over ecommerce  
+6. Restraint over decoration  
+7. Rhythm over repetition  
+8. Confidence over persuasion  
+9. Quality over quantity  
+10. Systems over pages  
+
+Any decision violating these principles requires senior review.
+
+## 1. Experience Strategy
+
+The Biz Gift is a premium corporate gifting studio disguised as an elegant editorial showroom.
+
+**Core Goals:**
+1. Inspire trust and brand perception  
+2. Enable occasion-based discovery and customization  
+3. Drive high-quality quote requests and WhatsApp conversations
+
+## 2. Editorial Layout System
+
+- Photography always dominates typography  
+- Never exceed 680px reading width for body text  
+- Every section must contain one dominant visual  
+- Alternate image-left / image-right rhythm  
+- Never repeat identical section layouts more than twice consecutively  
+- Every 2–3 sections must change visual tempo  
+- Whitespace communicates hierarchy  
+- Content should feel curated, not exhaustive
+
+## 3. Visual Language
+
+**Photography**  
+**Image Composition**  
+**Lighting**  
+**Materials & Textures**  
+**Backgrounds**  
+**Cropping**  
+**Packaging**  
+**Negative Space**  
+**Iconography**  
+**Illustration**  
+**Borders & Dividers**
+
+**Guiding Rule:** Natural lighting, warm tones, visible textures, soft shadows. 70% product focus, 20% packaging, 10% lifestyle. No HDR, no white studio backgrounds, no smiling office people.
+
+## 4. Token Architecture
+
+**Primitive → Alias → Semantic → Component Tokens**
+
+**Key Values:**  
+- bronze-500: #C59A7F (primary)  
+- Card radius: 24px (lg)  
+- Button radius: pill (9999px)  
+- Icon stroke: 1.75px  
+- Focus ring: 3px bronze with 20% glow
+
+## 5. Typography
+
+**Primary:** Cormorant Garamond (serif)  
+**Secondary:** Plus Jakarta Sans (sans-serif)  
+**Editorial Width:** Max 680px for body text.
+
+## 6. Grid & Spacing
+
+12-column grid (24px gutter), multiple container sizes, large editorial rhythm with generous vertical breathing room.
+
+## 7. Border Radius & Strokes
+
+- lg: 24px (cards — default)  
+- pill: 9999px (buttons, inputs)  
+- Default border: 1px solid neutral-200  
+- Strong border: 2px solid brand-primary
+
+## 8. Homepage Storytelling Engine & Governance
+
+**Frozen Flow:** Hero → Editorial Intro → Featured Collections → Browse by Occasion → Customisation Studio → Selected Products → Trust → Final CTA
+
+**Homepage Governance:** Maximum 9 sections. Any new section requires removing or merging an existing one unless approved in a major redesign.
+
+## 9. Page Blueprints
+
+Detailed blueprints for all major pages (Homepage, Explore, Category/Collection/Occasion, Product Detail, About, Customisation, Quote, Privacy, Terms, 404).
+
+## 10. Component Inventory & Specifications
+
+Full specifications for Header, Mega Menu, Hero, Product Card (variants), Collection Card, Occasion Card, Quote Form, Branding Matrix, Image Gallery, Sticky WhatsApp, Footer, etc.
+
+## 11. Motion System
+
+Hero reveal, card hover lift + scale, mega menu slide-down, horizontal gallery scroll, FAQ accordion, form success checkmark, sticky CTA fade-in, etc. All respect `prefers-reduced-motion`.
+
+## 12. Interaction Patterns
+
+Hover, focus, keyboard, touch, drag, accordion behaviour, mega menu, sticky CTA, etc.
+
+## 13. Responsive System
+
+Defined behaviour across Desktop XL → Small Mobile for all major components.
+
+## 14. Accessibility
+
+Contrast, keyboard navigation, ARIA, focus states, reduced motion, touch targets, alt text, form labels, screen reader order.
+
+## 15. Content Model
+
+**Airtable Mapping**, **Dynamic vs Static Components**, **Fallback Behaviour**.
+
+## 16. Content System
+
+**Content Governance**, **CMS Rules**, **Writing Rules**, **Character Limits**, **SEO & Metadata Rules**.
+
+## 17. Navigation Governance
+
+Primary navigation is frozen:  
+**Home • Explore Gifts • Customisation • About • Request Proposal**
+
+- Collections and Explore use mega menus.  
+- Any new top-level item requires IA review.
+
+## 18. Design Constraints
+
+- Never use gradients  
+- Maximum 2 primary CTAs per viewport  
+- Maximum 4 cards per row  
+- Maximum 680px reading width  
+- Maximum 9 homepage sections  
+- Photography always precedes copy  
+- No ecommerce language on homepage  
+- No pricing on homepage  
+- No Add to Cart  
+- No decorative icons  
+- No shadows for hierarchy when borders suffice
+
+## 19. Quality Assurance
+
+**Performance Budgets**  
+**Design QA Checklist**  
+**Accessibility QA**  
+**Responsive QA**
+
+## 20. Design Debt & Future Roadmap
+
+**Known Design Debt (v1):** Testimonials placeholder, client logo wall, advanced search, AI Gift Finder, Saved Collections, Gift Builder.
+
+**Future Versions:** v2.0 Gift Builder, v3.0 AI Concierge.
+
+## Appendix A — Changelog
+
+**v1.0** — Initial release (Frozen)  
+- Homepage architecture frozen  
+- Navigation frozen  
+- Component inventory established  
+- Design principles established  
+- Token architecture established
+
+
+Added:
+✓ Elevation System
+✓ Motion Tokens
+✓ Image Standards
+✓ Component Classification
+✓ Z-index Tokens
+Z-index system
+Elevation system
+Animation tokens
+Image aspect-ratio standards
+Component classification
+Design metrics
+
+I would only change these things
+1. Rename "Content Model"
+Current
+15. Content Model
+I would rename to
+15. Dynamic Content System
+because this document isn't defining Airtable schemas.
+It is defining how dynamic content behaves visually.
+
+2. Expand Token Architecture
+Instead of
+Primitive
+Alias
+Semantic
+Component
+I'd explicitly mention
+Primitive Tokens
+
+Alias Tokens
+
+Semantic Tokens
+
+Component Tokens
+
+Motion Tokens
+
+Elevation Tokens
+
+Z-index Tokens
+Otherwise developers forget motion tokens.
+
+3. Split Grid & Spacing
+Instead of
+Grid & Spacing
+I'd do
+06 Grid System
+
+07 Spacing System
+
+08 Border Radius
+
+09 Elevation & Borders
+Because those are independent systems.
+
+4. Missing Elevation
+You mention borders.
+No elevation.
+Need
+Elevation 0
+
+Elevation 1
+
+Elevation 2
+
+Modal
+
+Dropdown
+
+Mega Menu
+
+Drawer
+
+Sticky Header
+
+5. Missing Z-index Layer System
+This always becomes messy.
+Example
+0
+
+Background
+
+10
+
+Cards
+
+100
+
+Sticky
+
+200
+
+Header
+
+500
+
+Mega Menu
+
+700
+
+Drawer
+
+900
+
+Modal
+
+999
+
+Toast
+
+6. Component Inventory
+Instead of
+Header
+
+Hero
+
+Footer
+I'd classify.
+Example
+Navigation
+
+Header
+
+Mega Menu
+
+Breadcrumb
+
+Mobile Menu
+
+Cards
+
+Product
+
+Collection
+
+Occasion
+
+Editorial
+
+Trust
+
+Forms
+
+Quote
+
+Lead
+
+Newsletter
+
+Display
+
+Hero
+
+Gallery
+
+FAQ
+
+Carousel
+
+CTA
+
+Utility
+
+Toast
+
+Badge
+
+Chip
+
+Tag
+
+Divider
+
+Loader
+
+Skeleton
+
+Footer
+Much easier to maintain.
+
+7. Missing Icon System
+Not iconography.
+System.
+Lucide
+
+24
+
+20
+
+16
+
+Outline only
+
+1.75 stroke
+
+No filled icons
+
+No duotone
+
+No emoji
+
+No decorative icons
+
+8. Missing Animation Tokens
+Currently
+Motion.
+Need actual standards.
+Fast
+
+150
+
+Medium
+
+300
+
+Slow
+
+600
+
+Hero
+
+900
+
+9. Missing Image Ratios
+Need one section.
+Hero
+
+16:9
+
+Card
+
+4:5
+
+Collection
+
+3:2
+
+Gallery
+
+1:1
+
+Mega Menu
+
+3:2
+
+OG
+
+1200×630
+
+10. Missing Design Metrics
+Very important.
+Example
+Max cards
+
+4
+
+Max CTA
+
+2
+
+Max H1
+
+1
+
+Max accent colors
+
+1
+
+Max hero buttons
+
+2
+
+Reading width
+
+680
+
+Max section width
+
+1440
+
+11. Missing Appendix
+I would add
+Appendix
+
+Glossary
+
+Abbreviations
+
+Version History
+
+Future Components
+
+Final structure I'd freeze
+00 Introduction
+
+01 Design Principles
+
+02 Experience Strategy
+
+03 Visual Language
+
+04 Token Architecture
+
+05 Typography
+
+06 Grid System
+
+07 Spacing System
+
+08 Border Radius
+
+09 Elevation & Borders
+
+10 Motion System
+
+11 Interaction Patterns
+
+12 Responsive System
+
+13 Accessibility
+
+14 Homepage Storytelling
+
+15 Page Blueprints
+
+16 Component Inventory
+
+17 Dynamic Content System
+
+18 Navigation Governance
+
+19 Design Constraints
+
+20 Performance & QA
+
+21 Design Debt
+
+Appendix
+
+
+1. Add Brand Narrative (One Sentence)
+Right now you have:
+Brand Story
+Mission
+Vision
+Positioning
+They're all good.
+But I would add one sentence immediately under the title.
+Something like:
+The Biz Gift believes that corporate gifting is not about products—it is about strengthening relationships through thoughtful experiences that people genuinely remember.
+This becomes the one-line narrative everyone on the team can repeat.
+
+2. Add Brand Decision Filter
+This is something I've used successfully on brand documents.
+At the very end, add:
+Brand Decision Filter
+
+Before introducing any new product, campaign, partnership, collection, or experience, ask:
+
+• Does it feel thoughtful?
+• Does it elevate the recipient's experience?
+• Does it reinforce our premium positioning?
+• Would we be proud to photograph it?
+• Does it strengthen relationships rather than simply fulfill a transaction?
+
+If the answer to any of these questions is "No", reconsider the decision.
+This is surprisingly powerful because it turns the brand document from something people read once into something they actually use.
+1. Missing: Brand Story
+This is the biggest omission.
+This document should answer:
+Why does The Biz Gift exist?
+You already wrote excellent content for the About page.
+I'd adapt that into a concise brand story here.
+Example sections:
+The Observation
+
+Corporate gifting became transactional.
+
+The Opportunity
+
+Companies wanted to make people feel valued but lacked thoughtful partners.
+
+Our Response
+
+The Biz Gift exists to turn corporate gifting into memorable experiences.
+
+2. Missing: Mission
+One paragraph.
+Example
+Mission
+
+To help organizations build stronger relationships through thoughtfully curated gifting experiences that people genuinely remember.
+
+3. Missing: Vision
+Example
+Vision
+
+To become India's most trusted corporate gifting studio by combining thoughtful curation, premium presentation and operational excellence.
+
+4. Missing: Brand Values
+I'd define 5–6.
+Example
+Thoughtfulness
+
+Quality
+
+Reliability
+
+Craft
+
+Partnership
+
+Attention to Detail
+
+5. Missing: Positioning Statement
+One sentence.
+Example
+The Biz Gift is a premium corporate gifting studio for organizations that value relationships as much as results.
+
+6. Missing: Messaging Pillars
+Very useful.
+Example
+Premium Curation
+
+Thoughtful Experiences
+
+Reliable Delivery
+
+Corporate Customisation
+
+Meaningful Relationships
+Every marketing page should reinforce one or more of these.
+
+7. Missing: Brand Personality Spectrum
+Instead of adjectives alone, define the balance.
+Example:
+Trait
+Position
+Premium
+90
+Warm
+80
+Corporate
+40
+Playful
+20
+Luxury
+70
+Editorial
+90
+Salesy
+0
+
+This helps resolve future creative decisions.
+
+8. Missing: Brand Voice Matrix
+Example
+Instead of
+Professional
+Define:
+We sound...
+
+Consultative
+
+Editorial
+
+Warm
+
+Confident
+
+Clear
+
+Never...
+
+Pushy
+
+Corporate jargon
+
+Overly humorous
+
+Flashy
+
+Discount-driven
+
+9. Missing: Brand Experience Principles
+Different from design principles.
+Example
+Every interaction should feel
+
+Thoughtful
+
+Personal
+
+Premium
+
+Calm
+
+Reliable
+
+Memorable
+
+10. Missing: Competitive Positioning
+Very short.
+We compete against
+
+Catalog suppliers
+
+Promotional merchandise vendors
+
+Corporate gift marketplaces
+
+We differentiate through
+
+Curation
+
+Presentation
+
+Consultation
+
+Editorial experience
+
+11. Missing: Brand Architecture
+Very useful later.
+Example
+Master Brand
+
+The Biz Gift
+
+Sub Brands
+
+Collections
+
+Occasions
+
+Signature Hampers
+
+Future Products
+
+Gift Builder
+
+AI Concierge
+
+12. Missing: Success Definition
+What does success mean?
+Not revenue.
+Example
+The customer feels
+
+Confident
+
+Inspired
+
+Taken care of
+
+The recipient feels
+
+Valued
+
+Remembered
+
+Appreciated
+
+Final structure
+I'd make it
+Introduction
+
+Brand Overview
+
+Brand Story
+
+Mission
+
+Vision
+
+Positioning
+
+Audience
+
+Values
+
+Personality
+
+Voice
+
+Experience Principles
+
+Visual Identity
+
+Competitive Positioning
+
+Architecture
+
+Future Vision
+
+References
+

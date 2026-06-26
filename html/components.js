@@ -41,8 +41,65 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initMobileMenu();
     initDropdowns();
+    initNewsletter();
   });
 });
+
+/* --------------------------------------------------------------------------
+   NEWSLETTER SIGNUP — posts to /api/submit-lead (Airtable)
+   -------------------------------------------------------------------------- */
+function initNewsletter() {
+  const form = document.querySelector('.newsletter-form');
+  if (!form) return;
+
+  const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 ||
+                   location.protocol === 'file:';
+  const input = form.querySelector('input[type="email"]');
+  const button = form.querySelector('button');
+
+  const setStatus = (msg) => {
+    let status = form.parentElement.querySelector('.newsletter-status');
+    if (!status) {
+      status = document.createElement('p');
+      status.className = 'newsletter-status';
+      form.parentElement.appendChild(status);
+    }
+    status.textContent = msg;
+  };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    button.disabled = true;
+    const original = button.textContent;
+    button.textContent = 'Subscribing...';
+
+    const done = (msg) => {
+      form.reset();
+      button.disabled = false;
+      button.textContent = original;
+      setStatus(msg);
+    };
+
+    if (IS_LOCAL) {
+      setTimeout(() => done('Thank you — you are subscribed.'), 600);
+      return;
+    }
+
+    fetch('/api/submit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'newsletter', email: input.value })
+    }).then((res) => {
+      done(res.ok ? 'Thank you — you are subscribed.' : 'Something went wrong. Please try again.');
+    }).catch(() => {
+      button.disabled = false;
+      button.textContent = original;
+      setStatus('Network error. Please try again.');
+    });
+  });
+}
 
 /* --------------------------------------------------------------------------
    HEADER SCROLL STATE

@@ -1587,3 +1587,54 @@ img {
     transition: none;
   }
 }
+
+/* ==========================================================================
+   WHATSAPP STICKY WIDGET (site-wide, injected via footer.html)
+   ========================================================================== */
+.whatsapp-sticky-widget {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  background: #25D366;
+  color: #ffffff;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s var(--ease-premium, ease), box-shadow 0.3s ease;
+}
+
+.whatsapp-sticky-widget:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+  color: #ffffff;
+}
+
+.whatsapp-sticky-widget svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-sticky-widget {
+    bottom: 1.1rem;
+    right: 1.1rem;
+    padding: 0.85rem;
+  }
+  /* Collapse to a circular icon button on mobile to save space */
+  .whatsapp-sticky-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-sticky-widget {
+    transition: none;
+  }
+}
