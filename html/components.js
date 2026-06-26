@@ -102,12 +102,12 @@ function initMobileMenu() {
 }
 
 /* --------------------------------------------------------------------------
-   DROPDOWN KEYBOARD NAVIGATION
+   DROPDOWN / MEGA MENU KEYBOARD NAVIGATION
    -------------------------------------------------------------------------- */
 function initDropdowns() {
   document.querySelectorAll('.nav-item-dropdown').forEach(dropdown => {
     const toggle = dropdown.querySelector('.dropdown-toggle');
-    const panel = dropdown.querySelector('.nav-dropdown');
+    const panel = dropdown.querySelector('.mega-menu') || dropdown.querySelector('.nav-dropdown');
     
     if (!toggle || !panel) return;
 

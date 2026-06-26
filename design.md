@@ -116,18 +116,135 @@
 | 6 | Customisation | 4 branding grid |
 | 7 | CTA | Dark, split buttons |
 
-### Hamper Detail
-| Order | Block | Purpose |
-|-------|-------|---------|
-| 1 | Hero | 55/45 split (image / title+details) |
-| 2 | Why This Exists | Narrative |
-| 3 | What's Inside | 5 items |
-| 4 | Perfect For | 4 cards |
-| 5 | Customisation | 9 options |
-| 6 | Planning | Timelines, MOQ info |
-| 7 | Similar | Related items |
-| 8 | Proposal | Hidden fields, quote CTA |
-| 9 | Statement | Brand line |
+### Hamper Detail v2 (Redesigned B2B Editorial Product Page)
+| Order | Block | Purpose | Dynamic? | Hide if Empty? |
+|-------|-------|---------|----------|----------------|
+| 01 | Breadcrumb | Navigation hierarchy with collection/category fallback | Yes | No |
+| 02 | Hero | 55/45 split gallery (hover zoom, keyboard nav, mobile swipe) + premium chips + quick facts | Yes | No |
+| 03 | Product Introduction | Pure typography section (H2 + description + USP) — no cards, no borders | Yes | No |
+| 04 | Planning Information | Apple-style 2-column spec panel (editorial left, spec rows right with thin dividers) | Mixed | No — always show with fallbacks |
+| 05 | Perfect For | Icon-based responsive cards — elegant emoji icons + text + CTA link | Yes | Yes — if no occasion tags |
+| 06 | Make It Yours | Horizontal scroll gallery (pinned section, scroll-driven movement) | Yes | Yes — if no branding options |
+| 07 | FAQ | Accordion with single-open, 200ms smooth animation | Yes | Yes — if no FAQ data |
+| 08 | Related Hampers | "You May Also Like" — algorithmic, 4 cards max, sequential 100ms stagger | Yes | Yes — if no related found |
+| 09 | Proposal / Customisation | Merged split layout (editorial left with highlights + form right with validation) | Yes | No |
+
+#### Airtable Field Mapping
+| Airtable Field | API Key | UI Mapping |
+|---------------|---------|------------|
+| `URL Slug` | `slug` | URL routing |
+| `Website Product Name` | `name` | H1, breadcrumb |
+| `Website Description` | `description` | Hero intro + Product Introduction |
+| `Product Images` | `images[]` | Gallery (hero) |
+| `SEO Title` | `seoTitle` | `<title>` |
+| `SEO Description` | `seoDescription` | `<meta name="description">` |
+| `Parent Category` | `parentCategory` | Breadcrumb (fallback) |
+| `Category` | `category` | Breadcrumb (fallback) + Planning row |
+| `Occasion Tags` | `occasionTags[]` | Perfect For section |
+| `Curated Gift Tags` | `collectionTag` | Collection badge + breadcrumb + Planning |
+| `Product Tags` | `productTags[]` | Hero premium chips |
+| `MOQ` | `moq` | Quick facts + Planning row |
+| `USP` | `usp` | Introduction USP paragraph |
+| `Material` | `material` | Planning row |
+| `Branding Option` | `branding[]` | Make It Yours section |
+| `FAQ` | `faq[]` | FAQ accordion |
+| `Lead Time` | `leadTime` | Quick facts + Planning row |
+| `Delivery` | `delivery` | Quick facts + Planning row |
+| `Response Time` | `responseTime` | Planning row |
+
+#### Image Aspect Ratios
+| Context | Ratio | Notes |
+|---------|-------|-------|
+| Hero gallery | 16:10 | Preloaded, first image eager, hover zoom 1.02 |
+| Make It Yours | 1:1 | Lazy loaded, object-fit cover |
+| Related | 4:5 | Lazy loaded |
+
+#### Interaction Rules
+| Element | Behavior | Duration |
+|---------|----------|----------|
+| **Hero** | Fade-up on page load | 600ms |
+| **Gallery crossfade** | Opacity crossfade between images | 600ms |
+| **Gallery hover zoom** | Active image scales 1.02 on gallery hover | 800ms |
+| **Gallery keyboard** | ArrowLeft / ArrowRight navigation | Instant |
+| **Gallery swipe** | Touch horizontal swipe (50px threshold) | Instant |
+| **Lightbox** | Click image → full overlay, Escape to close | 400ms |
+| **Premium chips** | Hover: bronze bg, translateY -1px | 200ms |
+| **Buttons** | Background fill on hover, arrow slides 4px right | 200ms |
+| **Spec rows** | Hover: subtle bg tint, bronze underline on value | 300ms |
+| **Perfect For cards** | Hover: translateY -6px, border bronze, icon bg bronze, link gap expands | 400ms |
+| **Make It Yours items** | Hover: translateY -6px, shadow, image scale 1.05 | 400ms |
+| **Accordion** | Smooth height expand, chevron rotate 180°, single open | 200ms |
+| **Related cards** | Hover: translateY -8px, shadow, image scale 1.05, CTA underline expands | 500ms |
+| **Related cards (enter)** | Sequential fade-in, 100ms delay each | 800ms total |
+| **Scroll reveal** | IntersectionObserver, translateY 40→0, 80-120ms stagger | 800ms |
+| **Images** | Progressive fade-in on load (0→1 opacity) | 400ms |
+| **Sticky CTA** | Reveals after hero exits viewport, hides when proposal enters | 400ms |
+
+#### Empty State Rules
+```
+IF no FAQ              → Hide FAQ section
+IF no related          → Hide Related section
+IF no branding         → Hide Make It Yours section
+IF no occasion tags    → Hide Perfect For section
+IF no collection tag   → Hide badge in hero
+IF only 1 image        → Disable gallery controls
+IF 0 images            → Show fallback image
+IF no material         → Omit Material spec row
+IF no response time    → Omit Response Time spec row
+IF no usp              → Omit USP paragraph in Introduction
+```
+
+#### Sticky CTA Behaviour
+| Viewport | Behavior |
+|----------|----------|
+| Desktop | Hidden. Appears after hero scrolls past. Hides when Proposal enters viewport. |
+| Mobile | Always visible. Hides when Proposal enters viewport. |
+
+#### Proposal Form Behaviour
+| State | UI |
+|-------|-----|
+| Default | Fields: Name*, Company*, Email*, Phone, Quantity, Required Date, Message |
+| Hidden | productName, productUrl, collectionName, category, occasion, productId |
+| Validation | Inline errors on blur + submit. Red border on invalid fields. |
+| Loading | Spinner + "Submitting...". All inputs disabled. Double-submit prevented. |
+| Success | Form replaced with confirmation panel (checkmark + "Thank You" + message) |
+| Failure | Red banner with error. WhatsApp CTA remains accessible. |
+| Auto-focus | Name field focused after 1s |
+| Analytics | `dataLayer.push({ event: 'proposal_submit', product })` |
+
+#### Related Product Algorithm
+1. Priority 1 (+4): Same Curated Gift Tags (Collection)
+2. Priority 2 (+3): Same Occasion Tags
+3. Priority 3 (+2): Same Category
+4. Priority 4 (+1): Same Product Tags
+- Max 4. Never current product. Ties randomised.
+- Implemented server-side in `get-hamper.js`
+
+#### Loading & Error States
+| State | UI |
+|-------|-----|
+| Loading | Skeleton shimmer: gallery, text lines, chips bar |
+| 404 / missing slug | Editorial error page with CTA to explore |
+| Airtable timeout | Error message with WhatsApp + explore link |
+| Image load failure | `onerror` → fallback placeholder image |
+
+#### Files
+| File | Role |
+|------|------|
+| `html/hamper/template.html` | Minimal shell with skeleton + header/footer |
+| `html/hamper/hamper.css` | Complete v2 styles — 9 sections + skeleton + reduced motion (~1,050 lines) |
+| `html/hamper/hamper.js` | v2 IIFE — 9 builders + 9 interaction systems (~950 lines) |
+| `html/api/get-hamper.js` | Vercel serverless: single product + 4-priority related algorithm |
+
+#### Design Principles
+- No tables — use CSS Grid spec rows with thin dividers
+- No card-based planning — Apple-style label + value rows
+- No image-based occasion cards — icon + text cards
+- No separate consultation image block — editorial highlights + form merged
+- FAQ animation: 200ms (faster), chevron rotates, keyboard accessible
+- Gallery: hover zoom, keyboard nav (Arrow keys), touch swipe, lightbox
+- Chips: pill-style with bronze dots, clickable, linked to taxonomy pages
+- Reduced motion: `@media (prefers-reduced-motion: reduce)` disables all animations
 
 ---
 

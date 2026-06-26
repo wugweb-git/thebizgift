@@ -1,0 +1,1683 @@
+/* ==========================================================================
+   HAMPER DETAIL PAGE v2 — Complete Styles
+   TheBizGift — Luxury Corporate Gifting
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. CSS CUSTOM PROPERTIES (Hamper-specific tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  --hamper-gallery-height: 580px;
+  --hamper-card-radius: 16px;
+  --hamper-content-max: 700px;
+  --hamper-faq-max: 900px;
+  --hamper-stagger: 100ms;
+}
+
+/* --------------------------------------------------------------------------
+   1. BREADCRUMB
+   -------------------------------------------------------------------------- */
+.hamper-breadcrumb {
+  padding: 1.25rem var(--space-layout);
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EAEAE6;
+}
+
+.hamper-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.hamper-breadcrumb a {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.hamper-breadcrumb a:hover {
+  color: var(--accent-bronze);
+}
+
+.hamper-breadcrumb-separator {
+  opacity: 0.4;
+  font-size: 0.75rem;
+}
+
+.hamper-breadcrumb-current {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO — 55/45 Split
+   -------------------------------------------------------------------------- */
+.hamper-hero {
+  background-color: var(--bg-ivory);
+  padding: 5rem var(--space-layout) 5rem;
+  border-bottom: 1px solid #EAEAE6;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeReveal 0.6s var(--ease-premium) forwards;
+}
+
+@keyframes heroFadeReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hamper-hero-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* --- Gallery (Left Column) --- */
+.hamper-gallery {
+  position: relative;
+  width: 100%;
+  border-radius: var(--hamper-card-radius);
+  overflow: hidden;
+  background-color: var(--bg-charcoal);
+  aspect-ratio: 16 / 10;
+  cursor: zoom-in;
+}
+
+.hamper-gallery-main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hamper-gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-premium);
+}
+
+.hamper-gallery-image.active {
+  opacity: 1;
+}
+
+.hamper-gallery-image.loaded {
+  opacity: 1;
+}
+
+/* Hover zoom on gallery */
+.hamper-gallery:hover .hamper-gallery-image.active {
+  transform: scale(1.02);
+  transition: transform 0.8s var(--ease-premium), opacity 0.6s var(--ease-premium);
+}
+
+.hamper-gallery-nav {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+.hamper-gallery-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.hamper-gallery-dot.active {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  transform: scale(1.2);
+}
+
+.hamper-gallery-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hamper-gallery-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  opacity: 0;
+}
+
+.hamper-gallery:hover .hamper-gallery-arrow {
+  opacity: 1;
+}
+
+.hamper-gallery-arrow:hover {
+  background: #FFFFFF;
+  transform: scale(1.08);
+}
+
+/* Gallery image counter */
+.hamper-gallery-counter {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(0,0,0,0.5);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  z-index: 2;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* --- Lightbox --- */
+.hamper-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.hamper-lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hamper-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.hamper-lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.hamper-lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* --- Hero Content (Right Column) --- */
+.hamper-hero-content {
+  padding-right: 1rem;
+}
+
+.hamper-collection-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-bronze);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.hamper-collection-badge:hover {
+  color: var(--accent-copper);
+}
+
+.hamper-hero-content h1 {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  color: var(--text-dark);
+}
+
+.hamper-hero-description {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Premium chips instead of plain pills */
+.hamper-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.hamper-hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-charcoal);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  transition: background var(--transition-fast), transform 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.hamper-hero-chip:hover {
+  background: var(--accent-bronze);
+  transform: translateY(-1px);
+}
+
+.hamper-hero-chip .chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-bronze);
+  flex-shrink: 0;
+}
+
+.hamper-hero-chip:hover .chip-dot {
+  background: #FFFFFF;
+}
+
+.hamper-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.hamper-hero-actions .btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hamper-hero-actions .btn-action .btn-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hamper-hero-actions .btn-action:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.hamper-quick-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #EAEAE6;
+}
+
+.hamper-info-item {
+  text-align: center;
+}
+
+.hamper-info-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.hamper-info-value {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   3. PRODUCT INTRODUCTION
+   -------------------------------------------------------------------------- */
+.hamper-introduction {
+  padding: 6rem var(--space-layout);
+  background-color: #FFFFFF;
+}
+
+.hamper-introduction-content {
+  max-width: var(--hamper-content-max);
+  margin: 0 auto;
+}
+
+.hamper-introduction-content h2 {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.hamper-introduction-content .intro-description {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.hamper-introduction-content .intro-usp {
+  font-size: 1rem;
+  color: var(--accent-bronze);
+  font-weight: 400;
+  line-height: 1.7;
+  padding-top: 1.5rem;
+  border-top: 1px solid #EAEAE6;
+}
+
+/* --------------------------------------------------------------------------
+   4. PLANNING INFORMATION (Apple-style spec panel)
+   -------------------------------------------------------------------------- */
+.hamper-planning {
+  padding: 6rem var(--space-layout);
+  background-color: var(--bg-ivory);
+}
+
+.hamper-planning-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hamper-planning-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.hamper-planning-editorial h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.hamper-planning-editorial p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+.hamper-planning-specs {
+  display: flex;
+  flex-direction: column;
+}
+
+.hamper-planning-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #E5E1DA;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.hamper-planning-row:last-child {
+  border-bottom: none;
+}
+
+.hamper-planning-row:hover {
+  background: rgba(197, 154, 127, 0.03);
+}
+
+.hamper-planning-row:hover .hamper-planning-row-value {
+  border-bottom-color: var(--accent-bronze);
+}
+
+.hamper-planning-row-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.hamper-planning-row-value {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  padding-bottom: 2px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.hamper-planning-row-value small {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   5. PERFECT FOR (Icon-based cards)
+   -------------------------------------------------------------------------- */
+.hamper-perfect {
+  padding: 6rem var(--space-layout);
+  background-color: #FFFFFF;
+}
+
+.hamper-perfect-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hamper-perfect-card {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  background: var(--bg-ivory);
+  border-radius: var(--hamper-card-radius);
+  border: 1px solid transparent;
+  transition: transform 0.4s var(--ease-premium),
+              box-shadow 0.4s var(--ease-premium),
+              border-color 0.3s ease,
+              background 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: flex-start;
+}
+
+.hamper-perfect-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
+  border-color: var(--accent-bronze);
+  background: #FFFFFF;
+}
+
+.hamper-perfect-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--bg-charcoal);
+  color: var(--accent-bronze);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.hamper-perfect-card:hover .hamper-perfect-icon {
+  background: var(--accent-bronze);
+  color: #FFFFFF;
+}
+
+.hamper-perfect-text h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+  color: var(--text-dark);
+}
+
+.hamper-perfect-text p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.hamper-perfect-link {
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-bronze);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.2s ease;
+}
+
+.hamper-perfect-card:hover .hamper-perfect-link {
+  gap: 0.6rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. MAKE IT YOURS (Horizontal scroll gallery)
+   -------------------------------------------------------------------------- */
+.hamper-make-yours {
+  background-color: var(--bg-ivory);
+  border-top: 1px solid #EAEAE6;
+  border-bottom: 1px solid #EAEAE6;
+  position: relative;
+}
+
+.hamper-make-yours-header {
+  padding: 6rem var(--space-layout) 0;
+  text-align: center;
+}
+
+.hamper-make-yours-header h2 {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.hamper-make-yours-header p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.hamper-make-yours-scroll {
+  padding: 3rem var(--space-layout) 6rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  gap: 1.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hamper-make-yours-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hamper-make-yours-item {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  border-radius: var(--hamper-card-radius);
+  overflow: hidden;
+  background: #FFFFFF;
+  transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.hamper-make-yours-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+}
+
+.hamper-make-yours-image {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg-ivory);
+}
+
+.hamper-make-yours-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-premium);
+}
+
+.hamper-make-yours-item:hover .hamper-make-yours-image img {
+  transform: scale(1.05);
+}
+
+.hamper-make-yours-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.hamper-make-yours-body h4 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  color: var(--text-dark);
+}
+
+.hamper-make-yours-body p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. FAQ ACCORDION
+   -------------------------------------------------------------------------- */
+.hamper-faq {
+  padding: 6rem var(--space-layout);
+  background-color: #FFFFFF;
+}
+
+.hamper-faq-container {
+  max-width: var(--hamper-faq-max);
+  margin: 0 auto;
+}
+
+.hamper-faq-container .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hamper-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hamper-faq-item {
+  border-bottom: 1px solid #EAEAE6;
+}
+
+.hamper-faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.hamper-faq-question:hover {
+  color: var(--accent-bronze);
+}
+
+.hamper-faq-question .faq-chevron {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  color: var(--text-muted);
+}
+
+.hamper-faq-question[aria-expanded="true"] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.hamper-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s var(--ease-premium), padding 0.2s ease;
+  padding: 0;
+}
+
+.hamper-faq-answer.open {
+  max-height: 400px;
+  padding: 0 0 1.25rem;
+}
+
+.hamper-faq-answer p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+/* --------------------------------------------------------------------------
+   8. RELATED HAMPERS
+   -------------------------------------------------------------------------- */
+.hamper-related {
+  padding: 6rem var(--space-layout);
+  background-color: var(--bg-ivory);
+}
+
+.hamper-related-header {
+  margin-bottom: 2.5rem;
+}
+
+.hamper-related-header h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.hamper-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.hamper-related-card {
+  text-decoration: none;
+  display: block;
+  border-radius: var(--hamper-card-radius);
+  overflow: hidden;
+  background: #FFFFFF;
+  transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hamper-related-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hamper-related-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+}
+
+.hamper-related-image {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-ivory);
+}
+
+.hamper-related-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-premium);
+}
+
+.hamper-related-card:hover .hamper-related-image img {
+  transform: scale(1.05);
+}
+
+.hamper-related-body {
+  padding: 1.5rem;
+}
+
+.hamper-related-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-bronze);
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.hamper-related-body h4 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.hamper-related-body p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.hamper-related-cta {
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-bronze);
+  position: relative;
+  display: inline-block;
+}
+
+.hamper-related-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-bronze);
+  transition: width 0.3s ease;
+}
+
+.hamper-related-card:hover .hamper-related-cta::after {
+  width: 100%;
+}
+
+/* Mobile horizontal scroll for related */
+.hamper-related-scroll {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. PROPOSAL / CUSTOMISATION (Split)
+   -------------------------------------------------------------------------- */
+.hamper-proposal {
+  padding: 0;
+  background-color: var(--bg-charcoal);
+  color: #FFFFFF;
+}
+
+.hamper-proposal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 550px;
+}
+
+/* Left: Editorial */
+.hamper-proposal-editorial {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 520px;
+  margin-left: auto;
+}
+
+.hamper-proposal-editorial h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+  color: var(--accent-bronze);
+}
+
+.hamper-proposal-editorial > p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.hamper-proposal-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.hamper-proposal-highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+}
+
+.hamper-proposal-highlight .check-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(197, 154, 127, 0.2);
+  color: var(--accent-bronze);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Right: Form */
+.hamper-proposal-form-wrapper {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 520px;
+  margin-right: auto;
+  width: 100%;
+}
+
+.hamper-proposal-form {
+  background: #FFFFFF;
+  padding: 2.5rem;
+  border-radius: var(--hamper-card-radius);
+  text-align: left;
+}
+
+.hamper-proposal-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hamper-proposal-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.hamper-proposal-form .form-group.full-width {
+  grid-column: span 2;
+}
+
+.hamper-proposal-form label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.hamper-proposal-form input,
+.hamper-proposal-form textarea {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #E5E1DA;
+  background: var(--bg-ivory);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color var(--transition-fast);
+  border-radius: 8px;
+  min-height: 44px;
+}
+
+.hamper-proposal-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.hamper-proposal-form input:focus,
+.hamper-proposal-form textarea:focus {
+  border-color: var(--accent-bronze);
+}
+
+.hamper-proposal-form input.error,
+.hamper-proposal-form textarea.error {
+  border-color: #D32F2F;
+}
+
+.hamper-proposal-form .field-error {
+  font-size: 0.75rem;
+  color: #D32F2F;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.hamper-proposal-form .field-error.visible {
+  display: block;
+}
+
+.hamper-proposal-form .form-submit {
+  grid-column: span 2;
+  margin-top: 0.75rem;
+}
+
+.hamper-proposal-form .btn-submit {
+  width: 100%;
+  background: var(--accent-copper);
+  color: #FFFFFF;
+  border: none;
+  padding: 1rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), opacity 0.3s ease;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hamper-proposal-form .btn-submit:hover {
+  background: var(--accent-bronze);
+}
+
+.hamper-proposal-form .btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.hamper-proposal-form .btn-submit .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: none;
+}
+
+.hamper-proposal-form .btn-submit.loading .spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Form error banner */
+.hamper-proposal-error {
+  display: none;
+  grid-column: span 2;
+  background: #FFF0F0;
+  border: 1px solid #FFCDD2;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  color: #D32F2F;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.hamper-proposal-error.visible {
+  display: block;
+}
+
+/* Success */
+.hamper-proposal-success {
+  display: none;
+  background: #FFFFFF;
+  padding: 2.5rem;
+  border-radius: var(--hamper-card-radius);
+  text-align: center;
+}
+
+.hamper-proposal-success.visible {
+  display: block;
+}
+
+.hamper-proposal-success .success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-size: 1.5rem;
+}
+
+.hamper-proposal-success h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.hamper-proposal-success p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* WhatsApp CTA below form */
+.hamper-proposal-whatsapp {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.hamper-proposal-whatsapp .btn-whatsapp-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.hamper-proposal-whatsapp .btn-whatsapp-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* --------------------------------------------------------------------------
+   10. STICKY CTA BAR
+   -------------------------------------------------------------------------- */
+.hamper-sticky-cta {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 997;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hamper-sticky-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.hamper-sticky-cta.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.hamper-sticky-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--accent-copper);
+  color: #FFFFFF;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  transition: all 0.3s var(--ease-premium);
+  text-decoration: none;
+}
+
+.hamper-sticky-cta a:hover {
+  background: var(--accent-bronze);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* --------------------------------------------------------------------------
+   11. SKELETON LOADING
+   -------------------------------------------------------------------------- */
+.hamper-skeleton {
+  background: var(--bg-ivory);
+}
+
+.hamper-skeleton-hero {
+  padding: 5rem var(--space-layout);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hamper-skeleton-gallery {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--hamper-card-radius);
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.hamper-skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hamper-skeleton-badge {
+  width: 120px;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.hamper-skeleton-title {
+  width: 80%;
+  height: 44px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.hamper-skeleton-text {
+  width: 100%;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.hamper-skeleton-text:nth-child(4) { width: 90%; }
+.hamper-skeleton-text:nth-child(5) { width: 75%; }
+
+.hamper-skeleton-chips {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.hamper-skeleton-chip {
+  width: 120px;
+  height: 32px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.hamper-skeleton-section {
+  padding: 5rem var(--space-layout);
+}
+
+.hamper-skeleton-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hamper-skeleton-spec-row {
+  width: 100%;
+  height: 24px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --------------------------------------------------------------------------
+   12. RESPONSIVE — TABLET (768px–1100px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .hamper-hero-container {
+    gap: 3rem;
+  }
+
+  .hamper-hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .hamper-planning-layout {
+    gap: 3rem;
+  }
+
+  .hamper-perfect-grid {
+    gap: 1rem;
+  }
+
+  .hamper-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hamper-proposal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hamper-proposal-editorial {
+    max-width: 100%;
+    margin: 0;
+    padding: 4rem var(--space-layout) 2rem;
+  }
+
+  .hamper-proposal-form-wrapper {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 var(--space-layout) 4rem;
+  }
+
+  .hamper-planning-editorial p {
+    max-width: 100%;
+  }
+
+  .hamper-make-yours-item {
+    flex: 0 0 280px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE — MOBILE (<768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hamper-hero {
+    padding: 2.5rem var(--space-layout) 3rem;
+  }
+
+  .hamper-hero-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hamper-hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hamper-hero-content {
+    padding-right: 0;
+  }
+
+  .hamper-hero-description {
+    font-size: 1rem;
+  }
+
+  .hamper-hero-actions .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hamper-quick-info {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .hamper-gallery {
+    aspect-ratio: 4 / 5;
+  }
+
+  .hamper-gallery-arrows {
+    display: none;
+  }
+
+  .hamper-gallery-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Introduction */
+  .hamper-introduction {
+    padding: 4rem var(--space-layout);
+  }
+
+  .hamper-introduction-content h2 {
+    font-size: 2rem;
+  }
+
+  /* Planning */
+  .hamper-planning {
+    padding: 4rem var(--space-layout);
+  }
+
+  .hamper-planning-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hamper-planning-editorial h2 {
+    font-size: 2rem;
+  }
+
+  .hamper-planning-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 1rem 0;
+  }
+
+  .hamper-planning-row-label {
+    font-size: 0.7rem;
+  }
+
+  .hamper-planning-row-value {
+    font-size: 1rem;
+  }
+
+  /* Perfect For */
+  .hamper-perfect {
+    padding: 4rem var(--space-layout);
+  }
+
+  .hamper-perfect-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hamper-perfect-card {
+    padding: 1.25rem;
+  }
+
+  /* Make It Yours */
+  .hamper-make-yours-header {
+    padding: 4rem var(--space-layout) 0;
+  }
+
+  .hamper-make-yours-header h2 {
+    font-size: 2rem;
+  }
+
+  .hamper-make-yours-scroll {
+    padding: 2rem var(--space-layout) 4rem;
+  }
+
+  .hamper-make-yours-item {
+    flex: 0 0 260px;
+  }
+
+  /* FAQ */
+  .hamper-faq {
+    padding: 4rem var(--space-layout);
+  }
+
+  .hamper-faq-question {
+    font-size: 1.05rem;
+    padding: 1rem 0;
+  }
+
+  /* Related */
+  .hamper-related {
+    padding: 4rem var(--space-layout);
+  }
+
+  .hamper-related-header h2 {
+    font-size: 2rem;
+  }
+
+  .hamper-related-grid {
+    display: none;
+  }
+
+  .hamper-related-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  .hamper-related-scroll .hamper-related-card {
+    min-width: 260px;
+    scroll-snap-align: start;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Proposal */
+  .hamper-proposal-editorial {
+    padding: 3rem var(--space-layout) 1.5rem;
+  }
+
+  .hamper-proposal-editorial h2 {
+    font-size: 2rem;
+  }
+
+  .hamper-proposal-form-wrapper {
+    padding: 0 var(--space-layout) 3rem;
+  }
+
+  .hamper-proposal-form {
+    padding: 1.5rem;
+  }
+
+  .hamper-proposal-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hamper-proposal-form .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .hamper-proposal-form .form-submit {
+    grid-column: span 1;
+  }
+
+  .hamper-proposal-whatsapp .btn-whatsapp-large {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Sticky CTA */
+  .hamper-sticky-cta {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .hamper-sticky-cta a {
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  /* Skeleton */
+  .hamper-skeleton-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. UTILITY — Scroll Reveal
+   -------------------------------------------------------------------------- */
+.hamper-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.hamper-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hamper-reveal-delay-1 { transition-delay: 80ms; }
+.hamper-reveal-delay-2 { transition-delay: 160ms; }
+.hamper-reveal-delay-3 { transition-delay: 240ms; }
+.hamper-reveal-delay-4 { transition-delay: 320ms; }
+
+/* --------------------------------------------------------------------------
+   15. REDUCED MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hamper-hero {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hamper-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hamper-reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hamper-gallery-image {
+    transition: none;
+  }
+
+  .hamper-gallery:hover .hamper-gallery-image.active {
+    transform: none;
+  }
+
+  .hamper-faq-question .faq-chevron {
+    transition: none;
+  }
+
+  .hamper-faq-answer {
+    transition: none;
+  }
+
+  .hamper-sticky-cta {
+    transition: none;
+  }
+
+  .hamper-related-card {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hamper-perfect-card,
+  .hamper-make-yours-item {
+    transition: none;
+  }
+}
