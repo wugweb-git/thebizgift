@@ -1,0 +1,11 @@
+# Only deploy the html/ folder contents
+# Vercel rootDirectory is set in vercel.json
+# Exclude documentation and dev files from deployment bundle
+
+docs/
+node_modules/
+.DS_Store
+.git/
+.github/
+*.sql
+*.csv
