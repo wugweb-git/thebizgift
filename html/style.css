@@ -240,6 +240,7 @@ img {
   background-color: var(--bg-charcoal-light);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 430px;
   padding: 2.5rem var(--space-layout);
   opacity: 0;
   visibility: hidden;
@@ -259,10 +260,12 @@ img {
 
 .mega-menu-container {
   max-width: var(--container-max);
+  min-height: 350px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1.2fr;
   gap: 3rem;
+  align-items: stretch;
 }
 
 .mega-menu-column h4 {
@@ -317,6 +320,7 @@ img {
   padding: 0;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .mega-menu-featured-image {
@@ -364,82 +368,6 @@ img {
   font-weight: 500;
 }
 
-/* Mega Menu — Collections grid variant */
-.mega-menu-grid {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.mega-menu-collection-card {
-  display: flex;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.mega-menu-collection-card:hover {
-  transform: translateY(-4px);
-}
-
-.mega-menu-collection-image {
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--bg-charcoal);
-}
-
-.mega-menu-collection-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-premium);
-}
-
-.mega-menu-collection-card:hover .mega-menu-collection-image img {
-  transform: scale(1.05);
-}
-
-.mega-menu-collection-body {
-  padding: 1rem;
-}
-
-.mega-menu-collection-body h4 {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  color: #FFFFFF;
-  margin-bottom: 0.2rem;
-}
-
-.mega-menu-collection-body p {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 300;
-}
-
-.mega-menu-footer {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.mega-menu-footer a {
-  color: var(--accent-bronze);
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  transition: color var(--transition-fast);
-}
-
-.mega-menu-footer a:hover {
-  color: #FFFFFF;
-}
 
 /* --------------------------------------------------------------------------
    4. STRUCTURAL GLOBAL SECTIONS (FOOTER)

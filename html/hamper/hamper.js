@@ -16,7 +16,7 @@
     SKELETON_DELAY: 400,
     STAGGER_DELAY: 100,
     GALLERY_INTERVAL: 5000,
-    FALLBACK_IMAGE: '../image/TBG Logo New.png'
+    FALLBACK_IMAGE: '/image/TBG Logo New.png'
   };
 
   /* -----------------------------------------------------------------------
@@ -41,10 +41,10 @@
     ],
     productTags: ['Employee Gifting', 'Client Appreciation', 'Premium Picks', 'Eco Friendly'],
     images: [
-      { url: '../image/BCC Hamper 2.png', alt: 'The CC Hamper — Hero view' },
-      { url: '../image/BCC Hamper.png', alt: 'The CC Hamper — Detail view' },
-      { url: '../image/Hamper 3.png', alt: 'The CC Hamper — Packaging view' },
-      { url: '../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'The CC Hamper — Lifestyle view' }
+      { url: '/image/BCC Hamper 2.png', alt: 'The CC Hamper — Hero view' },
+      { url: '/image/BCC Hamper.png', alt: 'The CC Hamper — Detail view' },
+      { url: '/image/Hamper 3.png', alt: 'The CC Hamper — Packaging view' },
+      { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'The CC Hamper — Lifestyle view' }
     ],
     moq: '50 Units',
     material: 'Premium Kraft, Velvet Lining',
@@ -52,40 +52,40 @@
     delivery: 'Pan India',
     packaging: 'Rigid Gift Box',
     branding: [
-      { name: 'Logo Branding', description: 'Precision logo placement on packaging and products.', image: '../image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png' },
-      { name: 'Laser Engraving', description: 'Permanent premium finish on wooden and metal surfaces.', image: '../image/Gemini_Generated_Image_70tv9o70tv9o70tv.png' },
-      { name: 'Screen Printing', description: 'Ideal for high-volume gifting with consistent results.', image: '../image/Gemini_Generated_Image_ate3jcate3jcate3.png' },
-      { name: 'Custom Inserts', description: 'Welcome letters, guides and campaign collateral.', image: '../image/Gemini_Generated_Image_bemqj4bemqj4bemq.png' },
-      { name: 'Corporate Colour Matching', description: 'Packaging aligned to your brand identity.', image: '../image/Gemini_Generated_Image_dpv57edpv57edpv5.png' },
-      { name: 'Gift Notes', description: 'Personalised messages that add a human touch.', image: '../image/BCC Hamper 2.png' },
-      { name: 'Ribbon Colours', description: 'Custom ribbon colours to match your brand palette.', image: '../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png' }
+      { name: 'Logo Branding', description: 'Precision logo placement on packaging and products.', image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png' },
+      { name: 'Laser Engraving', description: 'Permanent premium finish on wooden and metal surfaces.', image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png' },
+      { name: 'Screen Printing', description: 'Ideal for high-volume gifting with consistent results.', image: '/image/Gemini_Generated_Image_ate3jcate3jcate3.png' },
+      { name: 'Custom Inserts', description: 'Welcome letters, guides and campaign collateral.', image: '/image/Gemini_Generated_Image_bemqj4bemqj4bemq.png' },
+      { name: 'Corporate Colour Matching', description: 'Packaging aligned to your brand identity.', image: '/image/Gemini_Generated_Image_dpv57edpv57edpv5.png' },
+      { name: 'Gift Notes', description: 'Personalised messages that add a human touch.', image: '/image/BCC Hamper 2.png' },
+      { name: 'Ribbon Colours', description: 'Custom ribbon colours to match your brand palette.', image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png' }
     ],
     related: [
       {
         name: 'Executive Welcome Kit',
         slug: 'executive-welcome-kit',
-        image: '../image/BCC Hamper.png',
+        image: '/image/BCC Hamper.png',
         description: 'A premium onboarding experience for new leadership hires.',
         collectionTag: 'Premium Collection'
       },
       {
         name: 'Coffee & Calm',
         slug: 'coffee-calm',
-        image: '../image/Gemini_Generated_Image_70tv9o70tv9o70tv.png',
+        image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png',
         description: 'Mindful gifting for wellness-focused corporate programs.',
         collectionTag: 'Wellness Edit'
       },
       {
         name: 'Heritage Box',
         slug: 'heritage-box',
-        image: '../image/Hamper 3.png',
+        image: '/image/Hamper 3.png',
         description: 'Artisanal selection celebrating craft and tradition.',
         collectionTag: 'Artisan Collection'
       },
       {
         name: 'Festive Celebration Box',
         slug: 'festive-celebration-box',
-        image: '../image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png',
+        image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png',
         description: 'Diwali and festive season gifting at scale.',
         collectionTag: 'Festive Edit'
       }
@@ -99,6 +99,85 @@
     ],
     responseTime: 'Within 4 hours during business hours.',
     productionWorkflow: 'Artwork approval → Production → Quality check → Dispatch → Tracking shared'
+  };
+
+  const MOCK_PRODUCTS = {
+    'cc-hamper': MOCK_PRODUCT,
+    'executive-welcome-kit': Object.assign({}, MOCK_PRODUCT, {
+      slug: 'executive-welcome-kit',
+      name: 'Executive Welcome Kit',
+      description: 'A polished onboarding kit for leadership hires and senior teams, built around premium workspace essentials and refined branded presentation.',
+      seoTitle: 'Executive Welcome Kit | The Biz Gift',
+      seoDescription: 'Premium executive onboarding kits with branding, packaging and pan India delivery.',
+      subCategory: 'Executive Onboarding',
+      collectionTag: 'Premium Picks',
+      usp: 'Designed for high-touch onboarding moments with executive stationery, drinkware and premium packaging tailored to your brand.',
+      images: [
+        { url: '/image/BCC Hamper.png', alt: 'Executive Welcome Kit — Hero view' },
+        { url: '/image/BCC Hamper 2.png', alt: 'Executive Welcome Kit — Packaging view' },
+        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png', alt: 'Executive Welcome Kit — Branding detail' }
+      ]
+    }),
+    'premium-desk-set': Object.assign({}, MOCK_PRODUCT, {
+      slug: 'premium-desk-set',
+      name: 'Premium Desk Set',
+      description: 'A practical workspace gifting set for employees, clients and event attendees who value everyday utility.',
+      seoTitle: 'Premium Desk Set | The Biz Gift',
+      seoDescription: 'Corporate desk sets with branded workplace essentials and custom packaging.',
+      subCategory: 'Office Essentials',
+      collectionTag: 'Best Sellers',
+      usp: 'A useful desk-first gift experience with easy logo branding and flexible item combinations for bulk programs.',
+      images: [
+        { url: '/image/Bottle Hamper.png', alt: 'Premium Desk Set — Hero view' },
+        { url: '/image/Hamper 3.png', alt: 'Premium Desk Set — Detail view' },
+        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png', alt: 'Premium Desk Set — Branding detail' }
+      ]
+    }),
+    'coffee-calm': Object.assign({}, MOCK_PRODUCT, {
+      slug: 'coffee-calm',
+      name: 'Coffee & Calm',
+      description: 'A warm, thoughtful hamper built around coffee, comfort and a slower moment in the middle of a busy workday.',
+      seoTitle: 'Coffee & Calm | The Biz Gift',
+      seoDescription: 'Coffee and wellness corporate hampers for employee appreciation and client gifting.',
+      subCategory: 'Wellness & Coffee',
+      collectionTag: 'Wellness Edit',
+      usp: 'Pairs premium coffee cues with relaxing add-ons and brandable packaging for calm, memorable gifting.',
+      images: [
+        { url: '/image/BCC Hamper 2.png', alt: 'Coffee & Calm — Hero view' },
+        { url: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png', alt: 'Coffee & Calm — Packaging view' },
+        { url: '/image/Self Care Hamper V2.png', alt: 'Coffee & Calm — Wellness detail' }
+      ]
+    }),
+    'heritage-box': Object.assign({}, MOCK_PRODUCT, {
+      slug: 'heritage-box',
+      name: 'Heritage Box',
+      description: 'An artisanal corporate gift box with a crafted, festive feel for clients, partners and seasonal campaigns.',
+      seoTitle: 'Heritage Box | The Biz Gift',
+      seoDescription: 'Artisanal heritage gift boxes for festive corporate gifting and client appreciation.',
+      subCategory: 'Artisan Gifting',
+      collectionTag: 'Festive Edit',
+      usp: 'A tactile festive presentation with craft-led packaging, inserts and flexible product curation.',
+      images: [
+        { url: '/image/Hamper 3.png', alt: 'Heritage Box — Hero view' },
+        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'Heritage Box — Festive detail' },
+        { url: '/image/BCC Hamper.png', alt: 'Heritage Box — Packaging view' }
+      ]
+    }),
+    'festive-celebration-box': Object.assign({}, MOCK_PRODUCT, {
+      slug: 'festive-celebration-box',
+      name: 'Festive Celebration Box',
+      description: 'A festive gifting experience for Diwali, Christmas and seasonal campaigns, designed for branded bulk delivery.',
+      seoTitle: 'Festive Celebration Box | The Biz Gift',
+      seoDescription: 'Festive corporate hampers for Diwali, Christmas and seasonal employee or client gifting.',
+      subCategory: 'Festive Gifting',
+      collectionTag: 'Festive Edit',
+      usp: 'Built for seasonal scale with custom sleeves, cards, inserts and pan India logistics support.',
+      images: [
+        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'Festive Celebration Box — Hero view' },
+        { url: '/image/BCC Hamper 2.png', alt: 'Festive Celebration Box — Packaging view' },
+        { url: '/image/Gemini_Generated_Image_sx0cy0sx0cy0sx0c.png', alt: 'Festive Celebration Box — Detail view' }
+      ]
+    })
   };
 
   /* -----------------------------------------------------------------------
@@ -133,7 +212,7 @@
   function fetchProduct() {
     return new Promise(function (resolve, reject) {
       if (CONFIG.USE_MOCK) {
-        setTimeout(function () { resolve(MOCK_PRODUCT); }, CONFIG.SKELETON_DELAY);
+        setTimeout(function () { resolve(MOCK_PRODUCTS[getSlug()] || MOCK_PRODUCT); }, CONFIG.SKELETON_DELAY);
         return;
       }
 
@@ -236,13 +315,13 @@
     return (
       '<div class="hamper-breadcrumb">' +
         '<nav aria-label="Breadcrumb">' +
-          '<a href="../index.html">Home</a>' +
+          '<a href="/">Home</a>' +
           '<span class="hamper-breadcrumb-separator">/</span>' +
           (p.collectionTag
-            ? '<a href="../explore/">' + escapeHtml(p.collectionTag) + '</a><span class="hamper-breadcrumb-separator">/</span>'
-            : '<a href="../explore/index.html">Explore</a><span class="hamper-breadcrumb-separator">/</span>') +
+            ? '<a href="/explore/">' + escapeHtml(p.collectionTag) + '</a><span class="hamper-breadcrumb-separator">/</span>'
+            : '<a href="/explore/">Explore</a><span class="hamper-breadcrumb-separator">/</span>') +
           (p.category && !p.collectionTag
-            ? '<a href="../explore/">' + escapeHtml(p.category) + '</a><span class="hamper-breadcrumb-separator">/</span>'
+            ? '<a href="/explore/">' + escapeHtml(p.category) + '</a><span class="hamper-breadcrumb-separator">/</span>'
             : '') +
           '<span class="hamper-breadcrumb-current">' + escapeHtml(p.name) + '</span>' +
         '</nav>' +
@@ -253,7 +332,7 @@
   // --- 02 Hero ---
   function buildHero(p) {
     var chips = (p.productTags || []).map(function (t) {
-      return '<a href="../explore/" class="hamper-hero-chip"><span class="chip-dot"></span>' + escapeHtml(t) + '</a>';
+      return '<a href="/explore/" class="hamper-hero-chip"><span class="chip-dot"></span>' + escapeHtml(t) + '</a>';
     }).join('');
 
     var images = p.images || [];
@@ -298,7 +377,7 @@
             navDots +
           '</div>' +
           '<div class="hamper-hero-content">' +
-            (p.collectionTag ? '<a href="../explore/" class="hamper-collection-badge">' + escapeHtml(p.collectionTag) + '</a>' : '') +
+            (p.collectionTag ? '<a href="/explore/" class="hamper-collection-badge">' + escapeHtml(p.collectionTag) + '</a>' : '') +
             '<h1>' + escapeHtml(p.name) + '</h1>' +
             '<p class="hamper-hero-description">' + escapeHtml(p.description) + '</p>' +
             (chips ? '<div class="hamper-hero-chips">' + chips + '</div>' : '') +
@@ -425,7 +504,7 @@
     }
 
     var cards = (p.occasionTags || []).map(function (occ) {
-      var link = occ.slug ? '../explore/' + occ.slug : '../explore/';
+      var link = occ.slug ? '/explore/' + occ.slug : '/explore/';
       var icon = getIcon(occ.name);
       return (
         '<a href="' + link + '" class="hamper-perfect-card">' +
@@ -512,7 +591,7 @@
   function buildRelated(p) {
     var cards = (p.related || []).map(function (r, i) {
       return (
-        '<a href="../hamper/' + escapeHtml(r.slug) + '" class="hamper-related-card" data-index="' + i + '">' +
+        '<a href="/hamper/' + escapeHtml(r.slug) + '/" class="hamper-related-card" data-index="' + i + '">' +
           '<div class="hamper-related-image">' +
             '<img src="' + (r.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(r.name) + '" loading="lazy">' +
           '</div>' +
@@ -528,7 +607,7 @@
 
     var scrollCards = (p.related || []).map(function (r, i) {
       return (
-        '<a href="../hamper/' + escapeHtml(r.slug) + '" class="hamper-related-card" data-index="' + i + '">' +
+        '<a href="/hamper/' + escapeHtml(r.slug) + '/" class="hamper-related-card" data-index="' + i + '">' +
           '<div class="hamper-related-image">' +
             '<img src="' + (r.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(r.name) + '" loading="lazy">' +
           '</div>' +
@@ -1020,7 +1099,7 @@
           '<div style="padding: 6rem 2rem; text-align: center; max-width: 600px; margin: 0 auto;">' +
             '<h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem;">Experience Unavailable</h2>' +
             '<p style="color: var(--text-muted); font-weight: 300; margin-bottom: 2rem;">This gifting experience could not be loaded. It may have been removed or is temporarily unavailable.</p>' +
-            '<a href="../explore/index.html" class="btn-action btn-primary">Explore Other Experiences</a>' +
+            '<a href="/explore/" class="btn-action btn-primary">Explore Other Experiences</a>' +
           '</div>';
       }
     });

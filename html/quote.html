@@ -1,4 +1,4 @@
-ase a<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -246,6 +246,14 @@ ase a<!DOCTYPE html>
         const productName = path.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         document.getElementById('sourceProduct').value = productName;
         document.getElementById('productUrl').value = window.location.href;
+        
+        // Extract collection from URL hash if present
+        const hash = window.location.hash;
+        if (hash) {
+          const collectionId = hash.replace('#', '');
+          const collectionName = collectionId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          document.getElementById('collectionName').value = collectionName;
+        }
       }
     });
   </script>

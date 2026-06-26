@@ -1,5 +1,11 @@
 // html/components.js
 document.addEventListener('DOMContentLoaded', () => {
+  const componentBasePath = (() => {
+    const script = document.currentScript || Array.from(document.scripts).find((item) => item.src.includes('components.js'));
+    if (!script || !script.src) return '';
+    return script.src.slice(0, script.src.lastIndexOf('/') + 1);
+  })();
+
   const components = [
     { id: 'header-placeholder', url: 'header.html' },
     { id: 'newsletter-placeholder', url: 'newsletter.html' },
@@ -10,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Promise((resolve) => {
       const el = document.getElementById(comp.id);
       if (el) {
-        fetch(comp.url)
+        fetch(new URL(comp.url, componentBasePath))
           .then(response => {
             if (!response.ok) throw new Error(`Could not load ${comp.url}`);
             return response.text();
@@ -31,11 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Promise.all(loadPromises).then(() => {
     // Initialize interactive features after components load
+    initHeaderScroll();
     initScrollReveal();
     initMobileMenu();
     initDropdowns();
   });
 });
+
+/* --------------------------------------------------------------------------
+   HEADER SCROLL STATE
+   -------------------------------------------------------------------------- */
+function initHeaderScroll() {
+  const header = document.getElementById('siteHeader');
+  if (!header) return;
+
+  const updateHeaderState = () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  };
+
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+}
 
 /* --------------------------------------------------------------------------
    SCROLL REVEAL — Intersection Observer
