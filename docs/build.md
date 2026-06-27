@@ -99,46 +99,44 @@ Current production tree:
 │       ├── moodboard/
 │       ├── references/
 │       └── photography/
-└── html/
-    ├── vercel.json                  # Root directory + headers
-    ├── index.html                   # Homepage (static shell)
-    ├── about.html                   # About (static)
-    ├── customisation.html           # Customisation studio (static)
-    ├── quote.html                   # Quote form (static)
-    ├── privacy.html                 # Legal (static)
-    ├── terms.html                   # Legal (static)
-    ├── sitemap.html                 # Utility (static)
-    ├── style.css                    # Global styles (tokens + resets)
-    ├── pages.css                    # Page-specific overrides
-    ├── components.js                # Shared component loader (fetch header/footer)
-    ├── header.html                  # Shared header (loaded via fetch)
-    ├── footer.html                  # Shared footer (loaded via fetch)
-    ├── newsletter.html              # Shared newsletter block (loaded via fetch)
-    ├── image/                       # Static image assets
-    │   └── ...
-    ├── api/                         # Vercel serverless functions
-    │   ├── get-featured-hampers.js
-    │   ├── get-hamper.js
-    │   └── submit-lead.js
-    ├── explore/
-    │   ├── index.html               # Explore hub (static shell)
-    │   └── explore.html             # Alternate explore (TBD: use / remove)
-    ├── hamper/
-    │   ├── template.html            # Product detail shell
-    │   ├── hamper.css               # Product detail styles
-    │   ├── hamper.js                # Product detail logic
-    │   └── cc-hamper/
-    │       └── index.html           # Pre-rendered static fallback
-    │   └── coffee-calm/
-    │       └── index.html
-    │   └── executive-welcome-kit/
-    │       └── index.html
-    │       └── ... (other pre-rendered fallbacks)
+│
+│   # ── Site files at repo root (served directly by Vercel) ──
+├── vercel.json                  # Headers + caching (no rootDirectory)
+├── .vercelignore                # Excludes docs/ + dev files
+├── index.html                   # Homepage (static shell)
+├── about.html                   # About (static)
+├── customisation.html           # Customisation studio (static)
+├── quote.html                   # Quote form (static)
+├── privacy.html                 # Legal (static)
+├── terms.html                   # Legal (static)
+├── sitemap.html                 # Utility (static)
+├── style.css                    # Global styles (tokens + resets)
+├── pages.css                    # Page-specific overrides
+├── components.js                # Shared component loader (fetch header/footer)
+├── header.html                  # Shared header (loaded via fetch)
+├── footer.html                  # Shared footer (loaded via fetch)
+├── newsletter.html              # Shared newsletter block (loaded via fetch)
+├── image/                       # Static image assets
+│   └── ...
+├── api/                         # Vercel serverless functions → /api/*
+│   ├── get-featured-hampers.js
+│   ├── get-hamper.js
+│   └── submit-lead.js
+├── explore/
+│   ├── index.html               # Explore hub (static shell)
+│   └── explore.html             # Alternate explore (TBD: use / remove)
+└── hamper/
+    ├── template.html            # Product detail shell
+    ├── hamper.css               # Product detail styles
+    ├── hamper.js                # Product detail logic
+    ├── cc-hamper/index.html     # Pre-rendered static fallback
+    ├── coffee-calm/index.html
+    └── executive-welcome-kit/index.html   # + other pre-rendered fallbacks
 ```
 
 ### 03.1 Folder Rules
 
-- `html/` is the Vercel root directory. All URLs are relative to this path.
+- Site files live at the **repo root** and are served directly by Vercel (no Root Directory setting). All absolute URLs (`/style.css`, `/api/...`, `/image/...`) resolve from the root. `docs/` is excluded from deploys via `.vercelignore`.
 - `docs/` is documentation only. It never deploys to production.
 - `html/api/*.js` are Vercel serverless functions. They deploy to `/api/*`.
 - `html/image/` contains static assets used across pages (logos, background textures).
@@ -885,7 +883,7 @@ Client renders editorial 404 with:
 For a new developer joining the project, this is the recommended build sequence:
 
 1. **Foundation**
-   - Set up Vercel project with Root Directory = `html`.
+   - Set up Vercel project (Root Directory = repo root / leave blank; site files are at root).
    - Add environment variables `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`.
    - Confirm `html/api/submit-lead.js` works (write test row to Airtable).
 
@@ -1018,7 +1016,7 @@ Before any deploy, verify:
 ### 28.1 Vercel Setup
 
 1. Connect GitHub repo in Vercel dashboard.
-2. Set **Root Directory** to `html`.
+2. Leave **Root Directory** blank (repo root) — site files are at the root, so no setting is needed. This keeps the project transferable to any account.
 3. Add environment variables:
    - `AIRTABLE_API_KEY` (new PAT)
    - `AIRTABLE_BASE_ID`
@@ -1032,7 +1030,7 @@ When moving to the client's own Vercel:
 
 1. Client creates Vercel account and invites developer as collaborator.
 2. Import repo (GitHub) or push new remote.
-3. Set Root Directory = `html`.
+3. Leave Root Directory blank (repo root) — no setting needed.
 4. Add environment variables (fresh PAT rotated from old).
 5. Add custom domain + DNS.
 6. Validate with staging URL before DNS cutover.
@@ -1069,7 +1067,7 @@ These are intentionally deferred to keep v1 focused on editorial experience and 
 ### 30.2 Deployment Checklist
 
 - [ ] Environment variables set in Vercel.
-- [ ] Root Directory = `html`.
+- [ ] Root Directory = repo root (blank) — site files are at root.
 - [ ] All forms submit to `/api/submit-lead` successfully.
 - [ ] At least one product loads from Airtable in production preview.
 - [ ] No `console.error` or unhandled promise rejections in production build.
@@ -1129,34 +1127,36 @@ These are intentionally deferred to keep v1 focused on editorial experience and 
 │       ├── moodboard/
 │       ├── references/
 │       └── photography/
-└── html/
-    ├── vercel.json
-    ├── index.html
-    ├── about.html
-    ├── customisation.html
-    ├── quote.html
-    ├── privacy.html
-    ├── terms.html
-    ├── sitemap.html
-    ├── style.css
-    ├── pages.css
-    ├── components.js
-    ├── header.html
-    ├── footer.html
-    ├── newsletter.html
-    ├── image/
-    ├── api/
-    │   ├── get-featured-hampers.js
-    │   ├── get-hamper.js
-    │   └── submit-lead.js
-    ├── explore/
-    │   ├── index.html
-    │   └── explore.html
-    ├── hamper/
-    │   ├── template.html
-    │   ├── hamper.css
-    │   ├── hamper.js
-    │   └── [product-slug]/index.html
+│
+│   # ── Site files at repo root (served by Vercel) ──
+├── vercel.json
+├── .vercelignore
+├── index.html
+├── about.html
+├── customisation.html
+├── quote.html
+├── privacy.html
+├── terms.html
+├── sitemap.html
+├── style.css
+├── pages.css
+├── components.js
+├── header.html
+├── footer.html
+├── newsletter.html
+├── image/
+├── api/
+│   ├── get-featured-hampers.js
+│   ├── get-hamper.js
+│   └── submit-lead.js
+├── explore/
+│   ├── index.html
+│   └── explore.html
+└── hamper/
+    ├── template.html
+    ├── hamper.css
+    ├── hamper.js
+    └── [product-slug]/index.html
 ```
 
 ---
@@ -1173,7 +1173,7 @@ These are intentionally deferred to keep v1 focused on editorial experience and 
 | Airtable as sole CMS | No separate CMS needed; Airtable provides both CMS and DB | Jun 2026 | Wugweb |
 | Mock data on localhost | Rapid design iteration without live API dependencies | Jun 2026 | Wugweb |
 | Client-side rendering for PDP | Simpler architecture; acceptable performance at launch scale | Jun 2026 | Wugweb |
-| `html/` as Vercel root | Serverless functions need predictable `/api` namespace; keeps assets rooted cleanly | Jun 2026 | Wugweb |
+| ~~`html/` as Vercel root~~ → **site served from repo root** | Root Directory is an out-of-repo dashboard setting that broke deploys and is not transferable; serving from the repo root makes deploys zero-config and portable to any Vercel account (import → deploy) | Jun 2026 | Wugweb |
 
 ---
 

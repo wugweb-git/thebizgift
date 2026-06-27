@@ -121,15 +121,15 @@ Taxonomy is how content is organised and discovered.
 
 | Component / Section | Location |
 |---------------------|----------|
-| Header & mega menu trigger | `html/header.html` |
-| Footer | `html/footer.html` |
+| Header & mega menu trigger | `header.html` |
+| Footer | `footer.html` |
 | Newsletter form | Inside footer |
 | WhatsApp widget | Inside footer |
-| About page | `html/about.html` |
-| Customisation page | `html/customisation.html` |
-| Quote page | `html/quote.html` |
-| Legal pages | `html/privacy.html`, `html/terms.html` |
-| Sitemap | `html/sitemap.html` |
+| About page | `about.html` |
+| Customisation page | `customisation.html` |
+| Quote page | `quote.html` |
+| Legal pages | `privacy.html`, `terms.html` |
+| Sitemap | `sitemap.html` |
 | Editorial sections | Homepage |
 
 **Rule:** Static homepage sections should not exceed 60% of total homepage content.
@@ -221,11 +221,11 @@ Occasion ──< contains >───┘
 
 | Section | Ownership | Managed Via | Frequency |
 |---------|-----------|-------------|-----------|
-| Hero text | Static | `html/index.html` | Per campaign |
+| Hero text | Static | `index.html` | Per campaign |
 | Featured Collections | Dynamic | Airtable Collections | Weekly |
 | Browse by Occasion | Dynamic | Airtable Occasions | Monthly |
 | Selected Gifts | Dynamic | Airtable Products | Weekly |
-| Other sections | Static | `html/index.html` | Rarely |
+| Other sections | Static | `index.html` | Rarely |
 
 ---
 
@@ -296,7 +296,7 @@ Occasion ──< contains >───┘
 
 Until Airtable schemas are finalised:
 
-- Product detail pages: `html/hamper/hamper.js` contains `MOCK_DATA` with realistic sample records.
+- Product detail pages: `hamper/hamper.js` contains `MOCK_DATA` with realistic sample records.
 - Forms: Return simulated success after delay.
 - Featured grids: Static HTML in explore hub.
 

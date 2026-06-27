@@ -1,0 +1,9 @@
+I will add file name and what i think we shoutld take
+hwoeevr this thing will work only when we have have major chunk of our own .md and Ui elemts mapped.
+
+Once they are we will make sure that no promitives or components are overridden - we just replace the bigger block with our exiitng items (hopefully)
+
+
+so ignorw this space for now
+
+

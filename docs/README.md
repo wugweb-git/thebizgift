@@ -56,19 +56,19 @@ See [build.md](build.md) for:
 
 | Page | File | Sections | Dynamic |
 |------|------|----------|---------|
-| Home | `html/index.html` | 10 | Partial |
-| About | `html/about.html` | 9 | No |
-| Explore Hub | `html/explore/index.html` | 7 | Partial |
-| Hamper Detail | `html/hamper/template.html` | 9 | Yes |
-| Customisation | `html/customisation.html` | 10 | No |
-| Quote | `html/quote.html` | 6 | No |
-| Legal | `html/privacy.html`, `html/terms.html` | — | No |
-| Sitemap | `html/sitemap.html` | — | No |
+| Home | `index.html` | 10 | Partial |
+| About | `about.html` | 9 | No |
+| Explore Hub | `explore/index.html` | 7 | Partial |
+| Hamper Detail | `hamper/template.html` | 9 | Yes |
+| Customisation | `customisation.html` | 10 | No |
+| Quote | `quote.html` | 6 | No |
+| Legal | `privacy.html`, `terms.html` | — | No |
+| Sitemap | `sitemap.html` | — | No |
 
 ## Setup & Development
 
 1. Clone the repository.
-2. Use a local server rooted at `html/` (e.g. `python3 -m http.server 4321 --directory html`, or VS Code Live Server). Component loading (`fetch()` of header/footer/newsletter) and absolute `/...` asset paths require an HTTP server — opening files via `file://` will not work.
+2. Use a local server from the **repo root** (e.g. `python3 -m http.server 4321` or `npx serve . -l 4321`, or VS Code Live Server). Component loading (`fetch()` of header/footer/newsletter) and absolute `/...` asset paths require an HTTP server — opening files via `file://` will not work.
 3. **Local behaviour:** on `localhost`/`127.0.0.1`, product pages render from built-in mock data and all forms simulate a successful submit (no Airtable calls). In production the live API is used automatically.
 4. **Optional:** To test live Airtable locally, copy `.env.example` to `.env.local` and add real credentials (see Deployment section).
 
@@ -96,7 +96,7 @@ See [content-architecture.md](content-architecture.md) for full field schemas.
 
 ## Deployment (Vercel)
 
-- **Root Directory must be set to `html`** in the Vercel project settings. This makes the serverless functions in `html/api/*` deploy as `/api/*` and makes every absolute asset path (`/style.css`, `/image/...`) resolve. Config lives in `html/vercel.json`.
+- **No Root Directory setting needed** — site files are at the repo root, so the serverless functions in `api/*` deploy as `/api/*` and every absolute asset path (`/style.css`, `/image/...`) resolves with default Vercel settings. Config lives in `vercel.json` (repo root); `.vercelignore` keeps `docs/` out of the bundle. This makes the project transferable: import into any Vercel account and deploy, no configuration.
 - Environment variables (Project → Settings → Environment Variables):
   - `AIRTABLE_API_KEY` — Airtable personal access token (never commit it)
   - `AIRTABLE_BASE_ID` — base id for the Products + Leads tables
@@ -108,7 +108,7 @@ When migrating to the client's own Vercel account:
 
 1. **Project creation**
    - Import repo or push to client's GitHub
-   - Set Root Directory = `html`
+   - Leave Root Directory blank (site files are at repo root)
    - Framework preset = Other (static)
 
 2. **Environment variables**
@@ -146,7 +146,7 @@ All three forms POST JSON to the single serverless endpoint `/api/submit-lead`, 
 
 During local development and design review, the site runs on embedded mock data rather than hitting Airtable.
 
-- Product detail pages: `html/hamper/hamper.js` contains a `MOCK_DATA` object with realistic sample records.
+- Product detail pages: `hamper/hamper.js` contains a `MOCK_DATA` object with realistic sample records.
 - Forms: All submissions return a simulated success after a short delay.
 - Featured grids: Static HTML in explore hub; `get-featured-hampers.js` exists but is not wired yet.
 
@@ -177,7 +177,7 @@ SEO and analytics will be addressed in a future phase after content and design a
 
 ## Audit & Hardening Pass (June 2026)
 
-- Unified all asset paths to absolute `/...` and added `html/vercel.json` + documented Root Directory = `html`
+- Unified all asset paths to absolute `/...` and added `vercel.json` + documented Root Directory = `html`
 - Wired quote, proposal and newsletter forms to Airtable via new `/api/submit-lead` serverless function
 - Product pages now use live Airtable in production, mock data only on localhost
 - Per-product SEO/OG/Twitter metadata on each hamper page (previously all identical)

@@ -35,7 +35,7 @@
 - [x] Shared components (header/footer/newsletter) inject via fetch()
 
 #### Vercel Deployment
-- [x] `html/vercel.json` clean — no `rootDirectory` property (that was the build failure cause; already fixed in commit e0c2ce1)
+- [x] `vercel.json` clean — no `rootDirectory` property (that was the build failure cause; already fixed in commit e0c2ce1)
 - [x] Security headers configured (X-Content-Type-Options, X-Frame-Options, Referrer-Policy)
 - [x] Image caching (86400s) and CSS/JS caching (3600s) configured
 - [x] Client migration checklist in docs/README.md
@@ -60,8 +60,16 @@
 - [x] Added full responsive breakpoints (1100px, 768px, 480px) for all explore components
 - [x] All styles use design system tokens (colors, fonts, radius, elevation-1 shadows, easing curves)
 
+### Session 3: Live deploy fixed + docs synced to reality
+
+- [x] **Root cause of broken live site found:** Vercel's Root Directory was not set to `html`, so it served the repo root (no index.html) → production 404. Proof: `/html/index.html` = 200, `/` = 404.
+- [x] **Fix (transferable + scalable, per user):** moved all site files `html/* → repo root`. Now deploys on any Vercel account with default settings — zero config. `vercel.json` + `.vercelignore` at root.
+- [x] **Site is LIVE:** https://thebizgift.vercel.app returns 200; CSS/JS with new design tokens served; nav (`.html` links), `/explore/`, product pages all resolve.
+- [x] **Docs synced to new structure:** CLAUDE.md, CLAUDE.local.md, README.md (root), docs/README.md, docs/build.md (2 folder trees + 5 deploy refs), docs/decision-log.md (D009 superseded). Stripped stale `html/` path prefixes across design.md, content-architecture.md, docs/README.md.
+- [x] **Airtable LIVE access confirmed via MCP** (read). Base `appG2IVjN168FLoqT` real tables: Products (134), Category, Enquiries (real leads table), Vendor, Tag Master, Proposals, Proposal Items. Code targets non-existent Leads/Collections/Occasions — to rewire in the post-UI-approval phase.
+
 ### Known Issues / Not Yet Done
-- [ ] Vercel deployment still failing — needs investigation (may need to push latest changes and re-deploy)
+- [x] ~~Vercel deployment failing~~ — RESOLVED (served from repo root)
 - [ ] Hamper detail pages don't render on `npx serve` (expected — API serverless functions only run on Vercel; mock data requires localhost detection in hamper.js)
 - [ ] Some homepage sections use `reveal` class with `opacity: 0` — IntersectionObserver may not trigger in all headless environments
 - [ ] WhatsApp number is placeholder (`919999999999`) — needs real number before launch

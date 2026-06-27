@@ -194,25 +194,25 @@ Whenever the team makes a deliberate choice between two or more valid approaches
 
 ---
 
-### D009: html/ as Vercel root directory
+### D009: Site served from the repo root (superseded "html/ as Vercel root directory")
 
-**Date:** June 2026  
+**Date:** June 2026 (revised)  
 **Decided By:** Wugweb
 
-**Context:** Monorepo structure. Documentation and code in same repo.
+**Context:** Documentation and site code share one repo. The original decision put site files in `html/` and required Vercel's **Root Directory** setting to be `html`. That setting is an out-of-repo dashboard config: it was repeatedly lost during deploy iterations (production 404'd while files lived in `html/`), and a future client migration would silently break unless the new account also set it.
 
-**Decision:** Set Vercel Root Directory to `html`.
+**Decision:** Move all site files to the **repo root**. Leave Vercel Root Directory blank.
 
 **Rationale:**
-- Serverless functions need predictable `/api` namespace.
-- Keeps static assets rooted cleanly (`/style.css`, `/image/...`).
-- Allows documentation (`/docs`) to coexist without deploying.
-- Matches common static-site patterns on Vercel.
+- **Transferable:** any Vercel account deploys it with defaults — import → deploy, no hidden config.
+- **Scalable / robust:** removes the single most common deploy-failure cause for this project.
+- Serverless functions live at `/api` (auto-detected at root); absolute asset paths (`/style.css`, `/image/...`) resolve unchanged.
+- `docs/` is kept out of the deploy bundle via `.vercelignore`.
 
 **Consequences:**
-- All URLs in code are absolute from `/` (works because root is `html/`).
-- `vercel.json` in `html/` configures rewrites/headers only.
-- Developers must remember to serve from `html/` locally.
+- `vercel.json` and `.vercelignore` live at the repo root.
+- Local dev runs from the repo root (`python3 -m http.server 4321` or `npx serve . -l 4321`).
+- Documentation that previously said "Root Directory = html" has been updated across CLAUDE.md, build.md, and README.md.
 
 ---
 

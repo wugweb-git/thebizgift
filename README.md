@@ -46,33 +46,34 @@ Open http://localhost:4321. Product pages use mock data locally; forms simulate 
 │       ├── references/
 │       └── photography/
 │
-├── html/                            ← Deployed site (Vercel root)
-│   ├── vercel.json
+│   ← Site files live at the repo root (served directly by Vercel) →
+├── vercel.json                      ← Headers + caching (no rootDirectory)
+├── .vercelignore                    ← Excludes docs/ + dev files from deploy
+├── index.html
+├── about.html
+├── customisation.html
+├── quote.html
+├── privacy.html
+├── terms.html
+├── sitemap.html
+├── style.css
+├── pages.css
+├── components.js
+├── header.html
+├── footer.html
+├── newsletter.html
+├── image/
+├── api/                             ← Serverless functions → /api/*
+│   ├── get-featured-hampers.js
+│   ├── get-hamper.js
+│   └── submit-lead.js
+├── explore/
 │   ├── index.html
-│   ├── about.html
-│   ├── customisation.html
-│   ├── quote.html
-│   ├── privacy.html
-│   ├── terms.html
-│   ├── sitemap.html
-│   ├── style.css
-│   ├── pages.css
-│   ├── components.js
-│   ├── header.html
-│   ├── footer.html
-│   ├── newsletter.html
-│   ├── image/
-│   ├── api/
-│   │   ├── get-featured-hampers.js
-│   │   ├── get-hamper.js
-│   │   └── submit-lead.js
-│   ├── explore/
-│   │   ├── index.html
-│   │   └── explore.html
-│   └── hamper/
-│       ├── template.html
-│       ├── hamper.css
-│       └── hamper.js
+│   └── explore.html
+├── hamper/
+│   ├── template.html
+│   ├── hamper.css
+│   └── hamper.js
 │
 ├── CLAUDE.md
 ├── CLAUDE.local.md
@@ -81,7 +82,7 @@ Open http://localhost:4321. Product pages use mock data locally; forms simulate 
 
 ## Deployment
 
-Deployed to Vercel with Root Directory set to `html`. See [docs/README.md](docs/README.md) for full deployment and client migration instructions.
+Deployed to Vercel from the **repo root** — no Root Directory setting needed, so it imports and deploys on any Vercel account with zero config. See [docs/README.md](docs/README.md) for full deployment and client migration instructions.
 
 ## Documentation
 

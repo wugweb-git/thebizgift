@@ -468,19 +468,19 @@ Hero → What We Create → Featured Collections → Customisation Studio → Br
 
 | Page | File | Sections | Status |
 |------|------|----------|--------|
-| Homepage | `html/index.html` | 10 | Built |
-| About | `html/about.html` | 9 | Built |
-| Explore Hub | `html/explore/index.html` | 7 | Built |
-| Hamper Detail | `html/hamper/template.html` | 9 | Built |
-| Customisation | `html/customisation.html` | 10 | Built |
-| Quote | `html/quote.html` | 6 | Built |
-| Collection Page | `html/explore/explore.html` | — | Template |
+| Homepage | `index.html` | 10 | Built |
+| About | `about.html` | 9 | Built |
+| Explore Hub | `explore/index.html` | 7 | Built |
+| Hamper Detail | `hamper/template.html` | 9 | Built |
+| Customisation | `customisation.html` | 10 | Built |
+| Quote | `quote.html` | 6 | Built |
+| Collection Page | `explore/explore.html` | — | Template |
 | Occasion Page | — | — | Future |
 | Category Page | — | — | Future |
-| Privacy | `html/privacy.html` | — | Built |
-| Terms | `html/terms.html` | — | Built |
+| Privacy | `privacy.html` | — | Built |
+| Terms | `terms.html` | — | Built |
 | 404 | — | — | Future |
-| Sitemap | `html/sitemap.html` | — | Built |
+| Sitemap | `sitemap.html` | — | Built |
 | Search | — | — | Future |
 | Gift Builder | — | — | Future (v2.0) |
 
@@ -755,10 +755,10 @@ Max 4 results · never the current product · ties randomised.
 ### 24.5 Files
 | File | Role |
 |------|------|
-| `html/hamper/template.html` | Shell: skeleton + header/footer |
-| `html/hamper/hamper.css` | v2 styles — 9 sections + skeleton + reduced motion |
-| `html/hamper/hamper.js` | v2 IIFE — 9 builders + 9 interaction systems |
-| `html/api/get-hamper.js` | Serverless: single product + related algorithm |
+| `hamper/template.html` | Shell: skeleton + header/footer |
+| `hamper/hamper.css` | v2 styles — 9 sections + skeleton + reduced motion |
+| `hamper/hamper.js` | v2 IIFE — 9 builders + 9 interaction systems |
+| `api/get-hamper.js` | Serverless: single product + related algorithm |
 
 ---
 
