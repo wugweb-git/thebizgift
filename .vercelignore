@@ -1,11 +1,14 @@
-# Only deploy the html/ folder contents
-# Vercel rootDirectory is set in vercel.json
-# Exclude documentation and dev files from deployment bundle
+# Site is served from the repo root — no Vercel Root Directory setting needed.
+# This makes the project transferable: any Vercel account deploys it with defaults.
+# Exclude documentation and dev files from the deployment bundle.
 
 docs/
+CLAUDE.md
+CLAUDE.local.md
 node_modules/
 .DS_Store
 .git/
 .github/
+.claude/
 *.sql
 *.csv
