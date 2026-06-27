@@ -169,8 +169,9 @@
         <span class="sg-name">Buttons</span>
         <span class="sg-tag sg-tag--ref">§18 Buttons</span>
         <span class="sg-tag sg-tag--class">.btn-action .btn-primary .btn-secondary</span>
+        <span class="sg-tag sg-tag--token">--radius-full --font-size-button</span>
         <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
-        <span class="sg-tag sg-tag--gap">⚠ spec says pill (--radius-full); code is square</span>
+        <span class="sg-tag" style="background:#16A34A;color:#fff">✓ pill — fixed</span>
       </div>
       <div class="sg-demo">
         <a class="btn-action btn-primary">Primary</a>
@@ -182,7 +183,41 @@
         <a class="btn-action btn-primary">Primary on dark</a>
         <a class="btn-action btn-secondary">Secondary (white border)</a>
       </div>
-      <div class="sg-note">Gap to close in the upgrade pass: design.md §10 specifies <code>--radius-full</code> (pill) for buttons; current <code>.btn-action</code> has no radius. This is exactly the "buttons not rounded" issue.</div>
+      <div class="sg-note">Fixed this session: <code>.btn-action</code>, form submit and newsletter buttons now use <code>--radius-full</code> (pill) and <code>--font-size-button</code> — the "buttons not rounded" issue is resolved globally.</div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Breadcrumb</span>
+        <span class="sg-tag sg-tag--ref">§18 Nav</span>
+        <span class="sg-tag sg-tag--class">.hamper-breadcrumb</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--gap">⚠ PDP-only — missing on taxonomy pages</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div class="hamper-breadcrumb" style="border:0;padding:0;background:transparent">
+          <nav><a>Home</a><span class="hamper-breadcrumb-separator">/</span><a>Wellness Edit</a><span class="hamper-breadcrumb-separator">/</span><span class="hamper-breadcrumb-current">Coffee &amp; Calm</span></nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planning info / spec rows -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Planning Information (spec rows)</span>
+        <span class="sg-tag sg-tag--ref">§14 PDP-04</span>
+        <span class="sg-tag sg-tag--class">.planning-grid</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div style="display:grid;gap:0;max-width:520px">
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Minimum Order</span><span style="font-weight:500">10 units</span></div>
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Lead Time</span><span style="font-weight:500">7–10 working days</span></div>
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Delivery</span><span style="font-weight:500">Pan-India</span></div>
+        </div>
+      </div>
+      <div class="sg-note">Apple-style label + value rows with thin dividers — no tables, per design.md §14.9. Reused on every product page.</div>
     </div>
 
     <!-- Chips / tags -->

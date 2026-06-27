@@ -96,6 +96,13 @@ a {
   text-decoration: none;
 }
 
+/* Base typography baseline — maps the type scale (tokens/typography.json)
+   so every heading inherits the system unless a component overrides it. */
+h1 { font-family: var(--font-serif); font-size: var(--font-size-hero); line-height: 1.1; font-weight: 400; }
+h2 { font-family: var(--font-serif); font-size: var(--font-size-h2); line-height: 1.15; font-weight: 400; }
+h3 { font-family: var(--font-serif); font-size: var(--font-size-h3); line-height: 1.2; font-weight: 400; }
+h4 { font-family: var(--font-serif); font-size: var(--font-size-h4); line-height: 1.3; font-weight: 400; }
+
 img {
   max-width: 100%;
   display: block;
@@ -113,7 +120,7 @@ img {
 .btn-action {
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: var(--font-size-button);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   border: 1px solid var(--accent-bronze);
@@ -124,6 +131,8 @@ img {
   background: transparent;
   cursor: pointer;
   z-index: 1;
+  border-radius: var(--radius-full);
+  overflow: hidden;
   transition: color var(--transition-fast);
 }
 
@@ -629,7 +638,7 @@ img {
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 4.5rem;
+  font-size: var(--font-size-hero);
   font-weight: 400;
   line-height: 1.15;
   margin-bottom: 2rem;
@@ -1238,13 +1247,13 @@ img {
 .newsletter-form input {
   flex: 1;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
-  padding: 0.8rem 1rem;
-  border: 1px solid #E5E1DA;
+  font-size: var(--font-size-small);
+  padding: 0.8rem 1.25rem;
+  border: 1px solid var(--border-light);
   background: var(--surface-white);
   color: var(--text-dark);
   outline: none;
-  border-radius: 8px;
+  border-radius: var(--radius-full);
   transition: border-color var(--transition-fast);
   min-height: 48px;
 }
@@ -1255,7 +1264,7 @@ img {
 
 .newsletter-form button {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: var(--font-size-button);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 500;
@@ -1263,7 +1272,7 @@ img {
   color: var(--bg-charcoal);
   border: none;
   padding: 0 1.75rem;
-  border-radius: 8px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: background var(--transition-fast);
   white-space: nowrap;

@@ -9,7 +9,7 @@
 
 .section-header h2 {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: var(--font-size-h2);
   font-weight: 400;
   margin-bottom: 1rem;
   line-height: 1.2;
@@ -878,7 +878,7 @@
 .btn-submit {
   width: 100%;
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -886,7 +886,7 @@
   color: var(--bg-charcoal);
   border: none;
   padding: 1.1rem;
-  border-radius: 12px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: background 0.3s ease;
 }

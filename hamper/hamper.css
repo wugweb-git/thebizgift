@@ -1082,10 +1082,10 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: var(--font-size-small);
   cursor: pointer;
   transition: background var(--transition-fast), opacity 0.3s ease;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
