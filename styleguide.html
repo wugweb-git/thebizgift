@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Inventory — The Biz Gift Design System</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/pages.css">
+  <link rel="stylesheet" href="/hamper/hamper.css">
+  <link rel="stylesheet" href="/styleguide.css">
+</head>
+<body class="sg-body">
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="sg-topbar">
+    <div>
+      <h1>The Biz Gift — UI Inventory</h1>
+      <div class="sg-meta">Living mirror of design.md v1.2 + docs/tokens/*.json · labels map UI → spec → CSS class · ♻ = recyclable</div>
+    </div>
+    <nav class="sg-nav">
+      <a href="#foundations">Foundations</a>
+      <a href="#components">Components</a>
+      <a href="#blocks">Blocks</a>
+      <a href="#states">States</a>
+      <a href="#map">Mapping</a>
+    </nav>
+  </header>
+
+  <!-- ===== LEGEND ===== -->
+  <section class="sg-section">
+    <div class="sg-label">
+      <span class="sg-tag sg-tag--ref">design.md §</span>
+      <span class="sg-tag sg-tag--class">.css-class</span>
+      <span class="sg-tag sg-tag--token">--token</span>
+      <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      <span class="sg-tag sg-tag--gap">⚠ Gap vs spec</span>
+    </div>
+    <p class="sg-section-sub">Every element below is rendered with the <strong>real</strong> <code>style.css</code> / <code>pages.css</code> classes — this is the actual current system, not a mockup. Chips show where each piece is documented (<code>design.md</code> section), the CSS class to reuse, the tokens it consumes, whether it's a reusable building block, and any gap between the code and the frozen spec.</p>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOUNDATIONS                                                   -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="foundations">
+    <h2>Foundations</h2>
+    <p class="sg-section-sub">Design tokens — the single source of truth. Mirrors <code>docs/tokens/*.json</code> and design.md §05–12.</p>
+
+    <!-- Color -->
+    <div class="sg-group">
+      <h3>Color · design.md §06 · tokens/colors.json</h3>
+      <div class="sg-swatches">
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--bg-charcoal)"></div><div class="sg-swatch-info"><div class="n">Charcoal</div><div class="v">#1A1A1A</div><div class="u">--bg-charcoal · header/footer</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--bg-charcoal-light)"></div><div class="sg-swatch-info"><div class="n">Charcoal Light</div><div class="v">#2A2A2A</div><div class="u">--bg-charcoal-light · menus</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--bg-ivory);border-bottom:1px solid var(--border-light)"></div><div class="sg-swatch-info"><div class="n">Ivory</div><div class="v">#FAFAF7</div><div class="u">--bg-ivory · page bg</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--accent-bronze)"></div><div class="sg-swatch-info"><div class="n">Bronze</div><div class="v">#C59A7F</div><div class="u">--accent-bronze · primary accent</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--accent-copper)"></div><div class="sg-swatch-info"><div class="n">Copper</div><div class="v">#B87333</div><div class="u">--accent-copper · decorative</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--text-dark)"></div><div class="sg-swatch-info"><div class="n">Text Dark</div><div class="v">#2C2C2A</div><div class="u">--text-dark · body</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--text-muted)"></div><div class="sg-swatch-info"><div class="n">Text Muted</div><div class="v">#706F6C</div><div class="u">--text-muted · secondary</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--color-whatsapp)"></div><div class="sg-swatch-info"><div class="n">WhatsApp</div><div class="v">#25D366</div><div class="u">--color-whatsapp · functional</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--color-error)"></div><div class="sg-swatch-info"><div class="n">Error</div><div class="v">#DC2626</div><div class="u">--color-error · form errors</div></div></div>
+        <div class="sg-swatch"><div class="sg-swatch-chip" style="background:var(--color-success)"></div><div class="sg-swatch-info"><div class="n">Success</div><div class="v">#16A34A</div><div class="u">--color-success · confirmations</div></div></div>
+      </div>
+      <div class="sg-note">Contrast check (WCAG AA needs ≥4.5:1 body text): Text Dark on Ivory ≈ 11:1 ✓ · White on Charcoal ≈ 16:1 ✓ · Bronze on Charcoal ≈ 4.7:1 ✓ for large/UI. Rule: max one accent per viewport, never gradients.</div>
+    </div>
+
+    <!-- Typography -->
+    <div class="sg-group">
+      <h3>Typography · design.md §07 · tokens/typography.json</h3>
+      <div class="sg-type-row"><span class="sg-type-meta">hero · 4.5rem · serif</span><span style="font-family:var(--font-serif);font-size:var(--font-size-hero);line-height:1.1">Thoughtful Gifting</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">h2 · 3.5rem · serif</span><span style="font-family:var(--font-serif);font-size:var(--font-size-h2)">Section Heading</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">h3 · 2.75rem · serif</span><span style="font-family:var(--font-serif);font-size:var(--font-size-h3)">Card Heading</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">h4 · 2rem · serif</span><span style="font-family:var(--font-serif);font-size:var(--font-size-h4)">Sub Heading</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">body · 1.06rem · sans</span><span style="font-family:var(--font-sans);font-size:var(--font-size-body)">Body copy in Plus Jakarta Sans, max 680px reading width.</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">small · 0.94rem · sans</span><span style="font-family:var(--font-sans);font-size:var(--font-size-small)">Small / caption supporting text.</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">button · 0.875rem · sans</span><span style="font-family:var(--font-sans);font-size:var(--font-size-button);text-transform:uppercase;letter-spacing:0.08em">Button Label</span></div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="sg-group">
+      <h3>Spacing · design.md §09 · tokens/spacing.json (4px base)</h3>
+      <div class="sg-space-row"><span class="lbl">0.5rem · 8</span><div class="sg-space-bar" style="width:8px"></div></div>
+      <div class="sg-space-row"><span class="lbl">1rem · 16</span><div class="sg-space-bar" style="width:16px"></div></div>
+      <div class="sg-space-row"><span class="lbl">1.5rem · 24</span><div class="sg-space-bar" style="width:24px"></div></div>
+      <div class="sg-space-row"><span class="lbl">2.5rem · 40</span><div class="sg-space-bar" style="width:40px"></div></div>
+      <div class="sg-space-row"><span class="lbl">4rem · 64</span><div class="sg-space-bar" style="width:64px"></div></div>
+      <div class="sg-space-row"><span class="lbl">8rem · 128</span><div class="sg-space-bar" style="width:128px"></div></div>
+    </div>
+
+    <!-- Radius -->
+    <div class="sg-group">
+      <h3>Border Radius · design.md §10 · tokens/radius.json</h3>
+      <div class="sg-tiles">
+        <div class="sg-tile" style="border-radius:var(--radius-sm)">sm · 4px</div>
+        <div class="sg-tile" style="border-radius:var(--radius-md)">md · 8px</div>
+        <div class="sg-tile" style="border-radius:var(--radius-lg)">lg · 24px<br>cards</div>
+        <div class="sg-tile" style="border-radius:var(--radius-xl)">xl · 32px<br>modal</div>
+        <div class="sg-tile" style="border-radius:var(--radius-full)">full · pill<br>buttons</div>
+      </div>
+    </div>
+
+    <!-- Elevation -->
+    <div class="sg-group">
+      <h3>Elevation · design.md §11 · tokens/elevation.json</h3>
+      <div class="sg-tiles">
+        <div class="sg-tile" style="box-shadow:var(--elevation-0);border-radius:var(--radius-md)">0 · flat</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-1);border-radius:var(--radius-md)">1 · card hover</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-2);border-radius:var(--radius-md)">2 · menus/CTA</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-3);border-radius:var(--radius-md)">3 · modal/lightbox</div>
+      </div>
+    </div>
+
+    <!-- Z-index -->
+    <div class="sg-group">
+      <h3>Z-index Layers · design.md §11 · tokens/zindex.json</h3>
+      <div class="sg-zstack">
+        <div class="sg-zlayer" style="left:0;top:0;background:#9a9a9a">base · 0</div>
+        <div class="sg-zlayer" style="left:40px;top:24px;background:#7a7a7a">raised · 10</div>
+        <div class="sg-zlayer" style="left:80px;top:48px;background:#5a5a5a">sticky · 100</div>
+        <div class="sg-zlayer" style="left:120px;top:72px;background:var(--text-dark)">header · 200</div>
+        <div class="sg-zlayer" style="left:160px;top:96px;background:var(--accent-copper)">mega-menu · 500</div>
+        <div class="sg-zlayer" style="left:200px;top:120px;background:var(--accent-bronze);color:var(--text-dark)">drawer · 700</div>
+        <div class="sg-zlayer" style="left:240px;top:144px;background:#1A1A1A">modal · 900</div>
+      </div>
+    </div>
+
+    <!-- Motion -->
+    <div class="sg-group">
+      <h3>Motion · design.md §12 · tokens/motion.json</h3>
+      <div class="sg-demo">
+        <div style="font-size:0.78rem;color:var(--text-muted);font-family:ui-monospace,monospace">
+          --ease-premium cubic-bezier(0.16,1,0.3,1) · --ease-standard · --ease-smooth<br>
+          durations: fast 150ms · normal 300ms · slow 600ms · hero 900ms · stagger 80–200ms
+        </div>
+      </div>
+      <div class="sg-note">Hover any card/button below to see the real curves. All motion respects <code>@media (prefers-reduced-motion: reduce)</code>.</div>
+    </div>
+
+    <!-- Icons -->
+    <div class="sg-group">
+      <h3>Iconography · design.md §26 — Lucide outline, 1.75 stroke</h3>
+      <div class="sg-demo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8l9-5 9 5"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <span style="margin-left:1rem;font-size:0.8rem;color:var(--text-muted)">Correct WhatsApp glyph →</span>
+        <span class="whatsapp-sticky-widget" style="position:static;box-shadow:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4.012 12.012.012c3.206 0 6.22 1.248 8.485 3.515 2.266 2.267 3.515 5.282 3.514 8.488 0 6.612-5.336 11.948-11.949 11.948-2.005 0-3.972-.504-5.715-1.46L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <span class="whatsapp-sticky-label">Discuss on WhatsApp</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- COMPONENTS                                                    -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="components">
+    <h2>Components</h2>
+    <p class="sg-section-sub">Rendered with real classes from <code>style.css</code> / <code>pages.css</code>. design.md §18 component inventory.</p>
+
+    <!-- Buttons -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Buttons</span>
+        <span class="sg-tag sg-tag--ref">§18 Buttons</span>
+        <span class="sg-tag sg-tag--class">.btn-action .btn-primary .btn-secondary</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--gap">⚠ spec says pill (--radius-full); code is square</span>
+      </div>
+      <div class="sg-demo">
+        <a class="btn-action btn-primary">Primary</a>
+        <a class="btn-action">Action (outline)</a>
+        <a class="btn-action btn-large btn-primary">Large</a>
+        <a class="btn-action btn-small">Small</a>
+      </div>
+      <div class="sg-demo sg-demo--dark">
+        <a class="btn-action btn-primary">Primary on dark</a>
+        <a class="btn-action btn-secondary">Secondary (white border)</a>
+      </div>
+      <div class="sg-note">Gap to close in the upgrade pass: design.md §10 specifies <code>--radius-full</code> (pill) for buttons; current <code>.btn-action</code> has no radius. This is exactly the "buttons not rounded" issue.</div>
+    </div>
+
+    <!-- Chips / tags -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Chips / Tags / Badges</span>
+        <span class="sg-tag sg-tag--ref">§18 Utility</span>
+        <span class="sg-tag sg-tag--class">.hamper-hero-chip .collection-tag</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo">
+        <a class="hamper-hero-chip"><span class="chip-dot"></span>Premium Picks</a>
+        <a class="hamper-hero-chip"><span class="chip-dot"></span>Eco Friendly</a>
+        <a class="hamper-hero-chip"><span class="chip-dot"></span>Employee Gifting</a>
+        <span class="collection-tag" style="margin-left:1rem">Featured Collection</span>
+      </div>
+      <div class="sg-note">Pill chips with bronze dot, hover lift + bronze fill — used as overlay/inline labels on hero and cards (the labels/tags you asked for).</div>
+    </div>
+
+    <!-- Form controls -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Form Controls</span>
+        <span class="sg-tag sg-tag--ref">§18 Forms</span>
+        <span class="sg-tag sg-tag--class">.newsletter-form input · proposal form</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <form class="newsletter-form" onsubmit="return false" style="max-width:480px;margin:0">
+          <input type="email" placeholder="Enter your work email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Section header -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Section Header</span>
+        <span class="sg-tag sg-tag--ref">§18 Content</span>
+        <span class="sg-tag sg-tag--class">.section-header (+ --center)</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div class="section-header" style="margin-bottom:0">
+          <h2>Browse by Collection</h2>
+          <p class="section-intro">Curated collections crafted with intention, designed to strengthen relationships.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Cards</span>
+        <span class="sg-tag sg-tag--ref">§17 Blueprints / §18 Cards</span>
+        <span class="sg-tag sg-tag--class">.occasion-card .collection-editorial-card .selected-card</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--token">--radius-lg --elevation-1</span>
+      </div>
+      <div class="sg-demo sg-demo--col" style="background:var(--bg-ivory)">
+        <div class="sg-cardrow">
+          <a class="occasion-card">
+            <div class="occasion-image"><img src="/image/BCC%20Hamper.png" alt="Occasion" loading="lazy"></div>
+            <div class="occasion-content"><h4>Employee Joining</h4><p>Welcome new beginnings with gifts that leave a lasting impression.</p></div>
+          </a>
+          <a class="collection-editorial-card">
+            <h4>Premium Picks</h4>
+            <p>Elevated gifting experiences for leadership teams and valued clients.</p>
+          </a>
+          <a class="selected-card">
+            <div class="selected-image"><img src="/image/Bottle%20Hamper.png" alt="Product" loading="lazy"></div>
+            <h4>Coffee &amp; Calm</h4>
+            <span class="btn-action btn-small">Explore Experience</span>
+          </a>
+        </div>
+      </div>
+      <div class="sg-note">Three reusable card archetypes: image+content (occasion/category/product), text-only editorial (collection), and product card with CTA. All share 24px radius, elevation-1 hover lift, image zoom 1.05.</div>
+    </div>
+
+    <!-- FAQ accordion (live) -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">FAQ Accordion</span>
+        <span class="sg-tag sg-tag--ref">§18 Display</span>
+        <span class="sg-tag sg-tag--class">.home-faq-item</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div class="home-faq-container" style="margin:0">
+          <div class="home-faq-item">
+            <button class="home-faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.home-faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+              What is the minimum order quantity?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="home-faq-answer"><p>MOQs vary by product, typically from 10–50 units. Each product page lists its MOQ.</p></div>
+          </div>
+          <div class="home-faq-item">
+            <button class="home-faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.home-faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+              Can we customise the packaging?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="home-faq-answer"><p>Yes — branding, custom boxes, welcome cards and personalised notes are all available.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social icons -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Social Icons</span>
+        <span class="sg-tag sg-tag--ref">§18 Footer</span>
+        <span class="sg-tag sg-tag--class">.footer-socials-compact</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--dark">
+        <div class="footer-socials-compact">
+          <a aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.27 2.3-2.61 4.73-2.61C21.6 7.57 24 10 24 14.6V24h-5v-8.4c0-2-.04-4.58-2.79-4.58-2.79 0-3.21 2.18-3.21 4.43V24h-5V8z"/></svg></a>
+          <a aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a4 4 0 110-8 4 4 0 010 8zm6.41-10.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- BLOCKS                                                        -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="blocks">
+    <h2>Blocks (recyclable section compositions)</h2>
+    <p class="sg-section-sub">The reusable section types you named — mapped to design.md §13–17. Each appears on multiple pages and should be a single reusable block.</p>
+    <table class="sg-table">
+      <thead><tr><th>Block</th><th>design.md §</th><th>Used on</th><th>Key class / hook</th><th>♻</th></tr></thead>
+      <tbody>
+        <tr><td>Hero</td><td>§17</td><td>Home, Explore, About, Quote, PDP</td><td><code>.hero-section</code> / <code>.explore-hero</code> / <code>.hamper-hero</code></td><td>♻</td></tr>
+        <tr><td>How It Works</td><td>§17 Home</td><td>Home, Quote</td><td><code>.section-process</code></td><td>♻</td></tr>
+        <tr><td>Featured Collection</td><td>§13 Home</td><td>Home, Explore</td><td><code>.section-featured-collections</code> / <code>.collection-editorial-grid</code></td><td>♻</td></tr>
+        <tr><td>Browse by Occasion</td><td>§13</td><td>Home, Explore</td><td><code>.occasion-grid</code></td><td>♻</td></tr>
+        <tr><td>Explore By Product Type</td><td>§13 Explore</td><td>Explore</td><td><code>.category-grid</code></td><td>♻</td></tr>
+        <tr><td>Planning Information</td><td>§14 PDP-04</td><td>PDP</td><td><code>.planning-grid</code> (spec rows)</td><td>♻</td></tr>
+        <tr><td>You May Also Like</td><td>§14 PDP-08</td><td>PDP</td><td><code>.related-grid</code> (algorithm)</td><td>♻</td></tr>
+        <tr><td>FAQ</td><td>§14 PDP-07</td><td>Home, PDP</td><td><code>.home-faq-item</code> / accordion</td><td>♻</td></tr>
+        <tr><td>Lead / Proposal Form</td><td>§14 PDP-09 / Quote</td><td>Quote, PDP</td><td><code>.proposal-form</code> / <code>.quote-form-section</code></td><td>♻</td></tr>
+        <tr><td>Final CTA</td><td>§17</td><td>Home, Explore, About</td><td><code>.section-final-cta</code> / <code>.explore-cta</code></td><td>♻</td></tr>
+        <tr><td>Newsletter</td><td>§18 Footer</td><td>All pages</td><td><code>.section-newsletter</code></td><td>♻</td></tr>
+        <tr><td>WhatsApp Sticky</td><td>§18 Footer</td><td>All pages</td><td><code>.whatsapp-sticky-widget</code></td><td>♻</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- STATES                                                        -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="states">
+    <h2>Component States</h2>
+    <p class="sg-section-sub">design.md §13 — every interactive component should define these. Hover the demos above to see live transitions.</p>
+    <div class="sg-states">
+      <div class="sg-state"><div class="st">Default</div><a class="btn-action btn-primary btn-small">Button</a></div>
+      <div class="sg-state"><div class="st">Hover</div><a class="btn-action btn-small">fill bronze →</a></div>
+      <div class="sg-state"><div class="st">Focus</div><a class="btn-action btn-small" style="outline:3px solid var(--accent-bronze);outline-offset:2px">3px ring</a></div>
+      <div class="sg-state"><div class="st">Disabled</div><a class="btn-action btn-small" style="opacity:.4;pointer-events:none">Disabled</a></div>
+      <div class="sg-state"><div class="st">Error</div><input style="border:1px solid var(--color-error);border-radius:var(--radius-md);padding:.5rem .75rem;width:100%" value="invalid@"></div>
+      <div class="sg-state"><div class="st">Success</div><span style="color:var(--color-success);font-weight:600">✓ Thank you</span></div>
+      <div class="sg-state"><div class="st">Loading</div><span style="color:var(--text-muted)">Submitting…</span></div>
+      <div class="sg-state"><div class="st">Empty</div><span style="color:var(--text-muted);font-size:.85rem">No products found.</span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- MAPPING                                                       -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="map">
+    <h2>UI → Spec → Code Mapping</h2>
+    <p class="sg-section-sub">How this UI traces back to the documentation. This is the contract for reuse.</p>
+    <table class="sg-table">
+      <thead><tr><th>Layer</th><th>Source of truth</th><th>In code</th></tr></thead>
+      <tbody>
+        <tr><td>Why / brand</td><td><code>docs/master-brand-document.md</code></td><td>Voice, no-price model, copy tone</td></tr>
+        <tr><td>Tokens</td><td><code>docs/tokens/*.json</code> (7 files)</td><td><code>:root</code> in <code>style.css</code></td></tr>
+        <tr><td>Components / blocks</td><td><code>docs/design.md</code> v1.2 §13–18</td><td><code>style.css</code>, <code>pages.css</code>, <code>hamper/hamper.css</code></td></tr>
+        <tr><td>Content / data</td><td><code>docs/content-architecture.md</code> §15 (Airtable)</td><td><code>api/*.js</code> + mock data in <code>hamper.js</code></td></tr>
+        <tr><td>Engineering rules</td><td><code>docs/build.md</code></td><td>Folder structure, fetch, forms</td></tr>
+      </tbody>
+    </table>
+    <div class="sg-note">Known gaps to close in the upgrade pass (your next chat): button radius (pill), mega-menu &amp; form ARIA, richer imagery/overlays, scroll-transform micro-interactions. Airtable rewire (real tables: Products / Category / Enquiries) is deferred until UI is approved.</div>
+  </section>
+
+</body>
+</html>
