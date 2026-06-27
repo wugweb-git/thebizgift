@@ -295,7 +295,7 @@
           </a>
         </div>
       </div>
-      <div class="sg-note">Three reusable card archetypes: image+content (occasion/category/product), text-only editorial (collection), and product card with CTA. All share 24px radius, elevation-1 hover lift, image zoom 1.05.</div>
+      <div class="sg-note"><strong>Phase 5 consolidated:</strong> Canonical <code>.media-card</code> base (style.css §2b) shared by occasion, category, selected, experience cards. Canonical <code>.editorial-card</code> base shared by collection-editorial. Each specific card overrides only what differs (aspect ratio, hover distance, font size). Create-card, moment-card, philosophy-card remain standalone (structurally different).</div>
     </div>
 
     <!-- FAQ accordion (live) -->
@@ -303,24 +303,24 @@
       <div class="sg-label">
         <span class="sg-name">FAQ Accordion</span>
         <span class="sg-tag sg-tag--ref">§18 Display</span>
-        <span class="sg-tag sg-tag--class">.home-faq-item</span>
-        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--class">.faq-item .faq-question .faq-answer</span>
+        <span class="sg-tag sg-tag--recycle">♻ Canonical</span>
       </div>
       <div class="sg-demo sg-demo--col">
-        <div class="home-faq-container" style="margin:0">
-          <div class="home-faq-item">
-            <button class="home-faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.home-faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <div style="max-width:800px;margin:0">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
               What is the minimum order quantity?
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="home-faq-answer"><p>MOQs vary by product, typically from 10–50 units. Each product page lists its MOQ.</p></div>
+            <div class="faq-answer"><p>MOQs vary by product, typically from 10–50 units. Each product page lists its MOQ.</p></div>
           </div>
-          <div class="home-faq-item">
-            <button class="home-faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.home-faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
               Can we customise the packaging?
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="home-faq-answer"><p>Yes — branding, custom boxes, welcome cards and personalised notes are all available.</p></div>
+            <div class="faq-answer"><p>Yes — branding, custom boxes, welcome cards and personalised notes are all available.</p></div>
           </div>
         </div>
       </div>
@@ -341,6 +341,310 @@
         </div>
       </div>
     </div>
+
+    <!-- Navigation system -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Navigation — Header &amp; Mega Menu</span>
+        <span class="sg-tag sg-tag--ref">§15 / §18 Nav</span>
+        <span class="sg-tag sg-tag--class">.site-header .nav-links .nav-link .mega-menu .hamburger-toggle .mobile-nav-overlay</span>
+        <span class="sg-tag sg-tag--token">--z-header --z-mega-menu --elevation-2 --bg-charcoal</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--dark sg-demo--col">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.8rem 0;width:100%">
+          <span style="font-family:var(--font-serif);font-size:1.3rem;color:var(--text-light);font-weight:500">The Biz Gift</span>
+          <nav style="display:flex;gap:2.5rem;align-items:center">
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">Explore</a>
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">Customise</a>
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">About</a>
+            <a class="btn-action btn-small" style="font-size:0.8rem;padding:0.5rem 1.25rem">Get a Quote</a>
+          </nav>
+        </div>
+        <div style="background:var(--bg-charcoal-light);border-radius:var(--radius-lg);padding:2rem;width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;border:1px solid var(--border-subtle)">
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Browse by Occasion</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:0.5rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent-bronze);display:inline-block"></span>Employee Joining</a>
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:0.5rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent-bronze);display:inline-block"></span>Client Gifting</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Collections</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Premium Picks</a>
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Wellness Edit</a>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-md);padding:1rem">
+            <div style="background:var(--bg-ivory);border-radius:var(--radius-md);height:80px;margin-bottom:0.75rem"></div>
+            <div style="font-size:var(--font-size-label);color:var(--text-light);font-weight:500">Featured: Wellness Edit</div>
+            <div style="font-size:var(--font-size-overline);color:rgba(255,255,255,0.5)">New collection for mindful corporate gifts.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note">Classes: <code>.site-header</code> (sticky, scrolled variant), <code>.header-container</code>, <code>.brand-identity</code>, <code>.nav-links</code> + <code>.nav-link</code> (underline-on-hover), <code>.nav-item-dropdown</code> + <code>.dropdown-toggle</code>, <code>.mega-menu</code> (3-col grid with featured image + CTA), <code>.hamburger-toggle</code> + <code>.mobile-nav-overlay</code> (mobile). All in <code>style.css</code>, rendered from <code>header.html</code>.</div>
+    </div>
+
+    <!-- Footer system -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Footer System</span>
+        <span class="sg-tag sg-tag--ref">§18 Footer</span>
+        <span class="sg-tag sg-tag--class">.site-footer .footer-compact .footer-col .footer-contact-item .footer-bottom-compact</span>
+        <span class="sg-tag sg-tag--token">--bg-charcoal --border-subtle --text-light</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--dark sg-demo--col">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;width:100%;padding:1rem 0">
+          <div>
+            <div style="font-family:var(--font-serif);font-size:1.2rem;color:var(--text-light);margin-bottom:0.75rem">The Biz Gift</div>
+            <div style="font-size:var(--font-size-label);color:rgba(255,255,255,0.6);line-height:1.6">Premium corporate gifting<br>for the Indian market.</div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Quick Links</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)">
+              <span>Explore</span><span>Customise</span><span>About</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Contact</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)">
+              <span>hello@thebizgift.com</span><span>+91 98xxx xxxxx</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Legal</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)">
+              <span>Privacy</span><span>Terms</span>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--border-subtle);padding-top:1rem;display:flex;justify-content:space-between;align-items:center;width:100%">
+          <span style="font-size:var(--font-size-overline);color:rgba(255,255,255,0.4)">&copy; 2026 The Biz Gift. All rights reserved.</span>
+          <span style="font-size:var(--font-size-overline);color:rgba(255,255,255,0.4)">Crafted by Wugweb</span>
+        </div>
+      </div>
+      <div class="sg-note">Classes: <code>.site-footer</code>, <code>.footer-compact</code> (4-col grid), <code>.footer-brand</code>, <code>.footer-col</code>, <code>.footer-contact-item</code> + <code>.contact-icon</code>, <code>.footer-bottom-compact</code> + <code>.utility-links</code>, <code>.wugweb-credit</code>. All in <code>style.css</code>, rendered from <code>footer.html</code>.</div>
+    </div>
+
+    <!-- Quote form -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Quote Form (full form system)</span>
+        <span class="sg-tag sg-tag--ref">§14 PDP-09 / §17 Quote</span>
+        <span class="sg-tag sg-tag--class">.quote-form .form-row .form-group .radio-group .btn-submit</span>
+        <span class="sg-tag sg-tag--token">--radius-full --font-size-button --border-form --color-error</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--gap">⚠ 2 form impls — consolidate Phase 5</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div style="max-width:600px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+            <div>
+              <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Full Name *</label>
+              <input type="text" placeholder="Your name" style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border-form);border-radius:var(--radius-full);font-family:var(--font-sans);font-size:var(--font-size-nav);background:var(--surface-white)">
+            </div>
+            <div>
+              <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Work Email *</label>
+              <input type="email" placeholder="you@company.com" style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border-form);border-radius:var(--radius-full);font-family:var(--font-sans);font-size:var(--font-size-nav);background:var(--surface-white)">
+            </div>
+          </div>
+          <div style="margin-bottom:1rem">
+            <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Enquiry Type</label>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:var(--font-size-label);cursor:pointer"><input type="radio" name="sg-type" checked> Corporate Order</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:var(--font-size-label);cursor:pointer"><input type="radio" name="sg-type"> Custom Design</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:var(--font-size-label);cursor:pointer"><input type="radio" name="sg-type"> General Enquiry</label>
+            </div>
+          </div>
+          <div style="margin-bottom:1rem">
+            <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Message</label>
+            <textarea placeholder="Tell us about your requirements..." style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border-form);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:var(--font-size-nav);min-height:80px;resize:vertical;background:var(--surface-white)"></textarea>
+          </div>
+          <button class="btn-action btn-primary" style="width:100%" onclick="return false">Submit Enquiry</button>
+        </div>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <div style="max-width:600px;display:flex;flex-direction:column;gap:0.75rem">
+          <div style="font-size:var(--font-size-label);font-weight:600;color:var(--text-dark)">Form states:</div>
+          <div style="padding:0.75rem 1rem;background:var(--color-error-bg);border:1px solid var(--color-error-border);border-radius:var(--radius-md);color:var(--color-error);font-size:var(--font-size-label)">Please enter a valid email address.</div>
+          <div style="padding:0.75rem 1rem;background:var(--color-success-bg);border:1px solid var(--color-success);border-radius:var(--radius-md);color:var(--color-success);font-size:var(--font-size-label)">&#10003; Thank you — we'll be in touch within 24 hours.</div>
+        </div>
+      </div>
+      <div class="sg-note">Two form systems exist: <code>.quote-form</code> (quote.html — <code>pages.css</code>) and <code>.hamper-proposal-form</code> (PDP — <code>hamper.css</code>). Both use <code>.form-row</code> / <code>.form-group</code> layout with <code>.radio-group</code>. Error: <code>.quote-error</code> / <code>.hamper-proposal-error</code>. Success: <code>.quote-success</code> / <code>.hamper-proposal-success</code>. Phase 5 will extract shared base form styles.</div>
+    </div>
+
+    <!-- Hero variants -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Hero Section Variants</span>
+        <span class="sg-tag sg-tag--ref">§17 Blueprints</span>
+        <span class="sg-tag sg-tag--class">.hero-section .explore-hero .about-hero-section .quote-hero-section .hamper-hero .custom-hero</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Variant</th><th>Page</th><th>CSS class</th><th>Layout</th><th>Key traits</th></tr></thead>
+          <tbody>
+            <tr><td>Homepage</td><td>index.html</td><td><code>.hero-section</code></td><td>Full-width, centered</td><td>Charcoal bg, hero chips, 2 CTAs, scroll indicator</td></tr>
+            <tr><td>Explore</td><td>explore/index.html</td><td><code>.explore-hero</code></td><td>Split — text + image</td><td>Ivory bg, search-style intro</td></tr>
+            <tr><td>About</td><td>about.html</td><td><code>.about-hero-section</code></td><td>Centered, narrow</td><td>Charcoal bg, eyebrow label above h1</td></tr>
+            <tr><td>Quote</td><td>quote.html</td><td><code>.quote-hero-section</code></td><td>Centered, compact</td><td>Charcoal bg, response-time badge</td></tr>
+            <tr><td>Hamper</td><td>hamper/template.html</td><td><code>.hamper-hero</code></td><td>Split — gallery + info</td><td>Ivory bg, breadcrumb, chips, collection badge</td></tr>
+            <tr><td>Customise</td><td>customisation.html</td><td><code>.custom-hero</code></td><td>Full-width, centered</td><td>Charcoal bg, single CTA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">Six hero implementations share the same narrative pattern (eyebrow → h1 → subtitle → CTA) but differ in background, layout direction, and supporting elements. All in <code>pages.css</code> except homepage (<code>style.css</code>) and hamper (<code>hamper.css</code>). Phase 6 may unify into a configurable block.</div>
+    </div>
+
+    <!-- Hamper / PDP components -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Hamper / PDP Components</span>
+        <span class="sg-tag sg-tag--ref">§14 / §24 PDP Deep Dive</span>
+        <span class="sg-tag sg-tag--class">.hamper-gallery .hamper-lightbox .hamper-quick-info .hamper-perfect .hamper-make-yours .hamper-planning .hamper-related .hamper-sticky-cta .hamper-skeleton</span>
+        <span class="sg-tag sg-tag--token">--radius-lg --elevation-3 --z-modal --ease-premium</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Sub-component</th><th>CSS class</th><th>Sub-classes</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Gallery</td><td><code>.hamper-gallery</code></td><td><code>-main, -image, -nav, -dot, -arrows, -arrow, -counter</code></td><td>Image carousel with dots + prev/next arrows</td></tr>
+            <tr><td>Lightbox</td><td><code>.hamper-lightbox</code></td><td><code>-close</code></td><td>Full-screen image zoom (z-modal, elevation-3)</td></tr>
+            <tr><td>Hero content</td><td><code>.hamper-hero-content</code></td><td><code>.hamper-collection-badge, .hamper-hero-chips, .hamper-hero-description</code></td><td>Product title, badge, description, chips</td></tr>
+            <tr><td>Quick info</td><td><code>.hamper-quick-info</code></td><td><code>.hamper-info-item, -label, -value</code></td><td>Key specs inline (MOQ, lead time, delivery)</td></tr>
+            <tr><td>Introduction</td><td><code>.hamper-introduction</code></td><td><code>-content, .intro-description, .intro-usp</code></td><td>Editorial copy + USP highlight</td></tr>
+            <tr><td>Perfect for</td><td><code>.hamper-perfect</code></td><td><code>-grid, -card, -icon, -text, -link</code></td><td>Occasion-matcher (icon + label cards)</td></tr>
+            <tr><td>Make yours</td><td><code>.hamper-make-yours</code></td><td><code>-header, -body, -scroll, -item, -image</code></td><td>Customisation gallery (horizontal scroll)</td></tr>
+            <tr><td>Planning specs</td><td><code>.hamper-planning</code></td><td><code>-layout, -specs, -row, -row-label, -row-value</code></td><td>Apple-style spec rows (thin dividers)</td></tr>
+            <tr><td>FAQ</td><td><code>.hamper-faq</code></td><td><code>-container, -list</code> + canonical <code>.faq-*</code></td><td>Product FAQ accordion (✅ extends canonical)</td></tr>
+            <tr><td>Related products</td><td><code>.hamper-related</code></td><td><code>-header, -scroll, -card, -image, -body, -cta, -badge</code></td><td>Horizontal scroll of related hampers</td></tr>
+            <tr><td>Sticky CTA</td><td><code>.hamper-sticky-cta</code></td><td><code>.visible, .hidden</code></td><td>Fixed bottom bar with proposal link</td></tr>
+            <tr><td>Skeleton loader</td><td><code>.hamper-skeleton</code></td><td><code>-hero, -gallery, -content, -badge, -title, -text, -chips, -chip, -section, -spec</code></td><td>Shimmer loading state</td></tr>
+            <tr><td>Reveal animation</td><td><code>.hamper-reveal</code></td><td><code>.revealed, .hamper-reveal-delay-*</code></td><td>Staggered entrance (IntersectionObserver)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">~50 classes in <code>hamper/hamper.css</code>, driven by <code>hamper/hamper.js</code> (IIFE + mock data on localhost). Gallery, lightbox, sticky CTA, and skeleton loader are PDP-only. FAQ accordion now extends canonical <code>.faq-*</code> classes (Phase 5 ✅).</div>
+    </div>
+
+    <!-- Explore page components -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Explore Page Components</span>
+        <span class="sg-tag sg-tag--ref">§13 / §17 Explore</span>
+        <span class="sg-tag sg-tag--class">.explore-occasions .explore-collections .explore-categories .explore-selected .explore-customisation .explore-cta</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+        <span class="sg-tag sg-tag--gap">⚠ category-card not in canonical set</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Section</th><th>CSS class</th><th>Grid class</th><th>Card type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Occasions</td><td><code>.explore-occasions</code></td><td><code>.occasion-grid</code> (2-col)</td><td><code>.occasion-card</code> ♻</td><td>Shared with homepage</td></tr>
+            <tr><td>Collections</td><td><code>.explore-collections</code></td><td><code>.collection-editorial-grid</code> (3-col)</td><td><code>.collection-editorial-card</code> ♻</td><td>Shared with homepage</td></tr>
+            <tr><td>Product Types</td><td><code>.explore-categories</code></td><td><code>.category-grid</code></td><td><code>.category-card</code></td><td>⚠ Fold into media-card (Phase 5)</td></tr>
+            <tr><td>Selected Hampers</td><td><code>.explore-selected</code></td><td><code>.selected-grid</code></td><td><code>.selected-card</code></td><td>Product card with CTA</td></tr>
+            <tr><td>Customisation</td><td><code>.explore-customisation</code></td><td><code>.customisation-showcase</code></td><td><code>.customisation-item</code></td><td>⚠ Defined twice in pages.css</td></tr>
+            <tr><td>Final CTA</td><td><code>.explore-cta</code></td><td>—</td><td>—</td><td>Charcoal bg, centered text + button</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">All in <code>pages.css</code>. Section wrappers use <code>var(--space-layout)</code> for horizontal padding. Grid containers are not independent reusable components yet — each section hard-codes its own grid. Phase 5 will extract shared grid patterns.</div>
+    </div>
+
+    <!-- About page components -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">About Page Components</span>
+        <span class="sg-tag sg-tag--ref">§17 About</span>
+        <span class="sg-tag sg-tag--class">.about-origin .about-pov .about-philosophy .about-moments .about-craft .about-today .about-statement</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Section</th><th>CSS class</th><th>Pattern</th><th>Consolidation note</th></tr></thead>
+          <tbody>
+            <tr><td>Origin Story</td><td><code>.about-origin</code></td><td>Split grid — image + content</td><td>Reusable split-content block</td></tr>
+            <tr><td>Point of View</td><td><code>.about-pov</code></td><td>Editorial blockquote</td><td>Unique — keep as-is</td></tr>
+            <tr><td>Philosophy</td><td><code>.about-philosophy</code></td><td>Card grid (<code>.philosophy-card</code>)</td><td>⚠ Fold into editorial-card (Phase 5)</td></tr>
+            <tr><td>Moments</td><td><code>.about-moments</code></td><td>Card grid (<code>.moment-card</code>)</td><td>⚠ Fold into media-card (Phase 5)</td></tr>
+            <tr><td>Craftsmanship</td><td><code>.about-craft</code></td><td>Split grid — image + content</td><td>Same pattern as origin — share</td></tr>
+            <tr><td>Today</td><td><code>.about-today</code></td><td>Full-width text block</td><td>Keep</td></tr>
+            <tr><td>Statement</td><td><code>.about-statement</code></td><td>Blockquote</td><td>Same as .about-pov — share</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">All in <code>pages.css</code>. Two patterns repeat: split-content (origin, craft) and blockquote (pov, statement) — candidates for shared blocks in Phase 6.</div>
+    </div>
+
+    <!-- Customisation page components -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Customisation Page Components</span>
+        <span class="sg-tag sg-tag--ref">§17 Customisation</span>
+        <span class="sg-tag sg-tag--class">.custom-hero .custom-why .custom-brand-experience .custom-packaging .custom-personalisation .custom-methods .custom-process .custom-cta</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Section</th><th>CSS class</th><th>Pattern</th></tr></thead>
+          <tbody>
+            <tr><td>Why Customise</td><td><code>.custom-why</code></td><td>Split grid — content + image</td></tr>
+            <tr><td>Brand Experience</td><td><code>.custom-brand-experience</code></td><td>Card grid (<code>.experience-card</code>)</td></tr>
+            <tr><td>Packaging</td><td><code>.custom-packaging</code></td><td>Showcase grid (<code>.packaging-item</code>)</td></tr>
+            <tr><td>Personalisation</td><td><code>.custom-personalisation</code></td><td>Grid (<code>.personalisation-item</code>)</td></tr>
+            <tr><td>Methods</td><td><code>.custom-methods</code></td><td>List (<code>.method-item</code> with expand)</td></tr>
+            <tr><td>Occasions</td><td><code>.custom-occasions</code></td><td>Reuses occasion pattern</td></tr>
+            <tr><td>Inspiration</td><td><code>.custom-inspiration</code></td><td>Masonry gallery (<code>.inspiration-item</code>)</td></tr>
+            <tr><td>Process</td><td><code>.custom-process</code></td><td>Timeline (<code>.process-timeline</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">All in <code>pages.css</code>. <code>.experience-card</code> is a media-card consolidation candidate. Packaging/inspiration showcases are unique display patterns.</div>
+    </div>
+
+    <!-- Reveal / animation utilities -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Reveal &amp; Animation Utilities</span>
+        <span class="sg-tag sg-tag--ref">§12 Motion</span>
+        <span class="sg-tag sg-tag--class">.reveal .reveal-left .reveal-right .reveal-scale .reveal-delay-*</span>
+        <span class="sg-tag sg-tag--token">--ease-premium --duration-slow</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <table class="sg-table">
+          <thead><tr><th>Class</th><th>Effect</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><code>.reveal</code></td><td>Fade up (opacity 0 + translateY 40px → visible)</td><td>Default entrance on all pages</td></tr>
+            <tr><td><code>.reveal-left</code></td><td>Slide in from left</td><td>Split-content left panels</td></tr>
+            <tr><td><code>.reveal-right</code></td><td>Slide in from right</td><td>Split-content right panels</td></tr>
+            <tr><td><code>.reveal-scale</code></td><td>Scale up from 0.95</td><td>Cards, images</td></tr>
+            <tr><td><code>.reveal-delay-1</code> … <code>-6</code></td><td>Stagger delays (100ms increments)</td><td>Grid items for cascade effect</td></tr>
+            <tr><td><code>.hamper-reveal</code></td><td>Same as .reveal, PDP-specific</td><td>Hamper page sections</td></tr>
+            <tr><td><code>prefers-reduced-motion</code></td><td>All animations disabled</td><td>Accessibility — no motion</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-note">Reveal classes in <code>style.css</code>, hamper variants in <code>hamper.css</code>. Triggered by IntersectionObserver in <code>components.js</code> (threshold 0.15, rootMargin "0px 0px -50px 0px"). All motion respects <code>prefers-reduced-motion: reduce</code>.</div>
+    </div>
+
+    <!-- Utility pages -->
+    <div class="sg-group">
+      <div class="sg-label">
+        <span class="sg-name">Utility Page Styles</span>
+        <span class="sg-tag sg-tag--ref">§17 Legal</span>
+        <span class="sg-tag sg-tag--class">.utility-header .utility-content .text-container .sitemap-grid</span>
+        <span class="sg-tag sg-tag--recycle">♻ Recyclable</span>
+      </div>
+      <div class="sg-demo sg-demo--col">
+        <p style="font-size:var(--font-size-label);color:var(--text-muted);line-height:1.6;max-width:500px">Shared wrapper classes for Privacy, Terms, and Sitemap pages: <code>.utility-header</code> (dark hero strip), <code>.utility-content</code> (max-width reading container at 680px), <code>.text-container</code> (inner prose), <code>.sitemap-grid</code> + <code>.sitemap-column</code> (multi-column link layout). All in <code>pages.css</code>.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ============================================================= -->
@@ -359,7 +663,7 @@
         <tr><td>Explore By Product Type</td><td>§13 Explore</td><td>Explore</td><td><code>.category-grid</code></td><td>♻</td></tr>
         <tr><td>Planning Information</td><td>§14 PDP-04</td><td>PDP</td><td><code>.planning-grid</code> (spec rows)</td><td>♻</td></tr>
         <tr><td>You May Also Like</td><td>§14 PDP-08</td><td>PDP</td><td><code>.related-grid</code> (algorithm)</td><td>♻</td></tr>
-        <tr><td>FAQ</td><td>§14 PDP-07</td><td>Home, PDP</td><td><code>.home-faq-item</code> / accordion</td><td>♻</td></tr>
+        <tr><td>FAQ</td><td>§14 PDP-07</td><td>Home, PDP</td><td><code>.faq-item</code> / canonical accordion</td><td>✅</td></tr>
         <tr><td>Lead / Proposal Form</td><td>§14 PDP-09 / Quote</td><td>Quote, PDP</td><td><code>.proposal-form</code> / <code>.quote-form-section</code></td><td>♻</td></tr>
         <tr><td>Final CTA</td><td>§17</td><td>Home, Explore, About</td><td><code>.section-final-cta</code> / <code>.explore-cta</code></td><td>♻</td></tr>
         <tr><td>Newsletter</td><td>§18 Footer</td><td>All pages</td><td><code>.section-newsletter</code></td><td>♻</td></tr>
@@ -402,7 +706,7 @@
         <tr><td>Engineering rules</td><td><code>docs/build.md</code></td><td>Folder structure, fetch, forms</td></tr>
       </tbody>
     </table>
-    <div class="sg-note">Known gaps to close in the upgrade pass (your next chat): button radius (pill), mega-menu &amp; form ARIA, richer imagery/overlays, scroll-transform micro-interactions. Airtable rewire (real tables: Products / Category / Enquiries) is deferred until UI is approved.</div>
+    <div class="sg-note"><strong>Phases 1–5 complete.</strong> All components inventoried (28 groups). All tokens swept (196 font-size, 43 radius, 0 hardcoded hex). Cards consolidated: <code>.media-card</code> (4 types) + <code>.editorial-card</code> (1 type). FAQ accordion merged into canonical <code>.faq-*</code> classes. <strong>Remaining:</strong> Phase 6 — page-by-page block replacement (pending approval). Airtable rewire deferred until UI is approved.</div>
   </section>
 
 </body>

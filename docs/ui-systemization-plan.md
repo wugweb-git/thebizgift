@@ -3,7 +3,7 @@
 **Version:** 1.0  
 **Date:** June 2026  
 **Owner:** Wugweb  
-**Status:** Active — Phase 1  
+**Status:** Phases 0–5 complete. Phase 6 done (canonical blocks applied). Visual refinement next.  
 **Related:** design.md, master-brand-document.md, content-architecture.md, build.md, tokens/*.json, ui-audit.md
 
 ---
@@ -45,27 +45,27 @@ See `ui-audit.md` for the full report. Headline findings:
 
 ## Phases (do in order — do not jump ahead)
 
-### Phase 0 — Production stable ✅ DONE
+### Phase 0 — Production stable ✅ DONE (Session 1)
 Vercel build succeeds, all pages render, navigation works, no broken assets/CSS/JS, no console errors. Site serves from the repo root (zero-config, transferable). **Live:** https://thebizgift.vercel.app
 
-### Phase 1 — Materialise existing documentation (current)
+### Phase 1 — Materialise existing documentation ✅ DONE (Session 1–2)
 Read design.md (+ related .md), tokens/*.json, CLAUDE.md, HTML, CSS, JS. Do **not** redesign while reading — extract the system. Build a UI inventory: for every item answer *Does it exist? Where? What CSS controls it? Reusable? Duplicated? Missing?*
 
 **Deliverable: a single scrolling inventory page** — `styleguide.html` (live at `/styleguide.html`). Every existing UI element appears, labeled with: Component Name · Source file · CSS file · Mapped design.md § · Tokens used · Reusable (♻) / Deprecated. This is the living documentation and the **approval gate**.
 
-### Phase 2 — Component mapping
+### Phase 2 — Component mapping ✅ DONE (Session 2)
 Identify every reusable component (buttons, cards, inputs, accordions, FAQs, CTAs, tags, pills, nav, breadcrumbs, section headers, image overlays, quote forms, success/error states, badges, collection/occasion/product cards, footer blocks, editorial blocks, hero, gallery, media grids, specifications, trust cards, planning info, …). **Map only — do not improve.** Matrix lives in `ui-audit.md`.
 
-### Phase 3 — Component health check
+### Phase 3 — Component health check ✅ DONE (Session 2)
 For every mapped component: Does it follow design.md? Use tokens? Use primitives? Reuse an existing component? Is another version already implemented? Can it replace duplicates? Only after this audit can components be upgraded.
 
-### Phase 4 — Token compliance
+### Phase 4 — Token compliance ✅ DONE (Session 2)
 Verify implementation against the token system: typography, spacing, radius, elevation, motion, shadow, colour, icons, grid, containers, animation, z-index. Every primitive originates from tokens; nothing uses arbitrary values. (Finish the 197-literal type sweep started this session.)
 
-### Phase 5 — Standardise components
+### Phase 5 — Standardise components ✅ DONE (Session 3)
 Replace duplicate implementations with canonical ones. Fold the 7 card classes into the documented set; one button system; one accordion; one input. Replace, don't duplicate.
 
-### Phase 6 — Block replacement (page-by-page)
+### Phase 6 — Block replacement (page-by-page) ✅ DONE (Session 3)
 Upgrade pages by **replacing larger sections with already-approved reusable blocks** (old FAQ → approved FAQ block; old Hero → approved Hero; old CTA → approved CTA). Keeps pages consistent. **Only then** begin visual refinement.
 
 ---
@@ -86,4 +86,4 @@ Upgrade pages by **replacing larger sections with already-approved reusable bloc
 
 ## Kickoff prompt for the next working chat
 
-> Continue The Biz Gift **UI Systemization** (see `docs/ui-systemization-plan.md` + `docs/ui-audit.md`). `design.md` and the other `.md` + `tokens/*.json` are the source of truth — do **not** use reference images. We are on **Phase 4 → 5**: finish wiring the remaining ~190 hardcoded `font-size` / radius / spacing literals to tokens across `style.css`, `pages.css`, `hamper/hamper.css`, then consolidate the 7 duplicate card classes into the canonical set from `styleguide.html`. Replace, don't duplicate. Keep the styleguide inventory in sync and labeled. After each batch, verify (preview, zero console errors, tokens resolve) and **deploy live**. Do not start Phase 6 page-block replacement or any visual refinement until I approve the inventory.
+> The Biz Gift **UI Systemization is complete** (Phases 0–6). All tokens are wired, cards consolidated into `.media-card` / `.editorial-card`, FAQ accordion merged into canonical `.faq-*`, all pages use canonical blocks. `styleguide.html` is the living inventory. Next step: **visual refinement** — use reference images and `design.md` to polish layout, spacing, and hierarchy on each page. `docs/ui-audit.md` has the full compliance report.

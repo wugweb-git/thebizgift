@@ -17,8 +17,15 @@
   --border-subtle: rgba(255, 255, 255, 0.1);
   --border-light: #EAEAE6;
   --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #1DA851;
   --color-error: #DC2626;
+  --color-error-bg: #FFF0F0;
+  --color-error-border: #FFCDD2;
   --color-success: #16A34A;
+  --color-success-bg: #E8F5E9;
+  --border-form: #E5E1DA;
+  --skeleton-base: #EAEAE6;
+  --skeleton-shine: #F5F5F0;
 
   /* Font Families */
   --font-serif: 'Cormorant Garamond', serif;
@@ -29,14 +36,40 @@
   --font-size-h2: 3.5rem;
   --font-size-h3: 2.75rem;
   --font-size-h4: 2rem;
+  --font-size-card-title: 1.5rem;
+  --font-size-subtitle: 1.25rem;
   --font-size-body: 1.0625rem;
   --font-size-small: 0.9375rem;
+  --font-size-nav: 0.9rem;
+  --font-size-label: 0.85rem;
   --font-size-caption: 0.8125rem;
   --font-size-button: 0.875rem;
+  --font-size-small-button: 0.8rem;
+  --font-size-overline: 0.75rem;
 
-  /* Structural Spacing & Layout */
-  --space-layout: 4rem;
-  --grid-gap: 4rem;
+  /* Spacing Scale (4px base — mirrors tokens/spacing.json) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-36: 9rem;
+  --space-40: 10rem;
+
+  /* Semantic Spacing */
+  --space-layout: var(--space-16);
+  --grid-gap: var(--space-16);
+  --space-section-y: 9rem;
+  --space-section-inner-y: 8rem;
+  --space-card-padding: 2.5rem;
   --container-max: 1400px;
   --container-narrow: 680px;
 
@@ -45,6 +78,7 @@
   --radius-md: 8px;
   --radius-lg: 24px;
   --radius-xl: 32px;
+  --radius-2xl: 48px;
   --radius-full: 9999px;
 
   /* Elevation (Shadows) */
@@ -184,18 +218,18 @@ img {
 
 .btn-large {
   padding: 1.3rem 3.5rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
 }
 
 .btn-small {
   padding: 0.75rem 1.5rem;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
 }
 
 /* Minimalist Navigation Link Micro-Underlines */
 .nav-link {
   position: relative;
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   font-weight: 400;
   letter-spacing: 0.05em;
   padding: 0.25rem 0;
@@ -223,6 +257,137 @@ img {
 .nav-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+/* --------------------------------------------------------------------------
+   2b. CANONICAL CARD SYSTEM
+   media-card: image + content (occasion, category, selected, experience)
+   editorial-card: text-only (collection-editorial)
+   -------------------------------------------------------------------------- */
+.media-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-white);
+  border: 1px solid rgba(44, 44, 42, 0.08);
+  transition: transform 0.4s var(--ease-standard), box-shadow 0.4s var(--ease-standard);
+}
+.media-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--elevation-2);
+}
+.media-card-image {
+  overflow: hidden;
+}
+.media-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-premium);
+}
+.media-card:hover .media-card-image img {
+  transform: scale(1.05);
+}
+.media-card-content {
+  padding: 2rem 2.5rem 2.5rem;
+}
+.media-card-content h4 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h4);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+.media-card-content p {
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.editorial-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text-dark);
+  padding: 2.5rem;
+  border: 1px solid rgba(44, 44, 42, 0.1);
+  border-radius: var(--radius-lg);
+  background: var(--surface-white);
+  transition: transform 0.4s var(--ease-standard), box-shadow 0.4s var(--ease-standard), border-color 0.3s ease;
+}
+.editorial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--elevation-2);
+  border-color: var(--accent-bronze);
+}
+.editorial-card h4 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-card-title);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+.editorial-card p {
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* --------------------------------------------------------------------------
+   2c. CANONICAL FAQ ACCORDION
+   -------------------------------------------------------------------------- */
+.faq-item {
+  border-bottom: 1px solid var(--border-light);
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subtitle);
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: left;
+  transition: color 0.2s ease;
+}
+.faq-question:hover {
+  color: var(--accent-bronze);
+}
+.faq-question .faq-chevron {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  color: var(--text-muted);
+}
+.faq-question[aria-expanded="true"] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s var(--ease-premium), padding 0.2s ease;
+  padding: 0;
+}
+.faq-answer.open {
+  max-height: 400px;
+  padding: 0 0 1.25rem;
+}
+.faq-answer p {
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 /* --------------------------------------------------------------------------
@@ -274,7 +439,7 @@ img {
 
 .header-actions .btn-quote-header {
   padding: 0.6rem 1.75rem;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
 }
 
 /* Mega Menu Base */
@@ -325,7 +490,7 @@ img {
 }
 
 .mega-menu-column h4 {
-  font-size: 0.75rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
@@ -344,7 +509,7 @@ img {
   align-items: center;
   gap: 0.6rem;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   font-weight: 300;
   transition: color var(--transition-fast), padding-left 0.2s ease;
   padding: 0.25rem 0;
@@ -371,7 +536,7 @@ img {
 /* Featured thumbnail in mega menu */
 .mega-menu-featured {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   padding: 0;
   display: flex;
@@ -402,14 +567,14 @@ img {
 
 .mega-menu-featured-body h4 {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   color: var(--text-light);
   margin-bottom: 0.3rem;
 }
 
 .mega-menu-featured-body p {
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
   color: rgba(255, 255, 255, 0.5);
   font-weight: 300;
   margin-bottom: 0.75rem;
@@ -417,7 +582,7 @@ img {
 }
 
 .mega-menu-featured-body .mega-cta {
-  font-size: 0.75rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-bronze);
@@ -451,7 +616,7 @@ img {
 }
 
 .footer-brand p {
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   color: rgba(255, 255, 255, 0.4);
   font-weight: 300;
   line-height: 1.6;
@@ -459,7 +624,7 @@ img {
 }
 
 .footer-col h4 {
-  font-size: 0.72rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
@@ -470,7 +635,7 @@ img {
 .footer-col a {
   display: block;
   color: rgba(255, 255, 255, 0.55);
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   margin-bottom: 0.6rem;
   font-weight: 300;
   transition: color var(--transition-fast);
@@ -491,7 +656,7 @@ img {
   align-items: center;
   gap: 0.6rem;
   color: rgba(255, 255, 255, 0.55);
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   font-weight: 300;
   transition: color var(--transition-fast);
 }
@@ -544,7 +709,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
   color: rgba(255, 255, 255, 0.35);
   font-weight: 300;
 }
@@ -667,7 +832,7 @@ img {
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: var(--font-size-subtitle);
   color: rgba(255, 255, 255, 0.75);
   max-width: 700px;
   margin: 0 auto 3.5rem auto;
@@ -708,7 +873,7 @@ img {
   align-items: center;
   gap: 0.5rem;
   color: rgba(255, 255, 255, 0.4);
-  font-size: 0.7rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.15em;
 }
@@ -785,14 +950,14 @@ img {
 
 .create-card h3 {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: var(--font-size-card-title);
   font-weight: 400;
   margin-bottom: 0.75rem;
   color: var(--text-dark);
 }
 
 .create-card p {
-  font-size: 0.95rem;
+  font-size: var(--font-size-small);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.6;
@@ -851,7 +1016,7 @@ img {
 
 .collection-tag {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
@@ -861,14 +1026,14 @@ img {
 
 .collection-content h3 {
   font-family: var(--font-serif);
-  font-size: 3rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
 
 .collection-content p {
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.7;
@@ -906,7 +1071,7 @@ img {
   scroll-snap-align: start;
   text-align: center;
   transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--bg-ivory);
   padding-bottom: 1.5rem;
@@ -937,14 +1102,14 @@ img {
 
 .customisation-scroll-item h4 {
   font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   font-weight: 400;
   margin: 1.25rem 1rem 0.4rem;
   color: var(--text-dark);
 }
 
 .customisation-scroll-item p {
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   color: var(--text-muted);
   font-weight: 300;
   margin: 0 1rem;
@@ -977,7 +1142,7 @@ img {
   position: absolute;
   right: -1.5rem;
   top: 1.5rem;
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   color: var(--accent-bronze);
   opacity: 0.5;
 }
@@ -991,21 +1156,21 @@ img {
   border: 2px solid var(--accent-bronze);
   border-radius: 50%;
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   color: var(--accent-bronze);
   margin: 0 auto 1rem;
 }
 
 .process-step h4 {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: var(--font-size-subtitle);
   font-weight: 400;
   margin-bottom: 0.5rem;
   color: var(--text-light);
 }
 
 .process-step p {
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   line-height: 1.5;
@@ -1032,14 +1197,14 @@ img {
 
 .trust-compact-item .trust-value {
   font-family: var(--font-serif);
-  font-size: 1.8rem;
+  font-size: var(--font-size-h4);
   font-weight: 400;
   color: var(--text-dark);
   margin-bottom: 0.25rem;
 }
 
 .trust-compact-item .trust-label {
-  font-size: 0.72rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -1063,7 +1228,7 @@ img {
   gap: 2rem;
   padding: 2rem 3rem;
   background: var(--bg-charcoal);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   color: var(--text-light);
 }
 
@@ -1074,20 +1239,20 @@ img {
 }
 
 .seasonal-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-h4);
   line-height: 1;
 }
 
 .seasonal-content h3 {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: var(--font-size-card-title);
   font-weight: 400;
   margin-bottom: 0.25rem;
   color: var(--accent-bronze);
 }
 
 .seasonal-content p {
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
 }
@@ -1113,13 +1278,13 @@ img {
   padding: 1.5rem;
   text-align: center;
   background: var(--bg-ivory);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
 }
 
 .planning-guide-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-bronze);
@@ -1130,7 +1295,7 @@ img {
 .planning-guide-value {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   color: var(--text-dark);
 }
@@ -1138,6 +1303,7 @@ img {
 /* --------------------------------------------------------------------------
    13. HOMEPAGE — FAQ (Accordion)
    -------------------------------------------------------------------------- */
+/* Home FAQ — extends canonical .faq-* (style.css §2c) */
 .section-home-faq {
   padding: 6rem var(--space-layout);
   background-color: var(--text-light);
@@ -1146,63 +1312,6 @@ img {
 .home-faq-container {
   max-width: 800px;
   margin: 0 auto;
-}
-
-.home-faq-item {
-  border-bottom: 1px solid var(--border-light);
-}
-
-.home-faq-question {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--text-dark);
-  text-align: left;
-  transition: color 0.2s ease;
-}
-
-.home-faq-question:hover {
-  color: var(--accent-bronze);
-}
-
-.home-faq-question .faq-chevron {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s ease;
-  flex-shrink: 0;
-  margin-left: 1rem;
-  color: var(--text-muted);
-}
-
-.home-faq-question[aria-expanded="true"] .faq-chevron {
-  transform: rotate(180deg);
-}
-
-.home-faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s var(--ease-premium), padding 0.2s ease;
-  padding: 0;
-}
-
-.home-faq-answer.open {
-  max-height: 300px;
-  padding: 0 0 1.25rem;
-}
-
-.home-faq-answer p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.7;
 }
 
 /* --------------------------------------------------------------------------
@@ -1223,14 +1332,14 @@ img {
 
 .newsletter-container h3 {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: var(--font-size-card-title);
   font-weight: 400;
   color: var(--text-dark);
   margin-bottom: 0.5rem;
 }
 
 .newsletter-container p {
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   color: var(--text-muted);
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -1394,7 +1503,7 @@ img {
 .mobile-nav-overlay a {
   display: block;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 1.75rem;
+  font-size: var(--font-size-h4);
   font-family: var(--font-serif);
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1408,7 +1517,7 @@ img {
 
 .mobile-nav-overlay .nav-dropdown-label {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
@@ -1417,7 +1526,7 @@ img {
 }
 
 .mobile-nav-overlay .mobile-sub-link {
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   font-family: var(--font-sans);
   font-weight: 300;
   padding: 0.6rem 0;
@@ -1660,7 +1769,7 @@ img {
   color: var(--text-light);
   border-radius: var(--radius-full);
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   font-weight: 600;
   text-decoration: none;
   box-shadow: var(--elevation-2);

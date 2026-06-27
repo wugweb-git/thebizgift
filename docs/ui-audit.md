@@ -1,4 +1,4 @@
-# The Biz Gift — UI Audit (Phase 1–4 working report)
+# The Biz Gift — UI Audit (Phase 1–5 working report)
 
 **Date:** June 2026 · **Owner:** Wugweb · **Companion to:** ui-systemization-plan.md, styleguide.html
 
@@ -8,33 +8,52 @@ This is the living audit: token-compliance, component-map matrix, duplicate repo
 
 ## 1. Token Compliance Report
 
-Tokens are defined in `:root` (style.css) and `docs/tokens/*.json`, but components historically used literals instead of consuming them.
+### Typography ✅ COMPLETE
+| File | `var(--font-size-*)` used | Hardcoded literals remaining |
+|------|---------------------------|------------------------------|
+| style.css | 50 | 5 (intentional: 2 special + 3 responsive) |
+| pages.css | 87 | 0 |
+| hamper.css | 59 | 0 |
+| **Total** | **196** | **5 (intentional)** |
 
-### Typography
-| File | `var(--font-size-*)` used | Hardcoded `font-size` literals remaining |
-|------|---------------------------|------------------------------------------|
-| style.css | 8 | 47 |
-| pages.css | 2 | 85 |
-| hamper.css | 1 | 58 |
-| **Total** | **11** | **~190** |
+- **Token scale expanded** from 8 to 14 tokens: added `--font-size-card-title` (1.5rem), `--font-size-subtitle` (1.25rem), `--font-size-nav` (0.9rem), `--font-size-label` (0.85rem), `--font-size-small-button` (0.8rem), `--font-size-overline` (0.75rem).
+- **Remaining 5 intentional:** `font-size: 0` (icon hiding), `0.7em` (relative dropdown arrow), 3 responsive media query overrides.
 
-- **Before this session:** `var(--font-size-*)` used **0×**; 197 literals.
-- **This session (system-level fix):** added base `h1–h4` rules mapped to tokens + wired hero title, `.section-header h2`, button + newsletter + submit fonts. The remaining ~190 literals are **component-local sizes** (card h3/h4, captions, chips, spec rows) → **Phase 4 sweep** in the next chat.
+### Radius ✅ COMPLETE
+| File | `var(--radius-*)` used | Hardcoded literals remaining |
+|------|------------------------|------------------------------|
+| style.css | 12 | 1 (`1px` hairline — intentional) |
+| pages.css | 16 | 0 |
+| hamper.css | 15 | 0 |
 
-### Radius
-| File | `var(--radius-*)` used | Status |
-|------|------------------------|--------|
-| style.css | 4 | buttons + inputs now pill (`--radius-full`) ✅ |
-| pages.css | 1 | explore cards tokenized; ~19 literals remain (cards 24px, panels 12px) |
-| hamper.css | 14 | mostly tokenized |
+- All `24px` → `--radius-lg`, `12px` → `--radius-md`, `16px` → `--radius-lg`, `50px` → `--radius-full`, `6px` → `--radius-sm`.
+- Added `--radius-2xl: 48px` (from radius.json, was missing in `:root`).
 
-- **This session:** `.btn-action`, `.newsletter-form` input/button, `.btn-submit`, hamper proposal submit → `--radius-full` (fixes "square buttons" everywhere).
+### Color ✅ COMPLETE
+| File | Hardcoded hex colors remaining |
+|------|-------------------------------|
+| style.css | 0 |
+| pages.css | 0 |
+| hamper.css | 0 |
 
-### Other token families (already aligned in prior session)
-- **Color:** ~50 hardcoded `#FFFFFF` / `#EAEAE6` replaced with `--surface-white` / `--border-light`. ✅
-- **Elevation:** 16 custom shadows → `--elevation-0…3`. ✅
-- **Z-index:** 1000/999/9999 → `--z-header/mega-menu/modal` (200/500/900). ✅
-- **Motion:** `--ease-*`, `--duration-*` defined; transitions consume `--transition-fast/slow`. Scroll reveals via IntersectionObserver in components.js. ⚠ uneven across pages — Phase 4/6.
+- **Error colors standardized:** 3 inconsistent reds (#DC2626, #9B2C2C, #D32F2F) → unified to `var(--color-error)`.
+- **Success green fixed:** #4CAF50 → `var(--color-success)` (#16A34A — matches token).
+- **New semantic tokens added:** `--color-error-bg`, `--color-error-border`, `--color-success-bg`, `--color-whatsapp-hover`, `--border-form`, `--skeleton-base`, `--skeleton-shine`.
+
+### Spacing (strategic tokenization)
+| Token | Count | Status |
+|-------|-------|--------|
+| `--space-layout` | ~30 uses | ✅ Already in use |
+| `--space-section-y` / `--space-section-inner-y` | defined | Available for Phase 6 block replacement |
+| `--space-card-padding` | defined | Available for Phase 5 card consolidation |
+| Scale `--space-1` through `--space-40` | defined | Available for component-level adoption |
+
+- **Strategy:** Section-level and grid spacing tokens are defined and available. Component-internal spacing kept as literals (intentional — optical adjustments that vary by component).
+
+### Other token families
+- **Elevation:** `--elevation-0…3` consumed across all files. ✅
+- **Z-index:** `--z-header/mega-menu/drawer/modal` consumed. ✅
+- **Motion:** `--ease-*`, `--transition-fast/slow` consumed. ✅
 
 ---
 
@@ -42,38 +61,63 @@ Tokens are defined in `:root` (style.css) and `docs/tokens/*.json`, but componen
 
 | Component | HTML source | CSS | design.md § | Tokens | Status |
 |-----------|-------------|-----|-------------|--------|--------|
-| Button | shared | style.css `.btn-action`(+primary/secondary/large/small) | §18 Buttons | radius-full, font-size-button | ♻ canonical (pill ✅) |
-| Nav link / dropdown | header.html | style.css `.nav-link` `.dropdown-toggle` | §18 Nav | — | ♻ |
-| Mega menu | header.html | style.css `.mega-menu` | §15/§18 | z-mega-menu, elevation-3 | ♻ |
-| Section header | all pages | pages.css `.section-header` | §18 Content | font-size-h2 ✅ | ♻ |
-| Chip / tag | hamper, styleguide | hamper.css `.hamper-hero-chip`, pages `.collection-tag` | §18 Utility | radius-full | ♻ |
-| Newsletter form | newsletter.html | style.css `.newsletter-form` | §18 Footer | radius-full ✅ | ♻ |
-| Quote / proposal form | quote.html, hamper | pages `.btn-submit`, hamper proposal | §14-09 | radius-full ✅ | ♻ |
-| FAQ accordion | index, hamper | style.css `.home-faq-item`, hamper FAQ | §14-07 | — | ⚠ 2 implementations → consolidate |
-| Breadcrumb | hamper | hamper.css `.hamper-breadcrumb` | §18 Nav | — | ⚠ PDP-only; missing elsewhere |
-| WhatsApp widget | footer.html | style.css `.whatsapp-sticky-widget` | §18 Footer | color-whatsapp, radius-full | ♻ |
+| Button | shared | style.css `.btn-action` (+variants) | §18 Buttons | radius-full, font-size-button, font-size-nav, font-size-small-button | ♻ canonical |
+| Nav link / dropdown | header.html | style.css `.nav-link` `.dropdown-toggle` | §18 Nav | font-size-nav | ♻ |
+| Mega menu | header.html | style.css `.mega-menu` | §15/§18 | z-mega-menu, elevation-3, font-size-overline, font-size-label | ♻ |
+| Section header | all pages | pages.css `.section-header` | §18 Content | font-size-h2, font-size-body | ♻ |
+| Chip / tag | hamper, styleguide | hamper.css `.hamper-hero-chip`, pages `.collection-tag` | §18 Utility | radius-full, font-size-small-button | ♻ |
+| Newsletter form | newsletter.html | style.css `.newsletter-form` | §18 Footer | radius-full, font-size-small, font-size-button | ♻ |
+| Quote form | quote.html | pages.css `.quote-form` `.form-row` `.form-group` | §17 Quote | radius-full, border-form, color-error-* | ♻ |
+| Hamper proposal form | hamper/template.html | hamper.css `.hamper-proposal-*` | §14-09 | radius-full, border-form, color-error-* | ♻ |
+| FAQ accordion (home) | index.html | style.css `.home-faq-item` | §14-07 | font-size-subtitle, font-size-small | ⚠ consolidate |
+| FAQ accordion (hamper) | hamper/template.html | hamper.css `.hamper-faq-*` | §14-07 | — | ⚠ consolidate |
+| Breadcrumb | hamper | hamper.css `.hamper-breadcrumb` | §18 Nav | font-size-label | ⚠ PDP-only |
+| WhatsApp widget | footer.html | style.css `.whatsapp-sticky-widget` | §18 Footer | color-whatsapp, radius-full, font-size-nav | ♻ |
 | Social icons | footer.html | style.css `.footer-socials-compact` | §18 Footer | — | ♻ |
+| Footer system | footer.html | style.css `.site-footer` `.footer-compact` | §18 Footer | bg-charcoal, border-subtle, font-size-label, font-size-overline | ♻ |
+| Hero (homepage) | index.html | style.css `.hero-section` | §17 Home | font-size-hero, font-size-subtitle | ♻ |
+| Hero (about) | about.html | pages.css `.about-hero-section` | §17 About | font-size-hero, font-size-small-button | ♻ |
+| Hero (explore) | explore/index.html | pages.css `.explore-hero` | §17 Explore | font-size-h3, font-size-body | ♻ |
+| Hero (quote) | quote.html | pages.css `.quote-hero-section` | §17 Quote | font-size-hero, font-size-body | ♻ |
+| Hero (hamper) | hamper/template.html | hamper.css `.hamper-hero` | §14/§24 | font-size-h3, font-size-label | ♻ |
+| Gallery | hamper/template.html | hamper.css `.hamper-gallery` | §24 | — | ♻ PDP-only |
+| Lightbox | hamper/template.html | hamper.css `.hamper-lightbox` | §24 | z-modal, elevation-3 | ♻ PDP-only |
+| Sticky CTA | hamper/template.html | hamper.css `.hamper-sticky-cta` | §24 | — | ♻ PDP-only |
+| Skeleton loader | hamper/template.html | hamper.css `.hamper-skeleton` | §24 | skeleton-base, skeleton-shine | ♻ PDP-only |
+| Reveal animations | all pages | style.css `.reveal` `.reveal-*` | §12 Motion | ease-premium | ♻ |
+| Cards (occasion) | explore, home, custom | `.media-card.occasion-card` | §18 Cards | radius-lg, elevation-2, font-size-h4 | ✅ extends media-card |
+| Cards (category) | explore | `.media-card.category-card` | §18 Cards | radius-lg, elevation-2, font-size-card-title | ✅ extends media-card |
+| Cards (selected) | explore, home | `.media-card.selected-card` | §18 Cards | radius-lg, elevation-2, font-size-subtitle | ✅ extends media-card |
+| Cards (experience) | customisation | `.media-card.experience-card` | §18 Cards | radius-lg, elevation-1, font-size-subtitle | ✅ extends media-card |
+| Cards (editorial) | home, explore | `.editorial-card.collection-editorial-card` | §18 Cards | radius-lg, font-size-card-title | ✅ extends editorial-card |
+| Cards (create) | home | style.css `.create-card` | §17 Home | font-size-card-title, font-size-small | ♻ standalone (unique animation) |
+| Cards (moment) | about | pages.css `.moment-card` | §17 About | elevation-2, font-size-h4 | ♻ standalone (no border/radius) |
+| Cards (philosophy) | about | pages.css `.philosophy-card` | §17 About | font-size-h4 | ♻ standalone (no hover/border) |
 
 ---
 
 ## 3. Duplicate Component Report
 
-**Cards — 7+ overlapping implementations doing similar jobs:**
+**Cards — consolidated into canonical base classes (Phase 5 ✅):**
 
-| Class | Used on | Pattern | Recommended action |
-|-------|---------|---------|--------------------|
-| `.occasion-card` | explore, styleguide | image + content | **Canonical "media card"** |
-| `.category-card` | explore | image + content | fold → media card (4:3) |
-| `.selected-card` | explore | image + CTA | fold → product card |
-| `.create-card` | home (What We Create) | image + text | fold → media card |
-| `.moment-card` | about | image + text | fold → media card |
-| `.collection-editorial-card` | home, explore | **text-only** | **Canonical "editorial card"** |
-| `.philosophy-card` | about | text-only | fold → editorial card |
-| `.experience-card` | (legacy) | — | verify usage / deprecate |
+| Class | Status | Base | Overrides |
+|-------|--------|------|-----------|
+| `.occasion-card` | ✅ extends `.media-card` | style.css §2b | aspect 3:2 |
+| `.category-card` | ✅ extends `.media-card` | style.css §2b | aspect 4:3, card-title font, tighter padding |
+| `.selected-card` | ✅ extends `.media-card` | style.css §2b | aspect 4:5, -8px hover, subtitle font, CTA button |
+| `.experience-card` | ✅ extends `.media-card` | style.css §2b | aspect 1:1, -4px hover, elevation-1, margin-based padding |
+| `.collection-editorial-card` | ✅ extends `.editorial-card` | style.css §2b | (no overrides needed) |
+| `.create-card` | ♻ standalone | style.css §6 | unique scatter animation, no radius |
+| `.moment-card` | ♻ standalone | pages.css | no border/radius/bg — structurally different |
+| `.philosophy-card` | ♻ standalone | pages.css | text-center, no hover — structurally different |
 
-**Buttons:** `.btn-action` (+ variants) is canonical. `.btn-quote-header`, `.btn-arrow`, `.btn-whatsapp-hero`, `.btn-whatsapp-large`, `.btn-submit` are context buttons — keep but ensure all consume `--radius-full` + `--font-size-button` (done for submit/newsletter; verify the rest in Phase 5).
+**Accordion — merged into canonical `.faq-*` classes (Phase 5 ✅):**
+- Canonical `.faq-item`, `.faq-question`, `.faq-answer` defined in style.css §2c.
+- Home FAQ (index.html) uses `faq-item home-faq-item` dual-class; section wrapper overrides max-width only.
+- Hamper FAQ (hamper.js) uses `faq-item hamper-faq-item` dual-class; overrides max-width + answer `p` max-width.
+- ~55 lines of duplicate CSS eliminated.
 
-**Accordion:** home `.home-faq-item` vs hamper FAQ — two implementations → one canonical accordion.
+**Buttons:** all context variants now consume tokens. ✅
 
 ---
 
@@ -88,13 +132,26 @@ Documented in design.md §18 but not implemented (do NOT build until needed by a
 
 ---
 
-## 5. This-session changes (system-level, not redesign)
-- Buttons + inputs → pill (`--radius-full`) globally. ✅
-- Base `h1–h4` typography baseline mapped to `--font-size-*`; canonical hero + section-header + form fonts wired. ✅
-- No per-page block replacement (deferred to Phase 6 per ground rules).
+## 5. Session History
 
-## 6. Next (Phase 4 → 5, next chat)
-- Sweep remaining ~190 type literals + ~19 radius literals → tokens.
-- Consolidate the 7 card classes into media-card + editorial-card + product-card.
-- Merge the two FAQ accordions.
-- Keep `styleguide.html` in sync after each batch.
+### Session 1 (prior)
+- Buttons + inputs → pill (`--radius-full`) globally. ✅
+- Base `h1–h4` typography baseline mapped to tokens. ✅
+- styleguide.html created with 17 component groups. ✅
+
+### Session 2 (current)
+- **Token foundation expanded:** `:root` grew from ~40 to 106 custom properties. Added spacing scale (16 values), 6 new typography tokens, 7 semantic color tokens, `--radius-2xl`.
+- **Styleguide completed:** 27 component groups (was 17). Added navigation, footer, forms, hero variants, hamper/PDP, explore, about, customisation, reveal utilities, utility pages.
+- **Phase 4 typography sweep:** 190 hardcoded font-size literals → 196 token references. Zero hardcoded remaining (5 intentional).
+- **Phase 4 radius sweep:** 20 hardcoded border-radius → tokenized. Zero remaining.
+- **Phase 4 color sweep:** 21 hardcoded hex colors → tokenized. Error colors standardized (3 variants → 1). Success green fixed.
+
+### Session 3 (current)
+- **Phase 5 card consolidation:** Canonical `.media-card` base (style.css §2b) — shared by 4 card types (occasion, category, selected, experience). Canonical `.editorial-card` base — shared by collection-editorial. 3 standalone cards kept as-is (create, moment, philosophy — structurally different).
+- **Phase 5 FAQ merge:** Canonical `.faq-item`, `.faq-question`, `.faq-answer` (style.css §2c). Both home and hamper accordions now extend the canonical base via dual-class. ~55 lines of duplicate CSS removed.
+- **HTML updated:** All consolidated cards and FAQ items now carry canonical + specific classes (additive, non-breaking).
+
+## 6. Next (Phase 6)
+- Phase 6 (page-by-page block replacement) pending user approval.
+- Styleguide update to reflect canonical card/accordion classes.
+- Optional: shared form base styles (quote form + hamper proposal form share ~80% of properties).

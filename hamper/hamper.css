@@ -28,7 +28,7 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  font-size: 0.82rem;
+  font-size: var(--font-size-label);
   color: var(--text-muted);
 }
 
@@ -43,7 +43,7 @@
 
 .hamper-breadcrumb-separator {
   opacity: 0.4;
-  font-size: 0.75rem;
+  font-size: var(--font-size-overline);
 }
 
 .hamper-breadcrumb-current {
@@ -172,7 +172,7 @@
   transition: all 0.3s ease;
   pointer-events: auto;
   color: var(--text-dark);
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   opacity: 0;
 }
 
@@ -192,7 +192,7 @@
   right: 1.5rem;
   background: rgba(0,0,0,0.5);
   color: var(--text-light);
-  font-size: 0.8rem;
+  font-size: var(--font-size-small-button);
   padding: 0.3rem 0.8rem;
   border-radius: var(--radius-lg);
   z-index: 2;
@@ -239,7 +239,7 @@
   background: rgba(255,255,255,0.1);
   border: none;
   color: var(--text-light);
-  font-size: 1.5rem;
+  font-size: var(--font-size-card-title);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -258,7 +258,7 @@
 
 .hamper-collection-badge {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-bronze);
@@ -274,7 +274,7 @@
 
 .hamper-hero-content h1 {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: var(--font-size-h2);
   font-weight: 400;
   line-height: 1.1;
   margin-bottom: 1.25rem;
@@ -282,7 +282,7 @@
 }
 
 .hamper-hero-description {
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.7;
@@ -304,7 +304,7 @@
   padding: 0.5rem 1rem;
   background: var(--bg-charcoal);
   color: var(--text-light);
-  font-size: 0.75rem;
+  font-size: var(--font-size-overline);
   font-weight: 500;
   letter-spacing: 0.05em;
   border-radius: var(--radius-full);
@@ -367,7 +367,7 @@
 
 .hamper-info-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -378,7 +378,7 @@
 .hamper-info-value {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   color: var(--text-dark);
   line-height: 1.3;
@@ -399,7 +399,7 @@
 
 .hamper-introduction-content h2 {
   font-family: var(--font-serif);
-  font-size: 2.8rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -407,7 +407,7 @@
 }
 
 .hamper-introduction-content .intro-description {
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.8;
@@ -415,7 +415,7 @@
 }
 
 .hamper-introduction-content .intro-usp {
-  font-size: 1rem;
+  font-size: var(--font-size-small);
   color: var(--accent-bronze);
   font-weight: 400;
   line-height: 1.7;
@@ -445,7 +445,7 @@
 
 .hamper-planning-editorial h2 {
   font-family: var(--font-serif);
-  font-size: 2.5rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 1rem;
@@ -453,7 +453,7 @@
 }
 
 .hamper-planning-editorial p {
-  font-size: 1.05rem;
+  font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.7;
@@ -470,7 +470,7 @@
   grid-template-columns: 140px 1fr;
   gap: 2rem;
   padding: 1.25rem 0;
-  border-bottom: 1px solid #E5E1DA;
+  border-bottom: 1px solid var(--border-form);
   align-items: center;
   transition: background 0.2s ease;
 }
@@ -488,7 +488,7 @@
 }
 
 .hamper-planning-row-label {
-  font-size: 0.75rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -497,7 +497,7 @@
 
 .hamper-planning-row-value {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   color: var(--text-dark);
   border-bottom: 2px solid transparent;
@@ -509,7 +509,7 @@
 
 .hamper-planning-row-value small {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   font-weight: 300;
   color: var(--text-muted);
 }
@@ -563,7 +563,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -574,14 +574,14 @@
 
 .hamper-perfect-text h4 {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   margin-bottom: 0.3rem;
   color: var(--text-dark);
 }
 
 .hamper-perfect-text p {
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.5;
@@ -589,7 +589,7 @@
 }
 
 .hamper-perfect-link {
-  font-size: 0.78rem;
+  font-size: var(--font-size-overline);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -621,14 +621,14 @@
 
 .hamper-make-yours-header h2 {
   font-family: var(--font-serif);
-  font-size: 2.8rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   margin-bottom: 1rem;
   color: var(--text-dark);
 }
 
 .hamper-make-yours-header p {
-  font-size: 1.05rem;
+  font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
   max-width: 600px;
@@ -692,14 +692,14 @@
 
 .hamper-make-yours-body h4 {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: var(--font-size-subtitle);
   font-weight: 400;
   margin-bottom: 0.4rem;
   color: var(--text-dark);
 }
 
 .hamper-make-yours-body p {
-  font-size: 0.88rem;
+  font-size: var(--font-size-label);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.5;
@@ -709,6 +709,7 @@
 /* --------------------------------------------------------------------------
    7. FAQ ACCORDION
    -------------------------------------------------------------------------- */
+/* Hamper FAQ — extends canonical .faq-* (style.css §2c) */
 .hamper-faq {
   padding: 6rem var(--space-layout);
   background-color: var(--text-light);
@@ -730,61 +731,7 @@
   gap: 0.25rem;
 }
 
-.hamper-faq-item {
-  border-bottom: 1px solid var(--border-light);
-}
-
-.hamper-faq-question {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-serif);
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--text-dark);
-  text-align: left;
-  transition: color 0.2s ease;
-}
-
-.hamper-faq-question:hover {
-  color: var(--accent-bronze);
-}
-
-.hamper-faq-question .faq-chevron {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s ease;
-  flex-shrink: 0;
-  margin-left: 1rem;
-  color: var(--text-muted);
-}
-
-.hamper-faq-question[aria-expanded="true"] .faq-chevron {
-  transform: rotate(180deg);
-}
-
-.hamper-faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s var(--ease-premium), padding 0.2s ease;
-  padding: 0;
-}
-
-.hamper-faq-answer.open {
-  max-height: 400px;
-  padding: 0 0 1.25rem;
-}
-
 .hamper-faq-answer p {
-  font-size: 1rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.7;
   max-width: 700px;
 }
 
@@ -802,7 +749,7 @@
 
 .hamper-related-header h2 {
   font-family: var(--font-serif);
-  font-size: 2.5rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   margin-bottom: 0.5rem;
   color: var(--text-dark);
@@ -858,7 +805,7 @@
 
 .hamper-related-badge {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent-bronze);
@@ -868,14 +815,14 @@
 
 .hamper-related-body h4 {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: var(--font-size-subtitle);
   font-weight: 400;
   margin-bottom: 0.5rem;
   color: var(--text-dark);
 }
 
 .hamper-related-body p {
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.6;
@@ -883,7 +830,7 @@
 }
 
 .hamper-related-cta {
-  font-size: 0.82rem;
+  font-size: var(--font-size-label);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -939,7 +886,7 @@
 
 .hamper-proposal-editorial h2 {
   font-family: var(--font-serif);
-  font-size: 2.5rem;
+  font-size: var(--font-size-h3);
   font-weight: 400;
   margin-bottom: 1.25rem;
   line-height: 1.2;
@@ -947,7 +894,7 @@
 }
 
 .hamper-proposal-editorial > p {
-  font-size: 1rem;
+  font-size: var(--font-size-small);
   color: rgba(255,255,255,0.75);
   font-weight: 300;
   line-height: 1.7;
@@ -965,7 +912,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 0.95rem;
+  font-size: var(--font-size-small);
   color: rgba(255,255,255,0.85);
   font-weight: 300;
 }
@@ -980,7 +927,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: var(--font-size-overline);
   font-weight: 700;
 }
 
@@ -1019,7 +966,7 @@
 }
 
 .hamper-proposal-form label {
-  font-size: 0.78rem;
+  font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dark);
@@ -1030,9 +977,9 @@
 .hamper-proposal-form input,
 .hamper-proposal-form textarea {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: var(--font-size-small);
   padding: 0.7rem 0.85rem;
-  border: 1px solid #E5E1DA;
+  border: 1px solid var(--border-form);
   background: var(--bg-ivory);
   color: var(--text-dark);
   outline: none;
@@ -1053,12 +1000,12 @@
 
 .hamper-proposal-form input.error,
 .hamper-proposal-form textarea.error {
-  border-color: #D32F2F;
+  border-color: var(--color-error);
 }
 
 .hamper-proposal-form .field-error {
-  font-size: 0.75rem;
-  color: #D32F2F;
+  font-size: var(--font-size-overline);
+  color: var(--color-error);
   margin-top: 0.25rem;
   display: none;
 }
@@ -1123,13 +1070,13 @@
 .hamper-proposal-error {
   display: none;
   grid-column: span 2;
-  background: #FFF0F0;
-  border: 1px solid #FFCDD2;
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
   border-radius: var(--radius-md);
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
-  color: #D32F2F;
-  font-size: 0.85rem;
+  color: var(--color-error);
+  font-size: var(--font-size-label);
   font-weight: 400;
 }
 
@@ -1154,25 +1101,25 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: var(--color-success);
   color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.25rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-card-title);
 }
 
 .hamper-proposal-success h3 {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: var(--font-size-card-title);
   font-weight: 400;
   color: var(--text-dark);
   margin-bottom: 0.75rem;
 }
 
 .hamper-proposal-success p {
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.6;
@@ -1193,7 +1140,7 @@
   padding: 0.9rem 2rem;
   border-radius: var(--radius-full);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: var(--font-size-nav);
   letter-spacing: 0.03em;
   box-shadow: var(--elevation-2);
   transition: all 0.3s ease;
@@ -1240,7 +1187,7 @@
   padding: 1rem 2rem;
   border-radius: var(--radius-full);
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: var(--font-size-label);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   box-shadow: var(--elevation-2);
@@ -1272,7 +1219,7 @@
 .hamper-skeleton-gallery {
   aspect-ratio: 16 / 10;
   border-radius: var(--hamper-card-radius);
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1287,7 +1234,7 @@
   width: 120px;
   height: 16px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1295,8 +1242,8 @@
 .hamper-skeleton-title {
   width: 80%;
   height: 44px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1305,7 +1252,7 @@
   width: 100%;
   height: 18px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1323,7 +1270,7 @@
   width: 120px;
   height: 32px;
   border-radius: var(--radius-full);
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1342,7 +1289,7 @@
   width: 100%;
   height: 24px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
@@ -1361,7 +1308,7 @@
   }
 
   .hamper-hero-content h1 {
-    font-size: 2.8rem;
+    font-size: var(--font-size-h3);
   }
 
   .hamper-planning-layout {
@@ -1415,7 +1362,7 @@
   }
 
   .hamper-hero-content h1 {
-    font-size: 2.2rem;
+    font-size: var(--font-size-h4);
   }
 
   .hamper-hero-content {
@@ -1423,7 +1370,7 @@
   }
 
   .hamper-hero-description {
-    font-size: 1rem;
+    font-size: var(--font-size-small);
   }
 
   .hamper-hero-actions .btn-action {
@@ -1455,7 +1402,7 @@
   }
 
   .hamper-introduction-content h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h4);
   }
 
   /* Planning */
@@ -1469,7 +1416,7 @@
   }
 
   .hamper-planning-editorial h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h4);
   }
 
   .hamper-planning-row {
@@ -1479,11 +1426,11 @@
   }
 
   .hamper-planning-row-label {
-    font-size: 0.7rem;
+    font-size: var(--font-size-overline);
   }
 
   .hamper-planning-row-value {
-    font-size: 1rem;
+    font-size: var(--font-size-small);
   }
 
   /* Perfect For */
@@ -1505,7 +1452,7 @@
   }
 
   .hamper-make-yours-header h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h4);
   }
 
   .hamper-make-yours-scroll {
@@ -1522,7 +1469,7 @@
   }
 
   .hamper-faq-question {
-    font-size: 1.05rem;
+    font-size: var(--font-size-body);
     padding: 1rem 0;
   }
 
@@ -1532,7 +1479,7 @@
   }
 
   .hamper-related-header h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h4);
   }
 
   .hamper-related-grid {
@@ -1561,7 +1508,7 @@
   }
 
   .hamper-proposal-editorial h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h4);
   }
 
   .hamper-proposal-form-wrapper {
