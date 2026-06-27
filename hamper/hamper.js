@@ -569,7 +569,7 @@
         '<div class="faq-item hamper-faq-item">' +
           '<button class="faq-question hamper-faq-question" aria-expanded="false" aria-controls="faq-answer-' + i + '" data-index="' + i + '">' +
             escapeHtml(faq.question) +
-            '<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+            '<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
           '</button>' +
           '<div class="faq-answer hamper-faq-answer" id="faq-answer-' + i + '" role="region">' +
             '<p>' + escapeHtml(faq.answer) + '</p>' +

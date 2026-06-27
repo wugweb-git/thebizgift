@@ -895,7 +895,7 @@
 
 .hamper-proposal-editorial > p {
   font-size: var(--font-size-small);
-  color: rgba(255,255,255,0.75);
+  color: var(--text-footer);
   font-weight: 300;
   line-height: 1.7;
   margin-bottom: 2rem;
@@ -1577,54 +1577,14 @@
 .hamper-reveal-delay-4 { transition-delay: 320ms; }
 
 /* --------------------------------------------------------------------------
-   15. REDUCED MOTION
+   15. REDUCED MOTION — covered by universal rule in style.css §18
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .hamper-hero {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .hamper-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .hamper-reveal.revealed {
-    opacity: 1;
-    transform: none;
-  }
-
-  .hamper-gallery-image {
-    transition: none;
-  }
-
-  .hamper-gallery:hover .hamper-gallery-image.active {
-    transform: none;
-  }
-
-  .hamper-faq-question .faq-chevron {
-    transition: none;
-  }
-
-  .hamper-faq-answer {
-    transition: none;
-  }
-
-  .hamper-sticky-cta {
-    transition: none;
-  }
-
+  .hamper-hero,
+  .hamper-reveal,
+  .hamper-reveal.revealed,
   .hamper-related-card {
-    transition: none;
     opacity: 1;
     transform: none;
-  }
-
-  .hamper-perfect-card,
-  .hamper-make-yours-item {
-    transition: none;
   }
 }

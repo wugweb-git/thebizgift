@@ -27,6 +27,18 @@
   --skeleton-base: #EAEAE6;
   --skeleton-shine: #F5F5F0;
 
+  /* Semantic: footer (dark-bg) text + border */
+  --text-footer: rgba(255, 255, 255, 0.75);
+  --text-footer-muted: rgba(255, 255, 255, 0.55);
+  --text-footer-dim: rgba(255, 255, 255, 0.4);
+  --text-footer-faint: rgba(255, 255, 255, 0.35);
+  --border-footer: rgba(255, 255, 255, 0.08);
+  --border-footer-subtle: rgba(255, 255, 255, 0.05);
+  --bg-footer-tint: rgba(255, 255, 255, 0.03);
+  --text-footer-link: rgba(255, 255, 255, 0.6);
+  --border-card: rgba(44, 44, 42, 0.08);
+  --border-social: rgba(255, 255, 255, 0.2);
+
   /* Font Families */
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -113,6 +125,27 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   1b. UNIVERSAL FOCUS & INTERACTION STATES (design.md §13 + §15)
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--accent-bronze);
+  outline-offset: 2px;
+}
+
+/* Dark-background elements: lighter ring for contrast */
+.site-footer :focus-visible,
+.mega-menu :focus-visible,
+.whatsapp-sticky-widget:focus-visible {
+  outline-color: var(--accent-bronze);
+  outline-offset: 3px;
+}
+
+/* Remove default outline on mouse clicks (focus-visible handles keyboard) */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 body {
@@ -216,6 +249,17 @@ img {
   color: var(--bg-charcoal);
 }
 
+.btn-action:active {
+  transform: scale(0.98);
+}
+
+.btn-action:disabled,
+.btn-action[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn-large {
   padding: 1.3rem 3.5rem;
   font-size: var(--font-size-nav);
@@ -233,7 +277,7 @@ img {
   font-weight: 400;
   letter-spacing: 0.05em;
   padding: 0.25rem 0;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-footer);
   transition: color var(--transition-fast);
 }
 
@@ -272,7 +316,7 @@ img {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--surface-white);
-  border: 1px solid rgba(44, 44, 42, 0.08);
+  border: 1px solid var(--border-card);
   transition: transform 0.4s var(--ease-standard), box-shadow 0.4s var(--ease-standard);
 }
 .media-card:hover {
@@ -313,7 +357,7 @@ img {
   text-decoration: none;
   color: var(--text-dark);
   padding: 2.5rem;
-  border: 1px solid rgba(44, 44, 42, 0.1);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   background: var(--surface-white);
   transition: transform 0.4s var(--ease-standard), box-shadow 0.4s var(--ease-standard), border-color 0.3s ease;
@@ -399,7 +443,7 @@ img {
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-footer-subtle);
   transition: all 0.3s ease;
 }
 
@@ -434,7 +478,7 @@ img {
 }
 
 .nav-links .nav-link {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-footer);
 }
 
 .header-actions .btn-quote-header {
@@ -459,8 +503,8 @@ img {
   left: 0;
   right: 0;
   background-color: var(--bg-charcoal-light);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-footer);
+  border-bottom: 1px solid var(--border-footer);
   height: 430px;
   padding: 2.5rem var(--space-layout);
   opacity: 0;
@@ -535,7 +579,7 @@ img {
 
 /* Featured thumbnail in mega menu */
 .mega-menu-featured {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-footer-tint);
   border-radius: var(--radius-md);
   overflow: hidden;
   padding: 0;
@@ -606,7 +650,7 @@ img {
   grid-template-columns: 1.2fr 1fr 1fr 1.5fr 0.8fr;
   gap: 2.5rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-footer-subtle);
 }
 
 .footer-brand img {
@@ -617,7 +661,7 @@ img {
 
 .footer-brand p {
   font-size: var(--font-size-label);
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-footer-dim);
   font-weight: 300;
   line-height: 1.6;
   max-width: 240px;
@@ -634,7 +678,7 @@ img {
 
 .footer-col a {
   display: block;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-footer-muted);
   font-size: var(--font-size-label);
   margin-bottom: 0.6rem;
   font-weight: 300;
@@ -655,7 +699,7 @@ img {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-footer-muted);
   font-size: var(--font-size-label);
   font-weight: 300;
   transition: color var(--transition-fast);
@@ -684,10 +728,10 @@ img {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-social);
   border-radius: 50%;
   transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-footer-link);
   font-size: 0;
 }
 
@@ -710,7 +754,7 @@ img {
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-size-small-button);
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-footer-faint);
   font-weight: 300;
 }
 
@@ -833,7 +877,7 @@ img {
 
 .hero-subtitle {
   font-size: var(--font-size-subtitle);
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-footer);
   max-width: 700px;
   margin: 0 auto 3.5rem auto;
   font-weight: 300;
@@ -872,7 +916,7 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-footer-dim);
   font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -1171,7 +1215,7 @@ img {
 
 .process-step p {
   font-size: var(--font-size-label);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-footer-link);
   font-weight: 300;
   line-height: 1.5;
 }
@@ -1253,7 +1297,7 @@ img {
 
 .seasonal-content p {
   font-size: var(--font-size-nav);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-footer-link);
   font-weight: 300;
 }
 
@@ -1506,7 +1550,7 @@ img {
   font-size: var(--font-size-h4);
   font-family: var(--font-serif);
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-footer-subtle);
   transition: color var(--transition-fast);
 }
 
@@ -1697,59 +1741,34 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   18. REDUCED MOTION
+   18. REDUCED MOTION (design.md §12.5 — universal rule)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .hero-media {
-    animation: none;
-    opacity: 1;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
-  .hero-media::after {
-    animation: none;
-    opacity: 1;
-  }
-
-  .hero-title .hero-line {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero-subtitle {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero-actions {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero-scroll-indicator {
-    animation: none;
-    display: none;
-  }
-
-  .hero-section.hero-zooming .hero-media img {
-    transform: none;
-    opacity: 1;
-  }
-
-  .create-card {
-    opacity: 1;
-    transform: none;
-  }
-
+  .hero-media,
+  .hero-media::after,
+  .hero-title .hero-line,
+  .hero-subtitle,
+  .hero-actions,
+  .create-card,
   .reveal,
   .reveal-left,
   .reveal-right,
   .reveal-scale {
     opacity: 1;
     transform: none;
-    transition: none;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
   }
 }
 
@@ -1798,8 +1817,3 @@ img {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .whatsapp-sticky-widget {
-    transition: none;
-  }
-}
