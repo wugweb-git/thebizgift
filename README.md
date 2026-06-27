@@ -15,7 +15,7 @@ Premium B2B corporate gifting platform for the Indian market. Curated hampers de
 ```bash
 git clone <repo-url>
 cd thebizgift
-python3 -m http.server 4321 --directory html
+python3 -m http.server 4321
 ```
 
 Open http://localhost:4321. Product pages use mock data locally; forms simulate success.
