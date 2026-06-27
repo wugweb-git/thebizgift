@@ -19,8 +19,8 @@
    -------------------------------------------------------------------------- */
 .hamper-breadcrumb {
   padding: 1.25rem var(--space-layout);
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EAEAE6;
+  background-color: var(--text-light);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .hamper-breadcrumb nav {
@@ -57,7 +57,7 @@
 .hamper-hero {
   background-color: var(--bg-ivory);
   padding: 5rem var(--space-layout) 5rem;
-  border-bottom: 1px solid #EAEAE6;
+  border-bottom: 1px solid var(--border-light);
   opacity: 0;
   transform: translateY(30px);
   animation: heroFadeReveal 0.6s var(--ease-premium) forwards;
@@ -141,8 +141,8 @@
 }
 
 .hamper-gallery-dot.active {
-  background: #FFFFFF;
-  border-color: #FFFFFF;
+  background: var(--surface-white);
+  border-color: var(--text-light);
   transform: scale(1.2);
 }
 
@@ -181,7 +181,7 @@
 }
 
 .hamper-gallery-arrow:hover {
-  background: #FFFFFF;
+  background: var(--surface-white);
   transform: scale(1.08);
 }
 
@@ -191,10 +191,10 @@
   top: 1.5rem;
   right: 1.5rem;
   background: rgba(0,0,0,0.5);
-  color: #FFFFFF;
+  color: var(--text-light);
   font-size: 0.8rem;
   padding: 0.3rem 0.8rem;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   z-index: 2;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -208,7 +208,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.92);
-  z-index: 9999;
+  z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,7 +226,7 @@
   max-width: 90vw;
   max-height: 90vh;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .hamper-lightbox-close {
@@ -238,7 +238,7 @@
   border-radius: 50%;
   background: rgba(255,255,255,0.1);
   border: none;
-  color: #FFFFFF;
+  color: var(--text-light);
   font-size: 1.5rem;
   cursor: pointer;
   display: flex;
@@ -303,11 +303,11 @@
   gap: 0.4rem;
   padding: 0.5rem 1rem;
   background: var(--bg-charcoal);
-  color: #FFFFFF;
+  color: var(--text-light);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   transition: background var(--transition-fast), transform 0.2s ease;
   cursor: pointer;
   text-decoration: none;
@@ -328,7 +328,7 @@
 }
 
 .hamper-hero-chip:hover .chip-dot {
-  background: #FFFFFF;
+  background: var(--surface-white);
 }
 
 .hamper-hero-actions {
@@ -358,7 +358,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding-top: 2rem;
-  border-top: 1px solid #EAEAE6;
+  border-top: 1px solid var(--border-light);
 }
 
 .hamper-info-item {
@@ -389,7 +389,7 @@
    -------------------------------------------------------------------------- */
 .hamper-introduction {
   padding: 6rem var(--space-layout);
-  background-color: #FFFFFF;
+  background-color: var(--text-light);
 }
 
 .hamper-introduction-content {
@@ -420,7 +420,7 @@
   font-weight: 400;
   line-height: 1.7;
   padding-top: 1.5rem;
-  border-top: 1px solid #EAEAE6;
+  border-top: 1px solid var(--border-light);
 }
 
 /* --------------------------------------------------------------------------
@@ -519,7 +519,7 @@
    -------------------------------------------------------------------------- */
 .hamper-perfect {
   padding: 6rem var(--space-layout);
-  background-color: #FFFFFF;
+  background-color: var(--text-light);
 }
 
 .hamper-perfect-grid {
@@ -548,16 +548,16 @@
 
 .hamper-perfect-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
+  box-shadow: var(--elevation-2);
   border-color: var(--accent-bronze);
-  background: #FFFFFF;
+  background: var(--surface-white);
 }
 
 .hamper-perfect-icon {
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--bg-charcoal);
   color: var(--accent-bronze);
   display: flex;
@@ -569,7 +569,7 @@
 
 .hamper-perfect-card:hover .hamper-perfect-icon {
   background: var(--accent-bronze);
-  color: #FFFFFF;
+  color: var(--text-light);
 }
 
 .hamper-perfect-text h4 {
@@ -609,8 +609,8 @@
    -------------------------------------------------------------------------- */
 .hamper-make-yours {
   background-color: var(--bg-ivory);
-  border-top: 1px solid #EAEAE6;
-  border-bottom: 1px solid #EAEAE6;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
   position: relative;
 }
 
@@ -657,7 +657,7 @@
   scroll-snap-align: start;
   border-radius: var(--hamper-card-radius);
   overflow: hidden;
-  background: #FFFFFF;
+  background: var(--surface-white);
   transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
   cursor: pointer;
   text-decoration: none;
@@ -666,7 +666,7 @@
 
 .hamper-make-yours-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  box-shadow: var(--elevation-2);
 }
 
 .hamper-make-yours-image {
@@ -711,7 +711,7 @@
    -------------------------------------------------------------------------- */
 .hamper-faq {
   padding: 6rem var(--space-layout);
-  background-color: #FFFFFF;
+  background-color: var(--text-light);
 }
 
 .hamper-faq-container {
@@ -731,7 +731,7 @@
 }
 
 .hamper-faq-item {
-  border-bottom: 1px solid #EAEAE6;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .hamper-faq-question {
@@ -819,7 +819,7 @@
   display: block;
   border-radius: var(--hamper-card-radius);
   overflow: hidden;
-  background: #FFFFFF;
+  background: var(--surface-white);
   transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
   opacity: 0;
   transform: translateY(30px);
@@ -832,7 +832,7 @@
 
 .hamper-related-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+  box-shadow: var(--elevation-2);
 }
 
 .hamper-related-image {
@@ -918,7 +918,7 @@
 .hamper-proposal {
   padding: 0;
   background-color: var(--bg-charcoal);
-  color: #FFFFFF;
+  color: var(--text-light);
 }
 
 .hamper-proposal-grid {
@@ -996,7 +996,7 @@
 }
 
 .hamper-proposal-form {
-  background: #FFFFFF;
+  background: var(--surface-white);
   padding: 2.5rem;
   border-radius: var(--hamper-card-radius);
   text-align: left;
@@ -1037,7 +1037,7 @@
   color: var(--text-dark);
   outline: none;
   transition: border-color var(--transition-fast);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   min-height: 44px;
 }
 
@@ -1075,7 +1075,7 @@
 .hamper-proposal-form .btn-submit {
   width: 100%;
   background: var(--accent-copper);
-  color: #FFFFFF;
+  color: var(--text-light);
   border: none;
   padding: 1rem;
   font-family: var(--font-sans);
@@ -1085,7 +1085,7 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: background var(--transition-fast), opacity 0.3s ease;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1105,7 +1105,7 @@
   width: 16px;
   height: 16px;
   border: 2px solid rgba(255,255,255,0.3);
-  border-top-color: #FFFFFF;
+  border-top-color: var(--text-light);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
   display: none;
@@ -1125,7 +1125,7 @@
   grid-column: span 2;
   background: #FFF0F0;
   border: 1px solid #FFCDD2;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   color: #D32F2F;
@@ -1140,7 +1140,7 @@
 /* Success */
 .hamper-proposal-success {
   display: none;
-  background: #FFFFFF;
+  background: var(--surface-white);
   padding: 2.5rem;
   border-radius: var(--hamper-card-radius);
   text-align: center;
@@ -1155,7 +1155,7 @@
   height: 56px;
   border-radius: 50%;
   background: #4CAF50;
-  color: #FFFFFF;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1188,21 +1188,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #25D366;
-  color: #FFFFFF;
+  background: var(--color-whatsapp);
+  color: var(--text-light);
   padding: 0.9rem 2rem;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   font-weight: 500;
   font-size: 0.9rem;
   letter-spacing: 0.03em;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  box-shadow: var(--elevation-2);
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .hamper-proposal-whatsapp .btn-whatsapp-large:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  box-shadow: var(--elevation-3);
 }
 
 /* --------------------------------------------------------------------------
@@ -1212,7 +1212,7 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 997;
+  z-index: var(--z-sticky);
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none;
@@ -1236,14 +1236,14 @@
   align-items: center;
   gap: 0.75rem;
   background: var(--accent-copper);
-  color: #FFFFFF;
+  color: var(--text-light);
   padding: 1rem 2rem;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   font-weight: 500;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  box-shadow: var(--elevation-2);
   transition: all 0.3s var(--ease-premium);
   text-decoration: none;
 }
@@ -1251,7 +1251,7 @@
 .hamper-sticky-cta a:hover {
   background: var(--accent-bronze);
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  box-shadow: var(--elevation-3);
 }
 
 /* --------------------------------------------------------------------------
@@ -1286,7 +1286,7 @@
 .hamper-skeleton-badge {
   width: 120px;
   height: 16px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
@@ -1304,7 +1304,7 @@
 .hamper-skeleton-text {
   width: 100%;
   height: 18px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
@@ -1322,7 +1322,7 @@
 .hamper-skeleton-chip {
   width: 120px;
   height: 32px;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
@@ -1341,7 +1341,7 @@
 .hamper-skeleton-spec-row {
   width: 100%;
   height: 24px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, #EAEAE6 25%, #F5F5F0 50%, #EAEAE6 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s ease-in-out infinite;
@@ -1599,7 +1599,7 @@
   .hamper-sticky-cta a {
     width: 100%;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 1rem;
   }
 

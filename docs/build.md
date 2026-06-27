@@ -92,7 +92,9 @@ Current production tree:
 │   │   ├── typography.json
 │   │   ├── spacing.json
 │   │   ├── radius.json
-│   │   └── motion.json
+│   │   ├── motion.json
+│   │   ├── elevation.json
+│   │   └── zindex.json
 │   └── assets/
 │       ├── moodboard/
 │       ├── references/
@@ -795,7 +797,7 @@ CSS trigger:
 
 ---
 
-## 21. SEO Implementation
+## 21. SEO Implementation (Deferred — Phase 2)
 
 **Note:** SEO work is documented but explicitly blocked in the current phase per user instructions ("SEO-related should be struck down or grayed (not in scope)"). The following defines what must exist when the phase opens.
 
@@ -1120,7 +1122,9 @@ These are intentionally deferred to keep v1 focused on editorial experience and 
 │   │   ├── typography.json
 │   │   ├── spacing.json
 │   │   ├── radius.json
-│   │   └── motion.json
+│   │   ├── motion.json
+│   │   ├── elevation.json
+│   │   └── zindex.json
 │   └── assets/
 │       ├── moodboard/
 │       ├── references/

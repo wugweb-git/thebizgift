@@ -1,0 +1,21 @@
+{
+  "elevation": {
+    "0": {
+      "shadow": "none",
+      "usage": "Page surface, flat cards"
+    },
+    "1": {
+      "shadow": "0 2px 8px rgba(26, 26, 26, 0.06)",
+      "usage": "Card hover lift"
+    },
+    "2": {
+      "shadow": "0 8px 24px rgba(26, 26, 26, 0.10)",
+      "usage": "Dropdowns, mega menu, sticky CTA"
+    },
+    "3": {
+      "shadow": "0 16px 48px rgba(26, 26, 26, 0.16)",
+      "usage": "Modals, lightbox"
+    }
+  },
+  "rule": "A surface uses exactly one elevation level. Prefer borders over shadows for hierarchy."
+}

@@ -8,3 +8,6 @@ dist/
 config.js
 CLAUDE.local.md
 claude.md
+
+# Claude Code local tooling
+.claude/

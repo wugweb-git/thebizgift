@@ -29,10 +29,12 @@ We design hampers with the same care and intentionality that goes into any good 
 
 ## Design System
 
-See [design.md](design.md) for full documentation:
-- **Primitives:** Color tokens, typography scales, spacing, motion curves
-- **Components:** Buttons, nav links, dropdowns, social icons, WhatsApp widget
-- **Blocks:** 10 homepage sections, 9 about sections, 7 explore sections
+See [design.md](design.md) for the full 26-section design system (v1.2):
+- **Foundation:** Design principles, experience strategy, editorial layout, visual language
+- **Tokens:** Color, typography, spacing, grid, radius, elevation, z-index, motion (7 JSON files in `tokens/`)
+- **Components:** Full classified inventory — navigation, heroes, cards, product, content, forms, utility, footer
+- **Blocks:** 10 homepage, 9 about, 7 explore, 9 hamper detail sections
+- **Systems:** Interaction patterns, responsive breakpoints, accessibility, dynamic content, constraints
 
 ## Content Architecture
 
@@ -158,20 +160,20 @@ When Airtable schemas are final, swap mock data for live API calls by toggling `
 - `api/get-featured-hampers.js` exists but is not wired to any page (the explore hub is static). Wire it up or remove it.
 - `explore/explore.html` is an unlinked alternate explore layout — decide whether to use or remove it.
 
-## Out of Scope (Current Phase)
+## Out of Scope (Phase 1)
 
-These items are documented but not actively being worked on:
+These items are **not in scope** for the current phase:
 
-- ~~SEO title/description per page~~ — ~~blocked~~ pending content finalisation
+- SEO title/description per page
 - Open Graph image generation
 - Twitter meta tags
-- Advanced search & filtering
 - Sitemap.xml automation
 - robots.txt configuration
+- Advanced search & filtering
 - Analytics integration (Plausible / GA4)
 - Performance budget enforcement tooling
 
-~~SEO-related work will be picked up in a dedicated phase after content and design are approved.~~
+SEO and analytics will be addressed in a future phase after content and design are approved.
 
 ## Audit & Hardening Pass (June 2026)
 

@@ -1,8 +1,3 @@
-**✅ `master-brand-document.md` — Final Updated Version**
-
-Here is the complete, polished, and final version with your requested additions:
-
-```markdown:disable-run
 # The Biz Gift — Master Brand Document
 
 **Version:** 1.0  
@@ -48,6 +43,18 @@ To become India’s most trusted corporate gifting studio by combining thoughtfu
 ## Positioning Statement
 
 The Biz Gift is a premium corporate gifting studio for organizations that value relationships as much as results.
+
+## Messaging Pillars
+
+Five themes that every marketing page, campaign, and product narrative should reinforce at least one of. They translate the brand story into repeatable communication.
+
+| Pillar | What it says | Where it shows up |
+|--------|--------------|-------------------|
+| **Premium Curation** | Every hamper is selected, not assembled. | Collections, product introductions |
+| **Thoughtful Experiences** | The moment of receiving matters as much as the gift. | Homepage hero, About, occasions |
+| **Reliable Delivery** | Dependable timelines and operational excellence. | Quote flow, planning information |
+| **Corporate Customisation** | Branding and personalisation done with restraint. | Customisation studio, "Make It Yours" |
+| **Meaningful Relationships** | Gifting as relationship-building, not transaction. | Brand story, final CTAs |
 
 ## Target Audience
 
@@ -149,15 +156,4 @@ If the answer to any of these questions is “No”, reconsider the decision.
 
 It serves as the strategic foundation. All visual, interaction, and content decisions must align with this brand document and the linked `design.md`.
 
----
-
-This is now the final, complete version of `master-brand-document.md`.
-
-Would you like me to:
-- Create `build.md` to complete the documentation suite?
-- Export all core documents to DOCX?
-- Make any tiny final wording adjustments?
-
-Let me know! 🚀
-```
 

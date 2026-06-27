@@ -151,7 +151,7 @@ Taxonomy is how content is organised and discovered.
 
 ---
 
-## 6. SEO & Metadata Architecture
+## 6. SEO & Metadata Architecture (Deferred — Phase 2)
 
 ### 6.1 Page Hierarchy
 
@@ -313,4 +313,174 @@ When schemas are ready, swap mock data for live API calls via `USE_MOCK_DATA` fl
 
 ---
 
-**Schema note:** Detailed Airtable table definitions (Products, Collections, Occasions, Categories, FAQs, Leads) will be added to this document once write access is granted. The current version captures all content behaviour and frontend requirements needed to proceed with development.
+---
+
+## 15. Airtable Content Model
+
+Field definitions for each table. Field names are case-sensitive and must match the code exactly.
+
+### 15.1 Products
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Website Product Name` | Single line text | Yes | Display name (H1, breadcrumb) |
+| `Internal Name` | Single line text | No | Team-facing reference name |
+| `URL Slug` | Single line text | Yes | Immutable, lowercase, hyphenated |
+| `Category` | Link to Categories | Yes | One per product |
+| `Occasion Tags` | Link to Occasions | Yes | 1–4 per product |
+| `Curated Gift Tags` | Link to Collections | No | 0–1 per product |
+| `Product Tags` | Multiple select | No | Internal search/filter labels |
+| `Product Images` | Attachment | Yes | Min 1 hero image, up to 6 |
+| `Website Description` | Long text | Yes | 150–250 words, lead with purpose |
+| `USP` | Single line text | No | ≤ 80 characters |
+| `MOQ` | Number | Yes | Minimum order quantity |
+| `Material` | Single line text | No | Primary materials |
+| `Branding Option` | Multiple select | No | Available customisation methods |
+| `Lead Time` | Single line text | Yes | e.g. "7–10 business days" |
+| `Delivery` | Single line text | Yes | Delivery terms |
+| `Response Time` | Single line text | No | e.g. "Within 4 hours" |
+| `FAQ` | Long text (JSON) | No | Array of {question, answer} |
+| `SEO Title` | Single line text | No | Phase 2 — `<title>` override |
+| `SEO Description` | Long text | No | Phase 2 — meta description |
+| `Published` | Checkbox | Yes | Controls visibility on site |
+| `Featured` | Checkbox | No | Appears in homepage Selected Gifts |
+| `Homepage` | Checkbox | No | Eligible for homepage featured |
+| `Created` | Created time | Auto | — |
+| `Updated` | Last modified time | Auto | — |
+
+### 15.2 Collections
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Name` | Single line text | Yes | Collection display name |
+| `Slug` | Single line text | Yes | URL slug |
+| `Description` | Long text | Yes | Collection narrative |
+| `Hero Image` | Attachment | Yes | 3:2 ratio, 1600×1000 min |
+| `Products` | Link to Products | Yes | Linked products |
+| `Featured` | Checkbox | No | Homepage featured collections |
+| `Published` | Checkbox | Yes | Controls visibility |
+| `Order` | Number | No | Sort order in navigation |
+
+### 15.3 Occasions
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Name` | Single line text | Yes | Occasion display name |
+| `Slug` | Single line text | Yes | URL slug |
+| `Description` | Long text | Yes | Occasion narrative |
+| `Hero Image` | Attachment | No | 3:2 ratio (fallback: brand colour) |
+| `Products` | Link to Products | Yes | Linked products |
+| `Featured` | Checkbox | No | Homepage featured occasions |
+| `Published` | Checkbox | Yes | Controls visibility |
+| `Order` | Number | No | Sort order in navigation |
+
+### 15.4 Categories
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Name` | Single line text | Yes | Category display name |
+| `Slug` | Single line text | Yes | URL slug |
+| `Description` | Long text | No | Category description |
+| `Products` | Link to Products | Yes | Linked products |
+| `Published` | Checkbox | Yes | Controls visibility |
+| `Order` | Number | No | Sort order in navigation |
+
+### 15.5 FAQs
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Question` | Single line text | Yes | FAQ question |
+| `Answer` | Long text | Yes | FAQ answer (plain text) |
+| `Product` | Link to Products | No | Product-specific FAQ |
+| `Collection` | Link to Collections | No | Collection-specific FAQ |
+| `Occasion` | Link to Occasions | No | Occasion-specific FAQ |
+| `Order` | Number | No | Display order in accordion |
+
+### 15.6 Leads
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `Type` | Single select | Yes | `quote` / `proposal` / `newsletter` |
+| `Name` | Single line text | Yes | Full name |
+| `Company` | Single line text | Yes | Company name |
+| `Email` | Email | Yes | Contact email |
+| `Phone` | Phone | No | Contact phone |
+| `Quantity` | Number | No | Estimated order size |
+| `Budget` | Single line text | No | Budget range |
+| `Occasion` | Single line text | No | Selected occasion |
+| `Required By` | Date | No | Delivery deadline |
+| `Branding` | Single line text | No | Branding requirements |
+| `Message` | Long text | No | Additional notes |
+| `Product` | Single line text | No | Product name (proposals) |
+| `Product URL` | URL | No | Source product page |
+| `Collection` | Single line text | No | Collection name |
+| `Category` | Single line text | No | Category name |
+| `Source Page` | URL | No | Page URL where form submitted |
+| `Created` | Created time | Auto | — |
+
+---
+
+## 16. Component Copy Inventory
+
+What copy each component requires. Helps content authors know exactly what to write.
+
+| Component | Copy Fields | Character Guide |
+|-----------|------------|-----------------|
+| **Hero (Homepage)** | Title, Subtitle, CTA Primary, CTA Secondary | Title ≤55, Subtitle ≤120 |
+| **Hero (Inner Page)** | Eyebrow, Title, Subtitle | Eyebrow ≤20, Title ≤55 |
+| **Product Card** | Product Name, Image Alt | Name ≤40 |
+| **Collection Card** | Name, Description, Image Alt, CTA | Description ≤80 |
+| **Occasion Card** | Name, Description, CTA | Description ≤60 |
+| **Product Detail** | Name, Description, USP, MOQ, Lead Time, Delivery | Description 150–250 words, USP ≤80 |
+| **FAQ Item** | Question, Answer | Question ≤80, Answer ≤200 words |
+| **Quote Form** | Title, Subtitle, Field Labels, Privacy Note, Submit Button | Title ≤40 |
+| **Proposal Form** | Title, Highlights (3), Field Labels, Submit Button, Success Message | Highlights ≤20 words each |
+| **Newsletter** | Label, Placeholder, Button | Label ≤30 |
+| **Section Header** | Heading, Intro | Heading ≤60, Intro ≤120 |
+| **Trust Pillar** | Title, Description | Title ≤20, Description ≤60 |
+| **CTA Block** | Headline, CTA Primary, CTA Secondary | Headline ≤50 |
+| **404 Page** | Headline, Body, CTA | Headline ≤40 |
+| **Empty State** | Message, CTA | Message ≤60 |
+
+---
+
+## 17. Search Index (Phase 2)
+
+When search is implemented, these fields should be indexed for full-text search:
+
+| Searchable Field | Source Table | Weight |
+|-----------------|-------------|--------|
+| Product Name | Products | High |
+| Description | Products | Medium |
+| USP | Products | Medium |
+| Category Name | Categories | High |
+| Occasion Name | Occasions | High |
+| Collection Name | Collections | High |
+| Product Tags | Products | Low |
+
+**Search rules:** Case-insensitive, partial match, ranked by weight. No pricing fields exposed. Results show product cards with name + image + CTA.
+
+---
+
+## 18. Metadata Requirements (Phase 2)
+
+When SEO phase opens, every page must define:
+
+| Page Type | Title | Description | Canonical | OG Image | Breadcrumb |
+|-----------|-------|-------------|-----------|----------|------------|
+| Homepage | Brand + tagline | Company description | Self | Hero image | — |
+| About | "About — [Brand]" | Mission summary | Self | About hero | Home > About |
+| Explore | "Explore Gifts — [Brand]" | Discovery description | Self | Collection image | Home > Explore |
+| Collection | "[Name] — [Brand]" | Collection description | Self | Collection hero | Home > Explore > [Name] |
+| Occasion | "[Name] — [Brand]" | Occasion description | Self | Occasion hero | Home > Explore > [Name] |
+| Category | "[Name] — [Brand]" | Category description | Self | Category image | Home > Explore > [Name] |
+| Product | Airtable `SEO Title` | Airtable `SEO Description` | Self | First product image | Home > [Collection/Category] > [Name] |
+| Customisation | "Customisation — [Brand]" | Capabilities summary | Self | Customisation image | Home > Customisation |
+| Quote | "Request Proposal — [Brand]" | Quote form description | Self | Logo on bronze | Home > Request Proposal |
+| Legal | "[Page] — [Brand]" | Legal summary | Self | Logo on bronze | Home > [Page] |
+
+**Schema markup:** JSON-LD BreadcrumbList on product and taxonomy pages. Organization schema on homepage.
+
+---
+
+**Schema note:** These table definitions represent the planned Airtable structure. Field names, types, and relationships will be validated when write access is granted. The current site operates on mock data that follows this model.
