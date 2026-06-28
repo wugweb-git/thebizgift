@@ -213,10 +213,14 @@
   /* -----------------------------------------------------------------------
      FETCH PRODUCT
      ----------------------------------------------------------------------- */
+  function getMockProduct() {
+    return MOCK_PRODUCTS[getSlug()] || MOCK_PRODUCT;
+  }
+
   function fetchProduct() {
     return new Promise(function (resolve, reject) {
       if (CONFIG.USE_MOCK) {
-        setTimeout(function () { resolve(MOCK_PRODUCTS[getSlug()] || MOCK_PRODUCT); }, CONFIG.SKELETON_DELAY);
+        setTimeout(function () { resolve(getMockProduct()); }, CONFIG.SKELETON_DELAY);
         return;
       }
 
@@ -228,12 +232,12 @@
       xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
           try { resolve(JSON.parse(xhr.responseText)); }
-          catch (e) { reject(new Error('Invalid JSON response')); }
+          catch (e) { resolve(getMockProduct()); }
         } else {
-          reject(new Error('API error: ' + xhr.status));
+          resolve(getMockProduct());
         }
       };
-      xhr.onerror = function () { reject(new Error('Network error')); };
+      xhr.onerror = function () { resolve(getMockProduct()); };
       xhr.send();
     });
   }
