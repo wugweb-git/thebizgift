@@ -90,6 +90,7 @@
 .origin-image {
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: var(--radius-lg);
   box-shadow: var(--elevation-2);
 }
 
@@ -227,6 +228,7 @@
 .moment-image {
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  border-radius: var(--radius-lg);
   margin-bottom: 1.5rem;
   box-shadow: var(--elevation-2);
 }
@@ -275,6 +277,7 @@
 .craft-image {
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  border-radius: var(--radius-lg);
   box-shadow: var(--elevation-2);
 }
 
@@ -437,6 +440,7 @@
 .why-image {
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: var(--radius-lg);
   box-shadow: var(--elevation-2);
 }
 
@@ -1250,8 +1254,12 @@
     grid-template-columns: 1fr;
   }
 
+  .form-card {
+    padding: 1.5rem;
+  }
+
   .whatsapp-card {
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .quote-statement h2 {
