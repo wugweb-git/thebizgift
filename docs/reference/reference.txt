@@ -1,9 +1,118 @@
-I will add file name and what i think we shoutld take
-hwoeevr this thing will work only when we have have major chunk of our own .md and Ui elemts mapped.
+Reference Folder — File Descriptions
+======================================
 
-Once they are we will make sure that no promitives or components are overridden - we just replace the bigger block with our exiitng items (hopefully)
+Hero.png
+  Main hero section with split layout. Left: high-quality product photography of luxury gift box
+  with golden elements. Right: "Our Promise" heading, body copy, "Featured in this Hamper" cards,
+  and a trust bar with "Trusted by 500+ companies" showing Google, Microsoft, Swiggy logos.
+  Top nav bar with THE BIZ GIFT logo and menu links.
+  STATUS: Converted to HTML (Section 17 — Hero + Trust Bar)
 
+Block 2.png
+  Three blocks: (1) Product detail showing "The Executive Indulgence" hamper with price ₹5,450,
+  image gallery thumbnails, and CTA. (2) "Browse by Collection" grid with 3-4 collection cards.
+  (3) Dark testimonial quote block. Also shows mobile viewport variants on the right.
+  STATUS: Converted to HTML (Sections 18, 19, 21)
 
-so ignorw this space for now
+Blockls.png
+  Full-width rendering of three major blocks at actual page scale:
+  (1) Hero editorial with stats (500+, 50K+, 4.9/5) — already existed in original HTML.
+  (2) Process steps (Choose, Customise, Approve, Deliver) — already existed.
+  (3) Info row (Bespoke Solutions, Need it in bulk?, Corporate Gifting Guide) — already existed.
+  STATUS: Already in original HTML (Sections 12-14)
 
+H + E.png
+  Two full page layouts side by side. Left: Product detail page (hamper detail) with gallery,
+  pricing, "What's Inside" grid. Right: "Explore Thoughtful Corporate Gifts" browse page with
+  collection grid and occasion browsing. Shows both desktop viewports.
+  STATUS: Converted to HTML (Sections 18, 19, 20)
 
+block board.png
+  Component board showing six standalone blocks: (1) Product image gallery with thumbnail strip.
+  (2) FAQ accordion with expandable questions. (3) Editorial quote block ("Gifting is not about
+  the object..."). (4) Proposal/quote form ("Let's create something meaningful together").
+  (5) 404 error page. (6) Empty state ("No hampers found").
+  STATUS: Converted to HTML (Sections 18, 21, 25, 26, 29)
+
+block board 2.png
+  Extended component board: Collection card, Occasion card, Product card with price, Related
+  product card, Planning information component, Sustainability badges strip, Shipping/delivery
+  info strip, Image gallery, Quote/proposal form, Dark testimonial block.
+  STATUS: Converted to HTML (distributed across Sections 19-29)
+
+collections.png
+  Full "Browse by Collection" page: Featured "Signature Hampers" hero with large product image,
+  "Wellness Collection" highlight section, 4-column collection card grid (Premium Boxes,
+  Sustainable Choices, Executive Essentials), "Looking for something truly unique?" CTA at bottom.
+  STATUS: Converted to HTML (Section 19 — Browse by Collection)
+
+component.png
+  Complete design system component library overview at miniature scale: navigation variants, hero
+  blocks, product cards, form components, stat rows, color palette swatches, image thumbnail
+  gallery, buttons, typography scale, 404 state. Comprehensive reference.
+  STATUS: Individual components converted across all sections
+
+detail`1.png
+  Full product detail page: breadcrumb navigation, image gallery with vertical thumbnail strip,
+  product info ("Executive Indulgence", ₹3,250, feature badges, quantity selector), "What's
+  Inside" 6-item grid (Botanics, Premium Coffee, Artisan Biscuits, Scented Candle, Brass Utility,
+  Leather Journal), FAQ accordion, "Still have questions?" sidebar CTA with contact block.
+  STATUS: Converted to HTML (Section 18 — Product Detail Page)
+
+extra component.png
+  Same as component.png — duplicate of the full component library overview reference.
+  STATUS: Covered by component.png
+
+megamenu.png
+  Mega menu navigation component: THE BIZ GIFT top bar, dropdown with featured collection image
+  on left, "Browse by Collection" and "Browse by Occasion" link columns in center, "Featured
+  Story" with image on right, trust/feature strip at bottom (Minimum Order, Bespoke Customisation,
+  Pan-India Delivery, Lead Time).
+  STATUS: Already in original HTML (Section 11 — Navigation & Mega Menu)
+
+moodboard.png
+  Brand moodboard and design system overview: typography specimens (Cormorant Garamond, Plus
+  Jakarta Sans), color palette (Bronze, Warm Beige, Ivory, Taupe, Charcoal), textures & materials,
+  product card style, UI elements (buttons, inputs, select fields), icon style, spacing system,
+  border radius scale, layout & composition examples, photography direction guidelines, and brand
+  pillars (Design Approach, Experience, Brand Essence, Tone of Voice).
+  STATUS: Foundation elements already in original HTML (Sections 02-08, 15)
+
+more blocks.png
+  Seven editorial page section blocks: (1) "Create a hamper that speaks for your brand" dark/light
+  split CTA. (2) "Gifts for every meaningful moment" 4-column dark product cards. (3) Large
+  testimonial quote. (4) "Let's create something meaningful together" contact form section.
+  (5) "Frequently asked questions" accordion. (6) "Gifting with purpose, built on values"
+  stats section (500+, 50K+, 4.9/5). (7) "Ready to create something special?" dark CTA block.
+  STATUS: Converted to HTML (Sections 21-28)
+
+more component.png
+  Extended component library: navigation bar, announcement bar, hero block variants, product
+  cards, form components, stat rows, 404 state, image variants. Similar to component.png with
+  additional detail on announcement bars and card states.
+  STATUS: Individual components converted across all sections
+
+occasions.png
+  Full "Occasions" page: header with description, filter tab pills (All Occasions, Joining, etc.),
+  horizontal scroll of tall vertical occasion cards (Employee Joining, Client Appreciation,
+  Festivals & Celebrations, Leadership Gifts, Milestone Moments), larger feature occasion cards
+  in grid below, occasion tag pills row at bottom.
+  STATUS: Converted to HTML (Section 20 — Occasions Page)
+
+sections.png
+  Six editorial section block templates: (1) "Create a hamper that speaks for your brand" — dark
+  panel + product image. (2) "Gifts for every meaningful moment" — centered heading + 4-column
+  dark cards. (3) "Let us curate the perfect gift for you" — split with feature checklist.
+  (4) "Everything you need to know" — FAQ accordion + product image. (5) "We believe gifts build
+  stronger connections" — stats block. (6) "Ready to create something special?" — dark CTA.
+  STATUS: Converted to HTML (Sections 22-28)
+
+The Biz Gift — UI Kit & Styleguide.html
+  The main HTML file containing the complete UI Kit and Styleguide. Contains all design tokens,
+  primitives (buttons, forms, icons), components (product cards, feature strip, mega menu), and
+  block-level layouts (heroes, process steps, info rows, footer, plus all newly added sections
+  17-29 covering product detail, collections, occasions, testimonials, FAQ, quote form, stats,
+  dark CTA, and error states).
+
+The Biz Gift — UI Kit & Styleguide_files/
+  Supporting assets folder for the HTML file: Google Fonts CSS and Cloudflare beacon script.
