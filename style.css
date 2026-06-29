@@ -385,6 +385,44 @@ img {
   font-weight: 300;
 }
 
+.collection-editorial-card {
+  position: relative;
+}
+
+.collection-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(197, 154, 127, 0.1);
+  color: var(--accent-bronze);
+  margin-bottom: 1.25rem;
+  transition: background 0.3s ease;
+}
+
+.collection-editorial-card:hover .collection-card-icon {
+  background: var(--accent-bronze);
+  color: var(--text-light);
+}
+
+.collection-card-arrow {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  font-size: var(--font-size-subtitle);
+  color: var(--accent-bronze);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.collection-editorial-card:hover .collection-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* --------------------------------------------------------------------------
    2c. CANONICAL FAQ ACCORDION
    -------------------------------------------------------------------------- */
@@ -1171,8 +1209,8 @@ img {
    -------------------------------------------------------------------------- */
 .section-process {
   padding: 6rem var(--space-layout);
-  background-color: var(--bg-charcoal);
-  color: var(--text-light);
+  background-color: var(--bg-ivory);
+  color: var(--text-dark);
 }
 
 .process-grid {
@@ -1189,27 +1227,27 @@ img {
 }
 
 .process-step:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -1.5rem;
-  top: 1.5rem;
-  font-size: var(--font-size-subtitle);
-  color: var(--accent-bronze);
-  opacity: 0.5;
+  content: '';
+  display: none;
 }
 
 .process-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 2px solid var(--accent-bronze);
-  border-radius: 50%;
+  position: relative;
   font-family: var(--font-serif);
-  font-size: var(--font-size-body);
+  font-size: var(--font-size-h3);
+  font-weight: 400;
   color: var(--accent-bronze);
-  margin: 0 auto 1rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.process-number .process-connector {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 2px;
 }
 
 .process-step h4 {
@@ -1217,12 +1255,12 @@ img {
   font-size: var(--font-size-subtitle);
   font-weight: 400;
   margin-bottom: 0.5rem;
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 
 .process-step p {
   font-size: var(--font-size-label);
-  color: var(--text-footer-link);
+  color: var(--text-muted);
   font-weight: 300;
   line-height: 1.5;
 }
@@ -1244,6 +1282,18 @@ img {
   max-width: 1100px;
   margin: 0 auto;
   text-align: center;
+}
+
+.trust-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: rgba(197, 154, 127, 0.1);
+  color: var(--accent-bronze);
 }
 
 .trust-compact-item .trust-value {
@@ -1315,42 +1365,78 @@ img {
    -------------------------------------------------------------------------- */
 .section-planning-guide {
   padding: 6rem var(--space-layout);
-  background-color: var(--text-light);
-  border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-charcoal);
+  color: var(--text-light);
 }
 
-.planning-guide-grid {
+.planning-guide-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1000px;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  max-width: 1100px;
   margin: 0 auto;
+  align-items: start;
 }
 
-.planning-guide-item {
-  padding: 1.5rem;
-  text-align: center;
-  background: var(--bg-ivory);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-light);
+.planning-guide-editorial h2 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h3);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+.planning-guide-editorial > p {
+  font-size: var(--font-size-body);
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+.planning-guide-specs {
+  display: flex;
+  flex-direction: column;
+}
+
+.planning-guide-row {
+  display: grid;
+  grid-template-columns: 36px 120px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: center;
+}
+
+.planning-guide-row:last-child {
+  border-bottom: none;
+}
+
+.planning-guide-row-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-bronze);
+  flex-shrink: 0;
 }
 
 .planning-guide-label {
-  display: block;
   font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--accent-bronze);
-  margin-bottom: 0.3rem;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
 }
 
 .planning-guide-value {
-  display: block;
   font-family: var(--font-serif);
   font-size: var(--font-size-body);
   font-weight: 400;
-  color: var(--text-dark);
+  color: var(--text-light);
 }
 
 /* --------------------------------------------------------------------------
@@ -1689,7 +1775,7 @@ img {
     gap: 1.5rem;
   }
 
-  .process-step:not(:last-child)::after {
+  .process-connector {
     display: none;
   }
 
@@ -1697,8 +1783,9 @@ img {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .planning-guide-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .planning-guide-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
   .mega-menu-container {
@@ -1785,8 +1872,9 @@ img {
     gap: 1.5rem;
   }
 
-  .planning-guide-grid {
-    grid-template-columns: 1fr;
+  .planning-guide-row {
+    grid-template-columns: 36px 100px 1fr;
+    gap: 0.75rem;
   }
 
   .seasonal-banner {

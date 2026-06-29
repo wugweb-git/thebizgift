@@ -14,7 +14,7 @@
                    window.location.protocol === 'file:';
 
   const CONFIG = {
-    USE_MOCK: IS_LOCAL,
+    USE_MOCK: true, // Phase 2: revert to IS_LOCAL when Airtable is configured
     API_ENDPOINT: '/api/get-hamper',
     WHATSAPP_NUMBER: '919999999999',
     SKELETON_DELAY: 400,
@@ -417,49 +417,55 @@
     );
   }
 
-  // --- 03 Product Introduction (Pure Typography) ---
+  // --- 03 Product Introduction (Split layout with image) ---
   function buildIntroduction(p) {
+    var heroImg = (p.images && p.images.length > 1) ? p.images[1].url : CONFIG.FALLBACK_IMAGE;
+    var heroAlt = (p.images && p.images.length > 1) ? p.images[1].alt : p.name;
     return (
       '<section class="hamper-introduction hamper-reveal" aria-label="About this hamper">' +
-        '<div class="container">' +
+        '<div class="hamper-introduction-layout">' +
+          '<div class="hamper-introduction-image">' +
+            '<img src="' + heroImg + '" alt="' + escapeHtml(heroAlt) + '" loading="lazy">' +
+          '</div>' +
           '<div class="hamper-introduction-content">' +
-            '<h2>About This Hamper</h2>' +
+            '<span class="hamper-intro-eyebrow">About This Hamper</span>' +
+            '<h2>' + escapeHtml(p.name) + '</h2>' +
             '<p class="intro-description">' + escapeHtml(p.description) + '</p>' +
             (p.usp ? '<p class="intro-usp">' + escapeHtml(p.usp) + '</p>' : '') +
+            '<a href="#hamper-proposal" class="btn-action btn-primary">Request Proposal →</a>' +
           '</div>' +
         '</div>' +
       '</section>'
     );
   }
 
-  // --- 04 Planning Information (Apple-style spec panel) ---
+  // --- 04 Planning Information (Icon-row spec panel) ---
   function buildPlanning(p) {
-    var rows = '';
+    var iconSvgs = {
+      'MOQ': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>',
+      'Lead Time': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+      'Branding': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+      'Packaging': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>',
+      'Delivery': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
+      'Material': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 22l10-10M16 8l-4 4M22 2l-6 6"/><path d="M15 2H22V9"/></svg>',
+      'Response Time': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+    };
+    var defaultIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
 
     var specs = [
       { label: 'MOQ', value: p.moq || 'Contact Us' },
       { label: 'Lead Time', value: p.leadTime || '7–14 Business Days' },
       { label: 'Branding', value: (p.branding && p.branding.length > 0) ? p.branding.map(function (b) { return b.name; }).join(', ') : 'Not Available' },
       { label: 'Packaging', value: p.packaging || 'Premium Rigid Gift Box' },
-      { label: 'Delivery', value: p.delivery || 'Pan India' },
-      { label: 'Category', value: p.category || 'Corporate Gifting' },
-      { label: 'Collection', value: p.collectionTag || 'Curated' }
+      { label: 'Delivery', value: p.delivery || 'Pan India' }
     ];
+    if (p.material) specs.push({ label: 'Material', value: p.material });
+    if (p.responseTime) specs.push({ label: 'Response Time', value: p.responseTime });
 
-    // Add material if available
-    if (p.material) {
-      specs.push({ label: 'Material', value: p.material });
-    }
-
-    // Add response time if available
-    if (p.responseTime) {
-      specs.push({ label: 'Response Time', value: p.responseTime });
-    }
-
-    // Only render lead time row if leadTime exists
-    rows = specs.map(function (spec) {
+    var rows = specs.map(function (spec) {
       return (
         '<div class="hamper-planning-row">' +
+          '<div class="hamper-planning-row-icon">' + (iconSvgs[spec.label] || defaultIcon) + '</div>' +
           '<span class="hamper-planning-row-label">' + escapeHtml(spec.label) + '</span>' +
           '<span class="hamper-planning-row-value">' + escapeHtml(spec.value) + '</span>' +
         '</div>'
@@ -471,8 +477,10 @@
         '<div class="hamper-planning-container">' +
           '<div class="hamper-planning-layout">' +
             '<div class="hamper-planning-editorial">' +
-              '<h2>Planning Information</h2>' +
+              '<span class="hamper-planning-eyebrow">Planning Information</span>' +
+              '<h2>Ready To Order?</h2>' +
               '<p>Everything your procurement and marketing teams need before requesting a proposal.</p>' +
+              (p.productionWorkflow ? '<p class="hamper-planning-workflow">' + escapeHtml(p.productionWorkflow) + '</p>' : '') +
             '</div>' +
             '<div class="hamper-planning-specs">' + rows + '</div>' +
           '</div>' +
@@ -481,34 +489,24 @@
     );
   }
 
-  // --- 05 Perfect For (Icon-based cards) ---
+  // --- 05 Perfect For (SVG icon cards) ---
   function buildPerfectFor(p) {
-    var iconMap = {
-      'employee': '👥',
-      'client': '🤝',
-      'leadership': '🏆',
-      'festive': '🎉',
-      'event': '📅',
-      'onboarding': '🚀',
-      'appreciation': '🌟',
-      'recognition': '🏅',
-      'diwali': '🪔',
-      'christmas': '🎄',
-      'wellness': '🌿',
-      'sustainable': '♻️',
-      'corporate': '🏢',
-      'budget': '💰',
-      'premium': '✨',
-      'default': '🎁'
+    var iconSvgMap = {
+      'employee': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
+      'client': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+      'leadership': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
+      'festive': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      'event': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      'default': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>'
     };
 
     function getIcon(name) {
-      if (!name) return iconMap.default;
+      if (!name) return iconSvgMap.default;
       var lower = name.toLowerCase();
-      for (var key in iconMap) {
-        if (lower.indexOf(key) !== -1) return iconMap[key];
+      for (var key in iconSvgMap) {
+        if (key !== 'default' && lower.indexOf(key) !== -1) return iconSvgMap[key];
       }
-      return iconMap.default;
+      return iconSvgMap.default;
     }
 
     var cards = (p.occasionTags || []).map(function (occ) {
@@ -520,7 +518,7 @@
           '<div class="hamper-perfect-text">' +
             '<h4>' + escapeHtml(occ.name) + '</h4>' +
             (occ.description ? '<p>' + escapeHtml(occ.description) + '</p>' : '') +
-            '<span class="hamper-perfect-link">→ View Collection</span>' +
+            '<span class="hamper-perfect-link">View Collection →</span>' +
           '</div>' +
         '</a>'
       );
@@ -529,9 +527,9 @@
     return (
       '<section class="hamper-perfect hamper-reveal" aria-label="Perfect For">' +
         '<div class="container">' +
-          '<div class="section-header">' +
+          '<div class="section-header section-header--center">' +
             '<h2>Perfect For</h2>' +
-            '<p class="section-intro">Helping buyers identify the right gifting scenario.</p>' +
+            '<p class="section-intro">This hamper is designed for the following gifting scenarios.</p>' +
           '</div>' +
           '<div class="hamper-perfect-grid">' + cards + '</div>' +
         '</div>' +
