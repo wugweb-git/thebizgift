@@ -1,8 +1,10 @@
 # Site is served from the repo root — no Vercel Root Directory setting needed.
 # This makes the project transferable: any Vercel account deploys it with defaults.
-# Exclude documentation and dev files from the deployment bundle.
+# Exclude documentation files from the deployment bundle,
+# but keep the reference styleguide HTML and assets accessible.
 
-docs/
+docs/*.md
+docs/*.txt
 CLAUDE.md
 CLAUDE.local.md
 node_modules/
