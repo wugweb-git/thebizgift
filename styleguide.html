@@ -1,1666 +1,1034 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Biz Gift — Style Guide & Design System</title>
-<link rel="icon" type="image/png" href="/image/TBG Logo New.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
-<link rel="stylesheet" href="/styleguide.css">
-<style>
-/* ============================================================
-   THE BIZ GIFT — STYLE GUIDE
-   Editorial design system: tokens → primitives → components → blocks
-   Enhanced with scroll-reveal animations, correct brand logo,
-   no all-caps titles, and dark-background readability.
-   ============================================================ */
-
-/* ---------- TOKENS ---------- */
-:root{
-  /* Color */
-  --bronze:#C59A7F;
-  --bronze-deep:#A87657;
-  --warm-beige:#E7DED3;
-  --ivory:#FAF7F2;
-  --ivory-soft:#F3EDE4;
-  --taupe:#A89E94;
-  --charcoal:#1E1E1E;
-  --charcoal-soft:#2A2522;
-  --line:rgba(30,30,30,.08);
-  --line-strong:rgba(30,30,30,.14);
-  --muted:#6B6258;
-
-  /* Typography */
-  --font-display:'Cormorant Garamond', 'Times New Roman', serif;
-  --font-body:'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-script:'Dancing Script', cursive;
-
-  /* Spacing scale */
-  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:48px;
-  --s-5:64px; --s-6:80px; --s-7:96px; --s-8:128px;
-
-  /* Radius */
-  --r-1:8px; --r-2:12px; --r-3:16px; --r-4:24px; --r-5:32px; --r-pill:999px;
-
-  /* Shadow */
-  --shadow-card: 0 1px 2px rgba(30,30,30,.04), 0 12px 32px -12px rgba(30,30,30,.12);
-  --shadow-soft: 0 30px 60px -30px rgba(30,30,30,.18);
-}
-
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--ivory);
-  color:var(--charcoal);
-  font-family:var(--font-body);
-  font-size:15px;
-  line-height:1.6;
-  font-feature-settings:"ss01","ss02";
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-
-/* ---------- TYPOGRAPHY PRIMITIVES ---------- */
-.display{font-family:var(--font-display);font-weight:500;letter-spacing:-0.01em;line-height:1.05}
-.h1{font-family:var(--font-display);font-weight:500;font-size:clamp(48px,6vw,84px);line-height:1;letter-spacing:-0.015em;margin:0}
-.h2{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.2vw,56px);line-height:1.08;letter-spacing:-0.01em;margin:0}
-.h3{font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,34px);line-height:1.15;margin:0}
-.h4{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.25;margin:0}
-.eyebrow{font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--muted)}
-.lede{font-size:18px;line-height:1.55;color:#3a3530;max-width:54ch}
-.body{font-size:15px;line-height:1.65;color:#3a3530}
-.small{font-size:13px;color:var(--muted)}
-.italic-serif{font-family:var(--font-display);font-style:italic;font-weight:400}
-
-/* ---------- LAYOUT ---------- */
-.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
-.section{padding:var(--s-7) 0;border-top:1px solid var(--line)}
-.section:first-of-type{border-top:0}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:48px;flex-wrap:wrap}
-.section-head .eyebrow{display:block;margin-bottom:12px}
-.grid{display:grid;gap:24px}
-.g-2{grid-template-columns:repeat(2,1fr)}
-.g-3{grid-template-columns:repeat(3,1fr)}
-.g-4{grid-template-columns:repeat(4,1fr)}
-.g-5{grid-template-columns:repeat(5,1fr)}
-.g-6{grid-template-columns:repeat(6,1fr)}
-@media(max-width:900px){
-  .g-2,.g-3,.g-4,.g-5,.g-6{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:520px){
-  .g-2,.g-3,.g-4,.g-5,.g-6{grid-template-columns:1fr}
-}
-
-/* ---------- COVER / NAV ---------- */
-.kit-nav{
-  position:sticky;top:0;z-index:50;
-  background:rgba(250,247,242,.85);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-.kit-nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1280px;margin:0 auto}
-.kit-nav-brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:20px;letter-spacing:.04em}
-.kit-nav-brand .mark{height:32px;width:auto}
-.kit-nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:13px;letter-spacing:.04em}
-.kit-nav ul a{color:var(--muted);transition:color .2s ease}
-.kit-nav ul a:hover{color:var(--charcoal)}
-@media(max-width:780px){.kit-nav ul{display:none}}
-
-.cover{
-  padding:120px 0 96px;
-  background:
-    radial-gradient(1000px 480px at 85% -10%, rgba(197,154,127,.18), transparent 60%),
-    linear-gradient(180deg,#F6EFE6 0%, var(--ivory) 80%);
-}
-.cover .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:end}
-@media(max-width:980px){.cover .wrap{grid-template-columns:1fr;gap:48px}}
-.cover .meta{display:flex;gap:32px;margin-top:40px;font-size:13px;color:var(--muted);letter-spacing:.04em}
-.cover .meta span b{display:block;color:var(--charcoal);font-weight:500;margin-top:4px;letter-spacing:.06em}
-.cover .signature{font-family:var(--font-script);font-size:42px;color:var(--bronze-deep);line-height:1}
-
-/* ---------- LOGO BLOCK ---------- */
-.logo-card{
-  background:var(--charcoal);
-  border-radius:var(--r-4);
-  aspect-ratio: 1/1;
-  display:grid;place-items:center;
-  position:relative;
-  overflow:hidden;
-}
-.logo-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%, rgba(197,154,127,.18), transparent 55%);pointer-events:none}
-.logo-monogram{position:relative;text-align:center;color:var(--bronze)}
-.logo-monogram .bg{font-family:var(--font-display);font-weight:600;font-size:160px;line-height:.9;letter-spacing:-.02em}
-.logo-monogram .script{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-3deg);font-family:var(--font-script);font-size:38px;color:#fff;white-space:nowrap}
-.logo-monogram .sub{display:block;font-family:var(--font-body);font-weight:500;letter-spacing:.42em;font-size:14px;margin-top:18px;color:var(--bronze)}
-
-/* ---------- COLOR PALETTE ---------- */
-.swatch{
-  border-radius:var(--r-3);
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:#fff;
-  transition:transform .35s cubic-bezier(0.25,1,0.5,1), box-shadow .35s cubic-bezier(0.25,1,0.5,1);
-}
-.swatch:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
-.swatch .chip{aspect-ratio:5/6}
-.swatch .meta{padding:14px 16px 16px}
-.swatch .name{font-size:11px;letter-spacing:.22em;color:var(--charcoal);font-weight:600}
-.swatch .hex{font-family:var(--font-body);font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:.04em}
-
-/* ---------- TYPOGRAPHY SHOWCASE ---------- */
-.type-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-4);padding:40px}
-.type-card .Aa{font-size:140px;line-height:1;letter-spacing:-.03em;color:var(--charcoal)}
-.type-card .Aa.body{font-family:var(--font-body);font-weight:600}
-.type-card .Aa.display{font-family:var(--font-display);font-weight:500}
-.type-card .label{margin-top:24px;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.type-card .label .name{font-family:var(--font-display);font-size:28px}
-.type-card .label .use{font-size:12px;letter-spacing:.18em;color:var(--muted)}
-.type-card .specimen{margin-top:20px;font-size:14px;color:var(--muted);line-height:1.7}
-.type-scale .row{display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:baseline;border-top:1px solid var(--line);padding:22px 0}
-.type-scale .row:first-child{border-top:0}
-.type-scale .tag{font-size:11px;letter-spacing:.2em;color:var(--muted)}
-
-/* ---------- ICONS ---------- */
-.icon-set{display:flex;gap:36px;flex-wrap:wrap;align-items:center}
-.icon-tile{
-  width:72px;height:72px;border-radius:var(--r-3);
-  background:#fff;border:1px solid var(--line);
-  display:grid;place-items:center;color:var(--bronze-deep);
-  transition:all .25s cubic-bezier(0.25,1,0.5,1);
-}
-.icon-tile:hover{border-color:var(--bronze);transform:translateY(-2px);box-shadow:var(--shadow-card)}
-.icon-tile svg{width:30px;height:30px;stroke-width:1.4}
-
-/* ---------- BUTTONS ---------- */
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--font-body);font-weight:600;
-  font-size:12px;letter-spacing:.18em;
-  padding:18px 28px;border-radius:var(--r-pill);
-  border:1px solid transparent;cursor:pointer;
-  transition:all .3s cubic-bezier(.2,.7,.2,1);
-}
-.btn .arrow{transition:transform .3s ease}
-.btn:hover .arrow{transform:translateX(4px)}
-.btn-primary{background:var(--bronze);color:#fff}
-.btn-primary:hover{background:var(--bronze-deep)}
-.btn-secondary{background:transparent;color:var(--bronze-deep);border-color:var(--bronze)}
-.btn-secondary:hover{background:var(--bronze);color:#fff}
-.btn-dark{background:var(--charcoal);color:var(--ivory)}
-.btn-dark:hover{background:#000}
-.btn-ghost{background:transparent;color:var(--charcoal);padding-left:0;padding-right:0;letter-spacing:.14em}
-.btn-ghost:hover{color:var(--bronze-deep)}
-.btn-square{border-radius:8px}
-.btn-lg{padding:22px 32px;font-size:13px}
-.btn-sm{padding:12px 18px;font-size:11px}
-
-/* ---------- FORM ---------- */
-.field{display:flex;flex-direction:column;gap:8px}
-.field label{font-size:11px;letter-spacing:.2em;color:var(--muted)}
-.input,.select,.textarea{
-  font-family:var(--font-body);font-size:14px;color:var(--charcoal);
-  background:#fff;border:1px solid var(--line-strong);
-  border-radius:var(--r-pill);padding:16px 22px;outline:none;
-  transition:border-color .2s ease, box-shadow .2s ease;
-}
-.input:focus,.select:focus,.textarea:focus{border-color:var(--bronze);box-shadow:0 0 0 4px rgba(197,154,127,.15)}
-.textarea{border-radius:var(--r-3);min-height:120px;resize:vertical}
-.select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23A89E94' fill='none' stroke-width='1.6'/></svg>");background-repeat:no-repeat;background-position:right 22px center;padding-right:48px}
-.check{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:#3a3530;cursor:pointer}
-.check input{appearance:none;width:18px;height:18px;border:1.5px solid var(--line-strong);border-radius:5px;display:grid;place-items:center;transition:all .15s ease}
-.check input:checked{background:var(--bronze);border-color:var(--bronze)}
-.check input:checked::after{content:"";width:9px;height:9px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M1 5l3 3 5-7' stroke='white' fill='none' stroke-width='2'/></svg>") center/contain no-repeat}
-
-/* ---------- SPACING / RADIUS ---------- */
-.scale-bars{display:flex;align-items:flex-end;gap:18px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:var(--r-3);overflow-x:auto}
-.scale-bars .bar{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:11px;letter-spacing:.08em}
-.scale-bars .bar i{display:block;background:var(--bronze);border-radius:6px;width:22px}
-.radii{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:24px;background:#fff;border:1px solid var(--line);border-radius:var(--r-3)}
-.radii .box{width:72px;height:72px;background:var(--warm-beige);display:grid;place-items:end center;padding-bottom:8px;font-size:11px;color:var(--muted)}
-
-/* ---------- PRODUCT CARD ---------- */
-.product{
-  background:#fff;border-radius:var(--r-3);overflow:hidden;
-  border:1px solid var(--line);transition:all .35s cubic-bezier(0.25,1,0.5,1);position:relative;
-}
-.product:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft);border-color:transparent}
-.product .img{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative}
-.product .fav{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);display:grid;place-items:center;color:var(--charcoal);transition:all .2s ease}
-.product .fav:hover{background:#fff;color:var(--bronze-deep)}
-.product .body{padding:22px 22px 24px}
-.product .name{font-family:var(--font-display);font-size:22px;line-height:1.1}
-.product .sub{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.02em}
-.product .row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
-.product .moq{font-size:11px;letter-spacing:.16em;color:var(--charcoal);background:var(--ivory-soft);padding:8px 14px;border-radius:var(--r-pill)}
-.product .go{width:36px;height:36px;border-radius:50%;background:var(--ivory-soft);display:grid;place-items:center;color:var(--bronze-deep);transition:all .25s ease}
-.product:hover .go{background:var(--bronze);color:#fff;transform:translateX(2px)}
-
-/* ---------- FEATURE STRIP ---------- */
-.features{
-  background:#fff;border-radius:var(--r-3);border:1px solid var(--line);
-  padding:36px;display:grid;grid-template-columns:repeat(6,1fr);gap:24px;
-}
-@media(max-width:900px){.features{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:520px){.features{grid-template-columns:repeat(2,1fr)}}
-.feature{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-.feature .ic{width:48px;height:48px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--bronze-deep)}
-.feature .ic svg{width:22px;height:22px;stroke-width:1.4}
-.feature p{margin:0;font-size:11px;letter-spacing:.18em;color:var(--charcoal);font-weight:600;line-height:1.5}
-
-/* ---------- HERO BLOCKS ---------- */
-.hero-split{
-  border-radius:var(--r-4);overflow:hidden;
-  display:grid;grid-template-columns:1.05fr .95fr;min-height:560px;
-  background:var(--charcoal);color:#fff;
-}
-@media(max-width:880px){.hero-split{grid-template-columns:1fr}}
-.hero-split .visual{
-  background-image:url('/image/From%20Brief%20to%20Box/Client%20Appreciation%20Hamper.jpeg');
-  background-size:cover;background-position:center;min-height:380px;position:relative;
-}
-.hero-split .visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%, rgba(0,0,0,.45))}
-.hero-split .content{padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;background:linear-gradient(180deg, #1E1A17 0%, #14110F 100%)}
-.hero-split .content h2{font-family:var(--font-display);font-size:48px;line-height:1.05;letter-spacing:-.01em;margin:0;font-weight:500}
-.hero-split .content p{color:rgba(255,255,255,.72);font-size:15px;line-height:1.7;max-width:42ch;margin:16px 0 0}
-.hero-split .featured{margin-top:auto}
-.hero-split .featured .label{font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.55);margin-bottom:14px}
-.hero-split .featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.hero-split .feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-3);padding:14px;display:flex;gap:14px;align-items:center}
-.hero-split .feat-card .thumb{width:64px;height:64px;border-radius:var(--r-2);background-size:cover;background-position:center;flex-shrink:0}
-.hero-split .feat-card .info{font-size:13px}
-.hero-split .feat-card .info b{display:block;font-family:var(--font-display);font-size:17px;font-weight:500;margin-bottom:2px}
-.hero-split .feat-card .info span{color:rgba(255,255,255,.55);font-size:12px}
-
-/* Hero editorial (dark, large) */
-.hero-editorial{
-  border-radius:var(--r-4);overflow:hidden;color:#fff;
-  background:linear-gradient(180deg,#1A1613 0%, #0F0D0B 100%);
-  display:grid;grid-template-columns:1.15fr .85fr;gap:0;min-height:560px;
-}
-@media(max-width:980px){.hero-editorial{grid-template-columns:1fr}}
-.hero-editorial .left{padding:64px;display:flex;flex-direction:column;justify-content:space-between;gap:48px;position:relative;background-image:url('/image/From%20Brief%20to%20Box/Team%20Appreciation%20Hamper.jpeg');background-size:cover;background-position:center;background-blend-mode:multiply;background-color:rgba(20,15,12,.55)}
-.hero-editorial .left::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,13,11,.5), rgba(15,13,11,.85));pointer-events:none}
-.hero-editorial .left>*{position:relative;z-index:1}
-.hero-editorial .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:var(--r-pill);font-size:10px;letter-spacing:.22em;width:fit-content}
-.hero-editorial h1{font-family:var(--font-display);font-size:64px;line-height:1;letter-spacing:-.015em;font-weight:500;margin:0}
-.hero-editorial h1 em{font-style:italic;color:var(--bronze);font-weight:400}
-.hero-editorial .lede{color:rgba(255,255,255,.72);max-width:42ch;margin-top:20px}
-.hero-editorial .right{padding:64px 48px;display:flex;flex-direction:column;gap:28px;border-left:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,#1A1613,#14110F)}
-.stat-row{display:flex;gap:18px;align-items:center}
-.stat-row .ic{width:36px;height:36px;border-radius:50%;background:rgba(197,154,127,.15);color:var(--bronze);display:grid;place-items:center}
-.stat-row .num{font-family:var(--font-display);font-size:34px;line-height:1;color:#fff}
-.stat-row .lbl{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.12em;margin-top:4px}
-.hero-editorial hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:8px 0}
-.avatars{display:flex}
-.avatars span{width:32px;height:32px;border-radius:50%;border:2px solid #1A1613;background:var(--bronze);margin-left:-8px;background-size:cover;background-position:center}
-.avatars span:first-child{margin-left:0}
-
-/* Hero bold */
-.hero-bold{
-  border-radius:var(--r-4);overflow:hidden;color:#fff;
-  position:relative;min-height:640px;
-  background-image:url('/image/PFA-Premium-Festive-Assortment.png');
-  background-size:cover;background-position:center;
-  display:flex;align-items:flex-end;
-}
-.hero-bold::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%, rgba(15,12,9,.85))}
-.hero-bold .inner{position:relative;padding:64px;max-width:880px}
-.hero-bold .small-line{font-family:var(--font-display);font-style:italic;font-size:22px;margin-bottom:18px;color:#fff}
-.hero-bold .title{font-family:var(--font-display);font-weight:600;font-size:clamp(56px,7vw,108px);line-height:.95;letter-spacing:-.01em;margin:0}
-
-/* ---------- MEGA MENU ---------- */
-.megamenu{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-3);overflow:hidden;
-  box-shadow:var(--shadow-soft);
-}
-.megamenu .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;border-bottom:1px solid var(--line)}
-.megamenu .topbar .nav{display:flex;gap:36px;font-size:13px;color:#3a3530;letter-spacing:.04em}
-.megamenu .topbar .nav a.active{color:var(--bronze-deep);font-weight:600;position:relative;display:inline-flex;align-items:center;gap:6px}
-.megamenu .topbar .nav a.active::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:4px}
-.megamenu .brand{font-family:var(--font-display);font-size:22px;letter-spacing:.05em}
-.megamenu .body{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.05fr;gap:32px;padding:32px}
-@media(max-width:980px){.megamenu .body{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.megamenu .body{grid-template-columns:1fr}}
-.megamenu .featured-img{
-  border-radius:var(--r-3);overflow:hidden;position:relative;min-height:340px;
-  background-image:url('/image/Premium%20Joining%20Kit.png');
-  background-size:cover;background-position:center;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
-}
-.megamenu .featured-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%, rgba(0,0,0,.7));z-index:0}
-.megamenu .featured-img>*{position:relative;z-index:1}
-.megamenu .featured-img .tag{font-size:10px;letter-spacing:.22em;color:rgba(255,255,255,.7)}
-.megamenu .featured-img h4{font-family:var(--font-display);font-size:28px;font-weight:500;margin:6px 0 8px;line-height:1.1}
-.megamenu .featured-img p{font-size:13px;color:rgba(255,255,255,.78);margin:0 0 16px;line-height:1.5}
-.megamenu .link-col h5{font-size:11px;letter-spacing:.22em;color:var(--muted);font-weight:600;margin:0 0 18px}
-.megamenu .link-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.megamenu .link-col a{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--charcoal);transition:color .2s}
-.megamenu .link-col a:hover{color:var(--bronze-deep)}
-.megamenu .link-col .view-all{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:12px;letter-spacing:.16em;color:var(--bronze-deep);margin-top:22px;font-weight:600}
-.megamenu .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:22px 32px;border-top:1px solid var(--line);background:#FBF8F3}
-@media(max-width:780px){.megamenu .strip{grid-template-columns:repeat(2,1fr)}}
-.megamenu .strip .item{display:flex;gap:12px;align-items:flex-start}
-.megamenu .strip .item .ic{color:var(--bronze-deep);flex-shrink:0;margin-top:2px}
-.megamenu .strip .item b{display:block;font-size:13px;font-weight:600}
-.megamenu .strip .item span{font-size:12px;color:var(--muted)}
-
-/* ---------- PROCESS / STEPS ---------- */
-.process{
-  background:var(--warm-beige);border-radius:var(--r-4);padding:64px;
-  display:grid;grid-template-columns:.95fr 2fr .8fr;gap:48px;align-items:center;
-}
-@media(max-width:980px){.process{grid-template-columns:1fr;padding:40px}}
-.process .intro h2{font-family:var(--font-display);font-size:48px;line-height:1;font-weight:500;margin:0}
-.process .intro .line{width:48px;height:1px;background:var(--charcoal);margin:24px 0 0}
-.process .play{margin-top:32px;display:inline-flex;align-items:center;gap:14px;background:#fff;padding:8px 22px 8px 8px;border-radius:var(--r-pill);font-size:12px;letter-spacing:.18em;font-weight:600;cursor:pointer;box-shadow:var(--shadow-card)}
-.process .play .ply{width:36px;height:36px;border-radius:50%;background:var(--bronze);color:#fff;display:grid;place-items:center}
-.process .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
-@media(max-width:760px){.process .steps{grid-template-columns:repeat(2,1fr)}}
-.process .steps::before{content:"";position:absolute;top:28px;left:8%;right:8%;height:1px;border-top:1px dashed rgba(30,30,30,.25);z-index:0}
-.process .step{text-align:center;position:relative;z-index:1}
-.process .step .ic{width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid rgba(30,30,30,.12);display:grid;place-items:center;margin:0 auto;color:var(--bronze-deep)}
-.process .step .num{font-family:var(--font-display);font-size:22px;color:var(--bronze-deep);margin-top:18px;display:block}
-.process .step h4{font-family:var(--font-display);font-size:22px;font-weight:500;margin:6px 0 8px}
-.process .step p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
-.process .visual{
-  aspect-ratio:1/1;border-radius:var(--r-3);background-size:cover;background-position:center;
-  background-image:url('/image/From%20Brief%20to%20Box/Client%20Appreciation%20Hamper.jpeg');
-}
-
-/* ---------- INFO CARDS ---------- */
-.info-row{display:grid;grid-template-columns:1fr 1.4fr 1.1fr;gap:24px}
-@media(max-width:980px){.info-row{grid-template-columns:1fr}}
-.info-dark{
-  background:var(--charcoal);color:#fff;border-radius:var(--r-3);
-  padding:40px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;
-  background-image:linear-gradient(180deg,rgba(20,17,15,.85),rgba(20,17,15,.85)), url('/image/PFA-Premium-Festive-Assortment.png');
-  background-size:cover;background-position:center;
-}
-.info-dark .mark{width:48px;height:48px;border:1px solid rgba(197,154,127,.4);border-radius:50%;display:grid;place-items:center;color:var(--bronze);font-family:var(--font-script);font-size:22px}
-.info-dark .eyebrow{color:var(--bronze);letter-spacing:.32em;margin-top:18px}
-.info-dark h3{font-family:var(--font-display);font-size:32px;line-height:1.1;font-weight:500;margin:18px 0 0}
-.info-dark p{color:rgba(255,255,255,.7);font-size:14px;margin-top:14px;max-width:34ch}
-.info-light{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:40px;min-height:340px;
-  display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;
-}
-.info-light h3{font-family:var(--font-display);font-size:30px;font-weight:500;line-height:1.15;margin:0}
-.info-light ul{list-style:none;margin:18px 0 28px;padding:0;display:flex;flex-direction:column;gap:10px}
-.info-light ul li{font-size:14px;display:flex;gap:10px;align-items:center}
-.info-light ul li::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--ivory-soft);display:grid;place-items:center;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M1 5l3 3 5-7' stroke='%23A87657' fill='none' stroke-width='1.6'/></svg>");background-position:center;background-repeat:no-repeat}
-.info-light .visual{aspect-ratio:4/5;border-radius:var(--r-3);background-size:cover;background-position:center;background-image:url('/image/Premium%20Joining%20Kit.png')}
-
-/* ---------- FOOTER BLOCK ---------- */
-.footer{
-  background:var(--charcoal);color:rgba(255,255,255,.7);border-radius:var(--r-4);padding:64px;
-}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
-.footer h6{font-size:11px;letter-spacing:.22em;color:rgba(255,255,255,.5);margin:0 0 20px;font-weight:600}
-.footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14px}
-.footer ul a{color:rgba(255,255,255,.85)}
-.footer ul a:hover{color:var(--bronze)}
-.footer .brand-blk h3{font-family:var(--font-display);font-size:30px;color:#fff;margin:0 0 12px;font-weight:500}
-.footer .brand-blk p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.65);max-width:36ch;margin:0 0 24px}
-.footer .sub{display:flex;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-pill);padding:6px}
-.footer .sub input{background:transparent;border:0;outline:none;color:#fff;padding:10px 16px;flex:1;font-size:13px}
-.footer .sub button{background:var(--bronze);color:#fff;border:0;padding:12px 22px;border-radius:var(--r-pill);font-size:11px;letter-spacing:.16em;cursor:pointer;font-weight:600}
-.footer .bottom{display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.08);margin-top:48px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.45);flex-wrap:wrap;gap:12px}
-
-/* ---------- TEXTURES ---------- */
-.textures{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:780px){.textures{grid-template-columns:repeat(2,1fr)}}
-.tx{aspect-ratio:1/1;border-radius:var(--r-3);background-size:cover;background-position:center;border:1px solid var(--line)}
-.tx-1{background-image:url('/image/Relax-and-Rejuvenate-Hamper.png')}
-.tx-2{background-image:url('/image/Professional%20Joining%20Kit.png')}
-.tx-3{background-image:url('/image/OOO%20Hamper.png')}
-.tx-4{background-image:url('/image/BCC%20Hamper.png')}
-
-/* ---------- TONE OF VOICE / VALUES ---------- */
-.values{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-@media(max-width:900px){.values{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.values{grid-template-columns:1fr}}
-.value-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:28px}
-.value-card .ic{width:42px;height:42px;border-radius:50%;background:var(--ivory-soft);display:grid;place-items:center;color:var(--bronze-deep);margin-bottom:18px}
-.value-card .ic svg{width:20px;height:20px;stroke-width:1.5}
-.value-card h6{font-size:11px;letter-spacing:.2em;color:var(--charcoal);margin:0 0 8px;font-weight:600}
-.value-card p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0}
-
-/* ---------- HELPERS ---------- */
-.flex{display:flex}
-.gap-12{gap:12px}
-.gap-16{gap:16px}
-.gap-24{gap:24px}
-.wrap-flex{flex-wrap:wrap}
-.center{text-align:center}
-.mt-8{margin-top:8px} .mt-16{margin-top:16px} .mt-24{margin-top:24px} .mt-32{margin-top:32px} .mt-48{margin-top:48px}
-.pad-24{padding:24px}
-.tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.22em;color:var(--bronze-deep);background:rgba(197,154,127,.12);padding:8px 14px;border-radius:var(--r-pill);font-weight:600}
-
-/* ---------- DECORATIVE INDEX ---------- */
-.contents{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:32px;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:14px 36px;
-}
-@media(max-width:780px){.contents{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.contents{grid-template-columns:1fr}}
-.contents a{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:10px 0;font-size:13px;color:#3a3530;transition:color .2s}
-.contents a:hover{color:var(--bronze-deep)}
-.contents a span{color:var(--muted);font-size:11px;letter-spacing:.16em}
-
-/* ---------- TRUST LOGOS ---------- */
-.trust-logos{display:flex;align-items:center;gap:24px;margin-top:24px;flex-wrap:wrap}
-.trust-logos .trust-label{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.08em}
-.trust-logos .logo-text{font-family:var(--font-body);font-weight:700;font-size:14px;color:rgba(255,255,255,.7);letter-spacing:.04em;opacity:.7}
-
-/* ---------- PDP GALLERY ---------- */
-.pdp-gallery{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:#fff;border:1px solid var(--line);border-radius:var(--r-4);padding:24px}
-@media(max-width:780px){.pdp-gallery{grid-template-columns:1fr}}
-.pdp-thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.pdp-thumbs img{aspect-ratio:1/1;border-radius:var(--r-2);object-fit:cover;border:1px solid var(--line);cursor:pointer;transition:all .2s}
-.pdp-thumbs img:hover,.pdp-thumbs img.active{border-color:var(--bronze);opacity:1}
-.pdp-main-img img{aspect-ratio:1/1;border-radius:var(--r-3);object-fit:cover;width:100%}
-
-/* ---------- OCCASION FILTERS ---------- */
-.occasion-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-.occasion-filters .pill{padding:10px 20px;border:1px solid var(--line-strong);border-radius:var(--r-pill);font-size:12px;letter-spacing:.08em;color:var(--muted);cursor:pointer;transition:all .2s;background:transparent}
-.occasion-filters .pill:hover{border-color:var(--bronze);color:var(--charcoal)}
-.occasion-filters .pill.active{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
-
-/* ---------- OCCASION CARDS ---------- */
-.occasion-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media(max-width:900px){.occasion-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.occasion-grid{grid-template-columns:1fr}}
-.occasion-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);overflow:hidden;transition:all .3s cubic-bezier(0.25,1,0.5,1)}
-.occasion-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
-.occasion-card .img{aspect-ratio:4/3;background-size:cover;background-position:center}
-.occasion-card .body{padding:20px}
-.occasion-card .body .ic{width:36px;height:36px;border-radius:50%;background:var(--ivory-soft);color:var(--bronze-deep);display:grid;place-items:center;margin-bottom:12px}
-.occasion-card .body h4{font-family:var(--font-display);font-size:20px;font-weight:500;margin:0 0 6px;line-height:1.15}
-.occasion-card .body p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
-
-/* ---------- MOMENTS ---------- */
-.moments-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media(max-width:900px){.moments-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.moments-grid{grid-template-columns:1fr}}
-.moment-card{background:var(--charcoal);border-radius:var(--r-3);overflow:hidden;position:relative;transition:transform .3s cubic-bezier(0.25,1,0.5,1)}
-.moment-card:hover{transform:translateY(-4px)}
-.moment-card .img{aspect-ratio:4/3;background-size:cover;background-position:center}
-.moment-card .body{padding:20px;color:#fff}
-.moment-card .body .ic{width:36px;height:36px;border-radius:50%;background:rgba(197,154,127,.15);color:var(--bronze);display:grid;place-items:center;margin-bottom:12px}
-.moment-card .body h4{font-family:var(--font-display);font-size:20px;font-weight:500;margin:0 0 6px;line-height:1.15}
-.moment-card .body p{font-size:13px;color:rgba(255,255,255,.6);margin:0;line-height:1.5}
-
-/* ---------- CURATE CTA ---------- */
-.block-curate{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-4);padding:48px;overflow:hidden}
-@media(max-width:900px){.block-curate{grid-template-columns:1fr;padding:32px}}
-.block-curate .visual{aspect-ratio:4/5;border-radius:var(--r-3);background-size:cover;background-position:center}
-.block-curate h3{font-family:var(--font-display);font-size:clamp(28px,3vw,38px);font-weight:500;line-height:1.1;margin:0}
-
-/* ---------- FAQ ACCORDION ---------- */
-.sg-faq-layout{display:grid;grid-template-columns:1.4fr .6fr;gap:48px;align-items:start}
-@media(max-width:900px){.sg-faq-layout{grid-template-columns:1fr}}
-.sg-faq-item{border-bottom:1px solid var(--line)}
-.sg-faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 0;background:transparent;border:none;cursor:pointer;font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--charcoal);text-align:left;gap:16px;line-height:1.3}
-.sg-faq-question .chevron{width:20px;height:20px;flex-shrink:0;transition:transform .3s ease;color:var(--muted)}
-.sg-faq-question[aria-expanded="true"] .chevron{transform:rotate(180deg)}
-.sg-faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.sg-faq-answer.open{max-height:300px}
-.sg-faq-answer .inner{padding:0 0 22px;font-size:14px;color:var(--muted);line-height:1.7;max-width:56ch}
-.sg-faq-sidebar{background:var(--warm-beige);border-radius:var(--r-3);padding:32px;position:sticky;top:100px}
-.sg-faq-sidebar h4{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0 0 12px}
-.sg-faq-sidebar p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 18px}
-
-/* ---------- QUOTE FORM ---------- */
-.quote-form{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;background:var(--warm-beige);border-radius:var(--r-4);padding:64px;overflow:hidden}
-@media(max-width:900px){.quote-form{grid-template-columns:1fr;padding:40px}}
-.quote-form h2{font-family:var(--font-display);font-size:clamp(32px,3.5vw,48px);font-weight:500;line-height:1.08;margin:0 0 12px}
-.quote-form>p{font-size:15px;color:var(--muted);line-height:1.6;margin:0 0 32px;max-width:42ch}
-.quote-form .visual{aspect-ratio:4/5;border-radius:var(--r-3);background-size:cover;background-position:center}
-
-/* ---------- STATS VALUES ---------- */
-.block-stats{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-4);padding:48px;overflow:hidden}
-@media(max-width:900px){.block-stats{grid-template-columns:1fr;padding:32px}}
-.block-stats .visual{aspect-ratio:1/1;border-radius:var(--r-3);background-size:cover;background-position:center}
-.stats-row{display:flex;gap:48px;margin-top:32px;flex-wrap:wrap}
-.stat-item{text-align:center}
-.stat-item .num{font-family:var(--font-display);font-size:42px;font-weight:500;line-height:1;color:var(--charcoal)}
-.stat-item .lbl{font-size:11px;letter-spacing:.18em;color:var(--muted);margin-top:6px}
-
-/* ---------- DARK CTA ---------- */
-.block-cta-dark{background:linear-gradient(180deg,#1A1613,#0F0D0B);color:#fff;border-radius:var(--r-4);padding:80px 64px;text-align:center;position:relative;overflow:hidden}
-.block-cta-dark::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(197,154,127,.1),transparent 60%);pointer-events:none}
-.block-cta-dark .logo-mark{width:64px;height:64px;border-radius:50%;border:1px solid rgba(197,154,127,.3);display:grid;place-items:center;margin:0 auto 28px;color:var(--bronze);font-family:var(--font-script);font-size:28px;position:relative;z-index:1}
-.block-cta-dark h2{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:500;line-height:1.08;margin:0 auto;max-width:600px;position:relative;z-index:1}
-.block-cta-dark p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.6;margin:18px auto 0;max-width:44ch;position:relative;z-index:1}
-.block-cta-dark .btn{position:relative;z-index:1;margin-top:32px}
-
-/* ---------- ERROR STATES ---------- */
-.error-block{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:64px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
-.error-block .code{font-family:var(--font-display);font-size:96px;font-weight:500;line-height:1;color:var(--charcoal);letter-spacing:-.02em}
-.error-block h3{font-family:var(--font-display);font-size:28px;font-weight:500;margin:0}
-.error-block p{font-size:14px;color:var(--muted);max-width:36ch;margin:0;line-height:1.6}
-.empty-state{background:var(--ivory-soft);border:1px dashed var(--line-strong);border-radius:var(--r-3);padding:64px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-.empty-state .ic{width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
-.empty-state h4{font-family:var(--font-display);font-size:24px;font-weight:500;margin:0}
-.empty-state p{font-size:14px;color:var(--muted);max-width:32ch;margin:0;line-height:1.6}
-
-/* ---------- EXPLORE PAGE ---------- */
-.explore-hero{background:linear-gradient(135deg,#F6EFE6 0%,var(--ivory) 60%);border-radius:var(--r-4);padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:340px;overflow:hidden}
-@media(max-width:900px){.explore-hero{grid-template-columns:1fr;padding:40px}}
-.explore-hero h1{font-family:var(--font-display);font-size:clamp(36px,4.5vw,56px);font-weight:500;line-height:1.05;margin:0}
-.explore-hero p{font-size:16px;color:var(--muted);line-height:1.6;margin:18px 0 0;max-width:42ch}
-.explore-hero .visual{aspect-ratio:4/3;border-radius:var(--r-3);background-size:cover;background-position:center}
-.category-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:0;overflow-x:auto}
-.category-tabs a{padding:14px 20px;font-size:13px;color:var(--muted);letter-spacing:.04em;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
-.category-tabs a:hover{color:var(--charcoal)}
-.category-tabs a.active{color:var(--bronze-deep);border-bottom-color:var(--bronze-deep);font-weight:600}
-.browse-section{margin-top:48px}
-.browse-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.browse-section-head h3{font-family:var(--font-display);font-size:28px;font-weight:500;margin:0}
-.browse-section-head a{font-size:12px;letter-spacing:.16em;color:var(--bronze-deep);font-weight:600;display:inline-flex;align-items:center;gap:6px}
-.browse-scroll{display:flex;gap:20px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}
-.browse-scroll::-webkit-scrollbar{height:3px}
-.browse-scroll::-webkit-scrollbar-thumb{background:var(--bronze);border-radius:3px}
-.browse-scroll-card{flex:0 0 180px;scroll-snap-align:start;text-align:center}
-.browse-scroll-card .img{aspect-ratio:1/1;border-radius:var(--r-3);background-size:cover;background-position:center;border:1px solid var(--line);margin-bottom:10px}
-.browse-scroll-card .name{font-family:var(--font-display);font-size:15px;font-weight:500}
-.browse-scroll-card .sub{font-size:11px;color:var(--muted);margin-top:3px}
-.occasion-icons-row{display:flex;gap:36px;flex-wrap:wrap;justify-content:center}
-.occasion-icon-item{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;width:110px}
-.occasion-icon-item .ic{width:48px;height:48px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--bronze-deep);transition:all .2s}
-.occasion-icon-item .ic:hover{border-color:var(--bronze);background:rgba(197,154,127,.08)}
-.occasion-icon-item .ic svg{width:22px;height:22px;stroke-width:1.4}
-.occasion-icon-item p{font-size:12px;letter-spacing:.08em;color:var(--charcoal);margin:0;font-weight:500}
-
-/* ---------- OCCASION VARIANTS ---------- */
-.occasion-variant-label{font-size:10px;letter-spacing:.22em;color:var(--bronze-deep);font-weight:600;margin-bottom:18px}
-.occasion-minimal{display:flex;gap:16px;flex-wrap:wrap}
-.occasion-minimal-card{width:140px;border:1px solid var(--line);border-radius:var(--r-3);padding:24px 18px;text-align:center;background:#fff;transition:all .25s;cursor:pointer}
-.occasion-minimal-card:hover{border-color:var(--bronze);transform:translateY(-2px);box-shadow:var(--shadow-card)}
-.occasion-minimal-card .ic{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--bronze-deep);margin:0 auto 14px}
-.occasion-minimal-card .ic svg{width:20px;height:20px;stroke-width:1.4}
-.occasion-minimal-card .name{font-family:var(--font-display);font-size:15px;font-weight:500;margin-top:8px}
-.occasion-minimal-card .sub{font-size:11px;color:var(--muted);margin-top:4px}
-
-/* ---------- MERGE FRAME ---------- */
-.merge-frame-shell{border:1px solid var(--line);border-radius:var(--r-3);overflow:hidden;background:#fff}
-.merge-frame-toolbar{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--ivory-soft)}
-.merge-frame-toolbar .dots{display:flex;gap:6px}
-.merge-frame-toolbar .dots span{width:10px;height:10px;border-radius:50%;background:var(--line-strong)}
-.merge-frame-toolbar p{font-size:12px;color:var(--muted);margin:0}
-.merge-frame{width:100%;height:600px;border:0}
-.merge-note-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
-@media(max-width:780px){.merge-note-grid{grid-template-columns:1fr}}
-.merge-note-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:28px}
-.merge-note-card .num{font-family:var(--font-display);font-size:36px;font-weight:500;color:var(--bronze);line-height:1;margin-bottom:12px}
-.merge-note-card h4{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0 0 8px}
-.merge-note-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
-
-/* ---------- DARK BACKGROUND READABILITY FIXES ---------- */
-.hero-split .content p,
-.hero-editorial .lede,
-.hero-editorial .right p,
-.info-dark p,
-.moment-card .body p,
-.block-cta-dark p,
-.footer p,
-.footer ul a {
-  color: rgba(255,255,255,.72);
-  text-shadow: 0 1px 2px rgba(0,0,0,.15);
-}
-.hero-split .content h2,
-.hero-editorial h1,
-.hero-bold .title,
-.info-dark h3,
-.moment-card .body h4,
-.block-cta-dark h2,
-.footer .brand-blk h3 {
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,.2);
-}
-.hero-editorial .badge {
-  color: rgba(255,255,255,.8);
-}
-.hero-split .featured .label,
-.hero-editorial .right .stat-row .lbl {
-  color: rgba(255,255,255,.6);
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Inventory — The Biz Gift Design System</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/image/TBG Logo New.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/pages.css">
+  <link rel="stylesheet" href="/hamper/hamper.css">
+  <link rel="stylesheet" href="/styleguide.css">
 </head>
-<body>
+<body class="sg-body">
 
-<!-- ====== STICKY NAV ====== -->
-<nav class="kit-nav" aria-label="Style guide navigation">
-  <div class="kit-nav-inner">
-    <div class="kit-nav-brand">
-      <img class="mark" src="/image/The Biz Gift (Logo).svg" alt="The Biz Gift" onerror="this.onerror=null;this.src='/image/The%20Biz%20Gift%20(Logo).png'">
-      <span>The Biz Gift <span style="color:var(--muted);font-family:var(--font-body);font-size:12px;letter-spacing:.18em">Style Guide</span></span>
-    </div>
-    <ul>
-      <li><a href="#brand">Brand</a></li>
-      <li><a href="#colors">Colors</a></li>
-      <li><a href="#typography">Typography</a></li>
-      <li><a href="#components">Components</a></li>
-      <li><a href="#blocks">Blocks</a></li>
-      <li><a href="#inventory">Inventory</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ====== COVER ====== -->
-<header class="cover reveal-initial" id="top">
-  <div class="wrap">
+  <!-- ===== TOP BAR ===== -->
+  <header class="sg-topbar">
     <div>
-      <span class="eyebrow">The Biz Gift</span>
-      <h1 class="h1" style="margin-top:16px">Style Guide<br>& Design System</h1>
-      <p class="lede" style="margin-top:24px">A comprehensive reference for the editorial design system — tokens, components, blocks, and production patterns that define The Biz Gift experience.</p>
-      <div class="meta">
-        <span>Version <b>2.0</b></span>
-        <span>Last updated <b>July 2026</b></span>
-        <span>Status <b style="color:var(--bronze-deep)">Live</b></span>
-      </div>
+      <h1>The Biz Gift — Design System</h1>
+      <div class="sg-meta">Living mirror of design.md v1.2 + docs/tokens/*.json</div>
     </div>
-    <div class="logo-card reveal-scale" data-testid="logo-card">
-      <div class="logo-monogram">
-        <div class="bg">BG</div>
-        <div class="script">The Biz Gift</div>
-        <span class="sub">Thoughtful Corporate Gifting</span>
-      </div>
-    </div>
-  </div>
-</header>
+    <nav class="sg-nav">
+      <a href="#brand">Brand</a>
+      <a href="#foundations">Foundations</a>
+      <a href="#components">Components</a>
+      <a href="#blocks">Blocks</a>
+      <a href="#sitemap">Site Map</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
 
-<!-- ====== TABLE OF CONTENTS ====== -->
-<section class="section reveal" id="toc">
-  <div class="wrap">
-    <div class="section-head">
+  <!-- ============================================================= -->
+  <!-- BRAND                                                         -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="brand">
+    <h2>Brand Identity</h2>
+    <p class="sg-section-sub">Core brand identity from <code>docs/master-brand-document.md</code>. The visual and verbal foundation everything is built on.</p>
+
+    <!-- Logo -->
+    <div class="sg-group">
+      <h3>Logo</h3>
+      <div class="sg-demo" style="gap:3rem;flex-wrap:wrap">
+        <div style="background:var(--bg-ivory);padding:2.5rem;border-radius:var(--radius-lg);border:1px solid var(--border-light)">
+          <img src="/image/TBG Logo New.png" alt="The Biz Gift Logo" style="height:80px;width:auto">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.75rem;font-family:ui-monospace,monospace">/image/TBG Logo New.png</div>
+        </div>
+        <div style="background:var(--bg-charcoal);padding:2.5rem;border-radius:var(--radius-lg)">
+          <img src="/image/The Biz Gift (Logo).png" alt="The Biz Gift Footer Logo" style="height:60px;width:auto">
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.75rem;font-family:ui-monospace,monospace">/image/The Biz Gift (Logo).png</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand Colors -->
+    <div class="sg-group">
+      <h3>Brand Palette &middot; design.md &sect;06</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem">
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--accent-bronze)"></div>
+          <div style="padding:1rem"><strong>Bronze</strong><br><code style="font-size:0.75rem">--accent-bronze</code><br><span style="color:var(--text-muted);font-size:0.8rem">#C59A7F &middot; Primary accent, CTAs, highlights</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--accent-copper)"></div>
+          <div style="padding:1rem"><strong>Copper</strong><br><code style="font-size:0.75rem">--accent-copper</code><br><span style="color:var(--text-muted);font-size:0.8rem">#B87333 &middot; Decorative, section labels</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--bg-charcoal)"></div>
+          <div style="padding:1rem"><strong>Charcoal</strong><br><code style="font-size:0.75rem">--bg-charcoal</code><br><span style="color:var(--text-muted);font-size:0.8rem">#1A1A1A &middot; Header, footer, hero bg</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--bg-ivory);border-bottom:1px solid var(--border-light)"></div>
+          <div style="padding:1rem"><strong>Ivory</strong><br><code style="font-size:0.75rem">--bg-ivory</code><br><span style="color:var(--text-muted);font-size:0.8rem">#FAFAF7 &middot; Page background</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--text-dark)"></div>
+          <div style="padding:1rem"><strong>Text Dark</strong><br><code style="font-size:0.75rem">--text-dark</code><br><span style="color:var(--text-muted);font-size:0.8rem">#2C2C2A &middot; Primary body text</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--text-muted)"></div>
+          <div style="padding:1rem"><strong>Text Muted</strong><br><code style="font-size:0.75rem">--text-muted</code><br><span style="color:var(--text-muted);font-size:0.8rem">#706F6C &middot; Secondary, captions</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:100px;background:var(--color-whatsapp)"></div>
+          <div style="padding:1rem"><strong>WhatsApp</strong><br><code style="font-size:0.75rem">--color-whatsapp</code><br><span style="color:var(--text-muted);font-size:0.8rem">#25D366 &middot; Functional CTA</span></div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)">
+          <div style="height:50px;background:var(--color-error)"></div>
+          <div style="height:50px;background:var(--color-success)"></div>
+          <div style="padding:1rem"><strong>Error / Success</strong><br><code style="font-size:0.75rem">--color-error --color-success</code><br><span style="color:var(--text-muted);font-size:0.8rem">#DC2626 / #16A34A</span></div>
+        </div>
+      </div>
+      <div class="sg-note">Contrast (WCAG AA ≥4.5:1): Text Dark on Ivory ≈ 11:1 ✓ &middot; White on Charcoal ≈ 16:1 ✓ &middot; Bronze on Charcoal ≈ 4.7:1 ✓ for large/UI text. Rule: max one accent colour per viewport, never gradients.</div>
+    </div>
+
+    <!-- Typography -->
+    <div class="sg-group">
+      <h3>Typography &middot; design.md &sect;07</h3>
+
+      <div style="border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;margin-bottom:2rem">
+        <div style="font-family:var(--font-serif);font-size:3rem;font-weight:400;margin-bottom:0.5rem">Cormorant Garamond</div>
+        <div style="font-family:var(--font-serif);font-size:1.25rem;font-weight:400;color:var(--text-muted);margin-bottom:1rem">Used for headings, hero titles, editorial moments. Weights: 400 Regular, 600 Semibold, 400 Italic.</div>
+        <div style="display:flex;gap:2rem;flex-wrap:wrap;font-family:var(--font-serif);font-size:1.5rem">
+          <span style="font-weight:400">Regular 400</span>
+          <span style="font-weight:600">Semibold 600</span>
+          <span style="font-style:italic">Italic 400</span>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;margin-bottom:2rem">
+        <div style="font-family:var(--font-sans);font-size:2rem;font-weight:500;margin-bottom:0.5rem">Plus Jakarta Sans</div>
+        <div style="font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--text-muted);margin-bottom:1rem">Used for body text, labels, buttons, navigation, UI elements. Weights: 300 Light, 400 Regular, 500 Medium, 600 Semibold.</div>
+        <div style="display:flex;gap:2rem;flex-wrap:wrap;font-family:var(--font-sans);font-size:1.25rem">
+          <span style="font-weight:300">Light 300</span>
+          <span style="font-weight:400">Regular 400</span>
+          <span style="font-weight:500">Medium 500</span>
+          <span style="font-weight:600">Semibold 600</span>
+        </div>
+      </div>
+
+      <!-- Heading Scale -->
+      <div style="border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden">
+        <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-hero</code><br><span style="font-size:0.7rem;color:var(--text-muted)">4.5rem &rarr; 2.4rem @768 &rarr; 2rem @480</span></div>
+          <div style="font-family:var(--font-serif);font-size:var(--font-size-hero);line-height:1.1;font-weight:400;color:var(--text-dark)">Hero Title</div>
+        </div>
+        <div style="padding:1.25rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-h2</code><br><span style="font-size:0.7rem;color:var(--text-muted)">3.5rem &rarr; 2rem @768 &rarr; 1.75rem @480</span></div>
+          <h2 style="font-family:var(--font-serif);font-size:var(--font-size-h2);font-weight:400;color:var(--text-dark);margin:0">Section Heading</h2>
+        </div>
+        <div style="padding:1.25rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-h3</code><br><span style="font-size:0.7rem;color:var(--text-muted)">2.75rem &rarr; inherits @768</span></div>
+          <h3 style="font-family:var(--font-serif);font-size:var(--font-size-h3);font-weight:400;color:var(--text-dark);margin:0;border:0;padding:0;text-transform:none;letter-spacing:normal">Card Heading</h3>
+        </div>
+        <div style="padding:1.25rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-h4</code><br><span style="font-size:0.7rem;color:var(--text-muted)">2rem &rarr; inherits @768</span></div>
+          <h4 style="font-family:var(--font-serif);font-size:var(--font-size-h4);font-weight:400;color:var(--text-dark);margin:0">Sub Heading</h4>
+        </div>
+        <div style="padding:1rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-body</code><br><span style="font-size:0.7rem;color:var(--text-muted)">1.06rem &middot; sans &middot; wt 300</span></div>
+          <p style="font-family:var(--font-sans);font-size:var(--font-size-body);font-weight:300;color:var(--text-dark);margin:0;max-width:500px;line-height:1.7">Body copy in Plus Jakarta Sans. Maximum reading width is 680px for comfortable line length.</p>
+        </div>
+        <div style="padding:1rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-small</code><br><span style="font-size:0.7rem;color:var(--text-muted)">0.94rem &middot; sans &middot; wt 300</span></div>
+          <span style="font-family:var(--font-sans);font-size:var(--font-size-small);font-weight:300;color:var(--text-muted)">Small / caption supporting text.</span>
+        </div>
+        <div style="padding:1rem 2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-button</code><br><span style="font-size:0.7rem;color:var(--text-muted)">0.875rem &middot; sans &middot; wt 500 &middot; uppercase</span></div>
+          <span style="font-family:var(--font-sans);font-size:var(--font-size-button);font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dark)">Button Label</span>
+        </div>
+        <div style="padding:1rem 2rem;display:flex;align-items:baseline;gap:2rem;flex-wrap:wrap">
+          <div style="flex:0 0 200px"><code style="font-size:0.75rem">--font-size-overline</code><br><span style="font-size:0.7rem;color:var(--text-muted)">0.75rem &middot; sans &middot; wt 500 &middot; uppercase</span></div>
+          <span style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted)">Overline / Eyebrow Label</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand Voice -->
+    <div class="sg-group">
+      <h3>Brand Voice &middot; master-brand-document.md</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin-bottom:1.5rem">
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg)">
+          <div style="font-family:var(--font-serif);font-size:2rem;margin-bottom:0.75rem">Confident</div>
+          <p style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.6">We know our craft. Authority without arrogance. Direct language that demonstrates expertise.</p>
+        </div>
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg)">
+          <div style="font-family:var(--font-serif);font-size:2rem;margin-bottom:0.75rem">Warm</div>
+          <p style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.6">Approachable and human. Never cold or corporate. Every interaction should feel like a conversation.</p>
+        </div>
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg)">
+          <div style="font-family:var(--font-serif);font-size:2rem;margin-bottom:0.75rem">Expert</div>
+          <p style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.6">We guide, educate, and simplify. Show the thinking behind the recommendation.</p>
+        </div>
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg)">
+          <div style="font-family:var(--font-serif);font-size:2rem;margin-bottom:0.75rem">Sincere</div>
+          <p style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.6">Every promise is real. No price on site — only conversations. Gifting is personal, not transactional.</p>
+        </div>
+      </div>
+      <div class="sg-note"><strong>Key brand rule:</strong> No prices displayed on the website. All pricing happens through personal consultation (quote form or WhatsApp). This positions every gift as a bespoke conversation, not a catalogue transaction.</div>
+    </div>
+
+    <!-- Brand Persona -->
+    <div class="sg-group">
+      <h3>Brand Persona &middot; master-brand-document.md</h3>
+      <p style="font-size:var(--font-size-small);color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7;max-width:680px">Core personality traits mapped on a 0&ndash;100 spectrum. These guide tone, visual weight, and editorial decisions across every touchpoint.</p>
+      <div style="max-width:600px">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Premium</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:90%;height:100%;background:var(--accent-bronze);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">90</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Editorial</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:90%;height:100%;background:var(--accent-bronze);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">90</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Warm</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:80%;height:100%;background:var(--accent-bronze);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">80</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Corporate</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:40%;height:100%;background:var(--accent-copper);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">40</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Playful</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:20%;height:100%;background:var(--accent-copper);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">20</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <span style="flex:0 0 120px;font-size:var(--font-size-small);font-weight:500;color:var(--text-dark)">Salesy</span>
+          <div style="flex:1;height:8px;background:var(--border-light);border-radius:var(--radius-full);overflow:hidden"><div style="width:0%;height:100%;background:var(--color-error);border-radius:var(--radius-full)"></div></div>
+          <span style="flex:0 0 30px;font-size:0.75rem;color:var(--text-muted);text-align:right">0</span>
+        </div>
+      </div>
+      <div class="sg-note"><strong>Core traits:</strong> Premium, Thoughtful, Warm, Curated, Professional, Quietly Confident.</div>
+    </div>
+
+    <!-- Target Audience -->
+    <div class="sg-group">
+      <h3>Target Audience &middot; master-brand-document.md</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+        <div style="padding:1.5rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem">HR &amp; People</div>
+          <span style="font-size:var(--font-size-small);color:var(--text-muted)">Employee Experience Teams</span>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem">Admin &amp; Procurement</div>
+          <span style="font-size:var(--font-size-small);color:var(--text-muted)">Operational Buyers</span>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem">Marketing &amp; Brand</div>
+          <span style="font-size:var(--font-size-small);color:var(--text-muted)">Campaign &amp; Event Teams</span>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem">Founders &amp; Leaders</div>
+          <span style="font-size:var(--font-size-small);color:var(--text-muted)">CXOs, Decision Makers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messaging Pillars -->
+    <div class="sg-group">
+      <h3>Messaging Pillars &middot; master-brand-document.md</h3>
+      <p style="font-size:var(--font-size-small);color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7;max-width:680px">Five themes every marketing page, campaign and product narrative should reinforce at least one of.</p>
+      <table class="sg-table">
+        <thead><tr><th>Pillar</th><th>What It Says</th><th>Where It Shows Up</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Premium Curation</strong></td><td>Every hamper is selected, not assembled.</td><td>Collections, product intros</td></tr>
+          <tr><td><strong>Thoughtful Experiences</strong></td><td>The moment of receiving matters as much as the gift.</td><td>Homepage hero, About, occasions</td></tr>
+          <tr><td><strong>Reliable Delivery</strong></td><td>Dependable timelines and operational excellence.</td><td>Quote flow, planning info</td></tr>
+          <tr><td><strong>Corporate Customisation</strong></td><td>Branding and personalisation done with restraint.</td><td>Customisation studio</td></tr>
+          <tr><td><strong>Meaningful Relationships</strong></td><td>Gifting as relationship-building, not transaction.</td><td>Brand story, final CTAs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Brand Values -->
+    <div class="sg-group">
+      <h3>Brand Values &middot; master-brand-document.md</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Thoughtfulness</span>
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Quality</span>
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Reliability</span>
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Craft</span>
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Partnership</span>
+        <span style="display:inline-block;padding:0.5rem 1.25rem;border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:var(--font-size-small);font-weight:400;color:var(--text-dark)">Attention to Detail</span>
+      </div>
+    </div>
+
+    <!-- Product & Category Taxonomy -->
+    <div class="sg-group">
+      <h3>Product &amp; Category Tags &middot; content-architecture.md</h3>
+      <p style="font-size:var(--font-size-small);color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7;max-width:680px">Taxonomy used across explore hub, hamper detail pages, and Airtable CMS. Tags render as chips/badges on product cards and detail pages.</p>
+
+      <div style="margin-bottom:2rem">
+        <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-copper);margin-bottom:0.75rem">Occasion Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-charcoal);color:#fff;border-radius:var(--radius-full);font-size:0.8rem">Employee Joining Kits</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-charcoal);color:#fff;border-radius:var(--radius-full);font-size:0.8rem">Client Appreciation</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-charcoal);color:#fff;border-radius:var(--radius-full);font-size:0.8rem">Event Giveaways</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-charcoal);color:#fff;border-radius:var(--radius-full);font-size:0.8rem">Leadership Gifts</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-charcoal);color:#fff;border-radius:var(--radius-full);font-size:0.8rem">Festive Gifting</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:2rem">
+        <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-copper);margin-bottom:0.75rem">Collection Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Premium Picks</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Best Sellers</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Budget Gifting</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Sustainable Choices</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Minimalist Gifts</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Under &#8377;500</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Wellness Edit</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;border:1px solid var(--accent-bronze);color:var(--accent-bronze);border-radius:var(--radius-full);font-size:0.8rem">Festive Edit</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:2rem">
+        <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-copper);margin-bottom:0.75rem">Category Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Drinkware</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Office Essentials</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Tech</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Bags &amp; Accessories</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Diaries &amp; Notebooks</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:var(--bg-ivory);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Combo Gifts</span>
+        </div>
+      </div>
+
       <div>
-        <span class="eyebrow">00 · Contents</span>
-        <h2 class="h2" style="margin-top:12px">What's inside</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Jump to any section. Each component is mapped to its design.md token and production CSS class.</p>
-    </div>
-    <div class="contents">
-      <a href="#brand"><span>01</span> Brand & Logo</a>
-      <a href="#colors"><span>02</span> Color Palette</a>
-      <a href="#typography"><span>03</span> Typography</a>
-      <a href="#icons"><span>04</span> Iconography</a>
-      <a href="#spacing"><span>05</span> Spacing & Radius</a>
-      <a href="#buttons"><span>06</span> Buttons</a>
-      <a href="#forms"><span>07</span> Forms & Inputs</a>
-      <a href="#cards"><span>08</span> Product Cards</a>
-      <a href="#features"><span>09</span> Feature Strip</a>
-      <a href="#nav"><span>10</span> Navigation</a>
-      <a href="#hero"><span>11</span> Hero Blocks</a>
-      <a href="#process"><span>12</span> Process</a>
-      <a href="#info"><span>13</span> Info Cards</a>
-      <a href="#occasions"><span>14</span> Occasions</a>
-      <a href="#faq"><span>15</span> FAQ</a>
-      <a href="#quote"><span>16</span> Quote Form</a>
-      <a href="#footer"><span>17</span> Footer</a>
-      <a href="#states"><span>18</span> States</a>
-      <a href="#inventory"><span>19</span> Production Inventory</a>
-    </div>
-  </div>
-</section>
-
-<!-- ====== BRAND & LOGO ====== -->
-<section class="section reveal" id="brand">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">01 · Brand & Logo</span>
-        <h2 class="h2" style="margin-top:12px">Brand identity</h2>
-      </div>
-      <p class="body" style="max-width:42ch">The Biz Gift logo, brand mark, and usage guidelines. Referenced from <code>docs/master-brand-document.md</code>.</p>
-    </div>
-
-    <div class="grid g-2">
-      <div>
-        <div class="sg-label">
-          <span class="sg-name">Primary Logo</span>
-          <span class="sg-tag sg-tag--ref">design.md §04</span>
-          <span class="sg-tag sg-tag--class">.kit-nav-brand .mark</span>
-        </div>
-        <div style="background:var(--charcoal);border-radius:var(--r-4);padding:48px;display:grid;place-items:center;min-height:200px">
-          <img src="/image/The Biz Gift (Logo).svg" alt="The Biz Gift Logo" style="max-height:80px;width:auto" onerror="this.onerror=null;this.src='/image/The%20Biz%20Gift%20(Logo).png'">
-        </div>
-        <p class="small mt-16">SVG preferred. On dark backgrounds, use the bronze-accented version. Minimum clear space: 20px on all sides.</p>
-      </div>
-      <div>
-        <div class="sg-label">
-          <span class="sg-name">Brand Values</span>
-          <span class="sg-tag sg-tag--ref">master-brand-document.md §07</span>
-        </div>
-        <div class="values">
-          <div class="value-card">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg></div>
-            <h6>Thoughtfulness</h6>
-            <p>Every detail is intentional, from curation to presentation.</p>
-          </div>
-          <div class="value-card">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-            <h6>Quality</h6>
-            <p>Premium materials, craftsmanship, and lasting impressions.</p>
-          </div>
-          <div class="value-card">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-            <h6>Reliability</h6>
-            <p>Dependable timelines and operational excellence.</p>
-          </div>
-          <div class="value-card">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
-            <h6>Craft</h6>
-            <p>Attention to detail in every hamper and every interaction.</p>
-          </div>
+        <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-copper);margin-bottom:0.75rem">Product Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Employee Gifting</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Client Appreciation</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Premium Picks</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Eco Friendly</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Luxury</span>
+          <span style="display:inline-block;padding:0.4rem 1rem;background:rgba(197,154,127,0.1);border-radius:var(--radius-full);font-size:0.8rem;color:var(--text-dark)">Handcrafted</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ====== COLOR PALETTE ====== -->
-<section class="section reveal" id="colors">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">02 · Color Palette</span>
-        <h2 class="h2" style="margin-top:12px">Warm neutrals & bronze accents</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Semantic tokens mapped from <code>docs/tokens/colors.json</code>. All values reference the design system's four-tier token architecture.</p>
-    </div>
-
-    <div class="sg-label">
-      <span class="sg-name">Primitive Colors</span>
-      <span class="sg-tag sg-tag--ref">design.md §06.1</span>
-      <span class="sg-tag sg-tag--token">docs/tokens/colors.json</span>
-    </div>
-    <div class="grid g-6">
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#1A1A1A"></div>
-        <div class="meta"><div class="name">Charcoal</div><div class="hex">#1A1A1A</div></div>
-      </div>
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#2A2A2A"></div>
-        <div class="meta"><div class="name">Charcoal Light</div><div class="hex">#2A2A2A</div></div>
-      </div>
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#FAFAF7"></div>
-        <div class="meta"><div class="name">Ivory</div><div class="hex">#FAFAF7</div></div>
-      </div>
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--line)"></div>
-        <div class="meta"><div class="name">White</div><div class="hex">#FFFFFF</div></div>
-      </div>
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#C59A7F"></div>
-        <div class="meta"><div class="name">Bronze</div><div class="hex">#C59A7F</div></div>
-      </div>
-      <div class="swatch reveal-stagger">
-        <div class="chip" style="background:#B87333"></div>
-        <div class="meta"><div class="name">Copper</div><div class="hex">#B87333</div></div>
-      </div>
-    </div>
-
-    <div class="sg-label mt-48">
-      <span class="sg-name">Semantic Tokens</span>
-      <span class="sg-tag sg-tag--ref">design.md §06.2</span>
-    </div>
-    <div class="grid g-3">
-      <div class="swatch">
-        <div class="chip" style="background:#FAFAF7"></div>
-        <div class="meta"><div class="name">Background Primary</div><div class="hex">--background-primary</div></div>
-      </div>
-      <div class="swatch">
-        <div class="chip" style="background:#1A1A1A"></div>
-        <div class="meta"><div class="name">Background Secondary</div><div class="hex">--background-secondary</div></div>
-      </div>
-      <div class="swatch">
-        <div class="chip" style="background:#2A2A2A"></div>
-        <div class="meta"><div class="name">Background Tertiary</div><div class="hex">--background-tertiary</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== TYPOGRAPHY ====== -->
-<section class="section reveal" id="typography">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">03 · Typography</span>
-        <h2 class="h2" style="margin-top:12px">Editorial type system</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Cormorant Garamond for display, Plus Jakarta Sans for body. Tokens from <code>docs/tokens/typography.json</code>.</p>
-    </div>
-
-    <div class="grid g-2">
-      <div class="type-card">
-        <div class="Aa display">Aa</div>
-        <div class="label">
-          <span class="name">Cormorant Garamond</span>
-          <span class="use">Display · Weight 500</span>
+    <!-- Brand Architecture -->
+    <div class="sg-group">
+      <h3>Brand Architecture &middot; master-brand-document.md</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px">
+        <div style="padding:2rem;background:var(--bg-charcoal);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Master Brand</div>
+          <div style="font-family:var(--font-serif);font-size:1.5rem;color:#fff">The Biz Gift</div>
         </div>
-        <div class="specimen">The quick brown fox jumps over the lazy dog. 0123456789</div>
-      </div>
-      <div class="type-card">
-        <div class="Aa body">Aa</div>
-        <div class="label">
-          <span class="name">Plus Jakarta Sans</span>
-          <span class="use">Body · Weight 400</span>
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center">
+          <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-copper);margin-bottom:0.75rem">Sub-Brands</div>
+          <div style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.8">Collections<br>Signature Hampers<br>Occasions</div>
         </div>
-        <div class="specimen">The quick brown fox jumps over the lazy dog. 0123456789</div>
-      </div>
-    </div>
-
-    <div class="type-scale mt-48">
-      <div class="sg-label">
-        <span class="sg-name">Type Scale</span>
-        <span class="sg-tag sg-tag--ref">design.md §07</span>
-      </div>
-      <div class="row"><span class="tag">H1 · 84px</span><span class="h1" style="font-size:clamp(36px,4vw,84px)">The Art of Gifting</span></div>
-      <div class="row"><span class="tag">H2 · 56px</span><span class="h2" style="font-size:clamp(28px,3.2vw,56px)">Curated with intention</span></div>
-      <div class="row"><span class="tag">H3 · 34px</span><span class="h3">Meaningful experiences</span></div>
-      <div class="row"><span class="tag">H4 · 22px</span><span class="h4">Signature collections</span></div>
-      <div class="row"><span class="tag">Lede · 18px</span><span class="lede" style="margin:0">A premium corporate gifting studio that helps companies create meaningful, memorable experiences.</span></div>
-      <div class="row"><span class="tag">Body · 15px</span><span class="body" style="margin:0">Every hamper is selected, not assembled. Thoughtful curation meets premium presentation.</span></div>
-      <div class="row"><span class="tag">Small · 13px</span><span class="small">Minimum order quantities apply. Pan-India delivery available.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== ICONS ====== -->
-<section class="section reveal" id="icons">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">04 · Iconography</span>
-        <h2 class="h2" style="margin-top:12px">Outline-only Lucide icons</h2>
-      </div>
-      <p class="body" style="max-width:42ch">No decorative illustrations — photography only. Icons are functional, outline-only Lucide with 1.4px stroke width.</p>
-    </div>
-
-    <div class="icon-set">
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="11" rx="1.5"/><path d="M14 9h4l3 3v5h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== SPACING & RADIUS ====== -->
-<section class="section reveal" id="spacing">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">05 · Spacing & Radius</span>
-        <h2 class="h2" style="margin-top:12px">Spatial system</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Tokens from <code>docs/tokens/spacing.json</code> and <code>docs/tokens/radius.json</code>. Generous whitespace communicates hierarchy.</p>
-    </div>
-
-    <div class="sg-label">
-      <span class="sg-name">Spacing Scale</span>
-      <span class="sg-tag sg-tag--token">docs/tokens/spacing.json</span>
-    </div>
-    <div class="scale-bars">
-      <div class="bar"><i style="height:8px"></i><span>8px</span></div>
-      <div class="bar"><i style="height:16px"></i><span>16px</span></div>
-      <div class="bar"><i style="height:24px"></i><span>24px</span></div>
-      <div class="bar"><i style="height:48px"></i><span>48px</span></div>
-      <div class="bar"><i style="height:64px"></i><span>64px</span></div>
-      <div class="bar"><i style="height:80px"></i><span>80px</span></div>
-      <div class="bar"><i style="height:96px"></i><span>96px</span></div>
-      <div class="bar"><i style="height:128px"></i><span>128px</span></div>
-    </div>
-
-    <div class="sg-label mt-48">
-      <span class="sg-name">Border Radius</span>
-      <span class="sg-tag sg-tag--token">docs/tokens/radius.json</span>
-    </div>
-    <div class="radii">
-      <div class="box" style="border-radius:8px">8px</div>
-      <div class="box" style="border-radius:12px">12px</div>
-      <div class="box" style="border-radius:16px">16px</div>
-      <div class="box" style="border-radius:24px">24px</div>
-      <div class="box" style="border-radius:32px">32px</div>
-      <div class="box" style="border-radius:999px">Pill</div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== BUTTONS ====== -->
-<section class="section reveal" id="buttons">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">06 · Buttons</span>
-        <h2 class="h2" style="margin-top:12px">Button system</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Five button variants with hover, focus, and active states. All use <code>cubic-bezier(0.2, 0.7, 0.2, 1)</code> easing.</p>
-    </div>
-
-    <div class="flex gap-16 wrap-flex">
-      <button class="btn btn-primary">Get a Quote <span class="arrow">→</span></button>
-      <button class="btn btn-secondary">Explore Collections <span class="arrow">→</span></button>
-      <button class="btn btn-dark">Learn More <span class="arrow">→</span></button>
-      <button class="btn btn-ghost">View Details <span class="arrow">→</span></button>
-    </div>
-    <div class="flex gap-16 wrap-flex mt-16">
-      <button class="btn btn-primary btn-lg">Large CTA <span class="arrow">→</span></button>
-      <button class="btn btn-primary btn-sm">Small CTA</button>
-      <button class="btn btn-primary btn-square">Square</button>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FORMS ====== -->
-<section class="section reveal" id="forms">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">07 · Forms & Inputs</span>
-        <h2 class="h2" style="margin-top:12px">Form elements</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Pill-shaped inputs with bronze focus ring. All form elements share consistent spacing and typography.</p>
-    </div>
-
-    <div class="grid g-2">
-      <div>
-        <div class="field">
-          <label>Full Name</label>
-          <input class="input" type="text" placeholder="Enter your name">
-        </div>
-        <div class="field mt-16">
-          <label>Email Address</label>
-          <input class="input" type="email" placeholder="you@company.com">
-        </div>
-        <div class="field mt-16">
-          <label>Company Size</label>
-          <select class="select">
-            <option>1–10 employees</option>
-            <option>11–50 employees</option>
-            <option>51–200 employees</option>
-            <option>200+ employees</option>
-          </select>
-        </div>
-        <div class="field mt-16">
-          <label>Message</label>
-          <textarea class="textarea" placeholder="Tell us about your gifting needs..."></textarea>
-        </div>
-        <div class="check mt-16">
-          <input type="checkbox" checked>
-          <span>I agree to the terms and conditions</span>
-        </div>
-      </div>
-      <div>
-        <div class="sg-label">
-          <span class="sg-name">Form States</span>
-          <span class="sg-tag sg-tag--class">.input:focus</span>
-        </div>
-        <div class="field">
-          <label>Focused State</label>
-          <input class="input" type="text" value="Focused input" style="border-color:var(--bronze);box-shadow:0 0 0 4px rgba(197,154,127,.15)">
-        </div>
-        <div class="field mt-16">
-          <label>Disabled State</label>
-          <input class="input" type="text" value="Disabled input" disabled style="opacity:.5;cursor:not-allowed">
-        </div>
-        <div class="field mt-16">
-          <label>Error State</label>
-          <input class="input" type="text" value="Invalid input" style="border-color:#DC2626;box-shadow:0 0 0 4px rgba(220,38,38,.1)">
+        <div style="padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg);text-align:center;border-style:dashed">
+          <div style="font-family:var(--font-sans);font-size:var(--font-size-overline);font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:0.75rem">Future</div>
+          <div style="font-size:var(--font-size-small);color:var(--text-muted);line-height:1.8">Gift Builder<br>AI Concierge</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ====== PRODUCT CARDS ====== -->
-<section class="section reveal" id="cards">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">08 · Product Cards</span>
-        <h2 class="h2" style="margin-top:12px">Product showcase</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Card with hover lift, favourite button, and MOQ badge. Transitions use premium easing.</p>
-    </div>
+  <!-- ============================================================= -->
+  <!-- FOUNDATIONS                                                   -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="foundations">
+    <h2>Foundations</h2>
+    <p class="sg-section-sub">Design tokens — the single source of truth. Mirrors <code>docs/tokens/*.json</code> and design.md &sect;05&ndash;12.</p>
 
-    <div class="grid g-3">
-      <div class="product">
-        <div class="img" style="background-image:url('/image/BCC%20Hamper.png')">
-          <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+    <!-- Border Radius -->
+    <div class="sg-group">
+      <h3>Border Radius &middot; design.md &sect;10 &middot; tokens/radius.json</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-end">
+        <div style="text-align:center">
+          <div style="width:100px;height:100px;background:var(--accent-bronze);border-radius:var(--radius-sm);opacity:0.7"></div>
+          <div style="font-size:0.75rem;margin-top:0.5rem"><code>--radius-sm</code><br>4px</div>
         </div>
-        <div class="body">
-          <div class="name">Executive Indulgence</div>
-          <div class="sub">A refined expression of gratitude</div>
-          <div class="row">
-            <span class="moq">Min. 10 units</span>
-            <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-          </div>
+        <div style="text-align:center">
+          <div style="width:100px;height:100px;background:var(--accent-bronze);border-radius:var(--radius-md);opacity:0.7"></div>
+          <div style="font-size:0.75rem;margin-top:0.5rem"><code>--radius-md</code><br>8px</div>
         </div>
-      </div>
-      <div class="product">
-        <div class="img" style="background-image:url('/image/Premium%20Joining%20Kit.png')">
-          <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div style="text-align:center">
+          <div style="width:120px;height:120px;background:var(--accent-bronze);border-radius:var(--radius-lg);opacity:0.7"></div>
+          <div style="font-size:0.75rem;margin-top:0.5rem"><code>--radius-lg</code><br>24px &middot; cards/images</div>
         </div>
-        <div class="body">
-          <div class="name">Premium Joining Kit</div>
-          <div class="sub">Welcome new team members</div>
-          <div class="row">
-            <span class="moq">Min. 20 units</span>
-            <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-          </div>
+        <div style="text-align:center">
+          <div style="width:120px;height:120px;background:var(--accent-bronze);border-radius:var(--radius-xl);opacity:0.7"></div>
+          <div style="font-size:0.75rem;margin-top:0.5rem"><code>--radius-xl</code><br>32px &middot; modals</div>
         </div>
-      </div>
-      <div class="product">
-        <div class="img" style="background-image:url('/image/Self%20Care%20Hamper%20V2.png')">
-          <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-        </div>
-        <div class="body">
-          <div class="name">Self Care Hamper</div>
-          <div class="sub">Wellness and rejuvenation</div>
-          <div class="row">
-            <span class="moq">Min. 10 units</span>
-            <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-          </div>
+        <div style="text-align:center">
+          <div style="width:200px;height:50px;background:var(--accent-bronze);border-radius:var(--radius-full);opacity:0.7"></div>
+          <div style="font-size:0.75rem;margin-top:0.5rem"><code>--radius-full</code><br>9999px &middot; buttons/pills</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ====== FEATURE STRIP ====== -->
-<section class="section reveal" id="features">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">09 · Feature Strip</span>
-        <h2 class="h2" style="margin-top:12px">Promise, at a glance</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Six trust signals in a single horizontal strip. Hairline icons, micro caps.</p>
+    <!-- Spacing -->
+    <div class="sg-group">
+      <h3>Spacing &middot; design.md &sect;09 &middot; tokens/spacing.json (4px base)</h3>
+      <div class="sg-space-row"><span class="lbl">0.5rem &middot; 8</span><div class="sg-space-bar" style="width:8px"></div></div>
+      <div class="sg-space-row"><span class="lbl">1rem &middot; 16</span><div class="sg-space-bar" style="width:16px"></div></div>
+      <div class="sg-space-row"><span class="lbl">1.5rem &middot; 24</span><div class="sg-space-bar" style="width:24px"></div></div>
+      <div class="sg-space-row"><span class="lbl">2.5rem &middot; 40</span><div class="sg-space-bar" style="width:40px"></div></div>
+      <div class="sg-space-row"><span class="lbl">4rem &middot; 64</span><div class="sg-space-bar" style="width:64px"></div></div>
+      <div class="sg-space-row"><span class="lbl">8rem &middot; 128</span><div class="sg-space-bar" style="width:128px"></div></div>
     </div>
 
-    <div class="features">
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/></svg></div><p>Curated<br>Selections</p></div>
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.2"/></svg></div><p>Brand<br>Customisation</p></div>
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="11" rx="1.5"/><path d="M14 9h4l3 3v5h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div><p>Pan India<br>Delivery</p></div>
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div><p>Dedicated<br>Support</p></div>
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg></div><p>Premium<br>Quality</p></div>
-      <div class="feature"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><p>Built for<br>Business</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== NAV / MEGA MENU ====== -->
-<section class="section reveal" id="nav">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">10 · Navigation</span>
-        <h2 class="h2" style="margin-top:12px">Editorial mega menu</h2>
-      </div>
-      <p class="body" style="max-width:42ch">A featured collection on the left, dual link columns in the middle, story spotlight on the right. Trust strip anchors the bottom.</p>
-    </div>
-
-    <div class="megamenu">
-      <div class="topbar">
-        <div class="brand">The Biz Gift</div>
-        <div class="nav">
-          <a class="active">Explore Gifts</a>
-          <a>Collections</a>
-          <a>Occasions</a>
-          <a>Customisation</a>
-          <a>About</a>
-        </div>
-        <button class="btn btn-secondary btn-sm">Get a Quote</button>
-      </div>
-
-      <div class="body">
-        <div class="featured-img">
-          <span class="tag" style="color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)">Featured Collection</span>
-          <h4>The Executive<br>Indulgence</h4>
-          <p>A refined expression of gratitude and celebration. Timeless, tasteful and thoughtfully curated.</p>
-          <a class="btn btn-ghost" style="color:#fff;padding:0;font-size:11px">Explore Collection <span class="arrow">→</span></a>
-        </div>
-
-        <div class="link-col">
-          <h5>Browse by Collection</h5>
-          <ul>
-            <li><a>Signature Hampers</a></li>
-            <li><a>Premium</a></li>
-            <li><a>Sustainable</a></li>
-            <li><a>Wellness</a></li>
-            <li><a>Executive</a></li>
-            <li><a>Corporate Essentials</a></li>
-            <li><a>New Arrivals</a></li>
-          </ul>
-          <a class="view-all">View all Collections <span>→</span></a>
-        </div>
-
-        <div class="link-col">
-          <h5>Browse by Occasion</h5>
-          <ul>
-            <li><a>Employee Joining</a></li>
-            <li><a>Client Appreciation</a></li>
-            <li><a>Leadership Gifts</a></li>
-            <li><a>Festivals</a></li>
-            <li><a>Events & Celebrations</a></li>
-            <li><a>Milestone Moments</a></li>
-            <li><a>Virtual Gifting</a></li>
-          </ul>
-          <a class="view-all">View all Occasions <span>→</span></a>
-        </div>
-
-        <div class="link-col">
-          <h5>Featured Story</h5>
-          <div style="aspect-ratio:1/1;border-radius:var(--r-3);background-image:url('/image/From%20Brief%20to%20Box/Team%20Appreciation%20Hamper.jpeg');background-size:cover;background-position:center;margin-bottom:16px"></div>
-          <div style="font-family:var(--font-display);font-size:22px;line-height:1.15;font-weight:500">The Art of<br>Meaningful Gifting</div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:10px">Thoughtful gifts create lasting impressions and stronger relationships.</p>
-          <a class="view-all">Read Our Story <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="strip">
-        <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/></svg></div><div><b>Minimum Order</b><span>From 10 units</span></div></div>
-        <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div><div><b>Bespoke Customisation</b><span>Tailored to your brand</span></div></div>
-        <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b>Pan-India Delivery</b><span>Reliable & on-time</span></div></div>
-        <div class="item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Lead Time</b><span>7–10 working days</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== HERO BLOCKS ====== -->
-<section class="section reveal" id="hero">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">11 · Hero Blocks</span>
-        <h2 class="h2" style="margin-top:12px">Hero variants</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Three hero compositions: split layout, editorial dark, and bold full-bleed. Photography dominates typography.</p>
-    </div>
-
-    <div class="sg-label">
-      <span class="sg-name">Hero Split</span>
-      <span class="sg-tag sg-tag--class">.hero-split</span>
-    </div>
-    <div class="hero-split">
-      <div class="visual"></div>
-      <div class="content">
+    <!-- Grid System -->
+    <div class="sg-group">
+      <h3>Grid System &middot; design.md &sect;08</h3>
+      <div style="display:flex;flex-direction:column;gap:1.5rem">
         <div>
-          <span class="eyebrow" style="color:var(--bronze);letter-spacing:.32em">Curated for you</span>
-          <h2>Thoughtful gifting,<br>designed to be<br>remembered</h2>
-          <p>Every hamper is selected, not assembled. Premium curation meets meaningful relationships.</p>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">4-column grid &middot; <code>.process-grid</code> / <code>.trust-compact-grid</code></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
+            <div style="height:60px;background:rgba(197,154,127,0.2);border-radius:var(--radius-md)"></div>
+            <div style="height:60px;background:rgba(197,154,127,0.2);border-radius:var(--radius-md)"></div>
+            <div style="height:60px;background:rgba(197,154,127,0.2);border-radius:var(--radius-md)"></div>
+            <div style="height:60px;background:rgba(197,154,127,0.2);border-radius:var(--radius-md)"></div>
+          </div>
         </div>
-        <div class="featured">
-          <div class="label">Featured Collections</div>
-          <div class="featured-grid">
-            <div class="feat-card">
-              <div class="thumb" style="background-image:url('/image/BCC%20Hamper.png')"></div>
-              <div class="info"><b>Executive</b><span>Premium selection</span></div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">3-column grid &middot; <code>.create-grid</code> / <code>.collection-editorial-grid</code></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+            <div style="height:80px;background:rgba(197,154,127,0.2);border-radius:var(--radius-lg)"></div>
+            <div style="height:80px;background:rgba(197,154,127,0.2);border-radius:var(--radius-lg)"></div>
+            <div style="height:80px;background:rgba(197,154,127,0.2);border-radius:var(--radius-lg)"></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">2-column split &middot; <code>.origin-grid</code> / <code>.craft-grid</code> &mdash; image + content</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+            <div style="height:100px;background:rgba(197,154,127,0.15);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.8rem">Image</div>
+            <div style="height:100px;background:rgba(44,44,42,0.05);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.8rem">Content</div>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note">Breakpoints: 1100px (tablet, 2-col), 768px (mobile, 1-col), 480px (small phone, tighter spacing). Layout padding: <code>var(--space-layout)</code> &mdash; 4rem &rarr; 2.5rem @1100 &rarr; 1.25rem @768.</div>
+    </div>
+
+    <!-- Elevation -->
+    <div class="sg-group">
+      <h3>Elevation &middot; design.md &sect;11 &middot; tokens/elevation.json</h3>
+      <div class="sg-tiles">
+        <div class="sg-tile" style="box-shadow:var(--elevation-0);border-radius:var(--radius-lg)">0 &middot; flat</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-1);border-radius:var(--radius-lg)">1 &middot; card hover</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-2);border-radius:var(--radius-lg)">2 &middot; menus/CTA</div>
+        <div class="sg-tile" style="box-shadow:var(--elevation-3);border-radius:var(--radius-lg)">3 &middot; modal</div>
+      </div>
+    </div>
+
+    <!-- Z-index -->
+    <div class="sg-group">
+      <h3>Z-index Layers &middot; design.md &sect;11 &middot; tokens/zindex.json</h3>
+      <div class="sg-zstack">
+        <div class="sg-zlayer" style="left:0;top:0;background:#9a9a9a">base &middot; 0</div>
+        <div class="sg-zlayer" style="left:40px;top:24px;background:#7a7a7a">raised &middot; 10</div>
+        <div class="sg-zlayer" style="left:80px;top:48px;background:#5a5a5a">sticky &middot; 100</div>
+        <div class="sg-zlayer" style="left:120px;top:72px;background:var(--text-dark)">header &middot; 200</div>
+        <div class="sg-zlayer" style="left:160px;top:96px;background:var(--accent-copper)">mega-menu &middot; 500</div>
+        <div class="sg-zlayer" style="left:200px;top:120px;background:var(--accent-bronze);color:var(--text-dark)">drawer &middot; 700</div>
+        <div class="sg-zlayer" style="left:240px;top:144px;background:#1A1A1A">modal &middot; 900</div>
+      </div>
+    </div>
+
+    <!-- Iconography -->
+    <div class="sg-group">
+      <h3>Iconography &middot; design.md &sect;26 &mdash; Lucide outline, 1.75 stroke</h3>
+      <div class="sg-demo" style="gap:2rem">
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8l9-5 9 5"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Gift</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">User</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Check</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Search</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Mail</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Phone</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">Chevron</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-whatsapp)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.3rem">WhatsApp</div>
+        </div>
+      </div>
+      <div class="sg-note">All UI icons use Lucide with <code>stroke-width="1.75"</code>. WhatsApp uses the official filled glyph. Social icons in footer use platform-specific filled SVGs.</div>
+    </div>
+
+    <!-- Motion -->
+    <div class="sg-group">
+      <h3>Motion &middot; design.md &sect;12 &middot; tokens/motion.json</h3>
+      <div class="sg-demo sg-demo--col">
+        <div style="font-size:0.8rem;color:var(--text-muted);font-family:ui-monospace,monospace;line-height:2">
+          --ease-premium: cubic-bezier(0.16, 1, 0.3, 1)<br>
+          --ease-standard: cubic-bezier(0.25, 1, 0.5, 1)<br>
+          --ease-smooth: cubic-bezier(0.45, 0, 0.55, 1)<br>
+          Durations: fast 150ms &middot; normal 300ms &middot; slow 600ms &middot; hero 900ms &middot; stagger 80&ndash;200ms
+        </div>
+      </div>
+      <div class="sg-note">All motion respects <code>@media (prefers-reduced-motion: reduce)</code> which sets all durations to 0s.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- COMPONENTS                                                    -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="components">
+    <h2>Components</h2>
+    <p class="sg-section-sub">Rendered with real classes from <code>style.css</code>, <code>pages.css</code>, and <code>hamper/hamper.css</code>. Every component shows its states inline.</p>
+
+    <!-- Buttons -->
+    <div class="sg-group">
+      <h3>Buttons &middot; <code>.btn-action</code> &middot; design.md &sect;18</h3>
+      <div class="sg-demo">
+        <a class="btn-action btn-primary">Primary</a>
+        <a class="btn-action">Outline</a>
+        <a class="btn-action btn-large btn-primary">Large Primary</a>
+        <a class="btn-action btn-small">Small</a>
+      </div>
+      <div class="sg-demo sg-demo--dark">
+        <a class="btn-action btn-primary">Primary on Dark</a>
+        <a class="btn-action btn-secondary">Secondary (white)</a>
+        <a class="btn-action btn-secondary" style="opacity:0.4;pointer-events:none">Disabled</a>
+      </div>
+      <div class="sg-demo">
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem">
+          <div><strong>States:</strong> Default &rarr; Hover (bronze fill, scale 1.05) &rarr; Focus (3px bronze ring) &rarr; Active (scale 0.98) &rarr; Disabled (opacity 0.4)</div>
+          <div><strong>Tokens:</strong> <code>--radius-full</code> <code>--font-size-button</code> <code>--accent-bronze</code> <code>white-space: nowrap</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="sg-group">
+      <h3>Cards &middot; design.md &sect;17&ndash;18</h3>
+      <div class="sg-demo sg-demo--col" style="background:var(--bg-ivory)">
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">Product / Feature Cards</div>
+        <div class="sg-cardrow">
+          <a class="occasion-card">
+            <div class="occasion-image"><img src="/image/BCC%20Hamper.png" alt="Occasion" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'"></div>
+            <div class="occasion-content"><h4>Employee Joining</h4><p>Welcome new beginnings with thoughtful gifts.</p></div>
+          </a>
+          <a class="collection-editorial-card">
+            <h4>Premium Picks</h4>
+            <p>Elevated gifting experiences for leadership teams and valued clients.</p>
+          </a>
+          <a class="selected-card">
+            <div class="selected-image"><img src="/image/Bottle%20Hamper.png" alt="Product" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'"></div>
+            <h4>Coffee &amp; Calm</h4>
+            <span class="btn-action btn-small">Explore</span>
+          </a>
+        </div>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0.5rem">Content Cards (Create, Moment, Philosophy)</div>
+        <div class="sg-cardrow">
+          <div class="create-card scatter-assembled">
+            <img src="/image/BCC%20Hamper%202.png" alt="Create" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+            <h3 style="padding:1.5rem 1.5rem 0">Employee Kits</h3>
+            <p style="padding:0 1.5rem 1.5rem">Make new hires feel welcome from day one.</p>
+          </div>
+          <div class="philosophy-card" style="padding:2rem">
+            <h3 style="font-family:var(--font-serif);font-size:1.75rem;font-weight:400;margin-bottom:0.5rem">Curated</h3>
+            <p style="font-size:var(--font-size-small);color:var(--text-muted)">We select. We refine. We edit.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note"><strong>States:</strong> Hover = translateY(-4px) + elevation-1. All cards use <code>--radius-lg</code> (24px) + <code>overflow: hidden</code>. Images flush to card edge (no padding).</div>
+    </div>
+
+    <!-- Chips / Tags / Badges -->
+    <div class="sg-group">
+      <h3>Chips, Tags &amp; Badges &middot; design.md &sect;18</h3>
+      <div class="sg-demo">
+        <a class="hamper-hero-chip"><span class="chip-dot"></span>Premium Picks</a>
+        <a class="hamper-hero-chip"><span class="chip-dot"></span>Eco Friendly</a>
+        <span class="collection-tag">Featured Collection</span>
+        <span class="badge" style="margin-left:0.5rem">New</span>
+        <span class="badge badge--bronze">Sale</span>
+        <span class="chip">Filter Chip</span>
+      </div>
+      <div class="sg-note"><strong>States:</strong> Chips hover with bronze fill + scale. <code>.badge</code> and <code>.chip</code> are future-proof (not yet in HTML).</div>
+    </div>
+
+    <!-- Form Controls -->
+    <div class="sg-group">
+      <h3>Form Controls &middot; design.md &sect;18</h3>
+      <div class="sg-demo sg-demo--col">
+        <div style="max-width:600px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+            <div>
+              <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Full Name *</label>
+              <input type="text" placeholder="Jane Doe" style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border-form);border-radius:var(--radius-full);font-family:var(--font-sans);font-size:var(--font-size-nav);background:var(--surface-white)">
             </div>
-            <div class="feat-card">
-              <div class="thumb" style="background-image:url('/image/Premium%20Joining%20Kit.png')"></div>
-              <div class="info"><b>Welcome Kit</b><span>New joiners</span></div>
+            <div>
+              <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Work Email *</label>
+              <input type="email" value="invalid@" style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--color-error);border-radius:var(--radius-full);font-family:var(--font-sans);font-size:var(--font-size-nav);background:var(--surface-white)">
+              <div style="color:var(--color-error);font-size:0.75rem;margin-top:0.3rem">Please enter a valid email address.</div>
+            </div>
+          </div>
+          <div style="margin-bottom:1rem">
+            <label style="display:block;font-size:var(--font-size-label);font-weight:500;margin-bottom:0.4rem">Message</label>
+            <textarea placeholder="Tell us about your requirements..." style="width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border-form);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:var(--font-size-nav);min-height:80px;resize:vertical;background:var(--surface-white)"></textarea>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-action btn-primary" onclick="return false">Submit Enquiry</button>
+            <span style="color:var(--color-success);font-weight:600;font-size:0.85rem">&#10003; Thank you &mdash; we'll be in touch.</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1rem">
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">Newsletter variant:</div>
+        <form class="newsletter-form" onsubmit="return false" style="max-width:480px">
+          <input type="email" placeholder="Your work email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="sg-group">
+      <h3>FAQ Accordion &middot; <code>.faq-item</code> &middot; design.md &sect;18</h3>
+      <div class="sg-demo sg-demo--col">
+        <div style="max-width:800px">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+              What is the minimum order quantity?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer"><p>MOQs vary by product, typically from 10&ndash;50 units. Each product page lists its specific MOQ.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" onclick="var a=this.parentNode.querySelector('.faq-answer');var o=a.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+              Can we customise the packaging?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer"><p>Yes &mdash; branding, custom boxes, welcome cards and personalised notes are all available.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="sg-group">
+      <h3>Navigation &middot; Header, Mega Menu, Mobile Nav &middot; design.md &sect;15</h3>
+      <div class="sg-demo sg-demo--dark sg-demo--col">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.8rem 0;width:100%">
+          <span style="font-family:var(--font-serif);font-size:1.3rem;color:var(--text-light);font-weight:500">The Biz Gift</span>
+          <nav style="display:flex;gap:2.5rem;align-items:center">
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">Explore</a>
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">Customise</a>
+            <a class="nav-link" style="color:rgba(255,255,255,0.75)">About</a>
+            <a class="btn-action btn-small" style="font-size:0.8rem;padding:0.5rem 1.25rem">Get a Quote</a>
+          </nav>
+        </div>
+        <div style="background:var(--bg-charcoal-light);border-radius:var(--radius-lg);padding:2rem;width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;border:1px solid var(--border-subtle)">
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Browse by Occasion</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Employee Joining</a>
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Client Gifting</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Collections</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Premium Picks</a>
+              <a style="font-size:var(--font-size-label);color:rgba(255,255,255,0.7)">Wellness Edit</a>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-md);padding:1rem">
+            <div style="background:var(--bg-ivory);border-radius:var(--radius-md);height:60px;margin-bottom:0.5rem"></div>
+            <div style="font-size:var(--font-size-label);color:var(--text-light);font-weight:500">Featured: Wellness Edit</div>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note"><strong>States:</strong> Header gains <code>.scrolled</code> class with backdrop-blur on scroll. Nav links have underline-on-hover. CTA button hidden at ≤768px. Hamburger toggle + mobile-nav-overlay at mobile.</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sg-group">
+      <h3>Footer &middot; design.md &sect;18</h3>
+      <div class="sg-demo sg-demo--dark sg-demo--col">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;width:100%;padding:1rem 0">
+          <div>
+            <div style="font-family:var(--font-serif);font-size:1.2rem;color:var(--text-light);margin-bottom:0.75rem">The Biz Gift</div>
+            <div style="font-size:var(--font-size-label);color:rgba(255,255,255,0.6);line-height:1.6">Premium corporate gifting<br>for the Indian market.</div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Explore</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)"><span>All Gifts</span><span>Joining Kits</span></div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Contact</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)"><span>hello@thebizgift.com</span><span>+91 8888 000 216</span></div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze);margin-bottom:0.75rem">Legal</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:var(--font-size-label);color:rgba(255,255,255,0.65)"><span>Privacy</span><span>Terms</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Widget -->
+    <div class="sg-group">
+      <h3>WhatsApp Sticky Widget &middot; design.md &sect;18</h3>
+      <div class="sg-demo">
+        <span class="whatsapp-sticky-widget" style="position:static;box-shadow:none">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="whatsapp-sticky-label">Discuss on WhatsApp</span>
+        </span>
+        <div style="font-size:0.75rem;color:var(--text-muted)">Fixed bottom-right on all pages. <code>.whatsapp-sticky-widget</code> from footer.html.</div>
+      </div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="sg-group">
+      <h3>Social Icons &middot; Footer</h3>
+      <div class="sg-demo sg-demo--dark">
+        <div class="footer-socials-compact">
+          <a aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planning / Spec Rows -->
+    <div class="sg-group">
+      <h3>Planning Spec Rows &middot; <code>.planning-grid</code> &middot; design.md &sect;14</h3>
+      <div class="sg-demo sg-demo--col">
+        <div style="max-width:520px">
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Minimum Order</span><span style="font-weight:500">10 units</span></div>
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Lead Time</span><span style="font-weight:500">7&ndash;10 working days</span></div>
+          <div style="display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-muted);font-size:.85rem">Delivery</span><span style="font-weight:500">Pan-India</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="sg-group">
+      <h3>Trust Compact Bar &middot; <code>.trust-compact-grid</code></h3>
+      <div class="sg-demo sg-demo--col">
+        <div class="trust-compact-grid" style="max-width:700px">
+          <div class="trust-compact-item">
+            <span class="trust-value">50+</span>
+            <span class="trust-label">MOQ</span>
+          </div>
+          <div class="trust-compact-item">
+            <span class="trust-value">Pan India</span>
+            <span class="trust-label">Delivery</span>
+          </div>
+          <div class="trust-compact-item">
+            <span class="trust-value">Available</span>
+            <span class="trust-label">Branding</span>
+          </div>
+          <div class="trust-compact-item">
+            <span class="trust-value">Supported</span>
+            <span class="trust-label">Bulk Orders</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="sg-group">
+      <h3>Section Header &middot; <code>.section-header</code></h3>
+      <div class="sg-demo sg-demo--col">
+        <div class="section-header" style="margin-bottom:0">
+          <h2>Browse by Collection</h2>
+          <p class="section-intro">Curated collections crafted with intention, designed to strengthen relationships.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="sg-group">
+      <h3>Breadcrumb &middot; <code>.hamper-breadcrumb</code></h3>
+      <div class="sg-demo">
+        <div class="hamper-breadcrumb" style="border:0;padding:0;background:transparent">
+          <nav><a>Home</a><span class="hamper-breadcrumb-separator">/</span><a>Wellness Edit</a><span class="hamper-breadcrumb-separator">/</span><span class="hamper-breadcrumb-current">Coffee &amp; Calm</span></nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Components -->
+    <div class="sg-group">
+      <h3>Future Components (CSS ready, not yet in HTML)</h3>
+      <div class="sg-demo">
+        <span class="badge">Badge</span>
+        <span class="badge badge--bronze">Badge Bronze</span>
+        <span class="chip">Filter Chip</span>
+      </div>
+      <div class="sg-demo sg-demo--col" style="margin-top:1rem">
+        <div class="empty-state" style="padding:2rem">
+          <h3>No Products Found</h3>
+          <p>Try adjusting your filters or browse our full collection.</p>
+          <a class="btn-action btn-primary btn-small">Browse All</a>
+        </div>
+      </div>
+      <div class="sg-note"><code>.toast</code> (slide-up notification) also ready in CSS. Activated via <code>.toast.visible</code>.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- BLOCKS                                                        -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="blocks">
+    <h2>Blocks</h2>
+    <p class="sg-section-sub">Reusable section compositions rendered with real classes. Each block is a full page section that can appear on multiple pages.</p>
+
+    <!-- Hero Variants -->
+    <div class="sg-group">
+      <h3>Hero Sections &middot; design.md &sect;17</h3>
+
+      <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem">Homepage Hero &middot; <code>.hero-section</code></div>
+      <div class="sg-demo sg-demo--dark sg-demo--col" style="padding:4rem 2rem;text-align:center">
+        <span style="font-family:var(--font-sans);font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-bronze)">The Biz Gift</span>
+        <h2 style="font-family:var(--font-serif);font-size:3rem;font-weight:400;color:var(--text-light);margin:1rem 0">Premium Corporate Gifts</h2>
+        <p style="font-size:var(--font-size-body);color:rgba(255,255,255,0.65);max-width:500px;margin:0 auto 2rem">Curated gifting experiences designed to be remembered.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a class="btn-action btn-primary">Explore Collection</a>
+          <a class="btn-action btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:0.4rem"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+
+      <div style="font-size:0.75rem;color:var(--text-muted);margin:1.5rem 0 0.5rem">About Hero &middot; <code>.about-hero-section</code></div>
+      <div class="sg-demo sg-demo--dark sg-demo--col" style="padding:3rem 2rem;text-align:center">
+        <span style="font-family:var(--font-sans);font-size:var(--font-size-overline);text-transform:uppercase;letter-spacing:0.15em;color:var(--accent-bronze)">The Biz Gift</span>
+        <h1 style="font-family:var(--font-serif);font-size:3.5rem;font-weight:400;color:var(--text-light);margin:0.5rem 0">Our Story</h1>
+        <p style="font-size:var(--font-size-body);color:rgba(255,255,255,0.6)">Intentional gifting for the modern workplace.</p>
+      </div>
+
+      <div style="font-size:0.75rem;color:var(--text-muted);margin:1.5rem 0 0.5rem">Hamper / PDP Hero &middot; <code>.hamper-hero</code></div>
+      <div class="sg-demo sg-demo--col" style="background:var(--bg-ivory);padding:2rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+          <div style="background:var(--surface-white);border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1/1">
+            <img src="/image/BCC%20Hamper%202.png" alt="Product" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+          </div>
+          <div>
+            <div class="hamper-breadcrumb" style="border:0;padding:0;background:transparent;margin-bottom:1rem">
+              <nav><a>Home</a><span class="hamper-breadcrumb-separator">/</span><a>Premium</a><span class="hamper-breadcrumb-separator">/</span><span class="hamper-breadcrumb-current">CC Hamper</span></nav>
+            </div>
+            <span class="collection-tag" style="margin-bottom:0.75rem;display:inline-block">Premium Collection</span>
+            <h2 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;margin:0.5rem 0">The CC Hamper</h2>
+            <p style="font-size:var(--font-size-body);color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem">A thoughtfully curated coffee experience designed for employee appreciation.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+              <a class="hamper-hero-chip"><span class="chip-dot"></span>Employee Gifting</a>
+              <a class="hamper-hero-chip"><span class="chip-dot"></span>Premium Picks</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="sg-label mt-48">
-      <span class="sg-name">Hero Editorial</span>
-      <span class="sg-tag sg-tag--class">.hero-editorial</span>
-    </div>
-    <div class="hero-editorial">
-      <div class="left">
-        <div class="badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg> Trusted by 500+ companies</div>
-        <div>
-          <h1>Made for<br><em>meaningful</em> moments</h1>
-          <p class="lede">From employee onboarding to client appreciation, every gift tells a story of thoughtfulness.</p>
-        </div>
-        <button class="btn btn-primary">Explore Gifts <span class="arrow">→</span></button>
-      </div>
-      <div class="right">
-        <div class="stat-row">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/></svg></div>
-          <div><div class="num">500+</div><div class="lbl">Corporate Clients</div></div>
-        </div>
-        <div class="stat-row">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="11" rx="1.5"/><path d="M14 9h4l3 3v5h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div>
-          <div><div class="num">50K+</div><div class="lbl">Hampers Delivered</div></div>
-        </div>
-        <hr>
-        <div class="stat-row">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-          <div><div class="num">Pan-India</div><div class="lbl">Delivery Network</div></div>
-        </div>
-        <div class="avatars">
-          <span style="background-image:url('/image/BCC%20Hamper.png')"></span>
-          <span style="background-image:url('/image/Premium%20Joining%20Kit.png')"></span>
-          <span style="background-image:url('/image/Self%20Care%20Hamper%20V2.png')"></span>
-          <span style="background-image:url('/image/Bottle%20Hamper.png')"></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sg-label mt-48">
-      <span class="sg-name">Hero Bold</span>
-      <span class="sg-tag sg-tag--class">.hero-bold</span>
-    </div>
-    <div class="hero-bold">
-      <div class="inner">
-        <div class="small-line">— The Biz Gift</div>
-        <h1 class="title">Made for<br>meaningful</h1>
-        <button class="btn btn-primary mt-24">Discover Our Story <span class="arrow">→</span></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== PROCESS ====== -->
-<section class="section reveal" id="process">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">12 · Process</span>
-        <h2 class="h2" style="margin-top:12px">How it works</h2>
-      </div>
-      <p class="body" style="max-width:42ch">A four-step process block with visual anchor. Dashed connector line between steps.</p>
-    </div>
-
-    <div class="process">
-      <div class="intro">
-        <h2>From brief<br>to box</h2>
-        <div class="line"></div>
-        <div class="play">
-          <div class="ply"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          See how it works
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
-          <span class="num">01</span>
-          <h4>Share your brief</h4>
-          <p>Tell us about your recipients, occasion and budget.</p>
-        </div>
-        <div class="step">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-          <span class="num">02</span>
-          <h4>We curate</h4>
-          <p>Our team selects the perfect products and packaging.</p>
-        </div>
-        <div class="step">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.2"/></svg></div>
-          <span class="num">03</span>
-          <h4>Customise it</h4>
-          <p>Add your logo, notes and personal touches.</p>
-        </div>
-        <div class="step">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="11" rx="1.5"/><path d="M14 9h4l3 3v5h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div>
-          <span class="num">04</span>
-          <h4>We deliver</h4>
-          <p>Pan-India delivery with reliable timelines.</p>
-        </div>
-      </div>
-      <div class="visual"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== INFO CARDS ====== -->
-<section class="section reveal" id="info">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">13 · Info Cards</span>
-        <h2 class="h2" style="margin-top:12px">Content blocks</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Dark and light info card variants. Dark cards use background images with gradient overlays for readability.</p>
-    </div>
-
-    <div class="info-row">
-      <div class="info-dark">
-        <div class="mark">B</div>
-        <div>
-          <span class="eyebrow">Why The Biz Gift</span>
-          <h3>Thoughtful curation,<br>premium presentation</h3>
-          <p>We transform corporate gifting into memorable experiences that strengthen relationships.</p>
-        </div>
-      </div>
-      <div class="info-light">
-        <div>
-          <h3>Everything you need</h3>
-          <ul>
-            <li>Curated product selection</li>
-            <li>Brand customisation</li>
-            <li>Premium packaging</li>
-            <li>Pan-India delivery</li>
-          </ul>
-          <button class="btn btn-primary btn-sm">Get Started <span class="arrow">→</span></button>
-        </div>
-        <div class="visual"></div>
-      </div>
-      <div class="info-dark" style="background-image:linear-gradient(180deg,rgba(20,17,15,.85),rgba(20,17,15,.85)), url('/image/From%20Brief%20to%20Box/Client%20Appreciation%20Hamper.jpeg')">
-        <div class="mark">B</div>
-        <div>
-          <span class="eyebrow">Corporate Gifting</span>
-          <h3>Built for<br>businesses</h3>
-          <p>From 10 to 10,000 units — we deliver consistency at scale.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== OCCASIONS ====== -->
-<section class="section reveal" id="occasions">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">14 · Occasions</span>
-        <h2 class="h2" style="margin-top:12px">Occasion-based discovery</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Filterable occasion cards with icon badges. Three visual variants: grid, minimal, and icon row.</p>
-    </div>
-
-    <div class="occasion-filters">
-      <span class="pill active">All Occasions</span>
-      <span class="pill">Employee Joining</span>
-      <span class="pill">Client Appreciation</span>
-      <span class="pill">Festivals</span>
-      <span class="pill">Milestones</span>
-    </div>
-
-    <div class="occasion-grid">
-      <div class="occasion-card">
-        <div class="img" style="background-image:url('/image/Premium%20Joining%20Kit.png')"></div>
-        <div class="body">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h4>Employee Joining</h4>
-          <p>Welcome new team members with a thoughtful joining kit.</p>
-        </div>
-      </div>
-      <div class="occasion-card">
-        <div class="img" style="background-image:url('/image/From%20Brief%20to%20Box/Client%20Appreciation%20Hamper.jpeg')"></div>
-        <div class="body">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-          <h4>Client Appreciation</h4>
-          <p>Show gratitude to your valued clients and partners.</p>
-        </div>
-      </div>
-      <div class="occasion-card">
-        <div class="img" style="background-image:url('/image/PFA-Premium-Festive-Assortment.png')"></div>
-        <div class="body">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <h4>Festivals</h4>
-          <p>Celebrate Diwali, Christmas and more with curated hampers.</p>
-        </div>
-      </div>
-      <div class="occasion-card">
-        <div class="img" style="background-image:url('/image/BCC%20Hamper.png')"></div>
-        <div class="body">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
-          <h4>Milestones</h4>
-          <p>Mark achievements and work anniversaries with style.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FAQ ====== -->
-<section class="section reveal" id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">15 · FAQ</span>
-        <h2 class="h2" style="margin-top:12px">Frequently asked questions</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Accordion with smooth max-height transition. Chevron rotates on expand.</p>
-    </div>
-
-    <div class="sg-faq-layout">
-      <div>
-        <div class="sg-faq-item">
-          <button class="sg-faq-question" aria-expanded="false">What is the minimum order quantity? <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-          <div class="sg-faq-answer"><div class="inner">Our minimum order quantity starts at 10 units per hamper design. For larger corporate orders, we offer volume-based pricing and dedicated account management.</div></div>
-        </div>
-        <div class="sg-faq-item">
-          <button class="sg-faq-question" aria-expanded="false">Can I customise the contents of the hamper? <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-          <div class="sg-faq-answer"><div class="inner">Yes, absolutely. You can customise the hamper contents, add your brand logo or messaging, and even choose sustainable packaging options tailored to your brand.</div></div>
-        </div>
-        <div class="sg-faq-item">
-          <button class="sg-faq-question" aria-expanded="false">What is the typical delivery timeline? <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-          <div class="sg-faq-answer"><div class="inner">Standard delivery takes 7–10 working days from order confirmation. Rush orders can be accommodated for an additional fee — please discuss with our team.</div></div>
-        </div>
-        <div class="sg-faq-item">
-          <button class="sg-faq-question" aria-expanded="false">Can I add my brand logo or messaging? <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-          <div class="sg-faq-answer"><div class="inner">Yes. We offer full brand customisation including logo placement on boxes, custom ribbons, personalised cards and branded packaging inserts.</div></div>
-        </div>
-        <div class="sg-faq-item">
-          <button class="sg-faq-question" aria-expanded="false">Do you deliver across India? <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-          <div class="sg-faq-answer"><div class="inner">Yes, we deliver pan-India with reliable logistics partners. We also offer scheduled delivery for multi-location corporate gifting programs.</div></div>
-        </div>
-      </div>
-      <div class="sg-faq-sidebar">
-        <h4>Still have questions?</h4>
-        <p>Our team is here to help you find the perfect gifting solution for your organisation.</p>
-        <button class="btn btn-primary btn-sm">Contact Us <span class="arrow">→</span></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== QUOTE FORM ====== -->
-<section class="section reveal" id="quote">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">16 · Quote Form</span>
-        <h2 class="h2" style="margin-top:12px">Request a proposal</h2>
-      </div>
-      <p class="body" style="max-width:42ch">A two-column form block with warm beige background. Left side has form fields, right side has a visual anchor.</p>
-    </div>
-
-    <div class="quote-form">
-      <div>
-        <h2>Let's create something memorable</h2>
-        <p>Tell us about your gifting needs and we'll curate a proposal tailored to your organisation.</p>
-        <div class="field">
-          <label>Full Name</label>
-          <input class="input" type="text" placeholder="Enter your name">
-        </div>
-        <div class="field mt-16">
-          <label>Work Email</label>
-          <input class="input" type="email" placeholder="you@company.com">
-        </div>
-        <div class="field mt-16">
-          <label>Company Name</label>
-          <input class="input" type="text" placeholder="Your organisation">
-        </div>
-        <div class="field mt-16">
-          <label>Tell us about your gifting needs</label>
-          <textarea class="textarea" placeholder="Recipients, occasion, budget, timeline..."></textarea>
-        </div>
-        <button class="btn btn-primary mt-24">Request Proposal <span class="arrow">→</span></button>
-      </div>
-      <div class="visual" style="background-image:url('/image/From%20Brief%20to%20Box/Client%20Appreciation%20Hamper.jpeg')"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FOOTER ====== -->
-<section class="section reveal" id="footer">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">17 · Footer</span>
-        <h2 class="h2" style="margin-top:12px">Site footer</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Dark footer with four-column grid, newsletter signup, and bottom bar. All text on dark backgrounds has improved contrast.</p>
-    </div>
-
-    <div class="footer">
-      <div class="footer-grid">
-        <div class="brand-blk">
-          <h3>The Biz Gift</h3>
-          <p>Thoughtful corporate gifting, designed to be remembered. Premium curation for meaningful relationships.</p>
-          <div class="sub">
-            <input type="email" placeholder="Enter your email">
-            <button>Subscribe</button>
+    <!-- How It Works -->
+    <div class="sg-group">
+      <h3>How It Works / Process &middot; <code>.process-grid</code></h3>
+      <div class="sg-demo sg-demo--col" style="background:var(--bg-ivory)">
+        <div class="section-header" style="margin-bottom:2rem"><h2>How It Works</h2></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem">
+          <div style="text-align:center">
+            <div style="width:60px;height:60px;border-radius:50%;background:var(--bg-charcoal);color:var(--text-light);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-serif);font-size:1.5rem">1</div>
+            <h4 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.5rem">Tell Us</h4>
+            <p style="font-size:var(--font-size-small);color:var(--text-muted)">Share your requirements</p>
+          </div>
+          <div style="text-align:center">
+            <div style="width:60px;height:60px;border-radius:50%;background:var(--bg-charcoal);color:var(--text-light);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-serif);font-size:1.5rem">2</div>
+            <h4 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.5rem">We Curate</h4>
+            <p style="font-size:var(--font-size-small);color:var(--text-muted)">Personalised recommendations</p>
+          </div>
+          <div style="text-align:center">
+            <div style="width:60px;height:60px;border-radius:50%;background:var(--bg-charcoal);color:var(--text-light);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-serif);font-size:1.5rem">3</div>
+            <h4 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.5rem">Customise</h4>
+            <p style="font-size:var(--font-size-small);color:var(--text-muted)">Add your branding</p>
+          </div>
+          <div style="text-align:center">
+            <div style="width:60px;height:60px;border-radius:50%;background:var(--bg-charcoal);color:var(--text-light);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-serif);font-size:1.5rem">4</div>
+            <h4 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.5rem">Deliver</h4>
+            <p style="font-size:var(--font-size-small);color:var(--text-muted)">Pan-India delivery</p>
           </div>
         </div>
-        <div>
-          <h6>Collections</h6>
-          <ul>
-            <li><a>Signature Hampers</a></li>
-            <li><a>Premium</a></li>
-            <li><a>Sustainable</a></li>
-            <li><a>Wellness</a></li>
-            <li><a>Executive</a></li>
-          </ul>
-        </div>
-        <div>
-          <h6>Company</h6>
-          <ul>
-            <li><a>About Us</a></li>
-            <li><a>Our Story</a></li>
-            <li><a>Blog</a></li>
-            <li><a>Careers</a></li>
-            <li><a>Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h6>Support</h6>
-          <ul>
-            <li><a>FAQ</a></li>
-            <li><a>Shipping</a></li>
-            <li><a>Returns</a></li>
-            <li><a>Privacy Policy</a></li>
-            <li><a>Terms of Service</a></li>
-          </ul>
+      </div>
+    </div>
+
+    <!-- Split Content -->
+    <div class="sg-group">
+      <h3>Split Content Block &middot; <code>.origin-grid</code> / <code>.craft-grid</code></h3>
+      <div class="sg-demo sg-demo--col" style="background:var(--bg-ivory)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
+          <div style="border-radius:var(--radius-lg);overflow:hidden">
+            <img src="/image/BCC%20Hamper.png" alt="Split content" style="width:100%;display:block" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+          </div>
+          <div>
+            <h2 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;margin-bottom:1rem">It Started With A Simple Observation.</h2>
+            <p style="color:var(--text-muted);line-height:1.7">Corporate gifting in India had become an afterthought. We built this brand to change that standard.</p>
+          </div>
         </div>
       </div>
-      <div class="bottom">
-        <span>&copy; 2026 The Biz Gift. All rights reserved.</span>
-        <span>Designed with care in India</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== STATES ====== -->
-<section class="section reveal" id="states">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">18 · States</span>
-        <h2 class="h2" style="margin-top:12px">Error & empty states</h2>
-      </div>
-      <p class="body" style="max-width:42ch">Error 404 block and empty state placeholder. Both use centred layout with generous padding.</p>
+      <div class="sg-note">Reused on About (origin, craft) and Customisation (why). Reverses column order on alternate rows with <code>direction: rtl</code>.</div>
     </div>
 
-    <div class="grid g-2">
-      <div class="error-block">
-        <div class="code">404</div>
-        <h3>Page not found</h3>
-        <p>The page you're looking for doesn't exist or has been moved.</p>
-        <button class="btn btn-primary btn-sm">Back to Home <span class="arrow">→</span></button>
+    <!-- Final CTA -->
+    <div class="sg-group">
+      <h3>Final CTA Block &middot; <code>.section-final-cta</code></h3>
+      <div class="sg-demo sg-demo--dark sg-demo--col" style="text-align:center;padding:4rem 2rem">
+        <h2 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;color:var(--text-light);margin-bottom:1rem">Let's Create Something Memorable</h2>
+        <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto 2rem">Tell us about your team and we'll curate gifting options that feel unmistakably you.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a class="btn-action btn-primary btn-large">Request A Proposal</a>
+          <a class="btn-action btn-secondary btn-large">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:0.4rem"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
       </div>
-      <div class="empty-state">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/></svg></div>
-        <h4>No hampers yet</h4>
-        <p>Your curated collection is empty. Start exploring our signature hampers.</p>
-        <button class="btn btn-primary btn-sm">Explore Gifts <span class="arrow">→</span></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== PRODUCTION INVENTORY ====== -->
-<section class="section reveal" id="inventory">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">19 · Production Inventory</span>
-        <h2 class="h2" style="margin-top:12px">Merged production reference</h2>
-      </div>
-      <p class="body" style="max-width:42ch">The original production-mapped UI inventory embedded for reference. All components above are mapped to live CSS classes.</p>
+      <div class="sg-note">Appears on Home, About, Explore, Customisation. Copy varies per page but structure is identical.</div>
     </div>
 
-    <div class="merge-note-grid">
-      <div class="merge-note-card">
-        <div class="num">01</div>
-        <h4>Brand + Foundations</h4>
-        <p class="small">Logo, palette, typography, spacing, radius, elevation, iconography and motion from the production inventory.</p>
-      </div>
-      <div class="merge-note-card">
-        <div class="num">02</div>
-        <h4>Production Components</h4>
-        <p class="small">Buttons, cards, chips, forms, FAQ, nav, footer, WhatsApp, breadcrumbs, trust bars and CSS-ready states.</p>
-      </div>
-      <div class="merge-note-card">
-        <div class="num">03</div>
-        <h4>Reusable Blocks + Docs</h4>
-        <p class="small">Hero variants, process, split content, CTA, newsletter, site map, shared includes and canonical documentation index.</p>
+    <!-- Blockquote / POV -->
+    <div class="sg-group">
+      <h3>Blockquote / POV Panel &middot; <code>.about-pov</code></h3>
+      <div class="sg-demo sg-demo--col" style="padding:3rem;text-align:center;background:var(--bg-ivory)">
+        <div style="width:60px;height:3px;background:var(--accent-copper);margin:0 auto 2rem"></div>
+        <blockquote style="font-family:var(--font-serif);font-size:1.75rem;font-weight:400;font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;color:var(--text-dark)">
+          "A gift is rarely just a gift. It's a message about how much a relationship matters."
+        </blockquote>
       </div>
     </div>
 
-    <div class="merge-frame-shell mt-48">
-      <div class="merge-frame-toolbar">
-        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <p>Embedded production UI inventory · mapped to live HTML/CSS</p>
+    <!-- Newsletter -->
+    <div class="sg-group">
+      <h3>Newsletter Signup &middot; <code>.section-newsletter</code></h3>
+      <div class="sg-demo sg-demo--dark sg-demo--col" style="text-align:center;padding:3rem 2rem">
+        <h2 style="font-family:var(--font-serif);font-size:2rem;font-weight:400;color:var(--text-light);margin-bottom:0.75rem">Stay in the Loop</h2>
+        <p style="font-size:var(--font-size-small);color:rgba(255,255,255,0.6);margin-bottom:1.5rem">New collections, gifting insights, and exclusive previews.</p>
+        <form class="newsletter-form" onsubmit="return false" style="max-width:420px;margin:0 auto">
+          <input type="email" placeholder="Your work email">
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
-      <iframe class="merge-frame" src="/docs/reference/production-ui-inventory.html" title="Production-mapped UI inventory"></iframe>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ====== END / SIGN-OFF ====== -->
-<section class="section" style="text-align:center;padding-bottom:120px">
-  <div class="wrap">
-    <div class="signature" style="font-family:var(--font-script);font-size:48px;color:var(--bronze-deep);line-height:1">The Biz Gift</div>
-    <p class="eyebrow mt-16">Style Guide · v2.0 · Crafted with care</p>
-  </div>
-</section>
+  <!-- ============================================================= -->
+  <!-- SITE MAP                                                      -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="sitemap">
+    <h2>Site Architecture</h2>
+    <p class="sg-section-sub">Page hierarchy, shared components, and stylesheet mapping.</p>
+
+    <div class="sg-group">
+      <h3>Page Hierarchy</h3>
+      <div style="font-family:var(--font-sans);font-size:var(--font-size-small);line-height:2.2;padding:2rem;border:1px solid var(--border-light);border-radius:var(--radius-lg)">
+        <div><strong>/</strong> &mdash; Homepage <span style="color:var(--text-muted)">(index.html &rarr; style.css + pages.css)</span></div>
+        <div style="padding-left:1.5rem">/explore/ &mdash; Explore Hub <span style="color:var(--text-muted)">(explore/index.html)</span></div>
+        <div style="padding-left:3rem">/hamper/cc-hamper/ &mdash; The CC Hamper <span style="color:var(--text-muted)">(hamper.css + hamper.js)</span></div>
+        <div style="padding-left:3rem">/hamper/executive-welcome-kit/ &mdash; Executive Welcome Kit</div>
+        <div style="padding-left:3rem">/hamper/premium-desk-set/ &mdash; Premium Desk Set</div>
+        <div style="padding-left:3rem">/hamper/coffee-calm/ &mdash; Curated Coffee &amp; Calm</div>
+        <div style="padding-left:3rem">/hamper/heritage-box/ &mdash; The Heritage Box</div>
+        <div style="padding-left:3rem">/hamper/festive-celebration-box/ &mdash; Festive Celebration Box</div>
+        <div style="padding-left:1.5rem">/customisation.html &mdash; Customisation Studio</div>
+        <div style="padding-left:1.5rem">/about.html &mdash; Our Story</div>
+        <div style="padding-left:1.5rem">/quote.html &mdash; Request a Quote</div>
+        <div style="padding-left:1.5rem">/privacy.html &mdash; Privacy Policy</div>
+        <div style="padding-left:1.5rem">/terms.html &mdash; Terms &amp; Conditions</div>
+        <div style="padding-left:1.5rem">/sitemap.html &mdash; Sitemap</div>
+      </div>
+    </div>
+
+    <div class="sg-group">
+      <h3>Shared Components (via components.js)</h3>
+      <table class="sg-table">
+        <thead><tr><th>Component</th><th>File</th><th>Injected into</th><th>Stylesheet</th></tr></thead>
+        <tbody>
+          <tr><td>Header + Mega Menu + Mobile Nav</td><td><code>header.html</code></td><td><code>#header-placeholder</code></td><td><code>style.css</code></td></tr>
+          <tr><td>Newsletter Signup</td><td><code>newsletter.html</code></td><td><code>#newsletter-placeholder</code></td><td><code>style.css</code></td></tr>
+          <tr><td>Footer + WhatsApp Widget</td><td><code>footer.html</code></td><td><code>#footer-placeholder</code></td><td><code>style.css</code></td></tr>
+        </tbody>
+      </table>
+      <div class="sg-note"><strong>Why only 3?</strong> CTA sections, trust blocks, FAQ accordions vary in content per page (different headings, card counts). Extracting them would require a templating engine. Header, footer, and newsletter are truly identical everywhere.</div>
+    </div>
+
+    <div class="sg-group">
+      <h3>Stylesheet Architecture</h3>
+      <table class="sg-table">
+        <thead><tr><th>File</th><th>Scope</th><th>design.md sections</th></tr></thead>
+        <tbody>
+          <tr><td><code>style.css</code></td><td>Global tokens, reset, shared components, cards, nav, footer</td><td>&sect;05&ndash;14, &sect;18</td></tr>
+          <tr><td><code>pages.css</code></td><td>Page-specific sections (about, explore, quote, customisation)</td><td>&sect;17</td></tr>
+          <tr><td><code>hamper/hamper.css</code></td><td>Product detail page (gallery, specs, FAQ, related)</td><td>&sect;24</td></tr>
+          <tr><td><code>styleguide.css</code></td><td>This inventory page only (not deployed)</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- DOCS                                                          -->
+  <!-- ============================================================= -->
+  <section class="sg-section" id="docs">
+    <h2>Documentation Index</h2>
+    <p class="sg-section-sub">Canonical references. Each document has a distinct responsibility with minimal overlap. Links open the raw files on GitHub.</p>
+
+    <table class="sg-table">
+      <thead><tr><th>Document</th><th>Responsibility</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/design.md" target="_blank" rel="noopener"><code>docs/design.md</code></a></td><td>Design System (v1.2) &mdash; 26-section canonical reference</td><td>Frozen</td></tr>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/master-brand-document.md" target="_blank" rel="noopener"><code>docs/master-brand-document.md</code></a></td><td>Brand Strategy &mdash; mission, values, voice, positioning</td><td>Frozen</td></tr>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/build.md" target="_blank" rel="noopener"><code>docs/build.md</code></a></td><td>Engineering Reference &mdash; code standards, architecture</td><td>Frozen</td></tr>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/content-architecture.md" target="_blank" rel="noopener"><code>docs/content-architecture.md</code></a></td><td>Content Architecture &mdash; taxonomy, Airtable schema</td><td>Active</td></tr>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/decision-log.md" target="_blank" rel="noopener"><code>docs/decision-log.md</code></a></td><td>Decision Log &mdash; 10 settled architectural decisions</td><td>Active</td></tr>
+        <tr><td><a href="https://github.com/wugweb-git/thebizgift/blob/main/docs/production-launch-checklist.md" target="_blank" rel="noopener"><code>docs/production-launch-checklist.md</code></a></td><td>Production Launch Checklist &mdash; all pre-launch items</td><td>Active</td></tr>
+        <tr><td><code>docs/tokens/*.json</code></td><td>Design Tokens (7 files) &mdash; colors, typography, spacing, radius, elevation, motion, zindex</td><td>Frozen</td></tr>
+      </tbody>
+    </table>
+  </section>
 
 <script>
-// FAQ accordion
-document.querySelectorAll('.sg-faq-question').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var expanded=btn.getAttribute('aria-expanded')==='true';
-    btn.setAttribute('aria-expanded',!expanded);
-    btn.nextElementSibling.classList.toggle('open');
-  });
-});
-
-// Occasion filter pills
-document.querySelectorAll('.occasion-filters .pill').forEach(function(pill){
-  pill.addEventListener('click',function(){
-    pill.closest('.occasion-filters').querySelectorAll('.pill').forEach(function(p){p.classList.remove('active')});
-    pill.classList.add('active');
-  });
-});
-
 // Scroll reveal with IntersectionObserver
 (function(){
-  var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger');
+  var revealEls = document.querySelectorAll('.sg-section');
   if (revealEls.length === 0) return;
+  revealEls.forEach(function(el) { el.classList.add('reveal'); });
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -1669,13 +1037,13 @@ document.querySelectorAll('.occasion-filters .pill').forEach(function(pill){
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-  revealEls.forEach(function(el) { observer.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 })();
 
 // Sticky nav active state on scroll
 (function(){
-  var sections = document.querySelectorAll('.section[id]');
-  var navLinks = document.querySelectorAll('.kit-nav ul a');
+  var sections = document.querySelectorAll('.sg-section[id]');
+  var navLinks = document.querySelectorAll('.sg-nav a');
   if (sections.length === 0 || navLinks.length === 0) return;
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
