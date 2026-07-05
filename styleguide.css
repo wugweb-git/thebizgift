@@ -1,17 +1,106 @@
 /* ==========================================================================
-   STYLEGUIDE — showcase chrome only.
-   Renders the REAL design system (style.css / pages.css tokens + components),
-   labeled and mapped to design.md. This file adds only the inventory chrome:
-   section frames, label chips, swatches, spec readouts, sticky nav.
+   STYLEGUIDE CHROME — inventory frames, label chips, swatches, spec readouts
+   Enhanced with brand animation tokens from docs/tokens/motion.json
    ========================================================================== */
 
+/* ---------- Animation Keyframes ---------- */
+@keyframes sg-fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes sg-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes sg-scale-up {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes sg-slide-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes sg-slide-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes sg-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---------- Reveal System ---------- */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.reveal.revealed {
+  animation: sg-fade-up 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-left.revealed {
+  animation: sg-slide-left 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-right.revealed {
+  animation: sg-slide-right 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-scale.revealed {
+  animation: sg-scale-up 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-stagger.revealed .sg-stagger-child {
+  opacity: 0;
+  animation: sg-fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-delay-1  { animation-delay: 80ms !important; }
+.reveal-delay-2  { animation-delay: 160ms !important; }
+.reveal-delay-3  { animation-delay: 240ms !important; }
+.reveal-delay-4  { animation-delay: 320ms !important; }
+.reveal-delay-5  { animation-delay: 400ms !important; }
+.reveal-delay-6  { animation-delay: 480ms !important; }
+.reveal-delay-7  { animation-delay: 560ms !important; }
+.reveal-delay-8  { animation-delay: 640ms !important; }
+
+.reveal-stagger.revealed .sg-stagger-child:nth-child(1)  { animation-delay: 80ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(2)  { animation-delay: 160ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(3)  { animation-delay: 240ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(4)  { animation-delay: 320ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(5)  { animation-delay: 400ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(6)  { animation-delay: 480ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(7)  { animation-delay: 560ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(8)  { animation-delay: 640ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(9)  { animation-delay: 720ms; }
+.reveal-stagger.revealed .sg-stagger-child:nth-child(10) { animation-delay: 800ms; }
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    animation: none !important;
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Body ---------- */
 .sg-body {
   background: var(--bg-ivory);
   color: var(--text-dark);
   font-family: var(--font-sans);
 }
 
-/* --- Top bar --- */
+/* ---------- Top Bar ---------- */
 .sg-topbar {
   position: sticky;
   top: 0;
@@ -43,13 +132,12 @@
 }
 .sg-nav a {
   font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.7);
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .sg-nav a:hover {
   color: var(--bg-charcoal);
@@ -57,7 +145,7 @@
   border-color: var(--accent-bronze);
 }
 
-/* --- Section --- */
+/* ---------- Section ---------- */
 .sg-section {
   max-width: 1200px;
   margin: 0 auto;
@@ -76,19 +164,22 @@
   margin-bottom: 2.5rem;
   max-width: 680px;
 }
-.sg-group { margin-bottom: 3rem; }
-.sg-group:last-child { margin-bottom: 0; }
+.sg-group {
+  margin-bottom: 3rem;
+}
+.sg-group:last-child {
+  margin-bottom: 0;
+}
 .sg-group > h3 {
   font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--accent-copper);
   margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-light);
 }
 
-/* --- Label chip (the mapping device) --- */
+/* ---------- Label Chip ---------- */
 .sg-label {
   display: flex;
   flex-wrap: wrap;
@@ -112,12 +203,12 @@
   white-space: nowrap;
 }
 .sg-tag--ref   { background: rgba(197,154,127,0.18); color: #7a5a42; }
-.sg-tag--class { background: rgba(44,44,42,0.08); color: var(--text-dark); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-.sg-tag--token { background: rgba(184,115,51,0.14); color: #8a531f; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.sg-tag--class { background: rgba(44,44,42,0.08); color: var(--text-dark); font-family: ui-monospace, monospace; }
+.sg-tag--token { background: rgba(184,115,51,0.14); color: #8a531f; font-family: ui-monospace, monospace; }
 .sg-tag--recycle { background: #16A34A; color: #fff; }
 .sg-tag--gap   { background: #DC2626; color: #fff; }
 
-/* --- Demo stage --- */
+/* ---------- Demo Stage ---------- */
 .sg-demo {
   padding: 2rem;
   border: 1px solid var(--border-light);
@@ -128,10 +219,15 @@
   gap: 1rem;
   align-items: center;
 }
-.sg-demo--dark { background: var(--bg-charcoal); }
-.sg-demo--col { flex-direction: column; align-items: stretch; }
+.sg-demo--dark {
+  background: var(--bg-charcoal);
+}
+.sg-demo--col {
+  flex-direction: column;
+  align-items: stretch;
+}
 
-/* --- Swatch grids --- */
+/* ---------- Swatch Grid ---------- */
 .sg-swatches {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -149,7 +245,7 @@
 .sg-swatch-info .v { font-size: 0.7rem; color: var(--text-muted); font-family: ui-monospace, monospace; }
 .sg-swatch-info .u { font-size: 0.66rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-/* --- Type specimens --- */
+/* ---------- Type Specimens ---------- */
 .sg-type-row {
   display: flex;
   align-items: baseline;
@@ -165,12 +261,12 @@
   font-family: ui-monospace, monospace;
 }
 
-/* --- Spacing bars --- */
+/* ---------- Spacing Bars ---------- */
 .sg-space-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
-.sg-space-bar { height: 16px; background: var(--accent-bronze); border-radius: 2px; }
+.sg-space-bar { height: 16px; background: var(--accent-bronze); border-radius: 2px; transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .sg-space-row .lbl { font-size: 0.72rem; color: var(--text-muted); font-family: ui-monospace, monospace; min-width: 90px; }
 
-/* --- Radius / elevation tiles --- */
+/* ---------- Radius / Elevation Tiles ---------- */
 .sg-tiles { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .sg-tile {
   width: 120px; height: 90px;
@@ -183,7 +279,7 @@
   text-align: center;
 }
 
-/* --- Z-index stack --- */
+/* ---------- Z-index Stack ---------- */
 .sg-zstack { position: relative; height: 180px; }
 .sg-zlayer {
   position: absolute;
@@ -195,17 +291,18 @@
   font-family: ui-monospace, monospace;
 }
 
-/* --- States grid --- */
+/* ---------- States Grid ---------- */
 .sg-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 1rem; }
 .sg-state { border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1rem; background: var(--surface-white); }
-.sg-state .st { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-copper); margin-bottom: 0.6rem; }
+.sg-state .st { font-size: 0.66rem; letter-spacing: 0.08em; color: var(--accent-copper); margin-bottom: 0.6rem; }
 
-/* --- Mapping table --- */
+/* ---------- Mapping Table ---------- */
 .sg-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
 .sg-table th, .sg-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-light); vertical-align: top; }
-.sg-table th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.sg-table th { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--text-muted); }
 .sg-table code { font-family: ui-monospace, monospace; font-size: 0.74rem; background: rgba(44,44,42,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+/* ---------- Note Block ---------- */
 .sg-note {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -216,5 +313,31 @@
   margin-top: 1rem;
 }
 
-/* mini card grid for component demos */
+/* ---------- Mini Card Grid ---------- */
 .sg-cardrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; width: 100%; }
+
+/* ---------- Animations on Hover for Cards ---------- */
+.sg-tile,
+.sg-swatch,
+.sg-state {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sg-tile:hover,
+.sg-swatch:hover,
+.sg-state:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -12px rgba(30,30,30,0.15);
+}
+
+/* ---------- Sticky Nav Highlight on Scroll ---------- */
+.sg-nav a.active {
+  color: var(--bg-charcoal);
+  background: var(--accent-bronze);
+  border-color: var(--accent-bronze);
+}
+
+/* ---------- Smooth entrance on page load ---------- */
+.sg-body .sg-section:first-of-type .reveal-initial {
+  animation: sg-fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}

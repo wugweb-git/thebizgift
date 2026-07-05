@@ -11,3 +11,5 @@ claude.md
 
 # Claude Code local tooling
 .claude/
+.vercel
+.env*
