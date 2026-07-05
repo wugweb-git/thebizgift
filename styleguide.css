@@ -1,9 +1,6 @@
 /* ==========================================================================
-   STYLEGUIDE — showcase chrome only.
-   Renders the REAL design system (style.css / pages.css tokens + components),
-   labeled and mapped to design.md. This file adds only the inventory chrome:
-   section frames, label chips, swatches, spec readouts, sticky nav.
-   Enhanced with scroll-reveal animations and brand motion tokens.
+   STYLEGUIDE CHROME — inventory frames, label chips, swatches, spec readouts
+   Enhanced with brand animation tokens from docs/tokens/motion.json
    ========================================================================== */
 
 /* ---------- Animation Keyframes ---------- */
@@ -26,6 +23,10 @@
 @keyframes sg-slide-right {
   from { opacity: 0; transform: translateX(40px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes sg-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 /* ---------- Reveal System ---------- */
@@ -92,42 +93,6 @@
   }
 }
 
-/* ---------- Hover Lift for Cards ---------- */
-.sg-section .sg-demo > div[style*="border-radius"],
-.sg-section .sg-demo > a,
-.sg-section .sg-demo > .occasion-card,
-.sg-section .sg-demo > .collection-editorial-card,
-.sg-section .sg-demo > .selected-card,
-.sg-section .sg-demo > .create-card,
-.sg-section .sg-demo > .philosophy-card {
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.sg-section .sg-demo > div[style*="border-radius"]:hover,
-.sg-section .sg-demo > a:hover,
-.sg-section .sg-demo > .occasion-card:hover,
-.sg-section .sg-demo > .collection-editorial-card:hover,
-.sg-section .sg-demo > .selected-card:hover,
-.sg-section .sg-demo > .create-card:hover,
-.sg-section .sg-demo > .philosophy-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px -12px rgba(30,30,30,0.15);
-}
-
-/* ---------- Dark Background Readability ---------- */
-.sg-demo--dark p,
-.sg-demo--dark .section-intro,
-.sg-demo--dark .hamper-breadcrumb nav a,
-.sg-demo--dark .hamper-breadcrumb nav span {
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-}
-.sg-demo--dark h1,
-.sg-demo--dark h2,
-.sg-demo--dark h3,
-.sg-demo--dark h4 {
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
 /* ---------- Body ---------- */
 .sg-body {
   background: var(--bg-ivory);
@@ -135,7 +100,7 @@
   font-family: var(--font-sans);
 }
 
-/* --- Top bar --- */
+/* ---------- Top Bar ---------- */
 .sg-topbar {
   position: sticky;
   top: 0;
@@ -179,13 +144,8 @@
   background: var(--accent-bronze);
   border-color: var(--accent-bronze);
 }
-.sg-nav a.active {
-  color: var(--bg-charcoal);
-  background: var(--accent-bronze);
-  border-color: var(--accent-bronze);
-}
 
-/* --- Section --- */
+/* ---------- Section ---------- */
 .sg-section {
   max-width: 1200px;
   margin: 0 auto;
@@ -204,8 +164,12 @@
   margin-bottom: 2.5rem;
   max-width: 680px;
 }
-.sg-group { margin-bottom: 3rem; }
-.sg-group:last-child { margin-bottom: 0; }
+.sg-group {
+  margin-bottom: 3rem;
+}
+.sg-group:last-child {
+  margin-bottom: 0;
+}
 .sg-group > h3 {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
@@ -215,7 +179,7 @@
   border-bottom: 1px solid var(--border-light);
 }
 
-/* --- Label chip (the mapping device) --- */
+/* ---------- Label Chip ---------- */
 .sg-label {
   display: flex;
   flex-wrap: wrap;
@@ -244,7 +208,7 @@
 .sg-tag--recycle { background: #16A34A; color: #fff; }
 .sg-tag--gap   { background: #DC2626; color: #fff; }
 
-/* --- Demo stage --- */
+/* ---------- Demo Stage ---------- */
 .sg-demo {
   padding: 2rem;
   border: 1px solid var(--border-light);
@@ -255,10 +219,15 @@
   gap: 1rem;
   align-items: center;
 }
-.sg-demo--dark { background: var(--bg-charcoal); }
-.sg-demo--col { flex-direction: column; align-items: stretch; }
+.sg-demo--dark {
+  background: var(--bg-charcoal);
+}
+.sg-demo--col {
+  flex-direction: column;
+  align-items: stretch;
+}
 
-/* --- Swatch grids --- */
+/* ---------- Swatch Grid ---------- */
 .sg-swatches {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -276,7 +245,7 @@
 .sg-swatch-info .v { font-size: 0.7rem; color: var(--text-muted); font-family: ui-monospace, monospace; }
 .sg-swatch-info .u { font-size: 0.66rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-/* --- Type specimens --- */
+/* ---------- Type Specimens ---------- */
 .sg-type-row {
   display: flex;
   align-items: baseline;
@@ -292,12 +261,12 @@
   font-family: ui-monospace, monospace;
 }
 
-/* --- Spacing bars --- */
+/* ---------- Spacing Bars ---------- */
 .sg-space-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
-.sg-space-bar { height: 16px; background: var(--accent-bronze); border-radius: 2px; }
+.sg-space-bar { height: 16px; background: var(--accent-bronze); border-radius: 2px; transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .sg-space-row .lbl { font-size: 0.72rem; color: var(--text-muted); font-family: ui-monospace, monospace; min-width: 90px; }
 
-/* --- Radius / elevation tiles --- */
+/* ---------- Radius / Elevation Tiles ---------- */
 .sg-tiles { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .sg-tile {
   width: 120px; height: 90px;
@@ -310,7 +279,7 @@
   text-align: center;
 }
 
-/* --- Z-index stack --- */
+/* ---------- Z-index Stack ---------- */
 .sg-zstack { position: relative; height: 180px; }
 .sg-zlayer {
   position: absolute;
@@ -322,17 +291,18 @@
   font-family: ui-monospace, monospace;
 }
 
-/* --- States grid --- */
+/* ---------- States Grid ---------- */
 .sg-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 1rem; }
 .sg-state { border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1rem; background: var(--surface-white); }
 .sg-state .st { font-size: 0.66rem; letter-spacing: 0.08em; color: var(--accent-copper); margin-bottom: 0.6rem; }
 
-/* --- Mapping table --- */
+/* ---------- Mapping Table ---------- */
 .sg-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
 .sg-table th, .sg-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-light); vertical-align: top; }
 .sg-table th { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--text-muted); }
 .sg-table code { font-family: ui-monospace, monospace; font-size: 0.74rem; background: rgba(44,44,42,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+/* ---------- Note Block ---------- */
 .sg-note {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -343,5 +313,31 @@
   margin-top: 1rem;
 }
 
-/* mini card grid for component demos */
+/* ---------- Mini Card Grid ---------- */
 .sg-cardrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; width: 100%; }
+
+/* ---------- Animations on Hover for Cards ---------- */
+.sg-tile,
+.sg-swatch,
+.sg-state {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sg-tile:hover,
+.sg-swatch:hover,
+.sg-state:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -12px rgba(30,30,30,0.15);
+}
+
+/* ---------- Sticky Nav Highlight on Scroll ---------- */
+.sg-nav a.active {
+  color: var(--bg-charcoal);
+  background: var(--accent-bronze);
+  border-color: var(--accent-bronze);
+}
+
+/* ---------- Smooth entrance on page load ---------- */
+.sg-body .sg-section:first-of-type .reveal-initial {
+  animation: sg-fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}
