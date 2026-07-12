@@ -265,16 +265,16 @@ img {
 }
 
 .btn-secondary {
-  border-color: var(--text-light);
-  color: var(--text-light);
+  border-color: var(--accent-bronze);
+  color: var(--accent-copper);
 }
 
 .btn-secondary::before {
-  background-color: var(--text-light);
+  background-color: var(--accent-bronze);
 }
 
 .btn-secondary:hover {
-  color: var(--bg-charcoal);
+  color: var(--text-light);
 }
 
 .btn-action:active {
