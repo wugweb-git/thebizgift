@@ -49,9 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
    NEWSLETTER SIGNUP — posts to /api/submit-lead (Airtable)
    -------------------------------------------------------------------------- */
 function initNewsletter() {
-  const form = document.querySelector('.newsletter-form');
-  if (!form) return;
+  document.querySelectorAll('.newsletter-form').forEach(initNewsletterForm);
+}
 
+function initNewsletterForm(form) {
   const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 ||
                    location.protocol === 'file:';
   const input = form.querySelector('input[type="email"]');

@@ -71,7 +71,6 @@
 .hero-eyebrow {
   display: block;
   font-size: var(--font-size-small-button);
-  text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--accent-bronze);
   margin-bottom: 2rem;
@@ -150,33 +149,41 @@
 }
 
 .about-pov {
-  background-color: var(--bg-ivory);
+  background: var(--bg-charcoal);
   padding: 8rem var(--space-layout);
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .pov-container {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
-  text-align: center;
   position: relative;
 }
 
-.copper-accent {
-  width: 2px;
-  height: 80px;
-  background-color: var(--accent-copper);
-  margin: 0 auto 3rem;
+.pov-container::before {
+  content: '\201C';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: 12rem;
+  color: rgba(197, 154, 127, 0.14);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .about-pov blockquote {
   font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
+  font-size: clamp(1.75rem, 3.5vw, var(--font-size-h3));
   font-weight: 400;
   line-height: 1.3;
-  color: var(--text-dark);
+  color: var(--text-light);
   font-style: italic;
+  position: relative;
+  z-index: 1;
 }
 
 .about-pov blockquote p {
@@ -193,23 +200,39 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .philosophy-card {
-  text-align: center;
+  text-align: left;
   padding: 2rem;
-  transition: transform 0.4s var(--ease-standard);
+  background: var(--surface-white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: transform 0.35s var(--ease-standard), box-shadow 0.35s var(--ease-standard);
 }
 .philosophy-card:hover {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.philosophy-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ivory-soft);
+  color: var(--accent-copper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
 }
 
 .philosophy-card h3 {
   font-family: var(--font-serif);
   font-size: var(--font-size-h4);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
   color: var(--text-dark);
 }
 
@@ -593,7 +616,6 @@
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--accent-bronze);
   border: 1px solid rgba(197, 154, 127, 0.3);
   border-radius: var(--radius-full);
@@ -716,9 +738,24 @@
 
 .custom-cta {
   padding: 8rem var(--space-layout);
-  background-color: var(--bg-charcoal);
+  background: linear-gradient(180deg, #1A1613, #0F0D0B);
   color: var(--text-light);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(197, 154, 127, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+.custom-cta .container {
+  position: relative;
+  z-index: 1;
 }
 
 .custom-cta h2 {
@@ -823,9 +860,8 @@
 }
 
 .form-card {
-  background: var(--bg-ivory);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  background: var(--warm-beige);
+  border-radius: var(--radius-xl);
   padding: 3rem;
 }
 
@@ -870,23 +906,45 @@
 }
 
 .form-group input,
-.form-group select,
-.form-group textarea {
+.form-group select {
   font-family: var(--font-sans);
   font-size: var(--font-size-small);
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--border-form);
-  border-radius: var(--radius-md);
+  padding: 1rem 1.375rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-full);
   background: var(--surface-white);
   color: var(--text-dark);
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23A89E94' fill='none' stroke-width='1.6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1.375rem center;
+  padding-right: 2.75rem;
+}
+
+.form-group textarea {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-small);
+  padding: 1rem 1.375rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-white);
+  color: var(--text-dark);
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--accent-bronze);
+  box-shadow: 0 0 0 4px rgba(197, 154, 127, 0.15);
 }
 
 .form-group.full-width {
@@ -915,14 +973,13 @@
 .btn-submit {
   width: 100%;
   font-family: var(--font-sans);
-  font-size: var(--font-size-body);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  letter-spacing: 0.18em;
   background: var(--accent-bronze);
   color: var(--bg-charcoal);
   border: none;
-  padding: 1.1rem;
+  padding: 1.125rem;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: background 0.3s ease;
@@ -1609,15 +1666,27 @@
 
 /* Explore CTA */
 .explore-cta {
-  background: var(--bg-charcoal);
+  background: linear-gradient(180deg, #1A1613, #0F0D0B);
   color: var(--text-light);
   padding: 8rem var(--space-layout);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.explore-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(197, 154, 127, 0.1), transparent 60%);
+  pointer-events: none;
 }
 
 .explore-cta .container {
   max-width: var(--container-max);
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .explore-cta h2 {
