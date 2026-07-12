@@ -156,127 +156,66 @@
       </div>
     </section>
 
-    <!-- 05 FEATURED COLLECTIONS (Parallax) -->
+    <!-- 05 FEATURED COLLECTIONS (Product Grid — sourced from Airtable "Products" table) -->
     <section class="section-featured-collections">
       <div class="container">
         <div class="section-header">
           <h2>Featured Collections</h2>
+          <p class="section-intro">A selection of our most-requested corporate hampers.</p>
         </div>
-        
-        <!-- Collection 1 -->
-        <div class="collection-row collection-row--reverse">
-          <div class="collection-image" data-parallax>
-            <img src="/image/BCC Hamper 2.png" alt="Coffee & Calm Collection" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-          </div>
-          <div class="collection-content reveal-left">
-            <span class="collection-tag">Relaxation</span>
-            <h3>Coffee & Calm</h3>
-            <p>Premium coffee blends paired with calming essentials for thoughtful moments of pause.</p>
-            <a href="/explore/" class="btn-action">View Collection</a>
-          </div>
-        </div>
-        
-        <!-- Collection 2 -->
-        <div class="collection-row">
-          <div class="collection-image" data-parallax>
-            <img src="/image/BCC Hamper.png" alt="Executive Essentials Collection" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-          </div>
-          <div class="collection-content reveal-right">
-            <span class="collection-tag">Premium</span>
-            <h3>Executive Essentials</h3>
-            <p>Sophisticated tech and workspace essentials for the modern executive.</p>
-            <a href="/explore/" class="btn-action">View Collection</a>
-          </div>
-        </div>
-        
-        <!-- Collection 3 -->
-        <div class="collection-row collection-row--reverse">
-          <div class="collection-image" data-parallax>
-            <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebrations Collection" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-          </div>
-          <div class="collection-content reveal-left">
-            <span class="collection-tag">Celebration</span>
-            <h3>Festive Celebrations</h3>
-            <p>Traditional meets contemporary in our Diwali and festive gifting hampers.</p>
-            <a href="/explore/" class="btn-action">View Collection</a>
-          </div>
-        </div>
-        
-        <!-- Collection 4 -->
-        <div class="collection-row">
-          <div class="collection-image" data-parallax>
-            <img src="/image/Self Care Hamper V2.png" alt="Wellness & Self Care Collection" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-          </div>
-          <div class="collection-content reveal-right">
-            <span class="collection-tag">Wellness</span>
-            <h3>Wellness & Self Care</h3>
-            <p>Curated wellness baskets for employees who go the extra mile.</p>
-            <a href="/explore/" class="btn-action">View Collection</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 06 CUSTOMISATION (Horizontal Scroll) -->
-    <section class="section-customisation-studio">
-      <div class="container">
-        <div class="section-header">
-          <h2>Customisation Studio</h2>
-          <p class="section-intro">Brand touchpoints that make every gift unmistakably yours. Scroll to explore.</p>
-        </div>
-        
-        <div class="customisation-scroll">
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Logo Printing" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+        <div class="selected-grid" id="featuredHampersGrid">
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/BCC Hamper.png" alt="Executive Essentials Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Logo Printing</h4>
-            <p>High-quality logo imprinting on premium surfaces.</p>
+            <h4>Executive Essentials Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
-          
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png" alt="Laser Engraving" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/BCC Hamper 2.png" alt="Coffee & Calm Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Laser Engraving</h4>
-            <p>Precision etching for lasting brand presence.</p>
+            <h4>Coffee & Calm Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
-          
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_ate3jcate3jcate3.png" alt="Custom Sleeves" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebrations Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Custom Sleeves</h4>
-            <p>Bespoke packaging sleeves in your brand colours.</p>
+            <h4>Festive Celebrations Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
-          
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_bemqj4bemqj4bemq.png" alt="Custom Notes" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/Self Care Hamper V2.png" alt="Wellness & Self Care Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Custom Notes</h4>
-            <p>Personalised messages for meaningful connections.</p>
+            <h4>Wellness & Self Care Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
-          
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_dpv57edpv57edpv5.png" alt="Premium Packaging" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/Bottle Hamper.png" alt="Client Appreciation Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Premium Packaging</h4>
-            <p>Luxury unboxing experiences that impress.</p>
+            <h4>Client Appreciation Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
-          
-          <div class="customisation-scroll-item">
-            <div class="customisation-scroll-image">
-              <img src="/image/Gemini_Generated_Image_sx0cy0sx0cy0sx0c.png" alt="Ribbon Colours" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
+
+          <div class="media-card selected-card reveal">
+            <div class="media-card-image selected-image">
+              <img src="/image/Hamper 3.png" alt="Employee Onboarding Hamper" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
             </div>
-            <h4>Ribbon Colours</h4>
-            <p>Custom ribbon colours to match your brand palette.</p>
+            <h4>Employee Onboarding Hamper</h4>
+            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
           </div>
         </div>
-        
+
         <div class="section-footer">
-          <a href="/customisation.html" class="btn-action">Explore Customisation</a>
+          <a href="/explore/" class="btn-action">View All Hampers</a>
         </div>
       </div>
     </section>
@@ -386,128 +325,62 @@
       </div>
     </section>
 
-    <!-- 09 BROWSE BY COLLECTION -->
+    <!-- 09 BROWSE BY CATEGORY -->
     <section class="section-browse-collection">
       <div class="container">
         <div class="section-header">
-          <h2>Browse By Collection</h2>
-          <p class="section-intro">Curated selections designed around different objectives and budgets.</p>
+          <h2>Browse By Category</h2>
+          <p class="section-intro">Find the right product type for your gifting programme.</p>
         </div>
 
         <div class="collection-editorial-grid">
-          <a href="/explore/#best-sellers" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#diaries" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
             </span>
-            <h4>Best Sellers</h4>
-            <p>Most-loved gifts by businesses</p>
+            <h4>Diaries</h4>
             <span class="collection-card-arrow">→</span>
           </a>
 
-          <a href="/explore/#premium-picks" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#drinkware" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
             </span>
-            <h4>Premium Picks</h4>
-            <p>Luxury gifting for special occasions</p>
+            <h4>Drinkware</h4>
             <span class="collection-card-arrow">→</span>
           </a>
 
-          <a href="/explore/#sustainable-choices" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#tech-accessories" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22c1.25-1.25 2.5-4 2.5-4s2.75 2.75 4 4"/><path d="M3 18c4-6 8-8 14-12"/><path d="M22 6c-4 0-8 2-12 6"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
             </span>
-            <h4>Sustainable Choices</h4>
-            <p>Eco-conscious corporate gifting</p>
+            <h4>Tech Accessories</h4>
             <span class="collection-card-arrow">→</span>
           </a>
 
-          <a href="/explore/#budget-gifting" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#wellness" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
             </span>
-            <h4>Budget Gifting</h4>
-            <p>Thoughtful gifts at every budget</p>
+            <h4>Wellness</h4>
             <span class="collection-card-arrow">→</span>
           </a>
 
-          <a href="/explore/#trending-products" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#lifestyle" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
             </span>
-            <h4>Trending Products</h4>
-            <p>Latest additions to our showroom</p>
+            <h4>Lifestyle</h4>
             <span class="collection-card-arrow">→</span>
           </a>
 
-          <a href="/explore/#under-500" class="editorial-card collection-editorial-card reveal">
+          <a href="/explore/#desk" class="editorial-card collection-editorial-card reveal">
             <span class="collection-card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
             </span>
-            <h4>Under ₹500</h4>
-            <p>Budget-friendly corporate gifts</p>
+            <h4>Desk</h4>
             <span class="collection-card-arrow">→</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 SELECTED GIFTS / RECENTLY ADDED -->
-    <section class="section-selected-gifts">
-      <div class="container">
-        <div class="section-header">
-          <h2>Newly Added Experiences</h2>
-          <p class="section-intro">Handpicked favourites from our showroom.</p>
-        </div>
-        
-        <div class="selected-grid">
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="Bamboo Diary" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Bamboo Diary</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
-          
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png" alt="Cork Notebook" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Cork Notebook</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
-          
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/Bottle Hamper.png" alt="Executive Bottle" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Executive Bottle</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
-          
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/BCC Hamper 2.png" alt="Premium Mug" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Premium Mug</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
-          
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/Hamper 3.png" alt="Desk Set" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Desk Set</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
-          
-          <div class="media-card selected-card reveal">
-            <div class="media-card-image selected-image">
-              <img src="/image/Self Care Hamper V2.png" alt="Corporate Combo" onerror="this.onerror=null;this.src='/image/placeholder.svg'" loading="lazy">
-            </div>
-            <h4>Corporate Combo</h4>
-            <a href="/quote.html" class="btn-action btn-small">Request Quote</a>
-          </div>
         </div>
       </div>
     </section>
@@ -519,7 +392,7 @@
           <div class="planning-guide-editorial">
             <h2>Planning Guide</h2>
             <p>Everything your procurement team needs to know before requesting a proposal.</p>
-            <a href="/quote.html" class="btn-action btn-primary">Get Started →</a>
+            <a href="/customisation.html" class="btn-action btn-primary">Get Started →</a>
           </div>
           <div class="planning-guide-specs">
             <div class="planning-guide-row">
@@ -568,108 +441,6 @@
         </div>
       </div>
     </section>
-
-    <!-- 12 OUR STORY (Expanded Editorial) -->
-    <section class="section-brand-story">
-      <div class="container">
-        <div class="story-block">
-          <span class="story-tag">Our Story</span>
-          <p>The Biz Gift was founded with a simple belief: corporate gifting should feel as considered as your business itself.</p>
-          <p>We work with companies across India to transform routine gifting into memorable moments that strengthen relationships, build culture, and leave lasting impressions—one thoughtful hamper at a time.</p>
-          <p>From employee onboarding kits that welcome new talent with warmth, to premium client appreciation hampers that strengthen partnerships, every experience we create is designed around purpose, audience and brand identity.</p>
-          <a href="/about.html" class="story-link">Read our full story →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 13 FAQ -->
-    <section class="section-home-faq reveal">
-      <div class="container">
-        <div class="section-header section-header--center">
-          <h2>Frequently Asked Questions</h2>
-          <p class="section-intro">Common enquiries from corporate gifting buyers.</p>
-        </div>
-        <div class="home-faq-container">
-          <div class="home-faq-list" id="homeFaqList">
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-1">
-                Can I see a sample before full production?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-1" role="region">
-                <p>Absolutely. For orders of 200 units and above, we provide a physical sample for your approval before we go into full production. This ensures the branding, quality, and packaging are exactly what you envisioned — no surprises at delivery.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-2">
-                What's the typical turnaround time?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-2" role="region">
-                <p>Every project is unique, so timelines depend on three key factors — the product selected, the size of the order, and the level of customisation required. We share a clear timeline with every proposal so you always know what to expect. Have a deadline in mind? Tell us upfront and we'll work around it.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-3">
-                Do you offer design support?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-3" role="region">
-                <p>Yes, we do. Our team will help you translate your brand guidelines into a gifting concept — from logo placement to colour matching and packaging design. You don't need to come to us with a finished brief. A rough idea is more than enough to get started.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-4">
-                What is the minimum order quantity for customised gifts?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-4" role="region">
-                <p>Customisation is available from 50 units onwards, though this may vary depending on the product and type of branding involved. Reach out with your requirement and we'll let you know what's possible within your budget.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-5">
-                Can I mix different products in one order?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-5" role="region">
-                <p>Absolutely. In fact, most of our clients do. You can combine diaries, pens, bags, bottles, and more into a single cohesive hamper — all branded consistently. We'll help you curate the right mix based on your occasion, budget, and recipient.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-6">
-                What branding techniques do you offer?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-6" role="region">
-                <p>We offer a range of branding methods including UV printing, screen printing, laser engraving, embossing, debossing, and embroidery. The right technique depends on the product and the finish you're looking for — we'll guide you to the best option.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-7">
-                Can you handle pan-India delivery?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-7" role="region">
-                <p>Yes. Whether you need gifts delivered to a single office or shipped across multiple cities simultaneously, we manage end-to-end logistics so your gifts arrive on time and in perfect condition — wherever your team or clients are.</p>
-              </div>
-            </div>
-            <div class="faq-item home-faq-item">
-              <button class="faq-question home-faq-question" aria-expanded="false" aria-controls="home-faq-8">
-                What if I don't have a clear brief yet?
-                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-answer home-faq-answer" id="home-faq-8" role="region">
-                <p>That's perfectly fine — most great projects start without one. Share your occasion, approximate budget, and number of recipients, and we'll come back with curated ideas and recommendations. You bring the occasion, we'll bring the ideas.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 14 NEWSLETTER -->
-    <div id="newsletter-placeholder"></div>
 
     <!-- 15 FINAL CTA -->
     <section class="section-final-cta">
@@ -757,42 +528,6 @@
         scatterObserver.observe(createGrid);
       }
 
-      // 03 Parallax for collection images
-      const parallaxImages = document.querySelectorAll('[data-parallax] img');
-      if (parallaxImages.length > 0 && window.innerWidth > 768) {
-        window.addEventListener('scroll', function() {
-          parallaxImages.forEach(function(img) {
-            const rect = img.parentElement.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            if (rect.top < windowHeight && rect.bottom > 0) {
-              const progress = 1 - (rect.top + rect.height) / (windowHeight + rect.height);
-              const translateY = (progress - 0.5) * 20;
-              img.style.transform = 'translateY(' + translateY + 'px) scale(1.03)';
-            }
-          });
-        }, { passive: true });
-      }
-
-      // 04 FAQ Accordion (single open)
-      const faqQuestions = document.querySelectorAll('.home-faq-question');
-      faqQuestions.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          const isOpen = this.getAttribute('aria-expanded') === 'true';
-          const answer = document.getElementById(this.getAttribute('aria-controls'));
-
-          faqQuestions.forEach(function(q) {
-            q.setAttribute('aria-expanded', 'false');
-            const a = document.getElementById(q.getAttribute('aria-controls'));
-            if (a) a.classList.remove('open');
-          });
-
-          if (!isOpen) {
-            this.setAttribute('aria-expanded', 'true');
-            if (answer) answer.classList.add('open');
-          }
-        });
-      });
     })();
   </script>
 </body>
