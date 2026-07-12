@@ -17,8 +17,10 @@
  * at once (Airtable's linked-record fields are many-to-many) — the website
  * shows all of them, not just the first.
  *
- * Required Airtable fields:
- *   URL Slug, Website Product Name, Website Description, Product Images
+ * Required Airtable fields (exact names, case-sensitive — these have been
+ * renamed at least twice during development, so double-check against
+ * list_tables_for_base before assuming a mismatch is a permissions issue):
+ *   website URL Slug, Product Website Name, Product Website Description, Product Images
  *
  * Taxonomy fields (Category/Sub Category/Occasion/Collections are linked-record
  * fields — Airtable's REST API returns these as bare record ID arrays, not names,
@@ -29,7 +31,7 @@
  *   Collections, Name (from Collections), Slug (from Collections), Collection Image (from Collections Linked)
  *
  * Optional Airtable fields (gracefully handled when missing):
- *   SEO Title / Slug, SEO Description, TBG Product Code, Image Alt Text,
+ *   SEO Title, SEO Description, TBG Product Code, Website Image Alt Text,
  *   Product Tags, MOQ, Product Type, USP, Material, Branding Option,
  *   Product Contents, FAQ, CTA Title, CTA Description, CTA Image,
  *   CTA Background, CTA Button Label, Lead Time, Delivery, Response Time,
@@ -131,12 +133,12 @@ function formatProduct(record) {
 
   return {
     id: record.id,
-    slug: f['URL Slug'] || 'unknown',
-    name: f['Website Product Name'] || 'Curated Experience',
-    description: f['Website Description'] || 'A thoughtfully curated gifting experience.',
-    
+    slug: f['website URL Slug'] || 'unknown',
+    name: f['Product Website Name'] || 'Curated Experience',
+    description: f['Product Website Description'] || 'A thoughtfully curated gifting experience.',
+
     // SEO
-    seoTitle: f['SEO Title / Slug'] || null,
+    seoTitle: f['SEO Title'] || null,
     seoDescription: f['SEO Description'] || null,
 
     // Reference
@@ -165,7 +167,7 @@ function formatProduct(record) {
     productTags: asArray(f['Product Tags']),
     
     // Media
-    images: extractAllImageUrls(f['Product Images'], f['Image Alt Text']),
+    images: extractAllImageUrls(f['Product Images'], f['Website Image Alt Text']),
     
     // Editorial
     whyTitle: f['Editorial Title'] || 'Why This Gift Exists',

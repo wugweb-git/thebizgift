@@ -24,9 +24,9 @@ export default async function handler(req, res) {
     // 2. Map the messy Airtable payload into clean, frontend-ready JSON
     const formattedHampers = data.records.map(record => ({
       id: record.id,
-      slug: record.fields['URL Slug'] || 'unknown-product',
-      name: record.fields['Website Product Name'] || 'Curated Hamper',
-      description: record.fields['Website Description'] || '',
+      slug: record.fields['website URL Slug'] || 'unknown-product',
+      name: record.fields['Product Website Name'] || 'Curated Hamper',
+      description: record.fields['Product Website Description'] || '',
       // Category/Occasion/Collections are linked-record fields — Airtable's
       // REST API returns bare record IDs for these, so names are read from
       // their paired lookup fields instead. A product can have several of
@@ -37,15 +37,15 @@ export default async function handler(req, res) {
       moq: record.fields['MOQ'] || '50',
       material: record.fields['Material'] || 'Mixed',
       branding: record.fields['Branding Option'] || [],
-      seoTitle: record.fields['SEO Title / Slug'] || '',
+      seoTitle: record.fields['SEO Title'] || '',
       seoDesc: record.fields['SEO Description'] || '',
       productCode: record.fields['TBG Product Code'] || '',
-      // Extract the first image URL safely; Image Alt Text is a single
-      // field covering the primary image, other filenames are ignored here.
+      // Extract the first image URL safely; Website Image Alt Text is a
+      // single field covering the primary image, other filenames are ignored here.
       image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
              ? record.fields['Product Images'][0].url
              : 'image/placeholder-blank.jpg',
-      imageAlt: record.fields['Image Alt Text'] || record.fields['Website Product Name'] || 'Product image'
+      imageAlt: record.fields['Website Image Alt Text'] || record.fields['Product Website Name'] || 'Product image'
     }));
 
     // 3. Send the clean data back to your HTML frontend
