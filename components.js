@@ -1,5 +1,9 @@
 // html/components.js
-document.addEventListener('DOMContentLoaded', () => {
+// Runs immediately (not gated on DOMContentLoaded): this script tag sits at
+// the end of <body>, so every placeholder div is already in the DOM by the
+// time it executes. Waiting on DOMContentLoaded here only delayed the
+// header/footer fetch by a full extra tick, causing a visible unstyled flash.
+(() => {
   const componentBasePath = (() => {
     const script = document.currentScript || Array.from(document.scripts).find((item) => item.src.includes('components.js'));
     if (!script || !script.src) return '';
@@ -43,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropdowns();
     initNewsletter();
   });
-});
+})();
 
 /* --------------------------------------------------------------------------
    NEWSLETTER SIGNUP — posts to /api/submit-lead (Airtable)

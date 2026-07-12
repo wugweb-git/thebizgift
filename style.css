@@ -1052,7 +1052,7 @@ img {
   }
 }
 
-.hero-subtitle {
+.hero-section .hero-subtitle {
   font-size: var(--font-size-lede);
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
