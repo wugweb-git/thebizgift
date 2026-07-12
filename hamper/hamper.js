@@ -16,7 +16,7 @@
   const CONFIG = {
     USE_MOCK: true, // Phase 2: revert to IS_LOCAL when Airtable is configured
     API_ENDPOINT: '/api/get-hamper',
-    WHATSAPP_NUMBER: '919999999999',
+    WHATSAPP_NUMBER: '917303700929',
     SKELETON_DELAY: 400,
     STAGGER_DELAY: 100,
     GALLERY_INTERVAL: 5000,
@@ -509,8 +509,18 @@
       return iconSvgMap.default;
     }
 
+    // Occasion tag name -> quote.html's Occasion dropdown value (see quote.html #occasion options)
+    var occasionFieldMap = {
+      'Employee Joining Kits': 'Employee Joining Kits',
+      'Event Giveaways': 'Event Giveaways',
+      'Client Appreciation': 'Client Appreciation',
+      'Festive Gifting': 'Festive Gifting',
+      'Leadership Recognition': 'Leadership Gifts'
+    };
+
     var cards = (p.occasionTags || []).map(function (occ) {
-      var link = occ.slug ? '/explore/' + occ.slug : '/explore/';
+      var occasionValue = occasionFieldMap[occ.name] || 'Other';
+      var link = '/quote.html?occasion=' + encodeURIComponent(occasionValue);
       var icon = getIcon(occ.name);
       return (
         '<a href="' + link + '" class="hamper-perfect-card">' +
@@ -518,7 +528,7 @@
           '<div class="hamper-perfect-text">' +
             '<h4>' + escapeHtml(occ.name) + '</h4>' +
             (occ.description ? '<p>' + escapeHtml(occ.description) + '</p>' : '') +
-            '<span class="hamper-perfect-link">View Collection →</span>' +
+            '<span class="hamper-perfect-link">Get A Quote →</span>' +
           '</div>' +
         '</a>'
       );
@@ -611,22 +621,8 @@
       );
     }).join('');
 
-    var scrollCards = (p.related || []).map(function (r, i) {
-      return (
-        '<a href="/hamper/' + escapeHtml(r.slug) + '/" class="hamper-related-card" data-index="' + i + '">' +
-          '<div class="hamper-related-image">' +
-            '<img src="' + (r.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(r.name) + '" loading="lazy">' +
-          '</div>' +
-          '<div class="hamper-related-body">' +
-            (r.collectionTag ? '<span class="hamper-related-badge">' + escapeHtml(r.collectionTag) + '</span>' : '') +
-            '<h4>' + escapeHtml(r.name) + '</h4>' +
-            (r.description ? '<p>' + escapeHtml(r.description) + '</p>' : '') +
-            '<span class="hamper-related-cta">Explore Experience</span>' +
-          '</div>' +
-        '</a>'
-      );
-    }).join('');
-
+    // .hamper-related-grid (desktop) and .hamper-related-scroll (mobile) render the
+    // same cards -- CSS toggles which is visible per breakpoint, so reuse one string.
     return (
       '<section class="hamper-related hamper-reveal" aria-label="Related Hampers">' +
         '<div class="container">' +
@@ -634,7 +630,7 @@
             '<h2>You May Also Like</h2>' +
           '</div>' +
           '<div class="hamper-related-grid">' + cards + '</div>' +
-          '<div class="hamper-related-scroll">' + scrollCards + '</div>' +
+          '<div class="hamper-related-scroll">' + cards + '</div>' +
         '</div>' +
       '</section>'
     );
