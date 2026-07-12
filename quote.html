@@ -204,7 +204,15 @@
       if (sourcePage) {
         document.getElementById('sourcePage').value = sourcePage;
       }
-      
+
+      // Pre-select occasion when arriving from an explore/occasion link
+      const occasionParam = urlParams.get('occasion');
+      if (occasionParam) {
+        const occasionField = document.getElementById('occasion');
+        const hasMatch = Array.from(occasionField.options).some(opt => opt.value === occasionParam);
+        occasionField.value = hasMatch ? occasionParam : 'Other';
+      }
+
       // Try to get from pathname if hamper page
       const path = window.location.pathname;
       if (path.includes('/hamper/')) {
