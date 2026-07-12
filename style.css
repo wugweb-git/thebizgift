@@ -974,7 +974,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, transparent 30%, rgba(15, 12, 9, 0.9));
+  background: linear-gradient(180deg, rgba(15, 12, 9, 0.15) 0%, rgba(15, 12, 9, 0.6) 45%, rgba(15, 12, 9, 0.94) 100%);
   opacity: 0;
   animation: heroOverlayFade 0.6s var(--ease-premium) 0.2s forwards;
 }
@@ -1012,6 +1012,7 @@ img {
   font-weight: 400;
   font-size: var(--font-size-subtitle);
   color: var(--text-light);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   margin-bottom: 1.25rem;
   opacity: 0;
   transform: translateY(20px);
@@ -1025,6 +1026,8 @@ img {
   line-height: 0.98;
   letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
+  color: var(--text-light);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .hero-title .hero-line {
@@ -1051,7 +1054,8 @@ img {
 
 .hero-subtitle {
   font-size: var(--font-size-lede);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   max-width: 600px;
   margin: 0 0 2.5rem;
   font-weight: 300;
@@ -1101,6 +1105,7 @@ img {
 
 .hero-trust-icon-item span {
   font-size: var(--font-size-small);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   line-height: 1.35;
 }
 
