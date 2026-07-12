@@ -14,7 +14,7 @@
                    window.location.protocol === 'file:';
 
   const CONFIG = {
-    USE_MOCK: true, // Phase 2: revert to IS_LOCAL when Airtable is configured
+    USE_MOCK: IS_LOCAL, // Airtable is live in production; localhost still uses mock data
     API_ENDPOINT: '/api/get-hamper',
     WHATSAPP_NUMBER: '917303700929',
     SKELETON_DELAY: 400,

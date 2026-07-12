@@ -538,6 +538,38 @@
     (function() {
       'use strict';
 
+      // 00 Featured Hampers — fetch from Airtable in production; on localhost
+      // (or if the API errors) leave the static fallback cards already in the markup.
+      var IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(window.location.hostname) !== -1 ||
+                     window.location.protocol === 'file:';
+      var featuredGrid = document.getElementById('featuredHampersGrid');
+
+      if (featuredGrid && !IS_LOCAL) {
+        fetch('/api/get-featured-hampers')
+          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+          .then(function (hampers) {
+            if (!Array.isArray(hampers) || hampers.length === 0) return;
+            var html = hampers.slice(0, 6).map(function (h) {
+              var div = document.createElement('div');
+              div.textContent = h.name || 'Curated Hamper';
+              var safeName = div.innerHTML;
+              div.textContent = h.imageAlt || h.name || 'Product image';
+              var safeAlt = div.innerHTML;
+              return (
+                '<a href="/hamper/' + encodeURIComponent(h.slug) + '/" class="media-card selected-card reveal">' +
+                  '<div class="media-card-image selected-image">' +
+                    '<img src="' + h.image + '" alt="' + safeAlt + '" onerror="this.onerror=null;this.src=\'/image/placeholder.svg\'" loading="lazy">' +
+                  '</div>' +
+                  '<h4>' + safeName + '</h4>' +
+                  '<span class="btn-action btn-small">Explore Hamper</span>' +
+                '</a>'
+              );
+            }).join('');
+            featuredGrid.innerHTML = html;
+          })
+          .catch(function () { /* leave the static fallback cards in place */ });
+      }
+
       // 01 Hero zoom on scroll
       const hero = document.getElementById('homeHero');
       const heroImg = hero && hero.querySelector('.hero-media img');
