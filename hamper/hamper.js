@@ -32,16 +32,22 @@
     description: 'A thoughtfully curated coffee experience designed for employee appreciation, client gifting and meaningful moments of connection.',
     seoTitle: 'The CC Hamper | The Biz Gift',
     seoDescription: 'A thoughtfully curated coffee experience designed for employee appreciation, client gifting and meaningful moments of connection.',
-    parentCategory: 'Corporate Gifting',
-    category: 'Premium Experiences',
+    productCode: 'TBG-COMBO-61',
+    productType: 'Premium',
+    // A product can belong to multiple Categories/Collections/Occasions at
+    // once — matches the real API shape (arrays of {name, slug, image}).
+    categories: [
+      { name: 'Combo', slug: 'combo', image: null }
+    ],
     subCategory: 'Coffee & Calm',
-    collectionTag: 'Premium Collection',
+    collections: [
+      { name: 'Premium Picks', slug: 'premium-picks', image: null }
+    ],
     usp: 'Hand-curated with artisanal coffee blends. Every hamper is custom-branded and delivered in premium rigid-box packaging across India.',
-    occasionTags: [
-      { name: 'Employee Joining Kits', slug: 'employee-joining-kits', description: 'Ideal for onboarding experiences that leave lasting first impressions.' },
-      { name: 'Client Appreciation', slug: 'client-appreciation', description: 'Build stronger business relationships with thoughtful gifting.' },
-      { name: 'Leadership Recognition', slug: 'leadership-gifts', description: 'Celebrate achievements with premium curated hampers.' },
-      { name: 'Festive Gifting', slug: 'festive-gifting', description: 'Perfect for Diwali, Christmas and seasonal campaigns.' }
+    occasions: [
+      { name: 'Employee Joining Kits', slug: 'employee-joining-kits', image: null },
+      { name: 'Client Appreciation Gifts', slug: 'client-appreciation-gifts', image: null },
+      { name: 'Festive Gifting', slug: 'festive-gifting', image: null }
     ],
     productTags: ['Employee Gifting', 'Client Appreciation', 'Premium Picks', 'Eco Friendly'],
     images: [
@@ -70,36 +76,29 @@
         slug: 'executive-welcome-kit',
         image: '/image/BCC Hamper.png',
         description: 'A premium onboarding experience for new leadership hires.',
-        collectionTag: 'Premium Collection'
+        collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }]
       },
       {
         name: 'Coffee & Calm',
         slug: 'coffee-calm',
         image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png',
         description: 'Mindful gifting for wellness-focused corporate programs.',
-        collectionTag: 'Wellness Edit'
+        collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }]
       },
       {
         name: 'Heritage Box',
         slug: 'heritage-box',
         image: '/image/Hamper 3.png',
         description: 'Artisanal selection celebrating craft and tradition.',
-        collectionTag: 'Artisan Collection'
+        collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }]
       },
       {
         name: 'Festive Celebration Box',
         slug: 'festive-celebration-box',
         image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png',
         description: 'Diwali and festive season gifting at scale.',
-        collectionTag: 'Festive Edit'
+        collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }]
       }
-    ],
-    faq: [
-      { question: 'What is the minimum order quantity?', answer: 'The minimum order quantity for The CC Hamper is 50 units. For smaller quantities, please contact our team to explore alternative options.' },
-      { question: 'Can I customise the contents of the hamper?', answer: 'Yes. We can swap, add or remove items based on your budget, audience and branding requirements. Each hamper is assembled to order.' },
-      { question: 'What branding options are available?', answer: 'We offer laser engraving, screen printing, UV printing, custom packaging, gift notes and corporate colour matching. Our team will recommend the most suitable method for your requirements.' },
-      { question: 'How long does delivery take?', answer: 'Lead time is 7–14 business days from approval of artwork and design. Pan India delivery is available. Express timelines can be accommodated for larger orders.' },
-      { question: 'Do you deliver outside India?', answer: 'Currently we deliver across all states in India. International delivery can be arranged on request for bulk orders.' }
     ],
     responseTime: 'Within 4 hours during business hours.',
     productionWorkflow: 'Artwork approval → Production → Quality check → Dispatch → Tracking shared'
@@ -114,7 +113,7 @@
       seoTitle: 'Executive Welcome Kit | The Biz Gift',
       seoDescription: 'Premium executive onboarding kits with branding, packaging and pan India delivery.',
       subCategory: 'Executive Onboarding',
-      collectionTag: 'Premium Picks',
+      collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }],
       usp: 'Designed for high-touch onboarding moments with executive stationery, drinkware and premium packaging tailored to your brand.',
       images: [
         { url: '/image/BCC Hamper.png', alt: 'Executive Welcome Kit — Hero view' },
@@ -129,7 +128,7 @@
       seoTitle: 'Premium Desk Set | The Biz Gift',
       seoDescription: 'Corporate desk sets with branded workplace essentials and custom packaging.',
       subCategory: 'Office Essentials',
-      collectionTag: 'Best Sellers',
+      collections: [{ name: 'Best Sellers', slug: 'best-sellers', image: null }],
       usp: 'A useful desk-first gift experience with easy logo branding and flexible item combinations for bulk programs.',
       images: [
         { url: '/image/Bottle Hamper.png', alt: 'Premium Desk Set — Hero view' },
@@ -144,7 +143,7 @@
       seoTitle: 'Coffee & Calm | The Biz Gift',
       seoDescription: 'Coffee and wellness corporate hampers for employee appreciation and client gifting.',
       subCategory: 'Wellness & Coffee',
-      collectionTag: 'Wellness Edit',
+      collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }],
       usp: 'Pairs premium coffee cues with relaxing add-ons and brandable packaging for calm, memorable gifting.',
       images: [
         { url: '/image/BCC Hamper 2.png', alt: 'Coffee & Calm — Hero view' },
@@ -159,7 +158,7 @@
       seoTitle: 'Heritage Box | The Biz Gift',
       seoDescription: 'Artisanal heritage gift boxes for festive corporate gifting and client appreciation.',
       subCategory: 'Artisan Gifting',
-      collectionTag: 'Festive Edit',
+      collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }],
       usp: 'A tactile festive presentation with craft-led packaging, inserts and flexible product curation.',
       images: [
         { url: '/image/Hamper 3.png', alt: 'Heritage Box — Hero view' },
@@ -174,7 +173,7 @@
       seoTitle: 'Festive Celebration Box | The Biz Gift',
       seoDescription: 'Festive corporate hampers for Diwali, Christmas and seasonal employee or client gifting.',
       subCategory: 'Festive Gifting',
-      collectionTag: 'Festive Edit',
+      collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }],
       usp: 'Built for seasonal scale with custom sleeves, cards, inserts and pan India logistics support.',
       images: [
         { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'Festive Celebration Box — Hero view' },
@@ -208,6 +207,13 @@
     var path = window.location.pathname;
     var parts = path.split('/').filter(Boolean);
     return parts[parts.length - 1] || '';
+  }
+
+  // A product can carry multiple Categories/Collections/Occasions (Airtable's
+  // linked-record fields are many-to-many); this returns the primary (first)
+  // entry for spots that show one, e.g. the breadcrumb trail.
+  function firstOf(arr) {
+    return (arr && arr.length > 0) ? arr[0] : null;
   }
 
   /* -----------------------------------------------------------------------
@@ -275,18 +281,13 @@
     html += buildPlanning(product);
 
     // 05 Perfect For (icon-based cards)
-    if (product.occasionTags && product.occasionTags.length > 0) {
+    if (product.occasions && product.occasions.length > 0) {
       html += buildPerfectFor(product);
     }
 
     // 06 Make It Yours (horizontal scroll gallery)
     if (product.branding && product.branding.length > 0) {
       html += buildMakeYours(product);
-    }
-
-    // 07 FAQ
-    if (product.faq && product.faq.length > 0) {
-      html += buildFAQ(product);
     }
 
     // 08 Related Hampers
@@ -302,7 +303,6 @@
     // Init interactions
     initGallery();
     initLightbox();
-    initAccordion();
     initScrollReveal();
     initStickyCTA();
     initForm();
@@ -315,22 +315,21 @@
      ----------------------------------------------------------------------- */
 
   // --- 01 Breadcrumb ---
+  // Home / <Category, Collection, or Occasion> / Product Name — a single
+  // taxonomy crumb, not an indexable Sub Category path. Category takes
+  // priority, falling back to Collection then Occasion when a product has
+  // no category assigned.
   function buildBreadcrumb(p) {
-    var collectionSlug = p.collectionTag
-      ? p.collectionTag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-      : '';
+    var crumb = firstOf(p.categories) || firstOf(p.collections) || firstOf(p.occasions);
 
     return (
       '<div class="hamper-breadcrumb">' +
         '<nav aria-label="Breadcrumb">' +
           '<a href="/">Home</a>' +
           '<span class="hamper-breadcrumb-separator">/</span>' +
-          (p.collectionTag
-            ? '<a href="/explore/">' + escapeHtml(p.collectionTag) + '</a><span class="hamper-breadcrumb-separator">/</span>'
+          (crumb
+            ? '<a href="/explore/#' + escapeHtml(crumb.slug || '') + '">' + escapeHtml(crumb.name) + '</a><span class="hamper-breadcrumb-separator">/</span>'
             : '<a href="/explore/">Explore</a><span class="hamper-breadcrumb-separator">/</span>') +
-          (p.category && !p.collectionTag
-            ? '<a href="/explore/">' + escapeHtml(p.category) + '</a><span class="hamper-breadcrumb-separator">/</span>'
-            : '') +
           '<span class="hamper-breadcrumb-current">' + escapeHtml(p.name) + '</span>' +
         '</nav>' +
       '</div>'
@@ -375,6 +374,12 @@
         '</div>'
       : '';
 
+    // A product can belong to multiple Collections at once — show all of them
+    // as badges, not just one.
+    var collectionBadges = (p.collections || []).map(function (c) {
+      return '<a href="/explore/#' + escapeHtml(c.slug || '') + '" class="hamper-collection-badge">' + escapeHtml(c.name) + '</a>';
+    }).join('');
+
     return (
       '<section class="hamper-hero" aria-label="Product Overview">' +
         '<div class="hamper-hero-container">' +
@@ -385,7 +390,7 @@
             navDots +
           '</div>' +
           '<div class="hamper-hero-content">' +
-            (p.collectionTag ? '<a href="/explore/" class="hamper-collection-badge">' + escapeHtml(p.collectionTag) + '</a>' : '') +
+            (collectionBadges ? '<div class="hamper-collection-badges">' + collectionBadges + '</div>' : '') +
             '<h1>' + escapeHtml(p.name) + '</h1>' +
             '<p class="hamper-hero-description">' + escapeHtml(p.description) + '</p>' +
             (chips ? '<div class="hamper-hero-chips">' + chips + '</div>' : '') +
@@ -410,6 +415,11 @@
                 '<span class="hamper-info-label">Lead Time</span>' +
                 '<span class="hamper-info-value">' + escapeHtml(p.leadTime || '7–14 Days') + '</span>' +
               '</div>' +
+              (p.productCode ? (
+              '<div class="hamper-info-item">' +
+                '<span class="hamper-info-label">Product Code</span>' +
+                '<span class="hamper-info-value">' + escapeHtml(p.productCode) + '</span>' +
+              '</div>') : '') +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -460,6 +470,7 @@
       { label: 'Delivery', value: p.delivery || 'Pan India' }
     ];
     if (p.material) specs.push({ label: 'Material', value: p.material });
+    if (p.productType) specs.push({ label: 'Product Type', value: p.productType });
     if (p.responseTime) specs.push({ label: 'Response Time', value: p.responseTime });
 
     var rows = specs.map(function (spec) {
@@ -509,18 +520,11 @@
       return iconSvgMap.default;
     }
 
-    // Occasion tag name -> quote.html's Occasion dropdown value (see quote.html #occasion options)
-    var occasionFieldMap = {
-      'Employee Joining Kits': 'Employee Joining Kits',
-      'Event Giveaways': 'Event Giveaways',
-      'Client Appreciation': 'Client Appreciation',
-      'Festive Gifting': 'Festive Gifting',
-      'Leadership Recognition': 'Leadership Gifts'
-    };
-
-    var cards = (p.occasionTags || []).map(function (occ) {
-      var occasionValue = occasionFieldMap[occ.name] || 'Other';
-      var link = '/quote.html?occasion=' + encodeURIComponent(occasionValue);
+    // Occasion names in Airtable's Occasions table match quote.html's
+    // #occasion dropdown values exactly, so no translation map is needed —
+    // pass the name straight through.
+    var cards = (p.occasions || []).map(function (occ) {
+      var link = '/quote.html?occasion=' + encodeURIComponent(occ.name);
       var icon = getIcon(occ.name);
       return (
         '<a href="' + link + '" class="hamper-perfect-card">' +
@@ -574,45 +578,17 @@
     );
   }
 
-  // --- 07 FAQ ---
-  function buildFAQ(p) {
-    var items = (p.faq || []).map(function (faq, i) {
-      return (
-        '<div class="faq-item hamper-faq-item">' +
-          '<button class="faq-question hamper-faq-question" aria-expanded="false" aria-controls="faq-answer-' + i + '" data-index="' + i + '">' +
-            escapeHtml(faq.question) +
-            '<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
-          '</button>' +
-          '<div class="faq-answer hamper-faq-answer" id="faq-answer-' + i + '" role="region">' +
-            '<p>' + escapeHtml(faq.answer) + '</p>' +
-          '</div>' +
-        '</div>'
-      );
-    }).join('');
-
-    return (
-      '<section class="hamper-faq hamper-reveal" aria-label="Frequently Asked Questions">' +
-        '<div class="hamper-faq-container">' +
-          '<div class="section-header">' +
-            '<h2>Frequently Asked Questions</h2>' +
-            '<p class="section-intro">Common enquiries from corporate gifting buyers.</p>' +
-          '</div>' +
-          '<div class="hamper-faq-list">' + items + '</div>' +
-        '</div>' +
-      '</section>'
-    );
-  }
-
   // --- 08 Related Hampers ---
   function buildRelated(p) {
     var cards = (p.related || []).map(function (r, i) {
+      var relatedCollection = firstOf(r.collections);
       return (
         '<a href="/hamper/' + escapeHtml(r.slug) + '/" class="hamper-related-card" data-index="' + i + '">' +
           '<div class="hamper-related-image">' +
             '<img src="' + (r.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(r.name) + '" loading="lazy">' +
           '</div>' +
           '<div class="hamper-related-body">' +
-            (r.collectionTag ? '<span class="hamper-related-badge">' + escapeHtml(r.collectionTag) + '</span>' : '') +
+            (relatedCollection ? '<span class="hamper-related-badge">' + escapeHtml(relatedCollection.name) + '</span>' : '') +
             '<h4>' + escapeHtml(r.name) + '</h4>' +
             (r.description ? '<p>' + escapeHtml(r.description) + '</p>' : '') +
             '<span class="hamper-related-cta">Explore Experience</span>' +
@@ -658,9 +634,10 @@
             '<form class="hamper-proposal-form" id="proposal-form" novalidate>' +
               '<input type="hidden" name="productName" value="' + escapeHtml(p.name) + '">' +
               '<input type="hidden" name="productUrl" value="' + escapeHtml(window.location.href) + '">' +
-              '<input type="hidden" name="collectionName" value="' + escapeHtml(p.collectionTag || '') + '">' +
-              '<input type="hidden" name="category" value="' + escapeHtml(p.category || '') + '">' +
-              '<input type="hidden" name="occasion" value="' + escapeHtml((p.occasionTags || []).map(function (o) { return o.name; }).join(', ')) + '">' +
+              '<input type="hidden" name="collectionName" value="' + escapeHtml((p.collections || []).map(function (c) { return c.name; }).join(', ')) + '">' +
+              '<input type="hidden" name="category" value="' + escapeHtml((p.categories || []).map(function (c) { return c.name; }).join(', ')) + '">' +
+              '<input type="hidden" name="occasion" value="' + escapeHtml((p.occasions || []).map(function (o) { return o.name; }).join(', ')) + '">' +
+              '<input type="hidden" name="productCode" value="' + escapeHtml(p.productCode || '') + '">' +
               '<input type="hidden" name="productId" value="' + escapeHtml(p.slug) + '">' +
 
               '<div class="hamper-proposal-error" id="form-error"></div>' +
@@ -846,28 +823,6 @@
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
-    });
-  }
-
-  // --- Accordion (single open, 200ms) ---
-  function initAccordion() {
-    var questions = $$('.hamper-faq-question');
-    questions.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var isOpen = this.getAttribute('aria-expanded') === 'true';
-        var answer = document.getElementById(this.getAttribute('aria-controls'));
-
-        questions.forEach(function (q) {
-          q.setAttribute('aria-expanded', 'false');
-          var a = document.getElementById(q.getAttribute('aria-controls'));
-          if (a) a.classList.remove('open');
-        });
-
-        if (!isOpen) {
-          this.setAttribute('aria-expanded', 'true');
-          if (answer) answer.classList.add('open');
-        }
-      });
     });
   }
 

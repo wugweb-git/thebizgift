@@ -27,18 +27,25 @@ export default async function handler(req, res) {
       slug: record.fields['URL Slug'] || 'unknown-product',
       name: record.fields['Website Product Name'] || 'Curated Hamper',
       description: record.fields['Website Description'] || '',
-      category: record.fields['Category'] || [],
-      occasion: record.fields['Occasion Tags'] || [],
-      curationTag: record.fields['Curated Gift Tags'] ? record.fields['Curated Gift Tags'][0] : 'Curated',
+      // Category/Occasion/Collections are linked-record fields — Airtable's
+      // REST API returns bare record IDs for these, so names are read from
+      // their paired lookup fields instead. A product can have several of
+      // each (many-to-many linked records), so all are kept as arrays.
+      categories: record.fields['Category Name (from Category)'] || [],
+      occasions: record.fields['Name (from Occasion)'] || [],
+      collections: record.fields['Name (from Collections)'] || [],
       moq: record.fields['MOQ'] || '50',
       material: record.fields['Material'] || 'Mixed',
       branding: record.fields['Branding Option'] || [],
-      seoTitle: record.fields['SEO Title'] || '',
+      seoTitle: record.fields['SEO Title / Slug'] || '',
       seoDesc: record.fields['SEO Description'] || '',
-      // Extract the first image URL safely
-      image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0) 
-             ? record.fields['Product Images'][0].url 
-             : 'image/placeholder-blank.jpg'
+      productCode: record.fields['TBG Product Code'] || '',
+      // Extract the first image URL safely; Image Alt Text is a single
+      // field covering the primary image, other filenames are ignored here.
+      image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
+             ? record.fields['Product Images'][0].url
+             : 'image/placeholder-blank.jpg',
+      imageAlt: record.fields['Image Alt Text'] || record.fields['Website Product Name'] || 'Product image'
     }));
 
     // 3. Send the clean data back to your HTML frontend

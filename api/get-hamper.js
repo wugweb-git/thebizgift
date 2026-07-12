@@ -5,23 +5,35 @@
  * Returns the full product payload plus algorithmically related products.
  *
  * Related Product Algorithm (Priority order):
- * 1. Same Curated Gift Tags (Collection)
- * 2. Same Occasion Tags
+ * 1. Same Collections
+ * 2. Same Occasion
  * 3. Same Category
  * 4. Same Product Tags
- * 
+ *
  * Max 4 related products. Never returns the current product.
  * Ties are randomised.
  *
+ * A product can belong to multiple Categories, Collections, and Occasions
+ * at once (Airtable's linked-record fields are many-to-many) — the website
+ * shows all of them, not just the first.
+ *
  * Required Airtable fields:
  *   URL Slug, Website Product Name, Website Description, Product Images
- * 
+ *
+ * Taxonomy fields (Category/Sub Category/Occasion/Collections are linked-record
+ * fields — Airtable's REST API returns these as bare record ID arrays, not names,
+ * so the paired "Name (from X)" / "Slug (from X)" lookup fields are read instead):
+ *   Category, Category Name (from Category), Category Slug (from Category), Category Image (from Category),
+ *   Sub Category, Sub Category Name (from Sub Category),
+ *   Occasion, Name (from Occasion), Slug (from Occasion), Occasion Image (from Occasion Tags Linked),
+ *   Collections, Name (from Collections), Slug (from Collections), Collection Image (from Collections Linked)
+ *
  * Optional Airtable fields (gracefully handled when missing):
- *   SEO Title, SEO Description, Parent Category, Category, Sub Category,
- *   Occasion Tags, Curated Gift Tags, Product Tags, MOQ, Product Type,
- *   USP, Material, Branding Option, Product Contents, FAQ,
- *   CTA Title, CTA Description, CTA Image, CTA Background, CTA Button Label,
- *   Lead Time, Delivery, Response Time, Production Workflow
+ *   SEO Title / Slug, SEO Description, TBG Product Code, Image Alt Text,
+ *   Product Tags, MOQ, Product Type, USP, Material, Branding Option,
+ *   Product Contents, FAQ, CTA Title, CTA Description, CTA Image,
+ *   CTA Background, CTA Button Label, Lead Time, Delivery, Response Time,
+ *   Production Workflow
  */
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
@@ -41,13 +53,15 @@ function extractImageUrl(images) {
   return images[0].url || images[0].thumbnails?.large?.url || null;
 }
 
-// Helper: extract all image URLs
-function extractAllImageUrls(images) {
+// Helper: extract all image URLs. Airtable only has one Image Alt Text field
+// per product (not per-attachment), so it's applied to the first/primary
+// image; the rest fall back to the filename.
+function extractAllImageUrls(images, primaryAlt) {
   if (!images || !Array.isArray(images)) return [];
-  return images.map(function (img) {
+  return images.map(function (img, i) {
     return {
       url: img.url,
-      alt: img.filename || 'Product image'
+      alt: (i === 0 && primaryAlt) || img.filename || 'Product image'
     };
   });
 }
@@ -75,20 +89,23 @@ function parseFAQ(faq) {
   return [];
 }
 
-// Helper: parse Occasion Tags into structured array
-function parseOccasionTags(tags) {
-  if (!tags) return [];
-  var arr = asArray(tags);
-  return arr.map(function (tag) {
-    if (typeof tag === 'string') {
-      return {
-        name: tag,
-        slug: tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
-        image: null,
-        description: null
-      };
-    }
-    return tag;
+// Helper: zip parallel lookup arrays (Name/Slug/Image) into an array of
+// { name, slug, image } objects, keyed by index. A product can belong to
+// several Categories/Collections/Occasions at once (Airtable's linked-record
+// fields are many-to-many), so every linked entry is kept, not just the first.
+// Airtable lookups return values in the same order as the source link field,
+// so parallel lookups off the same link field line up positionally. image is
+// null until Hero Image attachments are uploaded on the taxonomy tables.
+function zipTaxonomy(names, slugs, images) {
+  var arr = asArray(names);
+  return arr.map(function (name, i) {
+    var imgArr = asArray(images)[i];
+    var image = Array.isArray(imgArr) && imgArr.length > 0 ? imgArr[0].url : null;
+    return {
+      name: name,
+      slug: asArray(slugs)[i] || null,
+      image: image
+    };
   });
 }
 
@@ -119,21 +136,36 @@ function formatProduct(record) {
     description: f['Website Description'] || 'A thoughtfully curated gifting experience.',
     
     // SEO
-    seoTitle: f['SEO Title'] || null,
+    seoTitle: f['SEO Title / Slug'] || null,
     seoDescription: f['SEO Description'] || null,
-    
-    // Taxonomy
-    parentCategory: f['Parent Category'] || null,
-    category: f['Category'] || null,
-    subCategory: f['Sub Category'] || null,
-    
-    // Tags
-    collectionTag: asArray(f['Curated Gift Tags'])[0] || null,
-    occasionTags: parseOccasionTags(f['Occasion Tags']),
+
+    // Reference
+    productCode: f['TBG Product Code'] || null,
+
+    // Taxonomy — a product can have multiple Categories, Collections, and
+    // Occasions at once. Category/Sub Category/Occasion/Collections are
+    // linked-record fields; names/slugs/images come from their paired lookup
+    // fields, not the raw link field itself (which only holds record IDs).
+    categories: zipTaxonomy(
+      f['Category Name (from Category)'],
+      f['Category Slug (from Category)'],
+      f['Category Image (from Category)']
+    ),
+    subCategory: asArray(f['Sub Category Name (from Sub Category)'])[0] || null,
+    collections: zipTaxonomy(
+      f['Name (from Collections)'],
+      f['Slug (from Collections)'],
+      f['Collection Image (from Collections Linked)']
+    ),
+    occasions: zipTaxonomy(
+      f['Name (from Occasion)'],
+      f['Slug (from Occasion)'],
+      f['Occasion Image (from Occasion Tags Linked)']
+    ),
     productTags: asArray(f['Product Tags']),
     
     // Media
-    images: extractAllImageUrls(f['Product Images']),
+    images: extractAllImageUrls(f['Product Images'], f['Image Alt Text']),
     
     // Editorial
     whyTitle: f['Editorial Title'] || 'Why This Gift Exists',
@@ -171,10 +203,12 @@ function formatProduct(record) {
     // Related (will be populated by algorithm)
     related: [],
     
-    // Raw data for algorithm matching
-    _rawOccasionTags: asArray(f['Occasion Tags']),
+    // Raw data for algorithm matching — these are now linked-record IDs
+    // (Airtable REST API returns bare record ID strings for link fields),
+    // so matching is by true taxonomy record identity, not display name.
+    _rawOccasionTags: asArray(f['Occasion']),
     _rawCategories: asArray(f['Category']),
-    _rawCollectionTags: asArray(f['Curated Gift Tags']),
+    _rawCollectionTags: asArray(f['Collections']),
     _rawProductTags: asArray(f['Product Tags'])
   };
 }
@@ -243,7 +277,7 @@ function findRelated(currentProduct, allProducts) {
       slug: p.slug,
       image: firstImage,
       description: p.description ? p.description.substring(0, 120) + '...' : null,
-      collectionTag: p.collectionTag
+      collections: p.collections
     };
   });
 }
