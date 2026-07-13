@@ -83,7 +83,7 @@
   border-radius: var(--hamper-card-radius);
   overflow: hidden;
   background-color: var(--bg-charcoal);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3.6;
   cursor: zoom-in;
 }
 
@@ -299,35 +299,40 @@
 .hamper-hero-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--bg-charcoal);
-  color: var(--text-light);
+  background: var(--ivory-soft, var(--bg-ivory));
+  color: var(--text-dark);
   font-size: var(--font-size-overline);
   font-weight: 500;
   letter-spacing: 0.05em;
   border-radius: var(--radius-full);
-  transition: background var(--transition-fast), transform 0.2s ease;
+  border: 1px solid var(--border-light);
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform 0.2s ease;
   cursor: pointer;
   text-decoration: none;
   line-height: 1;
 }
 
 .hamper-hero-chip:hover {
-  background: var(--accent-bronze);
+  background: var(--surface-white);
+  border-color: var(--accent-bronze);
   transform: translateY(-1px);
 }
 
-.hamper-hero-chip .chip-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-bronze);
+.hamper-hero-chip .chip-icon {
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
+  color: var(--accent-bronze);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hamper-hero-chip:hover .chip-dot {
-  background: var(--surface-white);
+.hamper-hero-chip .chip-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .hamper-hero-actions {
@@ -352,6 +357,21 @@
   transform: translateX(4px);
 }
 
+/* Hamper page primary CTAs use the darker copper tone for more contrast
+   against the light ivory sections they sit on. */
+.hamper-hero .btn-primary,
+.hamper-introduction .btn-primary,
+.hamper-make-yours-intro .btn-primary {
+  background-color: var(--accent-copper);
+  color: var(--text-light);
+}
+
+.hamper-hero .btn-primary::before,
+.hamper-introduction .btn-primary::before,
+.hamper-make-yours-intro .btn-primary::before {
+  background-color: var(--bg-charcoal);
+}
+
 .hamper-quick-info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -361,7 +381,33 @@
 }
 
 .hamper-info-item {
-  text-align: center;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.hamper-info-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ivory-soft);
+  color: var(--accent-bronze);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamper-info-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hamper-info-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .hamper-info-label {
@@ -369,7 +415,7 @@
   font-size: var(--font-size-overline);
   letter-spacing: 0.1em;
   color: var(--text-muted);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
   font-weight: 500;
 }
 
@@ -473,9 +519,9 @@
 
 .hamper-planning-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
+  grid-template-columns: 0.85fr 2fr;
+  gap: 3rem;
+  align-items: center;
 }
 
 .hamper-planning-eyebrow {
@@ -501,7 +547,7 @@
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   line-height: 1.7;
-  max-width: 400px;
+  max-width: 320px;
 }
 
 .hamper-planning-workflow {
@@ -514,35 +560,45 @@
 
 .hamper-planning-specs {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1.5rem 1rem;
+  position: relative;
+}
+
+.hamper-planning-specs::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  z-index: 0;
 }
 
 .hamper-planning-row {
-  display: grid;
-  grid-template-columns: 36px 120px 1fr;
-  gap: 1rem;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  transition: background 0.2s ease;
-}
-
-.hamper-planning-row:last-child {
-  border-bottom: none;
-}
-
-.hamper-planning-row:hover {
-  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+  flex: 1;
+  min-width: 110px;
+  position: relative;
+  z-index: 1;
 }
 
 .hamper-planning-row-icon {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-charcoal-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-bronze);
   flex-shrink: 0;
+  margin-bottom: 0.75rem;
 }
 
 .hamper-planning-row-label {
@@ -550,6 +606,7 @@
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
+  margin-bottom: 0.35rem;
 }
 
 .hamper-planning-row-value {
@@ -569,9 +626,9 @@
 
 .hamper-perfect-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -658,35 +715,44 @@
   position: relative;
 }
 
-.hamper-make-yours-header {
-  padding: 6rem var(--space-layout) 0;
-  text-align: center;
+.hamper-make-yours-layout {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 6rem var(--space-layout);
+  display: grid;
+  grid-template-columns: 0.8fr 2.2fr;
+  gap: 3rem;
+  align-items: center;
 }
 
-.hamper-make-yours-header h2 {
+.hamper-make-yours-intro .hamper-intro-eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+.hamper-make-yours-intro h2 {
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
   font-weight: 400;
   margin-bottom: 1rem;
   color: var(--text-dark);
+  line-height: 1.15;
 }
 
-.hamper-make-yours-header p {
+.hamper-make-yours-intro p {
   font-size: var(--font-size-body);
   color: var(--text-muted);
   font-weight: 300;
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0 0 1.75rem;
   line-height: 1.6;
 }
 
 .hamper-make-yours-scroll {
-  padding: 3rem var(--space-layout) 6rem;
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
   gap: 1.5rem;
   scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -812,13 +878,6 @@
   overflow: hidden;
   background: var(--surface-white);
   transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.hamper-related-card.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .hamper-related-card:hover {
@@ -960,17 +1019,20 @@
 }
 
 .hamper-proposal-highlight .check-icon {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: rgba(197, 154, 127, 0.2);
+  background: rgba(197, 154, 127, 0.15);
   color: var(--accent-bronze);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-overline);
-  font-weight: 700;
+}
+
+.hamper-proposal-highlight .check-icon svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* Right: Form */
@@ -1385,6 +1447,11 @@
   .hamper-make-yours-item {
     flex: 0 0 280px;
   }
+
+  .hamper-make-yours-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1468,9 +1535,11 @@
   }
 
   .hamper-planning-row {
-    grid-template-columns: 36px 100px 1fr;
-    gap: 0.75rem;
-    padding: 1rem 0;
+    min-width: 42%;
+  }
+
+  .hamper-planning-specs::before {
+    display: none;
   }
 
   .hamper-planning-row-label {
@@ -1495,16 +1564,14 @@
   }
 
   /* Make It Yours */
-  .hamper-make-yours-header {
-    padding: 4rem var(--space-layout) 0;
+  .hamper-make-yours-layout {
+    grid-template-columns: 1fr;
+    padding: 4rem var(--space-layout);
+    gap: 2rem;
   }
 
-  .hamper-make-yours-header h2 {
+  .hamper-make-yours-intro h2 {
     font-size: var(--font-size-h4);
-  }
-
-  .hamper-make-yours-scroll {
-    padding: 2rem var(--space-layout) 4rem;
   }
 
   .hamper-make-yours-item {
@@ -1539,6 +1606,7 @@
     gap: 1rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--space-layout);
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.5rem;
   }

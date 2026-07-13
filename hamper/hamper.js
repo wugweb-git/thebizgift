@@ -216,6 +216,36 @@
     return (arr && arr.length > 0) ? arr[0] : null;
   }
 
+  // Shared icon set for the hero's quick-info row (MOQ/Branding/Delivery/etc.)
+  var QUICK_INFO_ICONS = {
+    'MOQ': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>',
+    'Branding': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    'Delivery': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
+    'Lead Time': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    'Product Code': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+  };
+
+  // Icon set for hero product-tag chips (Sustainable / Eco Friendly / Branding
+  // Possible etc.) — matched by keyword, falling back to a generic tag icon.
+  var TAG_ICONS = {
+    'sustainable': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    'eco': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>',
+    'branding': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
+    'premium': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg>',
+    'client': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    'employee': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
+    'default': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>'
+  };
+
+  function getTagIcon(tag) {
+    if (!tag) return TAG_ICONS.default;
+    var lower = tag.toLowerCase();
+    for (var key in TAG_ICONS) {
+      if (key !== 'default' && lower.indexOf(key) !== -1) return TAG_ICONS[key];
+    }
+    return TAG_ICONS.default;
+  }
+
   /* -----------------------------------------------------------------------
      FETCH PRODUCT
      ----------------------------------------------------------------------- */
@@ -339,7 +369,7 @@
   // --- 02 Hero ---
   function buildHero(p) {
     var chips = (p.productTags || []).map(function (t) {
-      return '<a href="/explore/" class="hamper-hero-chip"><span class="chip-dot"></span>' + escapeHtml(t) + '</a>';
+      return '<a href="/explore/" class="hamper-hero-chip"><span class="chip-icon">' + getTagIcon(t) + '</span>' + escapeHtml(t) + '</a>';
     }).join('');
 
     var images = p.images || [];
@@ -400,25 +430,30 @@
             '</div>' +
             '<div class="hamper-quick-info">' +
               '<div class="hamper-info-item">' +
-                '<span class="hamper-info-label">MOQ</span>' +
-                '<span class="hamper-info-value">' + escapeHtml(p.moq || 'Contact Us') + '</span>' +
+                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['MOQ'] + '</span>' +
+                '<span class="hamper-info-text"><span class="hamper-info-label">MOQ</span>' +
+                '<span class="hamper-info-value">' + escapeHtml(p.moq || 'Contact Us') + '</span></span>' +
               '</div>' +
               '<div class="hamper-info-item">' +
-                '<span class="hamper-info-label">Branding</span>' +
-                '<span class="hamper-info-value">' + ((p.branding && p.branding.length > 0) ? 'Available' : 'Not Available') + '</span>' +
+                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Branding'] + '</span>' +
+                '<span class="hamper-info-text"><span class="hamper-info-label">Branding</span>' +
+                '<span class="hamper-info-value">' + ((p.branding && p.branding.length > 0) ? 'Available' : 'Not Available') + '</span></span>' +
               '</div>' +
               '<div class="hamper-info-item">' +
-                '<span class="hamper-info-label">Delivery</span>' +
-                '<span class="hamper-info-value">' + escapeHtml(p.delivery || 'Pan India') + '</span>' +
+                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Delivery'] + '</span>' +
+                '<span class="hamper-info-text"><span class="hamper-info-label">Delivery</span>' +
+                '<span class="hamper-info-value">' + escapeHtml(p.delivery || 'Pan India') + '</span></span>' +
               '</div>' +
               '<div class="hamper-info-item">' +
-                '<span class="hamper-info-label">Lead Time</span>' +
-                '<span class="hamper-info-value">' + escapeHtml(p.leadTime || '7–14 Days') + '</span>' +
+                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Lead Time'] + '</span>' +
+                '<span class="hamper-info-text"><span class="hamper-info-label">Lead Time</span>' +
+                '<span class="hamper-info-value">' + escapeHtml(p.leadTime || '7–14 Days') + '</span></span>' +
               '</div>' +
               (p.productCode ? (
               '<div class="hamper-info-item">' +
-                '<span class="hamper-info-label">Product Code</span>' +
-                '<span class="hamper-info-value">' + escapeHtml(p.productCode) + '</span>' +
+                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Product Code'] + '</span>' +
+                '<span class="hamper-info-text"><span class="hamper-info-label">Product Code</span>' +
+                '<span class="hamper-info-value">' + escapeHtml(p.productCode) + '</span></span>' +
               '</div>') : '') +
             '</div>' +
           '</div>' +
@@ -434,15 +469,15 @@
     return (
       '<section class="hamper-introduction hamper-reveal" aria-label="About this hamper">' +
         '<div class="hamper-introduction-layout">' +
-          '<div class="hamper-introduction-image">' +
-            '<img src="' + heroImg + '" alt="' + escapeHtml(heroAlt) + '" loading="lazy">' +
-          '</div>' +
           '<div class="hamper-introduction-content">' +
             '<span class="hamper-intro-eyebrow">About This Hamper</span>' +
             '<h2>' + escapeHtml(p.name) + '</h2>' +
             '<p class="intro-description">' + escapeHtml(p.description) + '</p>' +
             (p.usp ? '<p class="intro-usp">' + escapeHtml(p.usp) + '</p>' : '') +
             '<a href="#hamper-proposal" class="btn-action btn-primary">Request Proposal →</a>' +
+          '</div>' +
+          '<div class="hamper-introduction-image">' +
+            '<img src="' + heroImg + '" alt="' + escapeHtml(heroAlt) + '" loading="lazy">' +
           '</div>' +
         '</div>' +
       '</section>'
@@ -569,11 +604,15 @@
 
     return (
       '<section class="hamper-make-yours hamper-reveal" aria-label="Make It Yours">' +
-        '<div class="hamper-make-yours-header">' +
-          '<h2>Make It Yours</h2>' +
-          '<p>Every gifting experience can be tailored to reflect your organisation, campaign and brand identity.</p>' +
+        '<div class="hamper-make-yours-layout">' +
+          '<div class="hamper-make-yours-intro">' +
+            '<span class="hamper-intro-eyebrow">Branding &amp; Personalisation</span>' +
+            '<h2>Make It Yours</h2>' +
+            '<p>Every gifting experience can be tailored to reflect your organisation, campaign and brand identity.</p>' +
+            '<a href="#hamper-proposal" class="btn-action btn-primary">Discuss Branding →</a>' +
+          '</div>' +
+          '<div class="hamper-make-yours-scroll">' + items + '</div>' +
         '</div>' +
-        '<div class="hamper-make-yours-scroll">' + items + '</div>' +
       '</section>'
     );
   }
@@ -622,10 +661,10 @@
             '<h2>Interested in this hamper?</h2>' +
             '<p>Let\'s create a version tailored to your organisation. Our team can customise branding, packaging, inserts and quantities for your requirements.</p>' +
             '<div class="hamper-proposal-highlights">' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon">✓</span> Branding</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon">✓</span> Packaging</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon">✓</span> Bulk Orders</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon">✓</span> Dedicated Account Support</div>' +
+              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span> Branding</div>' +
+              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg></span> Packaging</div>' +
+              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span> Bulk Orders</div>' +
+              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span> Dedicated Account Support</div>' +
             '</div>' +
           '</div>' +
 
