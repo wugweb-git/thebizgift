@@ -1020,7 +1020,7 @@
 }
 
 .process-timeline .process-step {
-  text-align: center;
+  text-align: left;
   position: relative;
   z-index: 1;
 }
@@ -1028,7 +1028,7 @@
 .process-timeline .step-icon {
   width: 56px;
   height: 56px;
-  margin: 0 auto 0.875rem;
+  margin: 0 0 0.875rem;
   border-radius: 50%;
   background: var(--surface-white);
   border: 1px solid rgba(30, 30, 30, 0.1);
@@ -1046,8 +1046,9 @@
 
 .process-timeline .step-number {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--font-size-body);
+  font-weight: 600;
   color: var(--accent-bronze);
   margin-bottom: 0.5rem;
 }
@@ -1088,6 +1089,82 @@
   }
   .process-timeline::before {
     display: none;
+  }
+}
+
+/* Homepage "How It Works" — vertical stacked-row list (index.html only) */
+.process-list {
+  max-width: 900px;
+  margin: 3rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.process-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: var(--warm-beige);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  text-align: left;
+}
+
+.process-row-icon {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface-white);
+  border: 1px solid rgba(30, 30, 30, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-bronze);
+}
+
+.process-row-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.4;
+}
+
+.process-row-body {
+  flex: 1;
+}
+
+.process-row-number {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  letter-spacing: 0.05em;
+  color: var(--accent-bronze);
+  margin-bottom: 0.35rem;
+}
+
+.process-row-body h4 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subtitle);
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+  color: var(--text-dark);
+}
+
+.process-row-body p {
+  font-size: var(--font-size-body);
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 60ch;
+}
+
+@media (max-width: 768px) {
+  .process-row {
+    padding: 1.5rem;
+    gap: 1rem;
   }
 }
 
@@ -2073,6 +2150,88 @@ body.modal-open {
   aspect-ratio: 3 / 2;
 }
 
+/* Homepage overlay-style occasion card (index.html only — explore/index.html
+   keeps the original .occasion-card image+content-below layout untouched). */
+.occasion-grid--overlay {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.occasion-card-overlay {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-standard);
+}
+
+.occasion-card-overlay:hover {
+  transform: translateY(-6px);
+}
+
+.occasion-card-overlay-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-premium);
+}
+
+.occasion-card-overlay:hover .occasion-card-overlay-img {
+  transform: scale(1.05);
+}
+
+.occasion-card-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 13, 11, 0) 45%, rgba(15, 13, 11, 0.85) 100%);
+}
+
+.occasion-card-overlay-title {
+  position: absolute;
+  left: 1.5rem;
+  right: 4rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.occasion-card-overlay-arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--accent-copper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .occasion-grid--overlay {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .occasion-grid--overlay {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Collection Tag Row (styleguide.html #taxonomy-tags .tag-chip) */
 .collection-tag-row {
   display: flex;
@@ -2132,6 +2291,217 @@ body.modal-open {
   line-height: 1.6;
 }
 
+/* Homepage horizontal-scroller category card (index.html only — explore/index.html
+   keeps the original .category-card grid layout untouched; picked layout from
+   the category-cards-preview.html "07 · Horizontal Scroller" reference). */
+.category-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.category-scroll-card {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: 1fr 88px;
+  align-items: stretch;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--warm-beige);
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.category-scroll-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 0 1.25rem 1.25rem;
+}
+
+.category-scroll-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subtitle);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.category-scroll-arrow {
+  color: var(--accent-copper);
+  font-size: var(--font-size-body);
+  margin-top: 0.5rem;
+}
+
+.category-scroll-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .category-scroll-card {
+    flex-basis: 210px;
+  }
+}
+
+/* Homepage two-column CTA (replaces the old centered .section-final-cta) —
+   dark Bespoke/Customisation panel + light checklist/Quote panel. */
+.section-dual-cta {
+  padding: 6rem var(--space-layout);
+  background: var(--bg-ivory);
+}
+
+.dual-cta {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  min-height: 440px;
+}
+
+.dual-cta-dark {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: #fff;
+  text-align: left;
+}
+
+.dual-cta-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26, 22, 19, 0.55), rgba(15, 13, 11, 0.88));
+  z-index: 0;
+}
+
+.dual-cta-dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dual-cta-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-overline);
+  color: var(--accent-bronze);
+  font-weight: 600;
+}
+
+.dual-cta-dark h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.dual-cta-dark p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--font-size-body);
+  max-width: 32ch;
+  margin: 0;
+}
+
+.dual-cta-dark .btn-action {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.dual-cta-light {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  background: var(--surface-white);
+}
+
+.dual-cta-light-text {
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.dual-cta-light-text h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.dual-cta-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dual-cta-checklist li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: var(--font-size-body);
+  color: var(--text-muted);
+}
+
+.dual-cta-checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-bronze);
+}
+
+.dual-cta-light-text .btn-action {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+}
+
+.dual-cta-light-visual {
+  background-size: cover;
+  background-position: center;
+  min-height: 280px;
+}
+
+@media (max-width: 1100px) {
+  .dual-cta {
+    grid-template-columns: 1fr;
+  }
+  .dual-cta-dark {
+    padding: 2.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dual-cta-light {
+    grid-template-columns: 1fr;
+  }
+  .dual-cta-light-text {
+    padding: 2.5rem;
+  }
+  .dual-cta-light-visual {
+    min-height: 200px;
+  }
+}
+
 /* Selected / Featured Product Cards — extends .media-card (style.css §2b) */
 .selected-grid {
   display: grid;
@@ -2157,6 +2527,77 @@ body.modal-open {
   align-self: flex-start;
   font-size: var(--font-size-overline);
   padding: 0.6rem 1.5rem;
+}
+
+/* Homepage standardized product card — wishlist icon + subtitle + MOQ pill +
+   arrow (index.html only; explore/index.html keeps the plain .selected-card). */
+.selected-card--v2 .selected-image {
+  position: relative;
+}
+
+.selected-card--v2 .wishlist-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  transition: color 0.2s ease;
+}
+
+.selected-card--v2 .wishlist-btn:hover {
+  color: var(--accent-copper);
+}
+
+.selected-card--v2 .selected-card-sub {
+  margin: 0;
+  padding: 0 2rem;
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+}
+
+.selected-card--v2 .selected-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem 1.5rem;
+  margin-top: auto;
+}
+
+.moq-pill {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: var(--warm-beige);
+  color: var(--text-dark);
+  font-size: var(--font-size-overline);
+  letter-spacing: 0.02em;
+}
+
+.selected-card-arrow {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-copper);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.selected-card-arrow:hover {
+  background: var(--accent-bronze);
+  color: #fff;
 }
 
 /* Explore Customisation Section */

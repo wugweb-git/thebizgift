@@ -690,6 +690,98 @@ a{color:inherit;text-decoration:none}
 .merge-note-card h4{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0 0 8px}
 .merge-note-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
 
+/* ---------- CATEGORY CARDS — 7 layout variants (inlined from
+   docs/reference/category-cards-preview.html, no iframe) ---------- */
+.variant{margin-bottom:64px}
+.variant:last-child{margin-bottom:0}
+.variant-label{font-size:10px;letter-spacing:.18em;color:var(--bronze-deep);font-weight:600;text-transform:uppercase;margin-bottom:18px}
+
+.v01-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.v01-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:24px 20px;transition:all .25s}
+.v01-card:hover{border-color:var(--bronze);transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.v01-card .ic{width:44px;height:44px;border-radius:50%;background:var(--ivory-soft);color:var(--bronze-deep);display:grid;place-items:center;margin-bottom:16px}
+.v01-card .ic svg{width:20px;height:20px;stroke-width:1.5}
+.v01-card h4{font-family:var(--font-display);font-size:18px;font-weight:500;margin:0 0 10px}
+.v01-card .arrow{color:var(--bronze-deep);font-size:14px}
+
+.v02-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-radius:var(--r-3);overflow:hidden;box-shadow:var(--shadow-card)}
+.v02-card{position:relative;aspect-ratio:3/4;background-size:cover;background-position:center;overflow:hidden;cursor:pointer;transition:transform .5s cubic-bezier(.25,1,.5,1)}
+.v02-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,30,30,.02) 40%,rgba(20,18,16,.88) 100%)}
+.v02-card:hover{transform:scale(1.04)}
+.v02-card .ic{position:absolute;top:20px;left:20px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.94);color:var(--bronze-deep);display:grid;place-items:center;z-index:1}
+.v02-card .ic svg{width:16px;height:16px;stroke-width:1.5}
+.v02-card .label{position:absolute;left:20px;right:20px;bottom:20px;z-index:1;color:#fff}
+.v02-card .label h4{font-family:var(--font-display);font-size:19px;font-weight:500;margin:0;line-height:1.15}
+.v02-card .label .arrow{display:inline-block;margin-top:8px;font-size:14px;color:#fff}
+
+.v03-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.v03-card{display:grid;grid-template-columns:1fr 140px;border:1px solid var(--line);border-radius:var(--r-3);overflow:hidden;background:#fff;transition:all .25s}
+.v03-card:hover{border-color:var(--bronze);box-shadow:var(--shadow-card)}
+.v03-card .body{padding:24px 24px}
+.v03-card .ic{width:36px;height:36px;border-radius:50%;background:var(--ivory-soft);color:var(--bronze-deep);display:grid;place-items:center;margin-bottom:14px}
+.v03-card .ic svg{width:16px;height:16px;stroke-width:1.5}
+.v03-card h4{font-family:var(--font-display);font-size:19px;font-weight:500;margin:0 0 6px}
+.v03-card p{font-size:12.5px;color:var(--muted);margin:0 0 10px;line-height:1.5}
+.v03-card .arrow{color:var(--bronze-deep);font-size:14px}
+.v03-card .img{background-size:cover;background-position:center}
+
+.v04-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.v04-feature{position:relative;border-radius:var(--r-3);overflow:hidden;background-size:cover;background-position:center;min-height:340px;display:flex;align-items:flex-end;padding:32px}
+.v04-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,30,30,.7) 0%,rgba(30,30,30,.1) 65%)}
+.v04-feature .label{position:relative;z-index:1;color:#fff;max-width:60%}
+.v04-feature h3{font-family:var(--font-display);font-size:30px;font-weight:500;margin:0 0 10px}
+.v04-feature p{font-size:13px;color:rgba(255,255,255,.82);line-height:1.55;margin:0 0 18px}
+.v04-feature .btn{display:inline-block;background:var(--bronze);color:#fff;padding:10px 20px;border-radius:var(--r-pill);font-size:12px;letter-spacing:.04em}
+.v04-small{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.v04-small .card{background:#fff;border:1px solid var(--line);border-radius:var(--r-3);padding:22px 18px;transition:all .25s}
+.v04-small .card:hover{border-color:var(--bronze);transform:translateY(-2px)}
+.v04-small .ic{width:34px;height:34px;border-radius:50%;background:var(--ivory-soft);color:var(--bronze-deep);display:grid;place-items:center;margin-bottom:12px}
+.v04-small .ic svg{width:15px;height:15px;stroke-width:1.5}
+.v04-small h4{font-family:var(--font-display);font-size:16px;font-weight:500;margin:0}
+
+.v05-wrap{position:relative;display:flex;align-items:center;justify-content:center;padding:20px 0 40px;overflow-x:auto}
+.v05-track{display:flex;align-items:center}
+.v05-card{flex:0 0 auto;border-radius:var(--r-3);overflow:hidden;background-size:cover;background-position:center;box-shadow:var(--shadow-soft);transition:transform .3s;position:relative}
+.v05-card:nth-child(1){width:220px;height:280px;z-index:6}
+.v05-card:nth-child(2){width:120px;height:220px;margin-left:-24px;z-index:5;filter:brightness(.82)}
+.v05-card:nth-child(3){width:120px;height:220px;margin-left:-24px;z-index:4;filter:brightness(.72)}
+.v05-card:nth-child(4){width:120px;height:220px;margin-left:-24px;z-index:3;filter:brightness(.62)}
+.v05-card:nth-child(5){width:120px;height:220px;margin-left:-24px;z-index:2;filter:brightness(.52)}
+.v05-card .ic{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--bronze-deep);display:grid;place-items:center}
+.v05-card .ic svg{width:14px;height:14px;stroke-width:1.5}
+.v05-card .label{position:absolute;left:16px;right:16px;bottom:16px;color:#fff}
+.v05-card .label h4{font-family:var(--font-display);font-size:18px;font-weight:500;margin:0}
+.v05-dots{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.v05-dots span{font-size:11px;color:var(--muted)}
+.v05-dots span.active{color:var(--bronze-deep);font-weight:600}
+
+.v06-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.v06-card{position:relative;aspect-ratio:3/4;border-radius:var(--r-3);overflow:hidden;background-size:cover;background-position:center;cursor:pointer;transition:transform .4s cubic-bezier(.25,1,.5,1)}
+.v06-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.68))}
+.v06-card:hover{transform:scale(1.03)}
+.v06-card .ic{position:absolute;top:18px;left:18px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--bronze-deep);display:grid;place-items:center;z-index:1}
+.v06-card .ic svg{width:15px;height:15px;stroke-width:1.5}
+.v06-card h4{position:absolute;left:18px;right:18px;bottom:18px;z-index:1;color:#fff;font-family:var(--font-display);font-size:19px;font-weight:500;margin:0;line-height:1.15}
+
+.v07-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}
+.v07-scroll::-webkit-scrollbar{height:4px}
+.v07-scroll::-webkit-scrollbar-thumb{background:var(--bronze);border-radius:4px}
+.v07-card{flex:0 0 320px;scroll-snap-align:start;border-radius:var(--r-3);overflow:hidden;background:var(--ivory-soft);display:grid;grid-template-columns:1.2fr 1fr;align-items:stretch}
+.v07-card .body{padding:20px 0 20px 22px;display:flex;flex-direction:column;justify-content:space-between}
+.v07-card h4{font-family:var(--font-display);font-size:18px;font-weight:500;margin:0;line-height:1.2}
+.v07-card .arrow{color:var(--bronze-deep);font-size:15px}
+.v07-card .img{background-size:cover;background-position:center}
+
+@media(max-width:1100px){
+  .v01-grid,.v02-grid,.v06-grid{grid-template-columns:repeat(3,1fr)}
+  .v04-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .v01-grid,.v02-grid,.v06-grid{grid-template-columns:repeat(2,1fr)}
+  .v03-card{grid-template-columns:1fr}
+  .v04-small{grid-template-columns:1fr 1fr}
+}
+
 /* ---------- PDP EXTRAS (full product detail page) ---------- */
 .pdp-breadcrumb{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);letter-spacing:.06em;margin-bottom:24px;flex-wrap:wrap}
 .pdp-breadcrumb a{color:var(--muted);transition:color .2s cubic-bezier(0.25,1,0.5,1)}
@@ -2984,14 +3076,6 @@ a{color:inherit;text-decoration:none}
         <p class="small">Hero variants, process, split content, CTA, newsletter, site map, shared includes and canonical documentation index.</p>
       </div>
     </div>
-
-    <div class="merge-frame-shell mt-48">
-      <div class="merge-frame-toolbar">
-        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <p>Embedded production UI inventory · mapped to live HTML/CSS</p>
-      </div>
-      <iframe class="merge-frame" src="/docs/reference/production-ui-inventory.html" title="Production-mapped UI inventory"></iframe>
-    </div>
   </div>
 </section>
 
@@ -3006,15 +3090,129 @@ a{color:inherit;text-decoration:none}
       <p class="body" style="max-width:42ch">Same seven treatments as the Occasions reference, rebuilt for Category using the images currently in <code>/image/category</code> (repeated to fill all 11 real categories until the rest are supplied). Pending a pick — not yet wired into any live page.</p>
     </div>
 
-    <div class="merge-frame-shell mt-48">
-      <div class="merge-frame-toolbar">
-        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <p>Embedded preview · docs/reference/category-cards-preview.html</p>
+    <div class="variant">
+      <div class="variant-label">01 · Minimal Icon + Text (Clean)</div>
+      <div class="v01-grid" id="ccV01"></div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">02 · Image Reveal on Hover (Overlay)</div>
+      <div class="v02-grid" id="ccV02"></div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">03 · Split Card (Text + Image)</div>
+      <div class="v03-grid" id="ccV03"></div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">04 · Large Feature + Small Cards</div>
+      <div class="v04-grid">
+        <div class="v04-feature" id="ccV04feature">
+          <div class="label">
+            <h3></h3>
+            <p></p>
+            <span class="btn">Explore Category</span>
+          </div>
+        </div>
+        <div class="v04-small" id="ccV04small"></div>
       </div>
-      <iframe class="merge-frame" style="height:2700px" src="/docs/reference/category-cards-preview.html" title="Category card layout preview"></iframe>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">05 · Overlapping Cards (Cascade)</div>
+      <div class="v05-wrap"><div class="v05-track" id="ccV05"></div></div>
+      <div class="v05-dots" id="ccV05dots"></div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">06 · Hover Zoom + Text on Image</div>
+      <div class="v06-grid" id="ccV06"></div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-label">07 · Horizontal Scroller (Mobile Friendly)</div>
+      <div class="v07-scroll" id="ccV07"></div>
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var IMAGES = [
+    '/image/category/office%20accessory.png',
+    '/image/category/office%20essentials.png',
+    '/image/category/drinkware.png',
+    '/image/category/Carry%20Bags.png'
+  ];
+
+  var ICONS = {
+    box: '<path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+    pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+    mug: '<path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><path d="M6 2v2M10 2v2M14 2v2"/>',
+    laptop: '<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M2 20h20"/>',
+    bag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+    suitcase: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    printer: '<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+    tag: '<path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+    gift: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/>'
+  };
+
+  var CATEGORIES = [
+    { name: 'Office Accessories', copy: 'Practical desk and workspace accessories that add function and polish.', icon: 'pen' },
+    { name: 'Office Essentials',  copy: 'Diaries, pens, organisers and workplace essentials for everyday use.', icon: 'box' },
+    { name: 'Drinkware',          copy: 'Thoughtfully branded mugs, bottles and hydration accessories.', icon: 'mug' },
+    { name: 'Tech',               copy: 'Desk companions and practical additions combining utility with presentation.', icon: 'laptop' },
+    { name: 'Carry Bags',         copy: 'Functional carry solutions for onboarding, events and everyday use.', icon: 'bag' },
+    { name: 'Bags',               copy: 'Versatile bags built for daily commuting, travel and on-the-go use.', icon: 'bag' },
+    { name: 'Transit Luggage',    copy: 'Durable travel and luggage solutions for professionals on the move.', icon: 'suitcase' },
+    { name: 'Box Making',         copy: 'Custom packaging and box solutions that elevate the unboxing moment.', icon: 'box' },
+    { name: 'Printing',           copy: 'Branding and print services that bring your identity to every gift.', icon: 'printer' },
+    { name: 'Branding',           copy: 'Custom branding options that put your identity front and centre.', icon: 'tag' },
+    { name: 'Combo',              copy: 'Pre-curated gifting combinations designed for convenience and impact.', icon: 'gift' }
+  ];
+
+  function img(i){ return IMAGES[i % IMAGES.length]; }
+  function icon(name, w){ w = w || 18; return '<svg width="'+w+'" height="'+w+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">'+ICONS[name]+'</svg>'; }
+
+  document.getElementById('ccV01').innerHTML = CATEGORIES.slice(0,5).map(function(c){
+    return '<div class="v01-card"><div class="ic">'+icon(c.icon)+'</div><h4>'+c.name+'</h4><span class="arrow">→</span></div>';
+  }).join('');
+
+  document.getElementById('ccV02').innerHTML = CATEGORIES.slice(0,5).map(function(c,i){
+    return '<div class="v02-card" style="background-image:url(\''+img(i)+'\')"><div class="ic">'+icon(c.icon,16)+'</div><div class="label"><h4>'+c.name+'</h4><span class="arrow">→</span></div></div>';
+  }).join('');
+
+  document.getElementById('ccV03').innerHTML = CATEGORIES.slice(0,3).map(function(c,i){
+    return '<div class="v03-card"><div class="body"><div class="ic">'+icon(c.icon,16)+'</div><h4>'+c.name+'</h4><p>'+c.copy+'</p><span class="arrow">→</span></div><div class="img" style="background-image:url(\''+img(i)+'\')"></div></div>';
+  }).join('');
+
+  (function(){
+    var feat = CATEGORIES[0];
+    document.querySelector('#ccV04feature h3').textContent = feat.name;
+    document.querySelector('#ccV04feature p').textContent = feat.copy;
+    document.getElementById('ccV04feature').style.backgroundImage = "url('"+img(0)+"')";
+    document.getElementById('ccV04small').innerHTML = CATEGORIES.slice(1,5).map(function(c){
+      return '<div class="card"><div class="ic">'+icon(c.icon,15)+'</div><h4>'+c.name+'</h4></div>';
+    }).join('');
+  })();
+
+  document.getElementById('ccV05').innerHTML = CATEGORIES.slice(0,5).map(function(c,i){
+    return '<div class="v05-card" style="background-image:url(\''+img(i)+'\')"><div class="ic">'+icon(c.icon,14)+'</div><div class="label"><h4>'+c.name+'</h4></div></div>';
+  }).join('');
+  document.getElementById('ccV05dots').innerHTML = CATEGORIES.slice(0,5).map(function(c,i){
+    return '<span class="'+(i===0?'active':'')+'">'+String(i+1).padStart(2,'0')+'</span>';
+  }).join('');
+
+  document.getElementById('ccV06').innerHTML = CATEGORIES.slice(0,5).map(function(c,i){
+    return '<div class="v06-card" style="background-image:url(\''+img(i+1)+'\')"><div class="ic">'+icon(c.icon,15)+'</div><h4>'+c.name+'</h4></div>';
+  }).join('');
+
+  document.getElementById('ccV07').innerHTML = CATEGORIES.map(function(c,i){
+    return '<div class="v07-card"><div class="body"><h4>'+c.name+'</h4><span class="arrow">→</span></div><div class="img" style="background-image:url(\''+img(i)+'\')"></div></div>';
+  }).join('');
+})();
+</script>
 
 <!-- ====== END / SIGN-OFF ====== -->
 <section class="section" style="text-align:center;padding-bottom:120px">

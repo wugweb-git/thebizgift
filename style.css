@@ -933,12 +933,9 @@ img {
 .hero-container {
   position: relative;
   z-index: 2;
-  /* .hero-section can't carry its own horizontal padding (the full-bleed
-     .hero-media background layer is absolutely positioned within it), so
-     this reproduces the site's usual "section padding + max-width:1400
-     centered" inset as a single box: widen by 2x the padding, center,
-     then pad back in by the same amount. */
-  max-width: calc(var(--container-max) + 2 * var(--space-layout));
+  /* Same box model as .container (max-width + padding), so hero content
+     lines up with every section below it. */
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--space-layout) 6rem;
 }
@@ -1217,16 +1214,23 @@ img {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
-  text-align: center;
+  text-align: left;
+}
+
+.trust-compact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .trust-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 1rem;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  margin: 0;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
   color: var(--accent-copper);
@@ -1236,7 +1240,7 @@ img {
   display: block;
   font-family: var(--font-serif);
   font-size: var(--font-size-h4);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text-dark);
   margin-bottom: 0.25rem;
 }
