@@ -2,6 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/hamper/:slug", "destination": "/hamper/template.html" },
+    { "source": "/hamper/:slug/", "destination": "/hamper/template.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

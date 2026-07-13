@@ -248,10 +248,13 @@ a{color:inherit;text-decoration:none}
 .product .body{padding:22px 22px 24px}
 .product .name{font-family:var(--font-display);font-size:22px;line-height:1.1}
 .product .sub{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.02em}
-.product .row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
-.product .moq{font-size:11px;letter-spacing:.16em;color:var(--charcoal);background:var(--ivory-soft);padding:8px 14px;border-radius:var(--r-pill)}
-.product .go{width:36px;height:36px;border-radius:50%;background:var(--ivory-soft);display:grid;place-items:center;color:var(--bronze-deep);transition:all .25s ease}
-.product:hover .go{background:var(--bronze);color:#fff;transform:translateX(2px)}
+.product .row{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.product .moq{font-size:11px;letter-spacing:.1em;color:var(--muted);background:var(--ivory-soft);padding:7px 14px;border-radius:var(--r-pill)}
+.product .go{width:20px;height:20px;display:grid;place-items:center;color:var(--bronze-deep);transition:transform .25s ease}
+.product:hover .go{transform:translateX(3px)}
+.product-dots{display:flex;gap:8px;justify-content:center;margin-top:28px}
+.product-dots span{width:6px;height:6px;border-radius:50%;background:var(--line-strong);transition:all .2s}
+.product-dots span.active{width:20px;border-radius:var(--r-pill);background:var(--bronze)}
 
 /* ---------- FEATURE STRIP ---------- */
 .features{
@@ -592,9 +595,13 @@ a{color:inherit;text-decoration:none}
 .sg-faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .sg-faq-answer.open{max-height:300px}
 .sg-faq-answer .inner{padding:0 0 22px;font-size:14px;color:var(--muted);line-height:1.7;max-width:56ch}
-.sg-faq-sidebar{background:var(--warm-beige);border-radius:var(--r-3);padding:32px;position:sticky;top:100px}
-.sg-faq-sidebar h4{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0 0 12px}
-.sg-faq-sidebar p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+.sg-faq-side{display:flex;flex-direction:column;gap:20px;position:sticky;top:100px}
+.sg-faq-sidebar{background:var(--warm-beige);border-radius:var(--r-3);padding:32px}
+.sg-faq-sidebar h4{font-family:var(--font-display);font-size:24px;font-weight:500;margin:0 0 12px}
+.sg-faq-sidebar p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 22px}
+.sg-faq-sidebar .btn{background:var(--bronze);border-color:var(--bronze);color:#fff;border-radius:var(--r-pill)}
+.sg-faq-sidebar .btn:hover{background:var(--bronze-deep);border-color:var(--bronze-deep)}
+.sg-faq-side-image{border-radius:var(--r-3);aspect-ratio:1/1;background-size:cover;background-position:center;background-color:var(--ivory-soft)}
 
 /* ---------- QUOTE FORM ---------- */
 .quote-form{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;background:var(--warm-beige);border-radius:var(--r-4);padding:64px;overflow:hidden}
@@ -762,12 +769,14 @@ a{color:inherit;text-decoration:none}
 .occasion-scroll .occasion-card::after{content:"";position:absolute;inset:0;border-radius:var(--r-3);background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.6))}
 .occasion-scroll .occasion-card .label{position:relative;z-index:1;font-family:var(--font-display);font-size:18px;font-weight:500}
 .occasion-scroll .occasion-card .label .sub{display:block;font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;font-weight:400}
-.occasion-card-lg{border-radius:var(--r-3);overflow:hidden;position:relative;min-height:320px;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:28px;cursor:pointer;transition:transform .3s cubic-bezier(0.25,1,0.5,1)}
+.occasion-card-lg{border-radius:var(--r-3);overflow:hidden;position:relative;aspect-ratio:4/3;background-size:cover;background-position:center;cursor:pointer;transition:transform .3s cubic-bezier(0.25,1,0.5,1)}
 .occasion-card-lg:hover{transform:translateY(-4px)}
-.occasion-card-lg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.65))}
-.occasion-card-lg .label{position:relative;z-index:1;color:#fff}
-.occasion-card-lg .label h3{font-family:var(--font-display);font-size:28px;font-weight:500;margin:0;line-height:1.1}
-.occasion-card-lg .label p{font-size:13px;color:rgba(255,255,255,.78);margin:8px 0 0;line-height:1.5}
+.occasion-card-lg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.75) 100%)}
+.occasion-card-lg .label{position:absolute;left:20px;right:64px;bottom:20px;z-index:1;color:#fff}
+.occasion-card-lg .label h3{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0;line-height:1.2}
+.occasion-card-lg .label p{font-size:13px;color:rgba(255,255,255,.82);margin:8px 0 0;line-height:1.45}
+.occasion-card-lg .go{position:absolute;right:20px;bottom:20px;z-index:1;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--charcoal);display:grid;place-items:center;transition:all .25s ease}
+.occasion-card-lg:hover .go{background:#fff;transform:translateX(2px)}
 .occasion-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
 
 /* ---------- TESTIMONIAL BLOCK ---------- */
@@ -775,6 +784,16 @@ a{color:inherit;text-decoration:none}
 .testimonial-block::before{content:"\201C";position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:200px;color:rgba(197,154,127,.12);line-height:1;pointer-events:none}
 .testimonial-block blockquote{font-family:var(--font-display);font-style:italic;font-size:clamp(28px,3.5vw,42px);line-height:1.25;max-width:680px;margin:0 auto;font-weight:400;position:relative;z-index:1}
 .testimonial-block .attribution{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.16em;margin-top:28px;position:relative;z-index:1}
+
+/* ---------- EDITORIAL QUOTE (WITH IMAGE) ---------- */
+.editorial-quote-block{background:var(--charcoal);border-radius:var(--r-4);overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr;align-items:stretch}
+.editorial-quote-block .text{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+.editorial-quote-block .text .eyebrow{color:var(--bronze);margin-bottom:20px}
+.editorial-quote-block .mark{font-family:var(--font-display);font-size:44px;color:var(--bronze);line-height:.6;margin-bottom:14px}
+.editorial-quote-block blockquote{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);font-weight:500;color:#fff;line-height:1.28;margin:0;max-width:26ch}
+.editorial-quote-block .rule{width:40px;height:2px;background:var(--bronze);margin-top:26px;border:none}
+.editorial-quote-block .visual{background-size:cover;background-position:center;min-height:280px}
+@media(max-width:900px){.editorial-quote-block{grid-template-columns:1fr}.editorial-quote-block .visual{min-height:220px;order:-1}}
 
 /* ---------- CUSTOM HAMPER CTA ---------- */
 .block-custom-hamper{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--r-4);overflow:hidden;min-height:440px}
@@ -930,6 +949,7 @@ a{color:inherit;text-decoration:none}
       <a href="#product-detail"><span>25</span> Pages · Product Detail</a>
       <a href="#values"><span>26</span> Brand · Tone & Values</a>
       <a href="#testimonial"><span>27</span> Blocks · Testimonial</a>
+      <a href="#editorial-quote"><span>27</span> Blocks · Editorial Quote</a>
       <a href="#custom-hamper"><span>28</span> Blocks · Custom Hamper</a>
       <a href="#moments-grid"><span>29</span> Blocks · Moments Grid</a>
       <a href="#curate-cta"><span>30</span> Blocks · Curate CTA</a>
@@ -1560,10 +1580,10 @@ a{color:inherit;text-decoration:none}
           <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         </div>
         <div class="body">
-          <div class="name">Executive Indulgence</div>
-          <div class="sub">A refined expression of gratitude</div>
+          <div class="name">BCC Hamper</div>
+          <div class="sub">Blind Carbon Copy Hub</div>
           <div class="row">
-            <span class="moq">Min. 10 units</span>
+            <span class="moq">MOQ 25 Boxes</span>
             <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
           </div>
         </div>
@@ -1573,10 +1593,10 @@ a{color:inherit;text-decoration:none}
           <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         </div>
         <div class="body">
-          <div class="name">Premium Joining Kit</div>
-          <div class="sub">Welcome new team members</div>
+          <div class="name">Onboarding Kit</div>
+          <div class="sub">Welcome With Purpose</div>
           <div class="row">
-            <span class="moq">Min. 20 units</span>
+            <span class="moq">MOQ 50 Boxes</span>
             <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
           </div>
         </div>
@@ -1586,15 +1606,16 @@ a{color:inherit;text-decoration:none}
           <div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         </div>
         <div class="body">
-          <div class="name">Self Care Hamper</div>
-          <div class="sub">Wellness and rejuvenation</div>
+          <div class="name">Client Appreciation Box</div>
+          <div class="sub">Thoughtful. Timeless.</div>
           <div class="row">
-            <span class="moq">Min. 10 units</span>
+            <span class="moq">MOQ 25 Boxes</span>
             <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
           </div>
         </div>
       </div>
     </div>
+    <div class="product-dots"><span class="active"></span><span></span><span></span></div>
   </div>
 </section>
 
@@ -2051,18 +2072,21 @@ a{color:inherit;text-decoration:none}
           <h3>Employee Joining</h3>
           <p>Make every new hire feel valued from day one with thoughtful welcome hampers.</p>
         </div>
+        <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
       </div>
       <div class="occasion-card-lg" style="background-image:url('/image/From%20Brief%20to%20Box/PFl.jpeg')">
         <div class="label">
           <h3>Client Appreciation</h3>
           <p>Strengthen business relationships with gifts that leave lasting impressions.</p>
         </div>
+        <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
       </div>
       <div class="occasion-card-lg" style="background-image:url('/image/Premium%20Joining%20Kit.png')">
         <div class="label">
           <h3>Festivals & Celebrations</h3>
           <p>Seasonal gifting that honours tradition with contemporary style.</p>
         </div>
+        <div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
       </div>
     </div>
 
@@ -2346,13 +2370,13 @@ a{color:inherit;text-decoration:none}
           <div class="sg-faq-answer"><div class="inner">Yes. We offer full brand customisation including logo placement on boxes, custom ribbons, personalised cards and branded packaging inserts.</div></div>
         </div>
       </div>
-      <div>
+      <div class="sg-faq-side">
         <div class="sg-faq-sidebar">
           <h4>Still have questions?</h4>
           <p>Our gifting consultants are happy to help you find the perfect solution for your needs.</p>
           <button class="btn btn-primary btn-sm">Talk to Us <span class="arrow">→</span></button>
         </div>
-        <div style="aspect-ratio:3/4;border-radius:var(--r-3);background-image:url('/image/Hamper%203.png');background-size:cover;background-position:center;margin-top:24px"></div>
+        <div class="sg-faq-side-image" style="background-image:url('/image/Hamper%203.png')"></div>
       </div>
     </div>
   </div>
@@ -2422,6 +2446,29 @@ a{color:inherit;text-decoration:none}
     <div class="testimonial-block">
       <blockquote>The hampers felt premium, thoughtful and completely aligned with our brand. The process was smooth from the first call to final delivery.</blockquote>
       <div class="attribution">— Placeholder Name, Head of People · Placeholder Company</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EDITORIAL QUOTE (WITH IMAGE) ====== -->
+<section class="section reveal" id="editorial-quote">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">27 · Blocks · Editorial Quote</span>
+        <h2 class="h2" style="margin-top:12px">Editorial quote, with image</h2>
+      </div>
+      <p class="body" style="max-width:42ch">A dark split card — short editorial line on the left, full-bleed image on the right. Placeholder image shown until real photography is supplied.</p>
+    </div>
+
+    <div class="editorial-quote-block">
+      <div class="text">
+        <span class="eyebrow">Editorial Quote</span>
+        <div class="mark">&ldquo;</div>
+        <blockquote>Gifting is not about the object, it's about the emotion it creates.</blockquote>
+        <hr class="rule">
+      </div>
+      <div class="visual" style="background-image:url('/image/placeholder.svg')"></div>
     </div>
   </div>
 </section>
@@ -2653,10 +2700,13 @@ a{color:inherit;text-decoration:none}
           <div class="sg-faq-answer"><div class="inner">That's perfectly fine — most great projects start without one. Share your occasion, approximate budget, and number of recipients, and we'll come back with curated ideas and recommendations. You bring the occasion, we'll bring the ideas.</div></div>
         </div>
       </div>
-      <div class="sg-faq-sidebar">
-        <h4>Still have questions?</h4>
-        <p>Our team is here to help you find the perfect gifting solution for your organisation.</p>
-        <button class="btn btn-primary btn-sm">Contact Us <span class="arrow">→</span></button>
+      <div class="sg-faq-side">
+        <div class="sg-faq-sidebar">
+          <h4>Still have questions?</h4>
+          <p>Our gifting consultants are happy to help you find the perfect solution for your needs.</p>
+          <button class="btn btn-primary btn-sm">Talk to Us <span class="arrow">→</span></button>
+        </div>
+        <div class="sg-faq-side-image" style="background-image:url('/image/placeholder.svg')"></div>
       </div>
     </div>
   </div>
