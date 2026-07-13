@@ -337,79 +337,167 @@
 }
 
 .about-cta {
-  padding: 8rem var(--space-layout);
-  background-color: var(--text-light);
-  text-align: center;
+  padding: 6rem var(--space-layout);
+  background-color: var(--bg-ivory);
 }
 
-.about-cta h2 {
+.about-cta .hamper-cta-block {
+  min-height: 340px;
+}
+
+.about-cta .hamper-cta-block .dark h2 {
   font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
-  font-weight: 400;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
 }
 
-.about-cta > .container > p {
+.about-cta .hamper-cta-block .dark p {
+  color: rgba(255, 255, 255, 0.65);
   font-size: var(--font-size-body);
-  color: var(--text-muted);
-  font-weight: 300;
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
   line-height: 1.7;
+  max-width: 34ch;
+  margin: 0.75rem 0 0;
 }
 
 /* --------------------------------------------------------------------------
-   CUSTOMISATION PAGE
+   CUSTOMISATION PAGE — HERO (dark/light split CTA + step row)
    -------------------------------------------------------------------------- */
 .custom-hero {
-  background-color: var(--bg-charcoal);
-  padding: 10rem var(--space-layout) 8rem;
-  text-align: left;
-  color: var(--text-light);
-  position: relative;
+  padding: 6rem var(--space-layout) 0;
+  background-color: var(--bg-ivory);
+}
+
+.hamper-cta-block {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius-2xl);
   overflow: hidden;
+  min-height: 440px;
 }
 
-.custom-hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.hamper-cta-block .dark {
+  background: linear-gradient(180deg, #1a1613, #0f0d0b);
+  color: #fff;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-.custom-hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.custom-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.9));
-}
-
-.custom-hero .hero-container {
-  max-width: 900px;
-  position: relative;
-  z-index: 1;
-}
-
-.custom-hero h1 {
+.hamper-cta-block .dark h1 {
   font-family: var(--font-serif);
-  font-size: var(--font-size-hero);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
 }
 
-.custom-hero p {
+.hamper-cta-block .dark p {
+  color: rgba(255, 255, 255, 0.72);
   font-size: var(--font-size-body);
-  color: var(--text-footer);
-  font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  max-width: 38ch;
+  margin: 0;
+}
+
+.hamper-cta-block .visual {
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+}
+
+.hamper-cta-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hamper-cta-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hamper-cta-pill svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-bronze);
+  flex-shrink: 0;
+}
+
+.hamper-cta-steps {
+  max-width: 1300px;
+  margin: 2rem auto 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hamper-cta-step {
+  background: var(--surface-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+  transition: all 0.25s ease;
+}
+
+.hamper-cta-step:hover {
+  border-color: var(--accent-bronze);
+  transform: translateY(-2px);
+}
+
+.hamper-cta-step .num {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.hamper-cta-step .ic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(197, 154, 127, 0.1);
+  display: grid;
+  place-items: center;
+  color: var(--accent-bronze);
+  margin: 0 auto 0.625rem;
+}
+
+.hamper-cta-step .ic svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.4;
+}
+
+.hamper-cta-step h5 {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .hamper-cta-block {
+    grid-template-columns: 1fr;
+  }
+  .hamper-cta-block .dark {
+    padding: 2.5rem;
+  }
 }
 
 .custom-why {
