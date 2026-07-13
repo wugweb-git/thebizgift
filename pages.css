@@ -189,60 +189,6 @@
   margin: 0;
 }
 
-.about-philosophy {
-  padding: 8rem var(--space-layout);
-  background-color: var(--text-light);
-}
-
-.philosophy-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.philosophy-card {
-  text-align: left;
-  padding: 2rem;
-  background: var(--surface-white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  transition: transform 0.35s var(--ease-standard), box-shadow 0.35s var(--ease-standard);
-}
-.philosophy-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
-}
-
-.philosophy-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--ivory-soft);
-  color: var(--accent-copper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-}
-
-.philosophy-card h3 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-h4);
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-  color: var(--text-dark);
-}
-
-.philosophy-card p {
-  font-size: var(--font-size-body);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.7;
-}
-
-
 .about-craft {
   padding: 8rem var(--space-layout);
   background-color: var(--text-light);
@@ -1710,11 +1656,6 @@
   .origin-grid,
   .craft-grid,
   .why-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .philosophy-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
