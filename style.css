@@ -409,44 +409,6 @@ img {
   font-weight: 300;
 }
 
-.collection-editorial-card {
-  position: relative;
-}
-
-.collection-card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(197, 154, 127, 0.1);
-  color: var(--accent-bronze);
-  margin-bottom: 1.25rem;
-  transition: background 0.3s ease;
-}
-
-.collection-editorial-card:hover .collection-card-icon {
-  background: var(--accent-bronze);
-  color: var(--text-light);
-}
-
-.collection-card-arrow {
-  position: absolute;
-  top: 2.5rem;
-  right: 2.5rem;
-  font-size: var(--font-size-subtitle);
-  color: var(--accent-bronze);
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.collection-editorial-card:hover .collection-card-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 /* --------------------------------------------------------------------------
    2c. CANONICAL FAQ ACCORDION
    -------------------------------------------------------------------------- */
@@ -1366,52 +1328,6 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   11. HOMEPAGE — SEASONAL SPOTLIGHT
-   -------------------------------------------------------------------------- */
-.section-seasonal {
-  padding: 3rem var(--space-layout);
-  background-color: var(--text-light);
-}
-
-.seasonal-banner {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem 3rem;
-  background: var(--bg-charcoal);
-  border-radius: var(--radius-lg);
-  color: var(--text-light);
-}
-
-.seasonal-content {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.seasonal-icon {
-  font-size: var(--font-size-h4);
-  line-height: 1;
-}
-
-.seasonal-content h3 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-card-title);
-  font-weight: 400;
-  margin-bottom: 0.25rem;
-  color: var(--accent-bronze);
-}
-
-.seasonal-content p {
-  font-size: var(--font-size-nav);
-  color: var(--text-footer-link);
-  font-weight: 300;
-}
-
-/* --------------------------------------------------------------------------
    12. HOMEPAGE — PLANNING GUIDE
    -------------------------------------------------------------------------- */
 .section-planning-guide {
@@ -1422,11 +1338,11 @@ img {
 
 .planning-guide-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  max-width: 1100px;
+  grid-template-columns: 0.85fr 2fr;
+  gap: 3rem;
+  max-width: 1300px;
   margin: 0 auto;
-  align-items: start;
+  align-items: center;
 }
 
 .planning-guide-editorial h2 {
@@ -1449,30 +1365,45 @@ img {
 
 .planning-guide-specs {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1.5rem 1rem;
+  position: relative;
+}
+
+.planning-guide-specs::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  z-index: 0;
 }
 
 .planning-guide-row {
-  display: grid;
-  grid-template-columns: 36px 120px 1fr;
-  gap: 1rem;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-}
-
-.planning-guide-row:last-child {
-  border-bottom: none;
+  text-align: center;
+  flex: 1;
+  min-width: 110px;
+  position: relative;
+  z-index: 1;
 }
 
 .planning-guide-row-icon {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-charcoal-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-bronze);
   flex-shrink: 0;
+  margin-bottom: 0.75rem;
 }
 
 .planning-guide-label {
@@ -1480,6 +1411,7 @@ img {
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
+  margin-bottom: 0.35rem;
 }
 
 .planning-guide-value {
@@ -1960,19 +1892,11 @@ img {
   }
 
   .planning-guide-row {
-    grid-template-columns: 36px 100px 1fr;
-    gap: 0.75rem;
+    min-width: 42%;
   }
 
-  .seasonal-banner {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .seasonal-content {
-    flex-direction: column;
-    text-align: center;
+  .planning-guide-specs::before {
+    display: none;
   }
 
   .newsletter-form {

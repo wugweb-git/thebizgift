@@ -40,6 +40,7 @@ export default async function handler(req, res) {
       seoTitle: record.fields['SEO Title'] || '',
       seoDesc: record.fields['SEO Description'] || '',
       productCode: record.fields['TBG Product Code'] || '',
+      featured: !!record.fields['Featured on Homepage'],
       // Extract the first image URL safely; Website Image Alt Text is a
       // single field covering the primary image, other filenames are ignored here.
       image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
