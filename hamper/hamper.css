@@ -1362,13 +1362,15 @@
 .hamper-skeleton-text:nth-child(4) { width: 90%; }
 .hamper-skeleton-text:nth-child(5) { width: 75%; }
 
-.hamper-skeleton-chips {
+.hamper-skeleton-chips,
+.hamper-skeleton-tags {
   display: flex;
   gap: 0.75rem;
   margin-top: 0.5rem;
 }
 
-.hamper-skeleton-chip {
+.hamper-skeleton-chip,
+.hamper-skeleton-tag {
   width: 120px;
   height: 32px;
   border-radius: var(--radius-full);
@@ -1379,6 +1381,26 @@
 
 .hamper-skeleton-section {
   padding: 5rem var(--space-layout);
+}
+
+.hamper-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.hamper-skeleton-card {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--hamper-card-radius);
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .hamper-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .hamper-skeleton-spec {
