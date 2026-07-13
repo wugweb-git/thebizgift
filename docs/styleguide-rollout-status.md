@@ -4,6 +4,10 @@
 
 **Commits, newest first:**
 ```
+4598ea7 Wire explore page's Featured Experiences grid to live Airtable data
+b5f03c0 Fix field-name mismatch: Website Product Name/Description/URL Slug/SEO Title/Image Alt Text
+99345e4 Trigger redeploy to pick up updated Airtable env vars
+fdb0655 Update session status doc: Airtable taxonomy, hamper page mapping, go-live progress
 f1259be Trigger redeploy to pick up regenerated AIRTABLE_API_KEY
 4db8b0c Go live: hamper pages and homepage now fetch real Airtable data
 7369783 Use dedicated local images for occasion cards instead of generic photos
@@ -55,22 +59,24 @@ All pushed to `main`, live on Vercel at https://thebizgift.vercel.app/.
 - Homepage/explore/header/sitemap/quote/styleguide taxonomy labels brought to full parity with the live Occasions/Collections/Category tables (was previously a curated marketing subset with several stale names like "Leadership Gifts," "Tech Accessories," "Bags & Accessories" that no longer match anything in Airtable).
 - Homepage "Featured Collections" section renamed to "Featured Hampers"; its `#featuredHampersGrid` category-tile section also given real per-occasion images (`image/occasion/`, renamed to slug-based filenames) instead of reused generic hamper photos.
 
-### Going live (in progress — see Pending below)
+### Going live — Airtable connection fully resolved
 - `hamper/hamper.js`'s `CONFIG.USE_MOCK` flipped from a hardcoded `true` to `IS_LOCAL` — production now actually calls `/api/get-hamper` instead of always rendering the 6 hardcoded mock products, per the file's own long-standing TODO comment.
-- Homepage's `#featuredHampersGrid` wired to fetch `/api/get-featured-hampers` in production (was 100% static HTML with no fetch call at all before); falls back to the static cards on localhost or if the API errors, so nothing regresses.
-- Diagnosed and worked through the Airtable connection chain live against production:
+- Homepage's `#featuredHampersGrid` wired to fetch `/api/get-featured-hampers` in production; falls back to the static cards on localhost or if the API errors, so nothing regresses.
+- **Explore page's `#exploreFeaturedGrid` ("Featured Experiences" section) was found to have never been wired to any API call this entire session** — it was 100% static HTML while the homepage had already been fixed. Fixed with the identical fetch pattern (commit `4598ea7`), deployed and confirmed live via direct HTML fetch of `https://thebizgift.vercel.app/explore/`.
+- Diagnosed and resolved the full Airtable connection chain live against production, four layers deep:
   1. `AIRTABLE_API_KEY`/`AIRTABLE_BASE_ID` were initially scoped to **Preview only** in Vercel, not Production → fixed by re-scoping.
-  2. The API key value itself was then rejected by Airtable with `401 Unauthorized` (token was incomplete/invalid) → fixed by regenerating the Airtable personal access token and updating Vercel with the full secret.
-  3. Current state: Airtable now returns **`404`** (auth succeeds, but the base/table isn't found) — points at `AIRTABLE_BASE_ID` needing a re-check in Vercel (expected value: `appG2IVjN168FLoqT`).
+  2. The API key value was then rejected by Airtable with `401 Unauthorized` (token was incomplete/invalid) → fixed by regenerating the Airtable personal access token and updating Vercel with the full secret.
+  3. Airtable then returned `404` (auth succeeds, base/table not found) → fixed by correcting `AIRTABLE_BASE_ID` in Vercel.
+  4. **Root cause of the last issue** ("real product data not showing anywhere on the site"): API returned `200 OK` but every product's name/slug/description was empty. Initially suspected an Airtable field-permissions issue on the PAT; ruled that out and re-checked the live schema, which revealed the **field names had been renamed in Airtable since they were last mapped** (`Website Product Name` → `Product Website Name`, `URL Slug` → `website URL Slug`, `SEO Title / Slug` → `SEO Title`, `Image Alt Text` → `Website Image Alt Text`). Fixed in both `api/get-hamper.js` and `api/get-featured-hampers.js` (commit `b5f03c0`).
+- **Verified live via direct API fetch**: `/api/get-featured-hampers` returns all 26 real products with correct names, slugs, descriptions, SEO titles, and images. `/explore/` HTML confirmed to contain the working fetch script.
 
 ---
 
 ## What's pending / not done
 
-### Blocking — live Airtable connection
-- **`AIRTABLE_BASE_ID` in Vercel needs verification.** Last live test of `/api/get-hamper` returned `Airtable connection failed: 404` — the token authenticates fine now, but the base isn't being found. Confirm the value is exactly `appG2IVjN168FLoqT` with no typos/whitespace/stale leftover value, then redeploy and re-test.
-- Once the API is confirmed working end-to-end: verify the homepage Featured Hampers grid renders real products, and spot-check at least one real `/hamper/<slug>/` product page in a browser with live data (this sandbox cannot run a local dev server or otherwise visually verify — every check so far has been via direct API calls to the deployed URL, not a browser).
-- **Security note:** the Airtable PAT secret was pasted directly into this chat during debugging. Recommend regenerating it once more after everything is confirmed working, since anything typed in chat should be treated as exposed.
+### Needs user confirmation
+- **Browser verification is still outstanding.** This sandbox cannot run a local dev server or a real browser — every check has been via direct API/HTML fetches against the deployed URL. The user needs to hard-refresh `https://thebizgift.vercel.app/` (Featured Hampers) and `https://thebizgift.vercel.app/explore/` (Featured Experiences) and confirm real products render, or share DevTools console/network errors if not.
+- **Security note:** the Airtable PAT secret was pasted directly into this chat during debugging and later regenerated once. Recommend regenerating it again after browser verification confirms everything works, since anything typed in chat should be treated as exposed.
 
 ### Explicitly deferred (not a bug, a scope decision)
 - Hamper page sections with no backing Airtable field yet: Editorial ("Why This Gift") title/paragraphs/image, Product Contents ("What's Inside"), CTA banner fields, Lead Time, Delivery, Response Time, Production Workflow, Packaging. These still render hardcoded fallback copy. Decision on whether to add the Airtable fields or hide the sections is still open.
@@ -88,7 +94,7 @@ All pushed to `main`, live on Vercel at https://thebizgift.vercel.app/.
 - Untracked/loose files in the repo that predate and are unrelated to this work were left alone: `"The Biz Gift — Merged UI Kit & Production Inventory.html"`, `old_styleguide.css`, `styleguide.html.bak`, various loose images at `image/` root, and a large `docs/backups/` directory (Airtable pre-migration snapshots — useful to keep, but currently untracked/uncommitted).
 
 ## Suggested next steps
-1. Confirm `AIRTABLE_BASE_ID` in Vercel, redeploy, re-test — this is the one thing standing between "code is correct" and "live data actually shows."
-2. Verify in an actual browser (not just API calls) once #1 is resolved.
-3. Decide on the deferred hamper-page sections (Editorial/CTA/logistics fields) and `submit-lead.js`'s write-access token.
+1. User to verify in an actual browser (hard refresh) that homepage and explore page both show real Airtable products — API and HTML are confirmed correct server-side, this is the last unverified link.
+2. Decide on the deferred hamper-page sections (Editorial/CTA/logistics fields) and `submit-lead.js`'s write-access token (same read-only PAT will likely fail lead writes — not yet tested).
+3. Regenerate the Airtable PAT once more now that everything is confirmed working server-side (it was pasted in chat during debugging).
 4. Run the mobile/keyboard/reduced-motion/console checklist that's been pending since the styleguide-rollout phase.
