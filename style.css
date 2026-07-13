@@ -1001,8 +1001,20 @@ img {
 .hero-container {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  /* .hero-section can't carry its own horizontal padding (the full-bleed
+     .hero-media background layer is absolutely positioned within it), so
+     this reproduces the site's usual "section padding + max-width:1400
+     centered" inset as a single box: widen by 2x the padding, center,
+     then pad back in by the same amount. */
+  max-width: calc(var(--container-max) + 2 * var(--space-layout));
+  margin: 0 auto;
   padding: 0 var(--space-layout) 6rem;
+}
+
+.hero-title,
+.hero-script-line,
+.hero-section .hero-subtitle {
+  max-width: 900px;
 }
 
 .hero-script-line {

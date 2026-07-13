@@ -56,7 +56,7 @@
    -------------------------------------------------------------------------- */
 .hamper-hero {
   background-color: var(--bg-ivory);
-  padding: 5rem var(--space-layout) 5rem;
+  padding: 5rem var(--space-layout);
   border-bottom: 1px solid var(--border-light);
   opacity: 0;
   transform: translateY(30px);
