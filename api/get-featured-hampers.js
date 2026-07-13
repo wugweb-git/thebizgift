@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       // single field covering the primary image, other filenames are ignored here.
       image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
              ? record.fields['Product Images'][0].url
-             : 'image/placeholder-blank.jpg',
+             : '/image/placeholder.svg',
       imageAlt: record.fields['Website Image Alt Text'] || record.fields['Product Website Name'] || 'Product image'
     }));
 
