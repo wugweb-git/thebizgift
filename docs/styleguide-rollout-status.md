@@ -1,9 +1,19 @@
 # Styleguide Rollout & Airtable Go-Live — Session Status
 
-**Note on scope:** this doc originally tracked a single "styleguide rollout" session. It's since been extended across several follow-on sessions covering Airtable taxonomy restructuring, hamper-detail-page field mapping, and going live with real Airtable data. Kept as one running log rather than splitting it, since each phase built directly on the last.
+**Note on scope:** this doc originally tracked a single "styleguide rollout" session. It's since been extended across several follow-on sessions covering Airtable taxonomy restructuring, hamper-detail-page field mapping, going live with real Airtable data, and a full UI/hygiene pass across every page. Kept as one running log rather than splitting it, since each phase built directly on the last.
 
 **Commits, newest first:**
 ```
+93aed1a Site hygiene pass #2: fix unstyled components, remove dead CSS
+2ccb020 Fix hero alignment (for real this time), rebuild quote.html, homepage fixes
+677711b Redesign hamper detail page: fix invisible related cards, restyle sections
+f76b9b9 Rebuild customisation hero and about CTA from styleguide reference
+806e02b Fix duplicate content on about.html: two "Details Matter." sections
+c1bd30c Site hygiene pass: add 404 page, fix dead image fallback, prune dead CSS
+512aa58 Add "Details Matter" 2-col section to about.html; split-style explore CTA
+baee810 Rebuild customisation hero and about CTA from styleguide reference
+e3c5dcf Fix hamper 404s on real Airtable slugs; restyle process/branding/product-card UI
+9c4c3ae Update status doc: field-name-mismatch fix and explore-page wiring fix
 4598ea7 Wire explore page's Featured Experiences grid to live Airtable data
 b5f03c0 Fix field-name mismatch: Website Product Name/Description/URL Slug/SEO Title/Image Alt Text
 99345e4 Trigger redeploy to pick up updated Airtable env vars
@@ -30,71 +40,80 @@ All pushed to `main`, live on Vercel at https://thebizgift.vercel.app/.
 
 ## What's done
 
-### Styleguide rollout (earlier phase)
+### Styleguide rollout & Airtable go-live (earlier phases, condensed)
+- Migrated `style.css` tokens to the styleguide's bronze/charcoal/ivory palette and radius/type scale; rolled the design system out across every page.
+- Restructured Airtable taxonomy (`appG2IVjN168FLoqT`) into real linked tables — Occasions (6), Collections (10), Category (12) — with a proper Sub Category → Category hierarchy; fixed a data bug where Products.Category pointed at proxy rows instead of true categories.
+- Mapped every hamper detail page field to the live Products schema, fixed several field-name mismatches (Airtable fields were renamed more than once — `Website Product Name` → `Product Website Name`, `URL Slug` → `website URL Slug`, `SEO Title / Slug` → `SEO Title`, `Image Alt Text` → `Website Image Alt Text`), removed the FAQ section (no backing field), simplified the breadcrumb to a single non-indexable taxonomy crumb.
+- Diagnosed and fixed the full Airtable production connection chain: env vars scoped to Preview-only → wrong/incomplete PAT → wrong base ID → field-name mismatch. All four resolved; homepage and explore page both confirmed fetching real Airtable data live.
+- **Security note:** the Airtable PAT was pasted in chat during debugging and has since been regenerated. If it's regenerated again, no doc update needed here — just confirm Vercel env vars are updated and redeploy.
 
-**Foundation**
-- **Tokens** (`style.css`): migrated `:root` color/radius/type-scale variables to match `styleguide.html` (bronze/charcoal/ivory palette, r-1…r-5/pill radius scale, fluid clamp() type scale). Added styleguide-native aliases (`--bronze`, `--line`, `--muted`, `--warm-beige`, etc.) and loaded `Dancing Script` sitewide.
-- **Buttons**: removed `text-transform: uppercase` sitewide in favor of letter-spacing on naturally-cased text, matching the styleguide's convention.
-- **Header/Footer**: mega menu rebuilt (featured-collection panel leads, trust strip added); footer got an inline pill newsletter signup, consolidating older standalone banners.
+### Critical bug: hamper page 404s on real products
+The site started linking to 26 live Airtable product slugs (via Featured Hampers / explore), but only 6 static `/hamper/<slug>/` folders existed on disk — every other slug hit Vercel's filesystem 404. Fixed with a `vercel.json` rewrite so any unmatched `/hamper/:slug` falls through to the shared `template.html` shell, which already reads the slug from the URL and fetches by slug client-side. Verified live against a real (non-static-folder) product slug.
 
-**Per-page restyle:** homepage hero, about, customisation, explore, quote, hamper template, and legal/utility pages all brought onto the shared token system.
+### Hero alignment — sitewide, fixed twice
+Every page's hero text was inset further right than the `.container`-based sections below it, because several hero sections had picked up a redundant extra horizontal padding layer on top of the section's own centered max-width. **First attempt at fixing this partially failed** — several edits were reported as done but never actually landed in the files (caught by re-reading the actual file content against the claim, not by re-testing the live site). Re-verified and re-applied for real: `about-hero-section`, `explore-hero`, `quote-hero-section`, `hamper-hero` all confirmed fixed in the deployed CSS. Homepage's hero needed a different fix (its full-bleed background layer can't tolerate the section itself carrying padding) — solved with a widen-center-repad `calc()` on the container instead.
 
-**11 bugs found and fixed** via live re-audit (hero contrast, `.btn-secondary` invisible text, duplicate newsletter section, header/footer load delay, off-brand centered hero banners, a CSS specificity bug, dead explore-page filter links, a mislabeled category, 404s in the hamper page's "Perfect For" links, a wrong WhatsApp number, and duplicated related-products logic). Full detail preserved in git history (commits `2832007`–`14b0c07`).
+### Full hamper detail page redesign
+- Fixed a real bug: "You May Also Like" related products were permanently invisible on desktop (CSS gated them behind a `.visible` class that nothing in the JS ever added).
+- Fixed uneven horizontal scroll-snap on the branding gallery and mobile related-scroll (missing `scroll-padding-left`).
+- "Perfect For" grid was hardcoded to exactly 2 columns regardless of occasion count — now a flexible `auto-fit` grid.
+- "Ready To Order?" rebuilt from a vertical spec list into a horizontal icon-card row with a dashed connector (same pattern used elsewhere on the site).
+- "About This Hamper" flipped from image-left/text-right to text-left/image-right; "Make It Yours" got a text-left intro beside its scroll gallery; "Interested in this hamper?" highlights now use icon circles instead of plain checkmarks.
+- Hero tag pills lightened (were solid charcoal, now ivory with a keyword-matched icon); hero quick-info row (MOQ/Branding/Delivery/etc.) got icons; primary CTAs switched to the darker copper accent for contrast; gallery image made taller.
 
-### Airtable taxonomy restructure (`appG2IVjN168FLoqT`)
-- Split flat multi-select tag fields into real linked-record tables: **Occasions** (6), **Collections** (10), **Category** (12, including a "More" catch-all for unassigned sub-categories) — each with Name/Slug/Description/Hero Image/Published, and a proper **Sub Category → Category** hierarchy (previously Category's "parent" was just a text label, not a real link).
-- Fixed the pre-existing `Category` field mismatch — it had been pointing at proxy rows in the Sub Category table, not real top-level Category records. Traced and corrected via the Sub Category → Parent Category chain for all 124 products.
-- All 6 Occasions, 10 Collections, and 12 Categories marked `Published = true`.
-- 26 products (`Product Status = "Website Ready"`) now have `Website Ready` and `Published` checked; 6 of those also flagged `Featured on Homepage`.
-- Original multi-select fields were **kept, not deleted** (this connector has no `delete_field` tool anyway) — new linked fields sit alongside them.
-- Backups of the pre-migration Products/Category data saved to `docs/backups/` before any changes, per explicit request.
+### Quote page rebuild
+- Hero: was ivory/washed-out with 3 identical CTA pills — now dark charcoal (matching the rest of the site) with a primary + WhatsApp secondary pair.
+- "What Happens Next" converted from a vertical 4-item list to the horizontal process-block pattern (icon row + dashed connector) used on the homepage and customisation page.
+- Added an Editorial Quote block (dark card, quote + image) between the process and form sections.
+- Form section rebuilt as the warm-beige split card with a photo on the right, matching the styleguide reference — real form fields/validation/submit logic untouched.
+- Final section converted from a plain centered heading to the dark/photo split CTA pattern used on about.html and customisation.html.
 
-### Hamper detail page ↔ Airtable field mapping
-- Audited every field the page renders against the live Products schema; fixed a real bug (`api/get-hamper.js` was reading a field named `SEO Title` that doesn't exist — real field is `SEO Title / Slug`, so SEO titles were silently always falling back to a default).
-- Added `Product Code` (from `TBG Product Code`) and per-primary-image `Image Alt Text` mapping — neither was exposed by the API before.
-- Rewired `hamper/hamper.js` to consume the corrected **array-based** taxonomy shape (`categories[]`, `collections[]`, `occasions[]`, each `{name, slug, image}`) instead of the old singular `category`/`collectionTag`/`occasionTags` fields, so a product's full set of linked Categories/Collections/Occasions actually renders (breadcrumb, hero collection badges, "Perfect For" cards, related-products, hidden proposal-form fields).
-- Removed the FAQ section from the hamper page entirely (no backing Airtable field exists yet) — mock data, `buildFAQ()`, and the now-orphaned accordion JS all removed.
-- Breadcrumb simplified to a single non-indexable crumb: Category → falls back to Collection → falls back to Occasion (Sub Category deliberately excluded, per explicit instruction not to make it an indexable path).
-- Confirmed via full-repo audit: **no duplicate hamper-page template exists** — all 6 `/hamper/<slug>/` folders are thin wrappers around the one `hamper/hamper.js` engine. `styleguide.html`'s PDP section is a design-reference mockup only, never a live page.
-- Homepage/explore/header/sitemap/quote/styleguide taxonomy labels brought to full parity with the live Occasions/Collections/Category tables (was previously a curated marketing subset with several stale names like "Leadership Gifts," "Tech Accessories," "Bags & Accessories" that no longer match anything in Airtable).
-- Homepage "Featured Collections" section renamed to "Featured Hampers"; its `#featuredHampersGrid` category-tile section also given real per-occasion images (`image/occasion/`, renamed to slug-based filenames) instead of reused generic hamper photos.
+### Homepage fixes
+- Removed the "Now Curating: Diwali Corporate Gifts" seasonal banner (and its now-dead CSS).
+- "Planning Guide" converted from a vertical spec list to the same horizontal icon-row pattern as the hamper page's "Ready To Order?".
+- **Featured Hampers grid was showing all 26 Website-Ready products instead of the 6 the client actually flagged.** Confirmed via Airtable that 6 products already have `Featured on Homepage` checked; the API just never returned or filtered on that field. Fixed — API now exposes `featured`, homepage filters client-side to just those 6 (explore's use of the same endpoint is unaffected, so it still shows the full pool).
+- "Browse By Category" was a completely different icon-only card component (no images) than explore.html's image-based category cards — replaced with the same `.media-card.category-card` markup explore uses, and both pages now use the real dedicated category photos in `image/category/` instead of reused generic hamper shots (only 4 real photos exist so far — cycled across the 11 categories until the rest are supplied).
+- Occasion cards were already consistent between homepage and explore (both use the same `.media-card.occasion-card` component) — no change needed there.
 
-### Going live — Airtable connection fully resolved
-- `hamper/hamper.js`'s `CONFIG.USE_MOCK` flipped from a hardcoded `true` to `IS_LOCAL` — production now actually calls `/api/get-hamper` instead of always rendering the 6 hardcoded mock products, per the file's own long-standing TODO comment.
-- Homepage's `#featuredHampersGrid` wired to fetch `/api/get-featured-hampers` in production; falls back to the static cards on localhost or if the API errors, so nothing regresses.
-- **Explore page's `#exploreFeaturedGrid` ("Featured Experiences" section) was found to have never been wired to any API call this entire session** — it was 100% static HTML while the homepage had already been fixed. Fixed with the identical fetch pattern (commit `4598ea7`), deployed and confirmed live via direct HTML fetch of `https://thebizgift.vercel.app/explore/`.
-- Diagnosed and resolved the full Airtable connection chain live against production, four layers deep:
-  1. `AIRTABLE_API_KEY`/`AIRTABLE_BASE_ID` were initially scoped to **Preview only** in Vercel, not Production → fixed by re-scoping.
-  2. The API key value was then rejected by Airtable with `401 Unauthorized` (token was incomplete/invalid) → fixed by regenerating the Airtable personal access token and updating Vercel with the full secret.
-  3. Airtable then returned `404` (auth succeeds, base/table not found) → fixed by correcting `AIRTABLE_BASE_ID` in Vercel.
-  4. **Root cause of the last issue** ("real product data not showing anywhere on the site"): API returned `200 OK` but every product's name/slug/description was empty. Initially suspected an Airtable field-permissions issue on the PAT; ruled that out and re-checked the live schema, which revealed the **field names had been renamed in Airtable since they were last mapped** (`Website Product Name` → `Product Website Name`, `URL Slug` → `website URL Slug`, `SEO Title / Slug` → `SEO Title`, `Image Alt Text` → `Website Image Alt Text`). Fixed in both `api/get-hamper.js` and `api/get-featured-hampers.js` (commit `b5f03c0`).
-- **Verified live via direct API fetch**: `/api/get-featured-hampers` returns all 26 real products with correct names, slugs, descriptions, SEO titles, and images. `/explore/` HTML confirmed to contain the working fetch script.
+### Two-pass hygiene audit (post-redesign)
+Ran two independent audit agents, cross-verified against each other, after the large batch of redesign edits — reading current file content directly rather than trusting prior "done" claims.
+
+Real bugs found and fixed:
+- `customisation.html`'s "From Brief to Box" lightbox modal had **zero CSS** (functional via JS, but would render completely unstyled/unpositioned). Fully styled now, plus a `body.modal-open` scroll lock.
+- Every hamper detail page's loading skeleton used `.hamper-skeleton-grid/-card/-tags/-tag`, none of which existed in `hamper.css` (only a differently-named variant did) — affected the loading state on every product page. Fixed.
+- `customisation.html`'s FAQ section wrapper and `quote.html`'s MOQ field-note had no container styling. Fixed.
+- Added a proper `404.html` (previously falling back to Vercel's generic default).
+- Fixed a dead image fallback path in `api/get-featured-hampers.js` (`image/placeholder-blank.jpg`, a file that never existed) → now `/image/placeholder.svg`.
+
+Dead CSS removed (confirmed zero HTML usage repo-wide by grep, not by assumption): `.editorial-card`, `.collection-editorial-*`, `.process-card`/`.process-grid`/`.process-number` (all superseded by `.media-card`/`.process-block` respectively), `.process-steps`, `.seasonal-*`, and 12 earlier-orphaned selectors (`about-statement`, `contents-grid`, `hamper-statement`, `methods-grid`, `planning-grid`, `quote-visuals`, `quote-whatsapp`, `related-grid`, `visual-grid`, `visual-image`, `visual-item`, `whatsapp-card`).
+
+Also fixed along the way: a real content-duplication bug on about.html (a new "Details Matter." section unknowingly duplicated an existing "Curated/Purposeful/Memorable" philosophy section elsewhere on the same page — caught during live verification, not before).
+
+### Styleguide.html additions
+- Added an FAQ sidebar image + Editorial Quote block, matching supplied UI references.
+- Added a "Category Cards · Layout Reference" section (`#category-cards`, entry 40 in the nav) embedding `docs/reference/category-cards-preview.html` via the same iframe pattern already used for the production UI inventory — 7 layout variants (minimal icon, image-reveal-on-hover, split card, large-feature, cascade, hover-zoom, horizontal scroller) for the client to pick from. **Not yet wired into any live page** — this is a design review artifact, not a shipped component.
 
 ---
 
 ## What's pending / not done
 
-### Needs user confirmation
-- **Browser verification is still outstanding.** This sandbox cannot run a local dev server or a real browser — every check has been via direct API/HTML fetches against the deployed URL. The user needs to hard-refresh `https://thebizgift.vercel.app/` (Featured Hampers) and `https://thebizgift.vercel.app/explore/` (Featured Experiences) and confirm real products render, or share DevTools console/network errors if not.
-- **Security note:** the Airtable PAT secret was pasted directly into this chat during debugging and later regenerated once. Recommend regenerating it again after browser verification confirms everything works, since anything typed in chat should be treated as exposed.
+### Decision needed from the client
+- **Pick a category card layout.** 7 variants are live for review at `styleguide.html#category-cards` (or directly at `/docs/reference/category-cards-preview.html`). Once a variant is chosen, it needs to be built into the real "Browse By Category" sections on homepage and explore (currently using a plain `.media-card` layout, not any of the 7 preview variants).
+- Only 4 real category photos exist (`image/category/office accessory.png`, `office essentials.png`, `drinkware.png`, `Carry Bags.png`) — cycled to fill all 11 categories on both homepage and explore in the meantime. Real photos for the remaining 7 categories (Tech, Bags, Transit Luggage, Box Making, Printing, Branding, Combo) are still needed.
 
 ### Explicitly deferred (not a bug, a scope decision)
-- Hamper page sections with no backing Airtable field yet: Editorial ("Why This Gift") title/paragraphs/image, Product Contents ("What's Inside"), CTA banner fields, Lead Time, Delivery, Response Time, Production Workflow, Packaging. These still render hardcoded fallback copy. Decision on whether to add the Airtable fields or hide the sections is still open.
-- `submit-lead.js` (quote-form → Airtable lead writes) uses the same Airtable PAT — that PAT is **read-only**, so lead submission will fail once tested unless a separate write-capable token is configured. Not yet verified either way.
-- Manual step still needed in Airtable: toggle the new linked-record columns (`Occasion Tags (Linked)`, `Collections (Linked)`, `Category (True Link)`, etc.) visible in the "Website Sync" view, and toggle `Featured on Homepage` visible there too — this connector has no tool to edit view field visibility.
+- Hamper page sections with no backing Airtable field yet: Product Contents ("What's Inside"), CTA banner fields, Lead Time/Delivery/Response Time/Production Workflow/Packaging beyond what's already mapped. Decision on whether to add the Airtable fields or hide the sections is still open.
+- `submit-lead.js` (quote-form → Airtable lead writes) uses the same read-only Airtable PAT used for reads — lead submission will likely fail once tested unless a separate write-capable token is configured. Not yet verified either way.
+- Manual step still needed in Airtable: toggle the linked-record columns and `Featured on Homepage` visible in the "Website Sync" view — this connector has no tool to edit view field visibility.
 
-### Carried over from the styleguide-rollout phase, still not done
-- **Mobile/tablet responsive testing** — every check across all sessions has been desktop-viewport (or API-only) verification. `CLAUDE.local.md`'s checklist calls for 1400/1100/768/375px testing; not done.
-- **Keyboard navigation / focus rings** — not tested.
-- **`prefers-reduced-motion` behavior** — not tested.
-- **Form validation UX** (inline error states for empty/invalid fields) — not exercised.
-- **Console-clean sweep** — no systematic check across all pages for JS warnings/errors.
-- **Empty/loading state review** — hamper page skeleton loading state exists in code but not deliberately tested under throttled network.
-- **`docs/design.md`, `docs/content-architecture.md`** — not updated to reflect new component patterns or the taxonomy restructure; likely stale in places if they're meant to track the live system.
-- Untracked/loose files in the repo that predate and are unrelated to this work were left alone: `"The Biz Gift — Merged UI Kit & Production Inventory.html"`, `old_styleguide.css`, `styleguide.html.bak`, various loose images at `image/` root, and a large `docs/backups/` directory (Airtable pre-migration snapshots — useful to keep, but currently untracked/uncommitted).
+### Carried over, still not done
+- **Mobile/tablet responsive testing, keyboard navigation/focus rings, `prefers-reduced-motion`, form validation UX, a systematic console-clean sweep, and empty/loading-state review under throttled network** — every check across this entire multi-session effort has been via direct API/HTML fetches against the deployed URL or by reading source, since this sandbox has no browser. None of the above have been visually verified in an actual browser.
+- `docs/design.md` and `docs/content-architecture.md` — not updated to reflect the new component patterns or the taxonomy restructure; likely stale if they're meant to track the live system.
+- Untracked/loose files predating this work, left alone: `"The Biz Gift — Merged UI Kit & Production Inventory.html"`, `old_styleguide.css`, `styleguide.html.bak`, various loose images at `image/` root, and `docs/backups/` (Airtable pre-migration snapshots — useful to keep, currently untracked).
 
 ## Suggested next steps
-1. User to verify in an actual browser (hard refresh) that homepage and explore page both show real Airtable products — API and HTML are confirmed correct server-side, this is the last unverified link.
-2. Decide on the deferred hamper-page sections (Editorial/CTA/logistics fields) and `submit-lead.js`'s write-access token (same read-only PAT will likely fail lead writes — not yet tested).
-3. Regenerate the Airtable PAT once more now that everything is confirmed working server-side (it was pasted in chat during debugging).
-4. Run the mobile/keyboard/reduced-motion/console checklist that's been pending since the styleguide-rollout phase.
+1. **Client to review the 7 category card variants** and pick one; then it gets built into the real homepage/explore "Browse By Category" sections.
+2. Upload real photos for the 7 categories still using cycled placeholder images.
+3. Decide on the deferred hamper-page sections and `submit-lead.js`'s write-access token.
+4. A real browser pass: mobile/tablet, keyboard nav, reduced-motion, form validation, console-clean, loading states — none of this has been visually verified yet, only verified by source/API inspection.
+5. Sync `docs/design.md` / `docs/content-architecture.md` to the current live system if they're meant to stay authoritative.
