@@ -339,6 +339,7 @@
     initForm();
     initImageFade();
     initMakeYoursScroll();
+    initConnectPopup();
   }
 
   /* -----------------------------------------------------------------------
@@ -1079,6 +1080,38 @@
       relatedScroll.setAttribute('role', 'region');
       relatedScroll.setAttribute('aria-label', 'Related hampers');
     }
+  }
+
+  // --- Connect popup: shows after a 5s dwell, capped at 3 shows per session ---
+  function initConnectPopup() {
+    var MAX_SHOWS = 3;
+    var DWELL_MS = 5000;
+    var STORAGE_KEY = 'bizgift_connect_popup_shown';
+
+    var modal = $('#connectPopup');
+    if (!modal) return;
+
+    var shownCount = parseInt(sessionStorage.getItem(STORAGE_KEY) || '0', 10);
+    if (shownCount >= MAX_SHOWS) return;
+
+    var timer = setTimeout(function () {
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      sessionStorage.setItem(STORAGE_KEY, String(shownCount + 1));
+    }, DWELL_MS);
+
+    function dismiss() {
+      modal.hidden = true;
+      document.body.classList.remove('modal-open');
+    }
+
+    $$('[data-connect-popup-dismiss]', modal).forEach(function (el) {
+      el.addEventListener('click', dismiss);
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) clearTimeout(timer);
+    });
   }
 
   /* -----------------------------------------------------------------------

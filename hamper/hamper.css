@@ -1725,3 +1725,111 @@
     transform: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   16. CONNECT POPUP — appears after a dwell timer, capped per session
+   -------------------------------------------------------------------------- */
+.connect-popup-modal[hidden] {
+  display: none;
+}
+
+.connect-popup-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.connect-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 26, 22, 0.85);
+}
+
+.connect-popup-dialog {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-charcoal);
+  color: var(--text-light);
+  border-radius: var(--radius-xl);
+  max-width: 420px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  text-align: left;
+  animation: connectPopupIn 0.4s var(--ease-premium);
+}
+
+@keyframes connectPopupIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.connect-popup-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-bronze);
+  color: var(--bg-charcoal);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.connect-popup-dialog .eyebrow {
+  display: block;
+  color: var(--accent-bronze);
+  font-size: var(--font-size-overline);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.connect-popup-dialog h3 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.connect-popup-dialog p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+}
+
+.connect-popup-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.connect-popup-close:hover {
+  border-color: var(--accent-bronze);
+  color: var(--accent-bronze);
+}
+
+@media (max-width: 480px) {
+  .connect-popup-dialog {
+    padding: 2.5rem 1.75rem;
+  }
+}
