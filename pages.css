@@ -73,6 +73,7 @@
   display: block;
   font-size: var(--font-size-small-button);
   letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--accent-bronze);
   margin-bottom: 2rem;
   font-weight: 600;
@@ -830,8 +831,13 @@
 }
 
 .branding-showcase-intro .eyebrow {
-  color: var(--accent-bronze);
   display: block;
+  font-size: var(--font-size-small-button);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bronze);
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .branding-showcase-intro h2 {
@@ -1005,6 +1011,11 @@
 
 .process-intro .eyebrow {
   display: block;
+  font-size: var(--font-size-small-button);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bronze);
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
@@ -1851,6 +1862,7 @@ body.modal-open {
   display: block;
   font-size: var(--font-size-small-button);
   letter-spacing: 0.2em;
+  text-transform: uppercase;
   font-weight: 600;
   margin-bottom: 1.25rem;
 }
@@ -2435,9 +2447,10 @@ body.modal-open {
 }
 
 .dual-cta-eyebrow {
+  display: block;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: var(--font-size-overline);
+  letter-spacing: 0.2em;
+  font-size: var(--font-size-small-button);
   color: var(--accent-bronze);
   font-weight: 600;
 }
