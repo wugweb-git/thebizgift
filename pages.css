@@ -115,7 +115,7 @@
 }
 
 .origin-image {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--radius-lg);
   box-shadow: var(--elevation-2);
@@ -193,56 +193,6 @@
 
 .about-pov blockquote p {
   margin: 0;
-}
-
-.about-craft {
-  padding: 6rem var(--space-layout);
-  background-color: var(--text-light);
-  border-top: 1px solid var(--border-light);
-}
-
-.craft-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: center;
-}
-
-.craft-image {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-2);
-}
-
-.craft-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1s var(--ease-premium);
-}
-
-.craft-image:hover img {
-  transform: scale(1.03);
-}
-
-.craft-content h2 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
-}
-
-.craft-content p {
-  font-size: var(--font-size-body);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.8;
-  margin-bottom: 1rem;
 }
 
 .about-today {
