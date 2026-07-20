@@ -15,43 +15,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   1. BREADCRUMB
-   -------------------------------------------------------------------------- */
-.hamper-breadcrumb {
-  padding: 1.25rem var(--space-layout);
-  background-color: var(--text-light);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.hamper-breadcrumb nav {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  font-size: var(--font-size-label);
-  color: var(--text-muted);
-}
-
-.hamper-breadcrumb a {
-  color: var(--text-muted);
-  transition: color var(--transition-fast);
-}
-
-.hamper-breadcrumb a:hover {
-  color: var(--accent-bronze);
-}
-
-.hamper-breadcrumb-separator {
-  opacity: 0.4;
-  font-size: var(--font-size-overline);
-}
-
-.hamper-breadcrumb-current {
-  color: var(--text-dark);
-  font-weight: 500;
-}
-
-/* --------------------------------------------------------------------------
    2. HERO — 55/45 Split
    -------------------------------------------------------------------------- */
 .hamper-hero {
@@ -519,10 +482,9 @@
 }
 
 .hamper-planning-layout {
-  display: grid;
-  grid-template-columns: 0.85fr 2fr;
-  gap: 3rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .hamper-planning-eyebrow {
@@ -548,7 +510,7 @@
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   line-height: 1.7;
-  max-width: 320px;
+  max-width: 60ch;
 }
 
 .hamper-planning-workflow {
@@ -618,92 +580,108 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. PERFECT FOR (Icon-based cards)
+   5. PERFECT FOR (occasion + collection overlay cards, left-aligned)
    -------------------------------------------------------------------------- */
 .hamper-perfect {
   padding: 6rem var(--space-layout);
   background-color: var(--text-light);
 }
 
-.hamper-perfect-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1100px;
+.hamper-perfect-group {
+  max-width: 1300px;
   margin: 0 auto;
 }
 
-.hamper-perfect-card {
+.hamper-perfect-group + .hamper-perfect-group {
+  margin-top: 3rem;
+}
+
+.hamper-perfect-group-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subtitle);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin: 0 0 1.25rem;
+  text-align: left;
+}
+
+.hamper-perfect-cards {
   display: flex;
   gap: 1.25rem;
-  padding: 1.75rem;
-  background: var(--bg-ivory);
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.hamper-perfect-card-overlay {
+  position: relative;
+  display: block;
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  aspect-ratio: 4 / 5;
   border-radius: var(--hamper-card-radius);
-  border: 1px solid transparent;
-  transition: transform 0.4s var(--ease-premium),
-              box-shadow 0.4s var(--ease-premium),
-              border-color 0.3s ease,
-              background 0.3s ease;
-  cursor: pointer;
+  overflow: hidden;
   text-decoration: none;
-  align-items: flex-start;
+  transition: transform 0.4s var(--ease-standard);
 }
 
-.hamper-perfect-card:hover {
+.hamper-perfect-card-overlay:hover {
   transform: translateY(-6px);
-  box-shadow: var(--elevation-2);
-  border-color: var(--accent-bronze);
-  background: var(--surface-white);
 }
 
-.hamper-perfect-icon {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  border-radius: var(--radius-lg);
-  background: var(--bg-charcoal);
-  color: var(--accent-bronze);
+.hamper-perfect-card-overlay-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-premium);
+}
+
+.hamper-perfect-card-overlay:hover .hamper-perfect-card-overlay-img {
+  transform: scale(1.05);
+}
+
+.hamper-perfect-card-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 13, 11, 0) 45%, rgba(15, 13, 11, 0.85) 100%);
+}
+
+.hamper-perfect-card-overlay-title {
+  position: absolute;
+  left: 1.25rem;
+  right: 3.5rem;
+  bottom: 1.25rem;
+  z-index: 1;
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subtitle);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.hamper-perfect-card-overlay-arrow {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--accent-copper);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-subtitle);
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.hamper-perfect-card:hover .hamper-perfect-icon {
-  background: var(--accent-bronze);
-  color: var(--text-light);
-}
-
-.hamper-perfect-text h4 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-body);
-  font-weight: 400;
-  margin-bottom: 0.3rem;
-  color: var(--text-dark);
-}
-
-.hamper-perfect-text p {
-  font-size: var(--font-size-nav);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.hamper-perfect-link {
-  font-size: var(--font-size-overline);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--accent-bronze);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: gap 0.2s ease;
-}
-
-.hamper-perfect-card:hover .hamper-perfect-link {
-  gap: 0.6rem;
+@media (max-width: 480px) {
+  .hamper-perfect-card-overlay {
+    flex-basis: 210px;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -871,88 +849,98 @@
   gap: 2rem;
 }
 
+/* Ported from styleguide.html #cards .product exactly (mandatory per client
+   request) — .img/.fav/.body/.name/.sub/.row/.moq/.go scoped under
+   .hamper-related-card so the generic names don't leak globally. */
 .hamper-related-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
   text-decoration: none;
   display: block;
-  border-radius: var(--hamper-card-radius);
-  overflow: hidden;
-  background: var(--surface-white);
-  transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
 }
 
 .hamper-related-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: var(--elevation-2);
+  border-color: transparent;
 }
 
-.hamper-related-image {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--bg-ivory);
+.hamper-related-card .img {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-.hamper-related-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s var(--ease-premium);
+.hamper-related-card .fav {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  color: var(--text-dark);
+  transition: all 0.2s ease;
 }
 
-.hamper-related-card:hover .hamper-related-image img {
-  transform: scale(1.05);
+.hamper-related-card .fav:hover {
+  background: #fff;
+  color: var(--accent-copper);
 }
 
-.hamper-related-body {
-  padding: 1.5rem;
+.hamper-related-card .body {
+  padding: 22px 22px 24px;
 }
 
-.hamper-related-badge {
-  display: inline-block;
-  font-size: var(--font-size-overline);
-  letter-spacing: 0.12em;
-  color: var(--accent-bronze);
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-}
-
-.hamper-related-body h4 {
+.hamper-related-card .name {
   font-family: var(--font-serif);
-  font-size: var(--font-size-subtitle);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
+  font-size: 22px;
+  line-height: 1.1;
   color: var(--text-dark);
 }
 
-.hamper-related-body p {
-  font-size: var(--font-size-nav);
+.hamper-related-card .sub {
+  font-size: 13px;
   color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
 }
 
-.hamper-related-cta {
-  font-size: var(--font-size-label);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--accent-bronze);
-  position: relative;
-  display: inline-block;
+.hamper-related-card .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
 }
 
-.hamper-related-cta::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-bronze);
-  transition: width 0.3s ease;
+.hamper-related-card .moq {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: var(--warm-beige);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
 }
 
-.hamper-related-card:hover .hamper-related-cta::after {
-  width: 100%;
+.hamper-related-card .go {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--accent-copper);
+  transition: transform 0.25s ease;
+}
+
+.hamper-related-card:hover .go {
+  transform: translateX(3px);
 }
 
 /* Mobile horizontal scroll for related */
@@ -975,47 +963,49 @@
   min-height: 550px;
 }
 
-/* Left: Editorial */
+/* Left: Editorial — styleguide.html .pdp-sidebar-cta warm-beige card treatment */
 .hamper-proposal-editorial {
-  padding: 5rem 4rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 520px;
-  margin-left: auto;
+  max-width: 480px;
+  margin: 2.5rem 2rem 2.5rem auto;
+  background: var(--warm-beige);
+  border-radius: var(--radius-lg);
 }
 
 .hamper-proposal-editorial h2 {
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
-  font-weight: 400;
-  margin-bottom: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
   line-height: 1.2;
-  color: var(--accent-bronze);
+  color: var(--text-dark);
 }
 
 .hamper-proposal-editorial > p {
-  font-size: var(--font-size-small);
-  color: var(--text-footer);
+  font-size: 14px;
+  color: var(--text-muted);
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .hamper-proposal-highlights {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .hamper-proposal-highlight {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: var(--font-size-small);
-  color: rgba(255,255,255,0.85);
-  font-weight: 300;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 400;
 }
 
 .hamper-proposal-highlight .check-icon {
@@ -1190,32 +1180,39 @@
 .hamper-proposal-success {
   display: none;
   background: var(--surface-white);
-  padding: 2.5rem;
+  padding: 3rem 2.5rem;
   border-radius: var(--hamper-card-radius);
   text-align: center;
 }
 
 .hamper-proposal-success.visible {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: hamperSuccessIn 0.5s var(--ease-premium);
+}
+
+@keyframes hamperSuccessIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hamper-proposal-success .success-icon {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: var(--color-success);
   color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.25rem;
-  font-size: var(--font-size-card-title);
+  margin: 0 auto 1.5rem;
 }
 
 .hamper-proposal-success h3 {
   font-family: var(--font-serif);
-  font-size: var(--font-size-card-title);
-  font-weight: 400;
+  font-size: var(--font-size-h4);
+  font-weight: 500;
   color: var(--text-dark);
   margin-bottom: 0.75rem;
 }
@@ -1225,6 +1222,8 @@
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.6;
+  max-width: 40ch;
+  margin-bottom: 1.75rem;
 }
 
 /* WhatsApp CTA below form */
@@ -1454,6 +1453,7 @@
     max-width: 100%;
     margin: 0;
     padding: 4rem var(--space-layout) 2rem;
+    border-radius: 0;
   }
 
   .hamper-proposal-form-wrapper {
@@ -1548,7 +1548,6 @@
   }
 
   .hamper-planning-layout {
-    grid-template-columns: 1fr;
     gap: 2rem;
   }
 

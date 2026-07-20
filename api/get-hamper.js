@@ -279,7 +279,8 @@ function findRelated(currentProduct, allProducts) {
       slug: p.slug,
       image: firstImage,
       description: p.description ? p.description.substring(0, 120) + '...' : null,
-      collections: p.collections
+      collections: p.collections,
+      moq: p.moq
     };
   });
 }

@@ -76,28 +76,32 @@
         slug: 'executive-welcome-kit',
         image: '/image/BCC Hamper.png',
         description: 'A premium onboarding experience for new leadership hires.',
-        collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }]
+        collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }],
+        moq: '50 Boxes'
       },
       {
         name: 'Coffee & Calm',
         slug: 'coffee-calm',
         image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png',
         description: 'Mindful gifting for wellness-focused corporate programs.',
-        collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }]
+        collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }],
+        moq: '25 Boxes'
       },
       {
         name: 'Heritage Box',
         slug: 'heritage-box',
         image: '/image/Hamper 3.png',
         description: 'Artisanal selection celebrating craft and tradition.',
-        collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }]
+        collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }],
+        moq: '25 Boxes'
       },
       {
         name: 'Festive Celebration Box',
         slug: 'festive-celebration-box',
         image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png',
         description: 'Diwali and festive season gifting at scale.',
-        collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }]
+        collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }],
+        moq: '50 Boxes'
       }
     ],
     responseTime: 'Within 4 hours during business hours.',
@@ -298,9 +302,6 @@
 
     var html = '';
 
-    // 01 Breadcrumb
-    html += buildBreadcrumb(product);
-
     // 02 Hero
     html += buildHero(product);
 
@@ -310,8 +311,8 @@
     // 04 Planning Information (Apple-style spec panel)
     html += buildPlanning(product);
 
-    // 05 Perfect For (icon-based cards)
-    if (product.occasions && product.occasions.length > 0) {
+    // 05 Perfect For (occasion cards + collection cards)
+    if ((product.occasions && product.occasions.length > 0) || (product.collections && product.collections.length > 0)) {
       html += buildPerfectFor(product);
     }
 
@@ -343,28 +344,6 @@
   /* -----------------------------------------------------------------------
      SECTION BUILDERS
      ----------------------------------------------------------------------- */
-
-  // --- 01 Breadcrumb ---
-  // Home / <Category, Collection, or Occasion> / Product Name — a single
-  // taxonomy crumb, not an indexable Sub Category path. Category takes
-  // priority, falling back to Collection then Occasion when a product has
-  // no category assigned.
-  function buildBreadcrumb(p) {
-    var crumb = firstOf(p.categories) || firstOf(p.collections) || firstOf(p.occasions);
-
-    return (
-      '<div class="hamper-breadcrumb">' +
-        '<nav aria-label="Breadcrumb">' +
-          '<a href="/">Home</a>' +
-          '<span class="hamper-breadcrumb-separator">/</span>' +
-          (crumb
-            ? '<a href="/explore/#' + escapeHtml(crumb.slug || '') + '">' + escapeHtml(crumb.name) + '</a><span class="hamper-breadcrumb-separator">/</span>'
-            : '<a href="/explore/">Explore</a><span class="hamper-breadcrumb-separator">/</span>') +
-          '<span class="hamper-breadcrumb-current">' + escapeHtml(p.name) + '</span>' +
-        '</nav>' +
-      '</div>'
-    );
-  }
 
   // --- 02 Hero ---
   function buildHero(p) {
@@ -499,7 +478,6 @@
 
     var specs = [
       { label: 'MOQ', value: p.moq || 'Contact Us' },
-      { label: 'Lead Time', value: p.leadTime || '7–14 Business Days' },
       { label: 'Branding', value: (p.branding && p.branding.length > 0) ? p.branding.map(function (b) { return b.name; }).join(', ') : 'Not Available' },
       { label: 'Packaging', value: p.packaging || 'Premium Rigid Gift Box' },
       { label: 'Delivery', value: p.delivery || 'Pan India' }
@@ -535,52 +513,61 @@
     );
   }
 
-  // --- 05 Perfect For (SVG icon cards) ---
-  function buildPerfectFor(p) {
-    var iconSvgMap = {
-      'employee': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
-      'client': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
-      'leadership': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
-      'festive': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-      'event': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
-      'default': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>'
-    };
+  // --- 05 Perfect For (occasion cards + collection cards, left-aligned) ---
+  var PERFECT_ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
-    function getIcon(name) {
-      if (!name) return iconSvgMap.default;
-      var lower = name.toLowerCase();
-      for (var key in iconSvgMap) {
-        if (key !== 'default' && lower.indexOf(key) !== -1) return iconSvgMap[key];
-      }
-      return iconSvgMap.default;
+  function buildPerfectFor(p) {
+    // Occasion/collection images are expected at /image/occasion/<slug>.png
+    // and /image/collection/<slug>.png respectively (falls back to the
+    // shared placeholder if a given slug's image hasn't been supplied yet).
+    function cardsFor(items, imageBase, linkBuilder) {
+      return (items || []).map(function (item) {
+        var img = item.image || (imageBase + encodeURIComponent(item.slug || '') + '.png');
+        return (
+          '<a href="' + linkBuilder(item) + '" class="hamper-perfect-card-overlay">' +
+            '<img class="hamper-perfect-card-overlay-img" src="' + img + '" alt="' + escapeHtml(item.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + CONFIG.FALLBACK_IMAGE + '\'">' +
+            '<span class="hamper-perfect-card-overlay-title">' + escapeHtml(item.name) + '</span>' +
+            '<span class="hamper-perfect-card-overlay-arrow">' + PERFECT_ARROW + '</span>' +
+          '</a>'
+        );
+      }).join('');
     }
 
     // Occasion names in Airtable's Occasions table match quote.html's
-    // #occasion dropdown values exactly, so no translation map is needed —
-    // pass the name straight through.
-    var cards = (p.occasions || []).map(function (occ) {
-      var link = '/quote.html?occasion=' + encodeURIComponent(occ.name);
-      var icon = getIcon(occ.name);
-      return (
-        '<a href="' + link + '" class="hamper-perfect-card">' +
-          '<div class="hamper-perfect-icon" aria-hidden="true">' + icon + '</div>' +
-          '<div class="hamper-perfect-text">' +
-            '<h4>' + escapeHtml(occ.name) + '</h4>' +
-            (occ.description ? '<p>' + escapeHtml(occ.description) + '</p>' : '') +
-            '<span class="hamper-perfect-link">Get A Quote →</span>' +
-          '</div>' +
-        '</a>'
+    // #occasion dropdown values exactly, so no translation map is needed.
+    var occasionCards = cardsFor(p.occasions, '/image/occasion/', function (occ) {
+      return '/quote.html?occasion=' + encodeURIComponent(occ.name);
+    });
+    var collectionCards = cardsFor(p.collections, '/image/collection/', function (col) {
+      return '/explore/#' + encodeURIComponent(col.slug || '');
+    });
+
+    var groups = '';
+    if (occasionCards) {
+      groups += (
+        '<div class="hamper-perfect-group">' +
+          '<h3 class="hamper-perfect-group-title">Occasions</h3>' +
+          '<div class="hamper-perfect-cards">' + occasionCards + '</div>' +
+        '</div>'
       );
-    }).join('');
+    }
+    if (collectionCards) {
+      groups += (
+        '<div class="hamper-perfect-group">' +
+          '<h3 class="hamper-perfect-group-title">Collections</h3>' +
+          '<div class="hamper-perfect-cards">' + collectionCards + '</div>' +
+        '</div>'
+      );
+    }
 
     return (
       '<section class="hamper-perfect hamper-reveal" aria-label="Perfect For">' +
         '<div class="container">' +
-          '<div class="section-header section-header--center">' +
+          '<div class="section-header">' +
             '<h2>Perfect For</h2>' +
-            '<p class="section-intro">This hamper is designed for the following gifting scenarios.</p>' +
+            '<p class="section-intro">This hamper is designed for the following gifting scenarios and collections.</p>' +
           '</div>' +
-          '<div class="hamper-perfect-grid">' + cards + '</div>' +
+          groups +
         '</div>' +
       '</section>'
     );
@@ -617,20 +604,23 @@
     );
   }
 
-  // --- 08 Related Hampers ---
+  // --- 08 Related Hampers (styleguide.html #cards .product, exact structure) ---
   function buildRelated(p) {
     var cards = (p.related || []).map(function (r, i) {
       var relatedCollection = firstOf(r.collections);
+      var sub = relatedCollection ? relatedCollection.name : (r.description || '');
       return (
         '<a href="/hamper/' + escapeHtml(r.slug) + '/" class="hamper-related-card" data-index="' + i + '">' +
-          '<div class="hamper-related-image">' +
-            '<img src="' + (r.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(r.name) + '" loading="lazy">' +
+          '<div class="img" style="background-image:url(\'' + (r.image || CONFIG.FALLBACK_IMAGE) + '\')">' +
+            '<div class="fav" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>' +
           '</div>' +
-          '<div class="hamper-related-body">' +
-            (relatedCollection ? '<span class="hamper-related-badge">' + escapeHtml(relatedCollection.name) + '</span>' : '') +
-            '<h4>' + escapeHtml(r.name) + '</h4>' +
-            (r.description ? '<p>' + escapeHtml(r.description) + '</p>' : '') +
-            '<span class="hamper-related-cta">Explore Experience</span>' +
+          '<div class="body">' +
+            '<div class="name">' + escapeHtml(r.name) + '</div>' +
+            (sub ? '<div class="sub">' + escapeHtml(sub) + '</div>' : '') +
+            '<div class="row">' +
+              '<span class="moq">MOQ ' + escapeHtml(r.moq || 'Contact Us') + '</span>' +
+              '<div class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>' +
+            '</div>' +
           '</div>' +
         '</a>'
       );
@@ -703,6 +693,7 @@
                 '<div class="form-group">' +
                   '<label for="field-phone">Phone</label>' +
                   '<input type="tel" id="field-phone" name="phone" placeholder="+91 99999 99999">' +
+                  '<span class="field-error" id="error-phone">Please enter a valid phone number</span>' +
                 '</div>' +
               '</div>' +
 
@@ -710,6 +701,7 @@
                 '<div class="form-group">' +
                   '<label for="field-quantity">Approximate Quantity</label>' +
                   '<input type="number" id="field-quantity" name="quantity" placeholder="e.g. 100" min="1">' +
+                  '<span class="field-error" id="error-quantity">Please enter a quantity of 1 or more</span>' +
                 '</div>' +
                 '<div class="form-group">' +
                   '<label for="field-required-date">Required Date</label>' +
@@ -731,9 +723,10 @@
             '</form>' +
 
             '<div class="hamper-proposal-success" id="proposal-success">' +
-              '<div class="success-icon">✓</div>' +
+              '<div class="success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
               '<h3>Thank You</h3>' +
               '<p>Your proposal request has been received. Our team will review your requirements and get back to you within 4 hours during business hours. If your requirement is urgent, please reach out to us on WhatsApp.</p>' +
+              '<a href="/explore/" class="btn-action btn-secondary btn-small">Explore More Hampers</a>' +
             '</div>' +
 
             '<div class="hamper-proposal-whatsapp">' +
@@ -946,19 +939,33 @@
       return valid;
     }
 
+    // Shared per-field validators — same rules used on blur/input and on submit.
+    var VALIDATORS = {
+      'field-name': { errorId: 'error-name', validator: function (v) { return v.trim().length > 0; } },
+      'field-company': { errorId: 'error-company', validator: function (v) { return v.trim().length > 0; } },
+      'field-email': { errorId: 'error-email', validator: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
+      'field-phone': { errorId: 'error-phone', validator: function (v) { return v.trim().length === 0 || /^[+]?[\d\s()-]{7,}$/.test(v); } },
+      'field-quantity': { errorId: 'error-quantity', validator: function (v) { return v.trim().length === 0 || Number(v) >= 1; } }
+    };
+
     function validateAll() {
       var valid = true;
-      valid = validateField('field-name', 'error-name', function (v) { return v.trim().length > 0; }) && valid;
-      valid = validateField('field-company', 'error-company', function (v) { return v.trim().length > 0; }) && valid;
-      valid = validateField('field-email', 'error-email', function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }) && valid;
+      Object.keys(VALIDATORS).forEach(function (id) {
+        var rule = VALIDATORS[id];
+        valid = validateField(id, rule.errorId, rule.validator) && valid;
+      });
       return valid;
     }
 
-    ['field-name', 'field-company', 'field-email'].forEach(function (id) {
+    Object.keys(VALIDATORS).forEach(function (id) {
       var field = getField(id);
       if (!field) return;
+      var rule = VALIDATORS[id];
       field.addEventListener('blur', function () {
-        validateField(id, 'error-' + id.split('-')[1]);
+        validateField(id, rule.errorId, rule.validator);
+      });
+      field.addEventListener('input', function () {
+        if (field.classList.contains('error')) validateField(id, rule.errorId, rule.validator);
       });
     });
 
@@ -1023,16 +1030,11 @@
         xhr.send(JSON.stringify(payload));
       }
     });
-
-    setTimeout(function () {
-      var nameField = getField('field-name');
-      if (nameField) nameField.focus();
-    }, 1000);
   }
 
   // --- Image Progressive Fade ---
   function initImageFade() {
-    var imgs = $$('.hamper-make-yours-image img, .hamper-related-image img');
+    var imgs = $$('.hamper-make-yours-image img');
     imgs.forEach(function (img) {
       if (img.complete) {
         img.style.opacity = '1';
