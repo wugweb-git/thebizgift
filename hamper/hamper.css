@@ -1768,16 +1768,8 @@
 }
 
 .connect-popup-mark {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--accent-bronze);
-  color: var(--bg-charcoal);
-  display: grid;
-  place-items: center;
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 600;
+  width: 110px;
+  height: auto;
   margin-bottom: 1.5rem;
 }
 
