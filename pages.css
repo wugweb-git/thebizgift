@@ -101,7 +101,7 @@
 }
 
 .about-origin {
-  padding: 8rem var(--space-layout);
+  padding: 6rem var(--space-layout);
   background-color: var(--text-light);
 }
 
@@ -155,7 +155,7 @@
 
 .about-pov {
   background: var(--bg-charcoal);
-  padding: 8rem var(--space-layout);
+  padding: 6rem var(--space-layout);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -196,7 +196,7 @@
 }
 
 .about-craft {
-  padding: 8rem var(--space-layout);
+  padding: 6rem var(--space-layout);
   background-color: var(--text-light);
   border-top: 1px solid var(--border-light);
 }
@@ -246,7 +246,7 @@
 }
 
 .about-today {
-  padding: 8rem var(--space-layout);
+  padding: 6rem var(--space-layout);
   background-color: var(--bg-ivory);
 }
 
@@ -445,7 +445,7 @@
   margin: 0 auto;
   width: 100%;
   padding: 0 var(--space-layout) 5rem;
-  color: #fff;
+  color: var(--text-light);
   text-align: left;
 }
 
@@ -459,7 +459,7 @@
   font-weight: 500;
   line-height: 1.1;
   margin: 0.75rem 0 0.5rem;
-  color: #fff;
+  color: var(--text-light);
   max-width: 20ch;
 }
 
