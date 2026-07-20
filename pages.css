@@ -342,10 +342,144 @@
   background-color: var(--bg-ivory);
 }
 
-.custom-hero .hamper-cta-steps {
-  max-width: var(--container-max);
-  padding: 4rem var(--space-layout) 0;
+/* Brand CTA — restored "Create a hamper that speaks for your brand" panel,
+   shuffled down below the carousel hero (it used to BE the hero, before the
+   carousel replaced it -- kept, not removed, per client request). */
+.custom-brand-cta {
+  padding: 5rem var(--space-layout);
+  background-color: var(--bg-ivory);
+}
+
+.hamper-cta-block {
+  max-width: 1300px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  min-height: 440px;
+}
+
+.hamper-cta-block .dark {
+  background: linear-gradient(180deg, #1a1613, #0f0d0b);
+  color: #fff;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.hamper-cta-block .dark h1,
+.hamper-cta-block .dark h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.hamper-cta-block .dark p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--font-size-body);
+  line-height: 1.7;
+  max-width: 38ch;
+  margin: 0;
+}
+
+.hamper-cta-block .visual {
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+}
+
+.hamper-cta-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hamper-cta-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hamper-cta-pill svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-bronze);
+  flex-shrink: 0;
+}
+
+.hamper-cta-steps {
+  max-width: 1300px;
+  margin: 2rem auto 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hamper-cta-step {
+  background: var(--surface-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+  transition: all 0.25s ease;
+}
+
+.hamper-cta-step:hover {
+  border-color: var(--accent-bronze);
+  transform: translateY(-2px);
+}
+
+.hamper-cta-step .num {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.hamper-cta-step .ic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(197, 154, 127, 0.1);
+  display: grid;
+  place-items: center;
+  color: var(--accent-bronze);
+  margin: 0 auto 0.625rem;
+}
+
+.hamper-cta-step .ic svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.4;
+}
+
+.hamper-cta-step h5 {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .hamper-cta-block {
+    grid-template-columns: 1fr;
+  }
+  .hamper-cta-block .dark {
+    padding: 2.5rem;
+  }
 }
 
 /* "From Brief to Box" hero carousel — plain HTML slides, meant to be easy
@@ -406,7 +540,7 @@
 .brief-carousel-content h1 {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.1;
   margin: 0.75rem 0 0.5rem;
   color: var(--text-light);
@@ -624,11 +758,17 @@
 }
 
 .personalisation-grid {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .personalisation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .personalisation-card {
@@ -698,7 +838,7 @@
   color: #fff;
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   margin: 1rem 0 1.25rem;
 }
@@ -871,7 +1011,7 @@
 .process-intro h2 {
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   margin: 0 0 1.25rem;
   color: var(--text-dark);
@@ -1245,7 +1385,7 @@
 .brief-gallery-card--intro h3 {
   font-family: var(--font-serif);
   font-size: var(--font-size-card-title);
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 0.5rem;
 }
 
@@ -1777,11 +1917,6 @@ body.modal-open {
   box-shadow: var(--elevation-3);
 }
 
-.quote-statement {
-  padding: 6rem var(--space-layout);
-  background-color: var(--bg-ivory);
-}
-
 /* --------------------------------------------------------------------------
    UTILITY / LEGAL PAGES
    -------------------------------------------------------------------------- */
@@ -2046,15 +2181,13 @@ body.modal-open {
 /* Explore Sections — shared layout */
 .explore-occasions,
 .explore-collections,
-.explore-selected,
-.explore-customisation {
+.explore-selected {
   padding: 8rem var(--space-layout);
 }
 
 .explore-occasions .container,
 .explore-collections .container,
-.explore-selected .container,
-.explore-customisation .container {
+.explore-selected .container {
   max-width: var(--container-max);
   margin: 0 auto;
 }
@@ -2312,7 +2445,7 @@ body.modal-open {
 .dual-cta-dark h2 {
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 500;
+  font-weight: 600;
   margin: 0;
   color: #fff;
   line-height: 1.15;
@@ -2348,7 +2481,7 @@ body.modal-open {
 .dual-cta-light-text h2 {
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 500;
+  font-weight: 600;
   margin: 0;
   color: var(--text-dark);
   line-height: 1.15;
@@ -2509,47 +2642,6 @@ body.modal-open {
 .selected-card-arrow:hover {
   background: var(--accent-bronze);
   color: #fff;
-}
-
-/* Explore Customisation Section */
-.explore-customisation {
-  background: var(--bg-ivory);
-}
-
-.customisation-showcase {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.customisation-item {
-  text-align: center;
-}
-
-.customisation-image {
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.customisation-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.customisation-item:hover .customisation-image img {
-  transform: scale(1.05);
-}
-
-.customisation-item h4 {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-small);
-  font-weight: 500;
-  color: var(--text-dark);
 }
 
 .section-footer {
