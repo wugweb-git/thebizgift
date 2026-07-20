@@ -143,7 +143,7 @@ function initScrollReveal() {
     '.create-card, .collection-row, .customisation-item, ' +
     '.occasion-card, .collection-editorial-card, ' +
     '.selected-card, .trust-card, .moment-card, ' +
-    '.philosophy-card, .occasion-grid > *, ' +
+    '.philosophy-card, ' +
     '.category-card, .selected-grid > *'
   );
 
