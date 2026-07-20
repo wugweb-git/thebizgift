@@ -1976,6 +1976,14 @@ body.modal-open {
   margin: 0 auto;
 }
 
+/* Homepage section wrappers — matches the 6rem vertical rhythm used by
+   every other homepage section (process/planning-guide/dual-cta). */
+.section-browse-occasion,
+.section-browse-collection {
+  padding: 6rem var(--space-layout);
+  background-color: var(--bg-ivory);
+}
+
 /* Occasion Cards — extends .media-card (style.css §2b) */
 .occasion-grid {
   display: grid;
@@ -1990,13 +1998,18 @@ body.modal-open {
 /* Homepage overlay-style occasion card (index.html only — explore/index.html
    keeps the original .occasion-card image+content-below layout untouched). */
 .occasion-grid--overlay {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
 }
 
 .occasion-card-overlay {
   position: relative;
   display: block;
+  flex: 0 0 280px;
+  scroll-snap-align: start;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2058,14 +2071,14 @@ body.modal-open {
 }
 
 @media (max-width: 900px) {
-  .occasion-grid--overlay {
-    grid-template-columns: repeat(2, 1fr);
+  .occasion-card-overlay {
+    flex-basis: 240px;
   }
 }
 
 @media (max-width: 480px) {
-  .occasion-grid--overlay {
-    grid-template-columns: 1fr;
+  .occasion-card-overlay {
+    flex-basis: 210px;
   }
 }
 
