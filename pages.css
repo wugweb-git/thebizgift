@@ -844,48 +844,6 @@
   }
 }
 
-.process-timeline {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
-}
-
-.process-step {
-  text-align: center;
-}
-
-.step-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--accent-bronze);
-  border-radius: 50%;
-  font-family: var(--font-serif);
-  font-size: var(--font-size-body);
-  color: var(--accent-bronze);
-  margin-bottom: 1rem;
-}
-
-.process-step h4 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-subtitle);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-  color: var(--text-dark);
-}
-
-.process-step p {
-  font-size: var(--font-size-nav);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.6;
-}
-
 /* Simple Collaborative Process — split card: intro / step row / photo */
 .process-block {
   max-width: 1300px;
@@ -991,7 +949,7 @@
 .process-timeline::before {
   content: '';
   position: absolute;
-  top: 44px;
+  top: 76px;
   left: calc(12.5% + 22px);
   right: calc(12.5% + 22px);
   height: 1px;
