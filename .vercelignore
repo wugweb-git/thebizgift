@@ -5,6 +5,7 @@
 
 docs/*.md
 docs/*.txt
+docs/backups/
 CLAUDE.md
 CLAUDE.local.md
 node_modules/
