@@ -24,7 +24,7 @@
         <img src="/image/BCC Hamper 2.png" alt="" aria-hidden="true" loading="eager">
       </div>
       <div class="quote-hero-container">
-        <span class="hero-eyebrow">Get In Touch</span>
+        <span class="eyebrow eyebrow--hero">Get In Touch</span>
         <h1>Request A Proposal</h1>
         <p class="hero-subtitle">Tell us about your gifting requirement and we'll curate recommendations tailored to your occasion, audience and budget.</p>
         <p class="response-time">We typically respond within 24 hours.</p>
@@ -50,43 +50,48 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="fullName">Full Name *</label>
-                <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
+                <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe" aria-describedby="fullName-error">
+                <span class="field-error" id="fullName-error" role="alert"></span>
               </div>
-              
+
               <div class="form-group">
                 <label for="companyName">Company Name *</label>
-                <input type="text" id="companyName" name="companyName" required placeholder="Acme Corp">
+                <input type="text" id="companyName" name="companyName" required placeholder="Acme Corp" aria-describedby="companyName-error">
+                <span class="field-error" id="companyName-error" role="alert"></span>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group">
                 <label for="workEmail">Work Email *</label>
-                <input type="email" id="workEmail" name="workEmail" required placeholder="jane@acmecorp.com">
+                <input type="email" id="workEmail" name="workEmail" required placeholder="jane@acmecorp.com" aria-describedby="workEmail-error">
+                <span class="field-error" id="workEmail-error" role="alert"></span>
               </div>
-              
+
               <div class="form-group">
                 <label for="phoneNumber">Phone Number *</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+91 99999 99999">
+                <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+91 99999 99999" aria-describedby="phoneNumber-error">
+                <span class="field-error" id="phoneNumber-error" role="alert"></span>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group">
                 <label for="quantity">Approximate Quantity * <span class="field-note">MOQ 50</span></label>
-                <input type="number" id="quantity" name="quantity" required min="50" step="1" placeholder="50 or more">
+                <input type="number" id="quantity" name="quantity" required min="50" step="1" placeholder="50 or more" aria-describedby="quantity-error">
+                <span class="field-error" id="quantity-error" role="alert"></span>
               </div>
-              
+
               <div class="form-group">
                 <label for="requiredByDate">Required By Date</label>
                 <input type="date" id="requiredByDate" name="requiredByDate">
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group">
                 <label for="occasion">Occasion *</label>
-                <select id="occasion" name="occasion" required>
+                <select id="occasion" name="occasion" required aria-describedby="occasion-error">
                   <option value="" disabled selected>Select occasion</option>
                   <option value="Employee Joining Kits">Employee Joining Kits</option>
                   <option value="Event Giveaways">Event Giveaways</option>
@@ -96,30 +101,33 @@
                   <option value="Wedding Gifting">Wedding Gifting</option>
                   <option value="Other">Other</option>
                 </select>
+                <span class="field-error" id="occasion-error" role="alert"></span>
               </div>
-              
+
               <div class="form-group">
                 <label for="budget">Estimated Budget Per Gift</label>
                 <input type="text" id="budget" name="budget" inputmode="numeric" placeholder="e.g. ₹1,500">
               </div>
             </div>
-            
+
             <div class="form-group full-width">
-              <label>Branding Required?</label>
-              <div class="radio-group">
-                <label class="radio-label">
-                  <input type="radio" name="branding" value="yes">
-                  <span>Yes</span>
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="branding" value="no">
-                  <span>No</span>
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="branding" value="not-sure" checked>
-                  <span>Not Sure</span>
-                </label>
-              </div>
+              <fieldset class="radio-fieldset">
+                <legend>Branding Required?</legend>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="branding" value="yes">
+                    <span>Yes</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="branding" value="no">
+                    <span>No</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="branding" value="not-sure" checked>
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </fieldset>
             </div>
             
             <div class="form-group full-width">
@@ -260,16 +268,46 @@
       const errorBox = document.getElementById('quote-error');
       const successBox = document.getElementById('quote-success');
       const submitBtn = document.getElementById('quote-submit');
-      const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 || location.protocol === 'file:';
+      const IS_LOCAL = window.TBG_IS_LOCAL;
+
+      function clearFieldErrors() {
+        form.querySelectorAll('.field-error').forEach(function (el) {
+          el.textContent = '';
+          el.classList.remove('visible');
+        });
+        form.querySelectorAll('[aria-invalid="true"]').forEach(function (el) {
+          el.removeAttribute('aria-invalid');
+        });
+      }
+
+      // Populates each invalid field's linked .field-error span (native
+      // Constraint Validation API messages) instead of the browser's default
+      // tooltip, so screen readers pick errors up via aria-describedby.
+      function showFieldErrors() {
+        var firstInvalid = null;
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.willValidate || el.validity.valid) return;
+          el.setAttribute('aria-invalid', 'true');
+          var errorEl = document.getElementById(el.id + '-error');
+          if (errorEl) {
+            errorEl.textContent = el.validationMessage;
+            errorEl.classList.add('visible');
+          }
+          if (!firstInvalid) firstInvalid = el;
+        });
+        return firstInvalid;
+      }
 
       if (form) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           errorBox.classList.remove('visible');
           errorBox.textContent = '';
+          clearFieldErrors();
 
           if (!form.checkValidity()) {
-            form.reportValidity();
+            var firstInvalid = showFieldErrors();
+            if (firstInvalid) firstInvalid.focus();
             return;
           }
 

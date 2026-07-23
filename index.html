@@ -443,7 +443,7 @@
       <div class="container">
         <div class="dual-cta">
           <div class="dual-cta-dark" style="background-image:url('/image/home/dual-cta-dark.jpeg')">
-            <span class="dual-cta-eyebrow">Bespoke Solutions</span>
+            <span class="eyebrow">Bespoke Solutions</span>
             <h2>Have a unique requirement?</h2>
             <p>We create experiences as unique as your brand.</p>
             <a href="/customisation.html" class="btn-action btn-primary">Let's Customise <span class="arrow">→</span></a>
@@ -477,8 +477,7 @@
 
       // 00 Featured Hampers — fetch from Airtable in production; on localhost
       // (or if the API errors) leave the static fallback cards already in the markup.
-      var IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(window.location.hostname) !== -1 ||
-                     window.location.protocol === 'file:';
+      var IS_LOCAL = window.TBG_IS_LOCAL;
       var featuredGrid = document.getElementById('featuredHampersGrid');
 
       if (featuredGrid && !IS_LOCAL) {

@@ -41,6 +41,7 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const TABLE_NAME = 'Products';
+const applyCors = require('./_lib/cors').applyCors;
 
 // Helper: safe array access
 function asArray(val) {
@@ -288,10 +289,7 @@ function findRelated(currentProduct, allProducts) {
 // ─── Vercel Serverless Handler ──────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  applyCors(req, res, 'GET, OPTIONS');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();

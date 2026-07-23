@@ -144,6 +144,14 @@
   opacity: 1;
 }
 
+/* Touch devices have no hover state to reveal the arrows on — show them
+   always so the affordance isn't invisible (swipe still works too). */
+@media (hover: none) {
+  .hamper-gallery-arrow {
+    opacity: 1;
+  }
+}
+
 .hamper-gallery-arrow:hover {
   background: var(--surface-white);
   transform: scale(1.08);
@@ -514,8 +522,8 @@
 }
 
 .hamper-planning-workflow {
-  font-size: var(--font-size-small) !important;
-  color: var(--accent-bronze) !important;
+  font-size: var(--font-size-small);
+  color: var(--accent-bronze);
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -655,7 +663,7 @@
   right: 3.5rem;
   bottom: 1.25rem;
   z-index: 1;
-  color: #fff;
+  color: var(--text-light);
   font-family: var(--font-serif);
   font-size: var(--font-size-subtitle);
   font-weight: 500;
@@ -853,7 +861,7 @@
    request) — .img/.fav/.body/.name/.sub/.row/.moq/.go scoped under
    .hamper-related-card so the generic names don't leak globally. */
 .hamper-related-card {
-  background: #fff;
+  background: var(--surface-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--line);
@@ -880,8 +888,8 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
@@ -892,7 +900,7 @@
 }
 
 .hamper-related-card .fav:hover {
-  background: #fff;
+  background: var(--surface-white);
   color: var(--accent-copper);
 }
 
@@ -1774,11 +1782,8 @@
 }
 
 .connect-popup-dialog .eyebrow {
-  display: block;
-  color: var(--accent-bronze);
   font-size: var(--font-size-overline);
   letter-spacing: 0.14em;
-  text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
 

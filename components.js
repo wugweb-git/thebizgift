@@ -3,6 +3,14 @@
 // the end of <body>, so every placeholder div is already in the DOM by the
 // time it executes. Waiting on DOMContentLoaded here only delayed the
 // header/footer fetch by a full extra tick, causing a visible unstyled flash.
+
+// Shared "are we on localhost / running from disk" flag. components.js loads
+// before every other page script (see script tag order in each HTML file), so
+// hamper.js and the inline scripts in index.html/explore/index.html/quote.html
+// all read this instead of recomputing the same hostname check themselves.
+window.TBG_IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 ||
+                       location.protocol === 'file:';
+
 (() => {
   const componentBasePath = (() => {
     const script = document.currentScript || Array.from(document.scripts).find((item) => item.src.includes('components.js'));
@@ -57,8 +65,7 @@ function initNewsletter() {
 }
 
 function initNewsletterForm(form) {
-  const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location.hostname) !== -1 ||
-                   location.protocol === 'file:';
+  const IS_LOCAL = window.TBG_IS_LOCAL;
   const input = form.querySelector('input[type="email"]');
   const button = form.querySelector('button');
 
@@ -192,22 +199,31 @@ function initDropdowns() {
   document.querySelectorAll('.nav-item-dropdown').forEach(dropdown => {
     const toggle = dropdown.querySelector('.dropdown-toggle');
     const panel = dropdown.querySelector('.mega-menu') || dropdown.querySelector('.nav-dropdown');
-    
+
     if (!toggle || !panel) return;
+
+    const setExpanded = (expanded) => toggle.setAttribute('aria-expanded', String(expanded));
 
     // Open on click (touch devices)
     toggle.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
         e.preventDefault();
-        panel.classList.toggle('visible');
+        const nowVisible = panel.classList.toggle('visible');
+        setExpanded(nowVisible);
       }
     });
+
+    // Desktop reveal is pure-CSS (:hover), so mirror it into aria-expanded
+    // for assistive tech that isn't tracking the hover state itself.
+    dropdown.addEventListener('mouseenter', () => setExpanded(true));
+    dropdown.addEventListener('mouseleave', () => setExpanded(false));
 
     // Close on Escape
     dropdown.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         panel.style.opacity = '0';
         panel.style.visibility = 'hidden';
+        setExpanded(false);
         toggle.focus();
       }
     });
@@ -218,6 +234,7 @@ function initDropdowns() {
         e.preventDefault();
         panel.style.opacity = '1';
         panel.style.visibility = 'visible';
+        setExpanded(true);
         panel.querySelector('a')?.focus();
       }
     });

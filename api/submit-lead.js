@@ -23,6 +23,33 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const LEADS_TABLE = process.env.AIRTABLE_LEADS_TABLE || 'Leads';
+const applyCors = require('./_lib/cors').applyCors;
+
+// Best-effort per-IP rate limit: 5 submissions/hour. Held in module-scope memory,
+// so it only holds across warm invocations of the same lambda instance (resets on
+// cold start) — not a hard guarantee, but blocks basic scripted abuse without
+// requiring an external store.
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const submissionsByIp = new Map();
+
+function isRateLimited(ip) {
+  var now = Date.now();
+  var timestamps = (submissionsByIp.get(ip) || []).filter(function (t) { return now - t < RATE_LIMIT_WINDOW_MS; });
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    submissionsByIp.set(ip, timestamps);
+    return true;
+  }
+  timestamps.push(now);
+  submissionsByIp.set(ip, timestamps);
+  return false;
+}
+
+function getClientIp(req) {
+  var forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return (req.socket && req.socket.remoteAddress) || 'unknown';
+}
 
 const TYPE_LABELS = {
   quote: 'Quote Request',
@@ -75,9 +102,7 @@ function buildFields(body) {
 }
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  applyCors(req, res, 'POST, OPTIONS');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -86,6 +111,11 @@ module.exports = async function handler(req, res) {
 
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  if (isRateLimited(getClientIp(req))) {
+    res.status(429).json({ error: 'Too many submissions. Please try again later.' });
     return;
   }
 
@@ -102,7 +132,19 @@ module.exports = async function handler(req, res) {
 
   var fields = buildFields(body);
 
-  // Minimum viable lead: a valid email address.
+  // Minimum viable lead: name, company, phone, and a valid email address.
+  if (!fields.Name) {
+    res.status(400).json({ error: 'Your name is required.' });
+    return;
+  }
+  if (!fields.Company) {
+    res.status(400).json({ error: 'Company name is required.' });
+    return;
+  }
+  if (!fields.Phone) {
+    res.status(400).json({ error: 'A phone number is required.' });
+    return;
+  }
   if (!fields.Email || !isValidEmail(fields.Email)) {
     res.status(400).json({ error: 'A valid email address is required.' });
     return;

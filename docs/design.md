@@ -576,7 +576,7 @@ Components are classified by role. Every component must define the states from �
 ### Footer
 - **Newsletter** — email input + submit, site-wide
 - **Contact** — phone, email, WhatsApp
-- **Social Icons** (`footer-socials`) — 36px circle, white border 20%, bronze + 2px lift on hover
+- **Social Icons** (`footer-socials-compact`) — 36px circle, white border 20%, bronze + 2px lift on hover
 - **Legal** — privacy + terms links
 - **CTA** — "Request Proposal" persistent link
 - **WhatsApp Widget** (`whatsapp-sticky-widget`) — fixed bottom-right, `#25D366`, 2px lift on hover

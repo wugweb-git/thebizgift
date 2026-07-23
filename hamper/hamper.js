@@ -10,8 +10,8 @@
      CONFIG
      ----------------------------------------------------------------------- */
   // Use mock data only during local development; production hits the live API.
-  const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(window.location.hostname) !== -1 ||
-                   window.location.protocol === 'file:';
+  // Set by components.js (window.TBG_IS_LOCAL), which loads before this script.
+  const IS_LOCAL = window.TBG_IS_LOCAL;
 
   const CONFIG = {
     USE_MOCK: IS_LOCAL, // Airtable is live in production; localhost still uses mock data
@@ -272,12 +272,14 @@
       xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
           try { resolve(JSON.parse(xhr.responseText)); }
-          catch (e) { resolve(getMockProduct()); }
+          catch (e) { reject(new Error('Malformed product response')); }
+        } else if (xhr.status === 404) {
+          reject(new Error('not_found'));
         } else {
-          resolve(getMockProduct());
+          reject(new Error('Airtable request failed with status ' + xhr.status));
         }
       };
-      xhr.onerror = function () { resolve(getMockProduct()); };
+      xhr.onerror = function () { reject(new Error('Network error while fetching product')); };
       xhr.send();
     });
   }
@@ -1125,14 +1127,20 @@
       var skeleton = document.getElementById('hamper-skeleton');
       if (skeleton) skeleton.remove();
       var container = document.getElementById('hamper-content');
-      if (container) {
-        container.innerHTML =
-          '<div style="padding: 6rem 2rem; text-align: center; max-width: 600px; margin: 0 auto;">' +
-            '<h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem;">Experience Unavailable</h2>' +
-            '<p style="color: var(--text-muted); font-weight: 300; margin-bottom: 2rem;">This gifting experience could not be loaded. It may have been removed or is temporarily unavailable.</p>' +
-            '<a href="/explore/" class="btn-action btn-primary">Explore Other Experiences</a>' +
-          '</div>';
-      }
+      if (!container) return;
+
+      var notFound = err && err.message === 'not_found';
+      var headline = notFound ? 'This page has been wrapped.' : 'Something went wrong while loading this gift.';
+      var body = notFound
+        ? 'This gifting experience could not be found. It may have been removed or is no longer available.'
+        : 'We hit a snag reaching our catalogue. Please try again in a moment, or reach us on WhatsApp for help.';
+
+      container.innerHTML =
+        '<div style="padding: 6rem 2rem; text-align: center; max-width: 600px; margin: 0 auto;">' +
+          '<h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem;">' + headline + '</h2>' +
+          '<p style="color: var(--text-muted); font-weight: 300; margin-bottom: 2rem;">' + body + '</p>' +
+          '<a href="/explore/" class="btn-action btn-primary">Explore Other Experiences</a>' +
+        '</div>';
     });
   }
 

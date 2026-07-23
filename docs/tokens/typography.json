@@ -13,11 +13,12 @@
   },
   "fontSize": {
     "hero": {
-      "desktop": "4.5rem",
-      "tablet": "3.2rem",
-      "mobile": "2.8rem",
+      "fluid": "clamp(3rem, 6vw, 5.25rem)",
+      "min": "3rem",
+      "max": "5.25rem",
       "lineHeight": "1.1",
-      "letterSpacing": "-0.02em"
+      "letterSpacing": "-0.02em",
+      "note": "Implemented as a fluid clamp() in style.css (--font-size-hero) rather than fixed per-breakpoint values — scales continuously with viewport width between min and max."
     },
     "h2": {
       "desktop": "3.5rem",

@@ -69,14 +69,8 @@
   z-index: 1;
 }
 
-.hero-eyebrow {
-  display: block;
-  font-size: var(--font-size-small-button);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
+.eyebrow--hero {
   margin-bottom: 2rem;
-  font-weight: 600;
 }
 
 .about-hero-section h1 {
@@ -237,11 +231,7 @@
   align-items: center;
 }
 
-.about-details-eyebrow {
-  display: block;
-  font-size: var(--font-size-small-button);
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
+.eyebrow--about-details {
   margin-bottom: 1.5rem;
 }
 
@@ -363,7 +353,7 @@
 
 .hamper-cta-block .dark {
   background: linear-gradient(180deg, #1a1613, #0f0d0b);
-  color: #fff;
+  color: var(--text-light);
   padding: 4rem;
   display: flex;
   flex-direction: column;
@@ -534,11 +524,7 @@
   text-align: left;
 }
 
-.brief-carousel-content .hero-eyebrow {
-  color: var(--accent-bronze);
-}
-
-.brief-carousel-content h1 {
+.brief-carousel-content .brief-carousel-title {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 600;
@@ -572,7 +558,7 @@
   border-radius: var(--radius-full);
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -767,17 +753,11 @@
 }
 
 .branding-showcase-intro .eyebrow {
-  display: block;
-  font-size: var(--font-size-small-button);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
-  font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .branding-showcase-intro h2 {
-  color: #fff;
+  color: var(--text-light);
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
   font-weight: 600;
@@ -856,7 +836,7 @@
 }
 
 .branding-card h4 {
-  color: #fff;
+  color: var(--text-light);
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 1.0625rem;
@@ -884,7 +864,7 @@
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: transparent;
-  color: #fff;
+  color: var(--text-light);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -946,12 +926,6 @@
 }
 
 .process-intro .eyebrow {
-  display: block;
-  font-size: var(--font-size-small-button);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
-  font-weight: 600;
   margin-bottom: 1rem;
 }
 
@@ -1008,7 +982,7 @@
   height: 34px;
   border-radius: 50%;
   background: var(--bg-charcoal);
-  color: #fff;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1650,8 +1624,38 @@ body.modal-open {
   box-shadow: 0 0 0 4px rgba(197, 154, 127, 0.15);
 }
 
+.form-group input[aria-invalid="true"],
+.form-group select[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  display: none;
+  font-size: var(--font-size-overline);
+  color: var(--color-error);
+}
+.field-error.visible {
+  display: block;
+}
+
 .form-group.full-width {
   grid-column: 1 / -1;
+}
+
+.radio-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-fieldset legend {
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  color: var(--text-dark);
+  padding: 0;
 }
 
 .radio-group {
@@ -1794,12 +1798,6 @@ body.modal-open {
 }
 
 .editorial-quote-block .text .eyebrow {
-  color: var(--accent-bronze);
-  display: block;
-  font-size: var(--font-size-small-button);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
   margin-bottom: 1.25rem;
 }
 
@@ -1815,7 +1813,7 @@ body.modal-open {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 2.6vw, 2rem);
   font-weight: 500;
-  color: #fff;
+  color: var(--text-light);
   line-height: 1.28;
   margin: 0;
   max-width: 26ch;
@@ -2211,7 +2209,7 @@ body.modal-open {
   right: 4rem;
   bottom: 1.5rem;
   z-index: 1;
-  color: #fff;
+  color: var(--text-light);
   font-family: var(--font-serif);
   font-size: var(--font-size-h4);
   font-weight: 500;
@@ -2365,7 +2363,7 @@ body.modal-open {
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  color: #fff;
+  color: var(--text-light);
   text-align: left;
 }
 
@@ -2382,21 +2380,13 @@ body.modal-open {
   z-index: 1;
 }
 
-.dual-cta-eyebrow {
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: var(--font-size-small-button);
-  color: var(--accent-bronze);
-  font-weight: 600;
-}
 
 .dual-cta-dark h2 {
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 600;
   margin: 0;
-  color: #fff;
+  color: var(--text-light);
   line-height: 1.15;
 }
 
@@ -2590,7 +2580,7 @@ body.modal-open {
 
 .selected-card-arrow:hover {
   background: var(--accent-bronze);
-  color: #fff;
+  color: var(--text-light);
 }
 
 .section-footer {

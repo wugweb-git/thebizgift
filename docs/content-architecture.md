@@ -321,30 +321,46 @@ Field definitions for each table. Field names are case-sensitive and must match 
 
 ### 15.1 Products
 
+Field names below match `api/get-hamper.js` and `api/get-featured-hampers.js` exactly — these are the real, live-queried Airtable field names (case-sensitive), reconciled against the base after several in-flight renames during development. If you're adding a new field, match this table, not any older draft.
+
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| `Website Product Name` | Single line text | Yes | Display name (H1, breadcrumb) |
-| `Internal Name` | Single line text | No | Team-facing reference name |
-| `URL Slug` | Single line text | Yes | Immutable, lowercase, hyphenated |
-| `Category` | Link to Categories | Yes | One per product |
-| `Occasion Tags` | Link to Occasions | Yes | 1–4 per product |
-| `Curated Gift Tags` | Link to Collections | No | 0–1 per product |
+| `Product Website Name` | Single line text | Yes | Display name (H1, breadcrumb) |
+| `website URL Slug` | Single line text | Yes | Immutable, lowercase, hyphenated |
+| `Product Website Description` | Long text | Yes | 150–250 words, lead with purpose |
+| `Category` | Link to Categories | Yes | Linked-record; paired lookups `Category Name (from Category)`, `Category Slug (from Category)`, `Category Image (from Category)` |
+| `Sub Category` | Link to Categories | No | Paired lookup `Sub Category Name (from Sub Category)` |
+| `Occasion` | Link to Occasions | Yes | Paired lookups `Name (from Occasion)`, `Slug (from Occasion)` |
+| `Occasion Tags Linked` | Link to Occasions | No | Separate link field used only for the `Occasion Image (from Occasion Tags Linked)` lookup |
+| `Collections` | Link to Collections | No | Paired lookups `Name (from Collections)`, `Slug (from Collections)` |
+| `Collections Linked` | Link to Collections | No | Separate link field used only for the `Collection Image (from Collections Linked)` lookup |
 | `Product Tags` | Multiple select | No | Internal search/filter labels |
 | `Product Images` | Attachment | Yes | Min 1 hero image, up to 6 |
-| `Website Description` | Long text | Yes | 150–250 words, lead with purpose |
+| `Website Image Alt Text` | Single line text | No | Alt text for the primary image only; other images fall back to filename |
+| `TBG Product Code` | Single line text | No | Internal reference code |
 | `USP` | Single line text | No | ≤ 80 characters |
-| `MOQ` | Number | Yes | Minimum order quantity |
+| `MOQ` | Number | No | Minimum order quantity |
+| `Product Type` | Single line text | No | — |
 | `Material` | Single line text | No | Primary materials |
 | `Branding Option` | Multiple select | No | Available customisation methods |
-| `Lead Time` | Single line text | Yes | e.g. "7–10 business days" |
-| `Delivery` | Single line text | Yes | Delivery terms |
+| `Lead Time` | Single line text | No | e.g. "7–10 business days" |
+| `Delivery` | Single line text | No | Delivery terms |
 | `Response Time` | Single line text | No | e.g. "Within 4 hours" |
+| `Production Workflow` | Long text | No | — |
+| `Product Contents` | Long text (JSON) or linked | No | Parsed as an items array |
+| `Editorial Title` | Single line text | No | Defaults to "Why This Gift Exists" if empty |
+| `Editorial Paragraphs` | Long text / Multiple select | No | — |
+| `Editorial Image` | Attachment | No | — |
 | `FAQ` | Long text (JSON) | No | Array of {question, answer} |
+| `CTA Title` | Single line text | No | — |
+| `CTA Description` | Long text | No | — |
+| `CTA Image` | Attachment | No | — |
+| `CTA Background` | Single line text | No | — |
+| `CTA Button Label` | Single line text | No | — |
 | `SEO Title` | Single line text | No | Phase 2 — `<title>` override |
 | `SEO Description` | Long text | No | Phase 2 — meta description |
-| `Published` | Checkbox | Yes | Controls visibility on site |
-| `Featured` | Checkbox | No | Appears in homepage Selected Gifts |
-| `Homepage` | Checkbox | No | Eligible for homepage featured |
+| `Website Ready` | Checkbox | Yes | Controls visibility on site — gates the `filterByFormula` query in both `api/get-hamper.js` and `api/get-featured-hampers.js` |
+| `Featured on Homepage` | Checkbox | No | Appears in homepage Selected Gifts |
 | `Created` | Created time | Auto | — |
 | `Updated` | Last modified time | Auto | — |
 
