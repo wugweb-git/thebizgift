@@ -456,13 +456,13 @@ Hero → What We Create → Featured Collections → Customisation Studio → Br
 |---|-------|---------|----------|----------------|
 | 01 | Breadcrumb | Hierarchy w/ collection/category fallback | Yes | No |
 | 02 | Hero | 55/45 split gallery + premium chips + quick facts | Yes | No |
-| 03 | Product Introduction | Pure typography (H2 + description + USP) | Yes | No |
 | 04 | Planning Information | 2-column spec panel, thin dividers | Mixed | No — show with fallbacks |
 | 05 | Perfect For | Icon cards + CTA link | Yes | Yes — if no occasion tags |
-| 06 | Make It Yours | Horizontal scroll branding gallery | Yes | Yes — if no branding |
 | 07 | FAQ | Single-open accordion, 200ms | Yes | Yes — if no FAQ |
 | 08 | Related Hampers | Algorithmic, 4 max, 100ms stagger | Yes | Yes — if none found |
 | 09 | Proposal / Customisation | Editorial left + validated form right | Yes | No |
+
+Blocks 03 (Product Introduction) and 06 (Make It Yours) were removed from the live page — numbering kept stable rather than renumbering the rest.
 
 ### Page Library
 
@@ -607,12 +607,10 @@ Header, footer, WhatsApp widget, About page, Customisation page, Quote page, leg
 1 image             → disable gallery controls
 no FAQ              → hide FAQ section
 no related          → hide Related section
-no branding         → hide Make It Yours
 no occasion tags    → hide Perfect For
 no collection tag   → hide hero badge
 no material         → omit Material spec row
 no response time    → omit Response Time row
-no usp              → omit USP paragraph
 0 products in list  → empty state with explore link
 API timeout         → error panel with retry + WhatsApp CTA
 image load failure  → onerror → placeholder SVG
@@ -718,9 +716,9 @@ LCP < 2.5s · CLS < 0.1 · INP < 200ms (see build.md §22)
 | `Curated Gift Tags` | `collectionTag` | Collection badge + breadcrumb + Planning |
 | `Product Tags` | `productTags[]` | Hero premium chips |
 | `MOQ` | `moq` | Quick facts + Planning row |
-| `USP` | `usp` | Introduction USP paragraph |
+| `USP` | `usp` | Not currently rendered (Product Introduction block removed) — still returned by the API |
 | `Material` | `material` | Planning row |
-| `Branding Option` | `branding[]` | Make It Yours |
+| `Branding Option` | `branding[]` | Not currently rendered (Make It Yours block removed) — still returned by the API |
 | `FAQ` | `faq[]` | FAQ accordion |
 | `Lead Time` | `leadTime` | Quick facts + Planning row |
 | `Delivery` | `delivery` | Quick facts + Planning row |
@@ -766,7 +764,6 @@ Max 4 results · never the current product · ties randomised.
 |---------|-------|----------|--------|---------|
 | Product hero gallery | 16:10 | 1600×1000 | WebP/JPEG | First eager, rest lazy |
 | Product gallery (extra) | 16:10 | 1600×1000 | WebP/JPEG | Lazy |
-| Make It Yours (branding) | 1:1 | 800×800 | WebP | Lazy |
 | Related product card | 4:5 | 800×1000 | WebP | Lazy |
 | Collection / occasion banner | 3:2 | 1600×1000 | WebP | Eager (above fold) |
 | Category card | 4:3 | 800×600 | WebP | Lazy |

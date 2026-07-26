@@ -190,6 +190,25 @@ function initDropdowns() {
    removes it from the nav too. On localhost (or if the API errors), the
    static fallback links already in header.html are left in place.
    -------------------------------------------------------------------------- */
+// Category icon paths, reused from explore/index.html's category-scroll-card
+// icons so the mega menu / mobile nav match. Keyed by Airtable slug; unknown
+// slugs (a category added after this list was written) fall back to a
+// generic "more" glyph rather than rendering with no icon at all.
+const CATEGORY_ICON_PATHS = {
+  'office-accessories': '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+  'office-essentials': '<path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+  'drinkware': '<path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><path d="M6 2v2M10 2v2M14 2v2"/>',
+  'tech': '<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M2 20h20"/>',
+  'bags': '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  'carry-bags': '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  'transit-luggage': '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  'box-making': '<path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+  'printing': '<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+  'branding': '<path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+  'combo': '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/>'
+};
+const CATEGORY_ICON_FALLBACK = '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>';
+
 function initTaxonomyNav() {
   if (window.TBG_IS_LOCAL) return;
 
@@ -199,15 +218,20 @@ function initTaxonomyNav() {
     return scratch.innerHTML;
   };
 
-  const renderLinks = (items, linkClass) => items.map((item) => {
+  const svg = (slug) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
+    (CATEGORY_ICON_PATHS[slug] || CATEGORY_ICON_FALLBACK) + '</svg>';
+
+  const renderLinks = (items, linkClass, withIcons) => items.map((item) => {
     const name = escapeHtml(item.name);
-    const dot = linkClass ? '' : '<span class="mega-link-dot"></span>';
-    const cls = linkClass ? ' class="' + linkClass + '"' : '';
-    return '<a href="/explore/#' + escapeHtml(item.slug) + '"' + cls + '>' + dot + name + '</a>';
+    const slug = escapeHtml(item.slug);
+    var marker = withIcons ? '<span class="mega-link-icon">' + svg(item.slug) + '</span>' : '<span class="mega-link-dot"></span>';
+    var cls = linkClass ? ' class="' + linkClass + (withIcons ? ' mobile-sub-link--icon' : '') + '"' : '';
+    var prefix = linkClass ? (withIcons ? svg(item.slug) : '') : marker;
+    return '<a href="/explore/#' + slug + '"' + cls + '>' + prefix + name + '</a>';
   }).join('');
 
   const targets = [
-    { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks' },
+    { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks', icons: true },
     { endpoint: '/api/get-occasions', mega: 'megaOccasionLinks', mobile: 'mobileOccasionLinks' },
     { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', megaSuffix: '<a href="/explore/#collections"><span class="mega-link-dot"></span>View All →</a>' }
   ];
@@ -221,8 +245,8 @@ function initTaxonomyNav() {
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('bad status'))))
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) return;
-        if (megaEl) megaEl.innerHTML = renderLinks(items, null) + (t.megaSuffix || '');
-        if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link');
+        if (megaEl) megaEl.innerHTML = renderLinks(items, null, t.icons) + (t.megaSuffix || '');
+        if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link', t.icons);
       })
       .catch(() => { /* leave the static fallback links in place */ });
   });

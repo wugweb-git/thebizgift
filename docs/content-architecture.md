@@ -199,7 +199,6 @@ Occasion ──< contains >───┘
 |---------|-------------|----------|--------|-----------|----------|
 | Product hero gallery | 16:10 | 1600×1000 | WebP/JPEG | First image eager | Placeholder SVG |
 | Product gallery (additional) | 16:10 | 1600×1000 | WebP/JPEG | Yes | Placeholder |
-| Make It Yours branding | 1:1 | 800×800 | WebP | Yes | Gray tile |
 | Related product card | 4:5 | 800×1000 | WebP | Yes | Placeholder |
 | Collection/occasion banner | 3:2 | 1600×1000 | WebP | No (above fold) | Solid brand colour |
 | OG / Twitter | 1200×630 | 1200×630 | JPEG/PNG | N/A | Logo on bronze |
@@ -282,7 +281,6 @@ Occasion ──< contains >───┘
 | Product has 1 image in gallery | Disable prev/next arrows |
 | Product has no FAQ | Hide FAQ section |
 | Product has no related | Hide "You May Also Like" |
-| Product has no branding | Hide "Make It Yours" |
 | Product has no occasion tags | Hide "Perfect For" |
 | Collection/Occasion has 0 products | Show empty state with explore link |
 | Airtable API timeout | Error panel with retry + WhatsApp CTA |

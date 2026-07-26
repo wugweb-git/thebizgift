@@ -307,20 +307,12 @@
     // 02 Hero
     html += buildHero(product);
 
-    // 03 Product Introduction (pure typography)
-    html += buildIntroduction(product);
-
     // 04 Planning Information (Apple-style spec panel)
     html += buildPlanning(product);
 
     // 05 Perfect For (occasion cards + collection cards)
     if ((product.occasions && product.occasions.length > 0) || (product.collections && product.collections.length > 0)) {
       html += buildPerfectFor(product);
-    }
-
-    // 06 Make It Yours (horizontal scroll gallery)
-    if (product.branding && product.branding.length > 0) {
-      html += buildMakeYours(product);
     }
 
     // 08 Related Hampers
@@ -339,8 +331,7 @@
     initScrollReveal();
     initStickyCTA();
     initForm();
-    initImageFade();
-    initMakeYoursScroll();
+    initRelatedScroll();
     initConnectPopup();
   }
 
@@ -438,28 +429,6 @@
                 '<span class="hamper-info-value">' + escapeHtml(p.productCode) + '</span></span>' +
               '</div>') : '') +
             '</div>' +
-          '</div>' +
-        '</div>' +
-      '</section>'
-    );
-  }
-
-  // --- 03 Product Introduction (Split layout with image) ---
-  function buildIntroduction(p) {
-    var heroImg = (p.images && p.images.length > 1) ? p.images[1].url : CONFIG.FALLBACK_IMAGE;
-    var heroAlt = (p.images && p.images.length > 1) ? p.images[1].alt : p.name;
-    return (
-      '<section class="hamper-introduction hamper-reveal" aria-label="About this hamper">' +
-        '<div class="hamper-introduction-layout">' +
-          '<div class="hamper-introduction-content">' +
-            '<span class="hamper-intro-eyebrow">About This Hamper</span>' +
-            '<h2>' + escapeHtml(p.name) + '</h2>' +
-            '<p class="intro-description">' + escapeHtml(p.description) + '</p>' +
-            (p.usp ? '<p class="intro-usp">' + escapeHtml(p.usp) + '</p>' : '') +
-            '<a href="#hamper-proposal" class="btn-action btn-primary">Request Proposal →</a>' +
-          '</div>' +
-          '<div class="hamper-introduction-image">' +
-            '<img src="' + heroImg + '" alt="' + escapeHtml(heroAlt) + '" loading="lazy">' +
           '</div>' +
         '</div>' +
       '</section>'
@@ -571,37 +540,6 @@
             '<p class="section-intro">This hamper is designed for the following gifting scenarios and collections.</p>' +
           '</div>' +
           groups +
-        '</div>' +
-      '</section>'
-    );
-  }
-
-  // --- 06 Make It Yours (Horizontal scroll gallery) ---
-  function buildMakeYours(p) {
-    var items = (p.branding || []).map(function (b) {
-      return (
-        '<div class="hamper-make-yours-item">' +
-          '<div class="hamper-make-yours-image">' +
-            '<img src="' + (b.image || CONFIG.FALLBACK_IMAGE) + '" alt="' + escapeHtml(b.name) + '" loading="lazy">' +
-          '</div>' +
-          '<div class="hamper-make-yours-body">' +
-            '<h4>' + escapeHtml(b.name) + '</h4>' +
-            (b.description ? '<p>' + escapeHtml(b.description) + '</p>' : '') +
-          '</div>' +
-        '</div>'
-      );
-    }).join('');
-
-    return (
-      '<section class="hamper-make-yours hamper-reveal" aria-label="Make It Yours">' +
-        '<div class="hamper-make-yours-layout">' +
-          '<div class="hamper-make-yours-intro">' +
-            '<span class="hamper-intro-eyebrow">Branding &amp; Personalisation</span>' +
-            '<h2>Make It Yours</h2>' +
-            '<p>Every gifting experience can be tailored to reflect your organisation, campaign and brand identity.</p>' +
-            '<a href="#hamper-proposal" class="btn-action btn-primary">Discuss Branding →</a>' +
-          '</div>' +
-          '<div class="hamper-make-yours-scroll">' + items + '</div>' +
         '</div>' +
       '</section>'
     );
@@ -1035,47 +973,8 @@
     });
   }
 
-  // --- Image Progressive Fade ---
-  function initImageFade() {
-    var imgs = $$('.hamper-make-yours-image img');
-    imgs.forEach(function (img) {
-      if (img.complete) {
-        img.style.opacity = '1';
-      } else {
-        img.style.opacity = '0';
-        img.addEventListener('load', function () {
-          this.style.transition = 'opacity 0.4s ease';
-          this.style.opacity = '1';
-        });
-        img.addEventListener('error', function () {
-          this.src = CONFIG.FALLBACK_IMAGE;
-          this.style.opacity = '1';
-        });
-      }
-    });
-  }
-
-  // --- Make Yours horizontal scroll (keyboard + drag enhancement) ---
-  function initMakeYoursScroll() {
-    var scrollContainer = $('.hamper-make-yours-scroll');
-    if (!scrollContainer) return;
-
-    // Keyboard arrow navigation within the scroll area
-    scrollContainer.setAttribute('tabindex', '0');
-    scrollContainer.setAttribute('role', 'region');
-    scrollContainer.setAttribute('aria-label', 'Branding options gallery');
-
-    scrollContainer.addEventListener('keydown', function (e) {
-      var scrollAmount = 340;
-      if (e.key === 'ArrowRight') {
-        this.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-      if (e.key === 'ArrowLeft') {
-        this.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
-    });
-
-    // Related scroll on mobile
+  // --- Related Hampers horizontal scroll (mobile) accessibility ---
+  function initRelatedScroll() {
     var relatedScroll = $('.hamper-related-scroll');
     if (relatedScroll) {
       relatedScroll.setAttribute('tabindex', '0');

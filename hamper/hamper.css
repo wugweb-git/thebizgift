@@ -331,16 +331,12 @@
 
 /* Hamper page primary CTAs use the darker copper tone for more contrast
    against the light ivory sections they sit on. */
-.hamper-hero .btn-primary,
-.hamper-introduction .btn-primary,
-.hamper-make-yours-intro .btn-primary {
+.hamper-hero .btn-primary {
   background-color: var(--accent-copper);
   color: var(--text-light);
 }
 
-.hamper-hero .btn-primary::before,
-.hamper-introduction .btn-primary::before,
-.hamper-make-yours-intro .btn-primary::before {
+.hamper-hero .btn-primary::before {
   background-color: var(--bg-charcoal);
 }
 
@@ -398,81 +394,6 @@
   font-weight: 400;
   color: var(--text-dark);
   line-height: 1.3;
-}
-
-/* --------------------------------------------------------------------------
-   3. PRODUCT INTRODUCTION
-   -------------------------------------------------------------------------- */
-.hamper-introduction {
-  padding: 6rem var(--space-layout);
-  background-color: var(--text-light);
-}
-
-.hamper-introduction-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
-}
-
-.hamper-introduction-image {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-2);
-}
-
-.hamper-introduction-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1s var(--ease-premium);
-}
-
-.hamper-introduction-image:hover img {
-  transform: scale(1.03);
-}
-
-.hamper-intro-eyebrow {
-  display: block;
-  font-size: var(--font-size-overline);
-  letter-spacing: 0.15em;
-  color: var(--accent-bronze);
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.hamper-introduction-content h2 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
-}
-
-.hamper-introduction-content .intro-description {
-  font-size: var(--font-size-body);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-}
-
-.hamper-introduction-content .intro-usp {
-  font-size: var(--font-size-small);
-  color: var(--accent-bronze);
-  font-weight: 400;
-  line-height: 1.7;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--border-light);
-  margin-bottom: 2rem;
-}
-
-.hamper-introduction-content .btn-action {
-  margin-top: 0.5rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -690,117 +611,6 @@
   .hamper-perfect-card-overlay {
     flex-basis: 210px;
   }
-}
-
-/* --------------------------------------------------------------------------
-   6. MAKE IT YOURS (Horizontal scroll gallery)
-   -------------------------------------------------------------------------- */
-.hamper-make-yours {
-  background-color: var(--bg-ivory);
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-  position: relative;
-}
-
-.hamper-make-yours-layout {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 6rem var(--space-layout);
-  display: grid;
-  grid-template-columns: 0.8fr 2.2fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-.hamper-make-yours-intro .hamper-intro-eyebrow {
-  margin-bottom: 1.25rem;
-}
-
-.hamper-make-yours-intro h2 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-  line-height: 1.15;
-}
-
-.hamper-make-yours-intro p {
-  font-size: var(--font-size-body);
-  color: var(--text-muted);
-  font-weight: 300;
-  margin: 0 0 1.75rem;
-  line-height: 1.6;
-}
-
-.hamper-make-yours-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  gap: 1.5rem;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.hamper-make-yours-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.hamper-make-yours-item {
-  flex: 0 0 320px;
-  scroll-snap-align: start;
-  border-radius: var(--hamper-card-radius);
-  overflow: hidden;
-  background: var(--surface-white);
-  transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-}
-
-.hamper-make-yours-item:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--elevation-2);
-}
-
-.hamper-make-yours-image {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--bg-ivory);
-}
-
-.hamper-make-yours-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s var(--ease-premium);
-}
-
-.hamper-make-yours-item:hover .hamper-make-yours-image img {
-  transform: scale(1.05);
-}
-
-.hamper-make-yours-body {
-  padding: 1.25rem 1.5rem 1.5rem;
-}
-
-.hamper-make-yours-body h4 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-subtitle);
-  font-weight: 400;
-  margin-bottom: 0.4rem;
-  color: var(--text-dark);
-}
-
-.hamper-make-yours-body p {
-  font-size: var(--font-size-label);
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.5;
-  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -1473,15 +1283,6 @@
   .hamper-planning-editorial p {
     max-width: 100%;
   }
-
-  .hamper-make-yours-item {
-    flex: 0 0 280px;
-  }
-
-  .hamper-make-yours-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1532,24 +1333,6 @@
     height: 8px;
   }
 
-  /* Introduction */
-  .hamper-introduction {
-    padding: 4rem var(--space-layout);
-  }
-
-  .hamper-introduction-layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .hamper-introduction-image {
-    max-height: 400px;
-  }
-
-  .hamper-introduction-content h2 {
-    font-size: var(--font-size-h4);
-  }
-
   /* Planning */
   .hamper-planning {
     padding: 4rem var(--space-layout);
@@ -1590,21 +1373,6 @@
 
   .hamper-perfect-card {
     padding: 1.25rem;
-  }
-
-  /* Make It Yours */
-  .hamper-make-yours-layout {
-    grid-template-columns: 1fr;
-    padding: 4rem var(--space-layout);
-    gap: 2rem;
-  }
-
-  .hamper-make-yours-intro h2 {
-    font-size: var(--font-size-h4);
-  }
-
-  .hamper-make-yours-item {
-    flex: 0 0 260px;
   }
 
   /* FAQ */
