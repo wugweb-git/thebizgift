@@ -115,7 +115,6 @@ Current production tree:
 ├── components.js                # Shared component loader (fetch header/footer)
 ├── header.html                  # Shared header (loaded via fetch)
 ├── footer.html                  # Shared footer (loaded via fetch)
-├── newsletter.html              # Shared newsletter block (loaded via fetch)
 ├── image/                       # Static image assets
 │   └── ...
 ├── api/                         # Vercel serverless functions → /api/*
@@ -290,7 +289,7 @@ export async function loadFooter() { ... }
 
 | File | Purpose |
 |------|---------|
-| `components.js` | Fetch + inject header, footer, newsletter components |
+| `components.js` | Fetch + inject header, footer components |
 | `hamper/hamper.js` | Product detail: gallery, FAQ, sticky CTA, form |
 | `html/api/get-hamper.js` | Server-side: fetch product + related algorithm |
 
@@ -324,13 +323,12 @@ async function fetchJSON(url) {
 
 ### 8.1 Shared Components
 
-These are injected via `fetch()` to avoid duplicating header, footer, and newsletter markup across pages.
+These are injected via `fetch()` to avoid duplicating header and footer markup across pages.
 
 | Component | File | Load Trigger | Scope |
 |-----------|------|--------------|-------|
 | Header | `header.html` | `DOMContentLoaded` | All pages |
 | Footer | `footer.html` | `DOMContentLoaded` | All pages |
-| Newsletter | Inside `footer.html` | Same as footer | All pages |
 | WhatsApp widget | Inside `footer.html` | Same as footer | All pages |
 
 **Implementation:**
@@ -562,7 +560,6 @@ Example:
 | Why Companies Choose | No | — | Static HTML |
 | Brand Story | No | — | Static HTML |
 | Final CTA | No | — | Static HTML |
-| Newsletter | Hybrid | Hidden input collects Source Page | — |
 
 ---
 
@@ -894,7 +891,7 @@ For a new developer joining the project, this is the recommended build sequence:
 3. **Header / Footer / Components**
    - Implement `components.js` fetch + inject logic.
    - Build `header.html` with mega menu skeleton.
-   - Build `footer.html` with newsletter + WhatsApp.
+   - Build `footer.html` with WhatsApp widget.
    - Wire mobile hamburger menu.
 
 4. **Homepage**
@@ -999,7 +996,7 @@ Before any deploy, verify:
 - [ ] **Alt text:** Every image has descriptive alt text or empty alt.
 - [ ] **SEO:** Unique `<title>`, meta description, canonical on every page.
 - [ ] **Dynamic:** Product pages load from `/api/get-hamper.js` in production, mock data locally.
-- [ ] **Forms:** Quote, proposal, and newsletter forms all submit successfully to `/api/submit-lead`.
+- [ ] **Forms:** Quote and proposal forms all submit successfully to `/api/submit-lead`.
 - [ ] **WhatsApp:** Sticky widget visible, correct number, works on mobile.
 - [ ] **Animations:** Smooth on desktop; disabled under `prefers-reduced-motion`.
 - [ ] **Performance:** LCP < 2.5s, CLS < 0.1 on simulated 4G.
@@ -1143,7 +1140,6 @@ These are intentionally deferred to keep v1 focused on editorial experience and 
 ├── components.js
 ├── header.html
 ├── footer.html
-├── newsletter.html
 ├── image/
 ├── api/
 │   ├── get-featured-hampers.js

@@ -4,9 +4,8 @@
  * Single write endpoint for every lead-capture form on the site:
  *   - Quote form        (/quote.html)              type: "quote"
  *   - Product proposal  (hamper detail pages)      type: "proposal"
- *   - Newsletter signup  (site-wide footer block)  type: "newsletter"
  *
- * Writes a row to the Airtable "Leads" table. All three forms are normalised
+ * Writes a row to the Airtable "Leads" table. Both forms are normalised
  * into one common schema so the sales team has a single inbox.
  *
  * Required env vars (set in Vercel dashboard, never in code):
@@ -53,8 +52,7 @@ function getClientIp(req) {
 
 const TYPE_LABELS = {
   quote: 'Quote Request',
-  proposal: 'Product Proposal',
-  newsletter: 'Newsletter'
+  proposal: 'Product Proposal'
 };
 
 function firstNonEmpty() {
@@ -136,16 +134,13 @@ module.exports = async function handler(req, res) {
   // Required fields mirror each form's own client-side validation:
   //  - quote.html requires fullName, companyName, phoneNumber, workEmail
   //  - the hamper PDP proposal form requires name, company, email but leaves phone optional
-  //  - the newsletter form only collects email
-  if (type !== 'newsletter') {
-    if (!fields.Name) {
-      res.status(400).json({ error: 'Your name is required.' });
-      return;
-    }
-    if (!fields.Company) {
-      res.status(400).json({ error: 'Company name is required.' });
-      return;
-    }
+  if (!fields.Name) {
+    res.status(400).json({ error: 'Your name is required.' });
+    return;
+  }
+  if (!fields.Company) {
+    res.status(400).json({ error: 'Company name is required.' });
+    return;
   }
   if (type === 'quote' && !fields.Phone) {
     res.status(400).json({ error: 'A phone number is required.' });

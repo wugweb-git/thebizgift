@@ -574,9 +574,7 @@ Components are classified by role. Every component must define the states from �
 - **404 Page** — "This page has been wrapped" + explore CTA
 
 ### Footer
-- **Newsletter** — email input + submit, site-wide
 - **Contact** — phone, email, WhatsApp
-- **Social Icons** (`footer-socials-compact`) — 36px circle, white border 20%, bronze + 2px lift on hover
 - **Legal** — privacy + terms links
 - **CTA** — "Request Proposal" persistent link
 - **WhatsApp Widget** (`whatsapp-sticky-widget`) — fixed bottom-right, `#25D366`, 2px lift on hover
@@ -601,7 +599,7 @@ How dynamic content behaves visually — not the Airtable schema (see content-ar
 | Branding options | Products (branding[]) | Horizontal scroll gallery |
 
 ### Static Components
-Header, footer, newsletter, WhatsApp widget, About page, Customisation page, Quote page, legal pages, editorial homepage sections.
+Header, footer, WhatsApp widget, About page, Customisation page, Quote page, legal pages, editorial homepage sections.
 
 ### Fallback Behaviour
 ```

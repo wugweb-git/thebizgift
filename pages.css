@@ -1753,13 +1753,6 @@ body.modal-open {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Newsletter inline status message */
-.newsletter-status {
-  margin-top: 1rem;
-  font-size: var(--font-size-nav);
-  color: var(--accent-bronze);
-}
-
 .quote-process {
   padding: 6rem var(--space-layout);
   background-color: var(--bg-ivory);

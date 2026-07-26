@@ -39,10 +39,9 @@ Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS 
 ├── sitemap.html                       # Sitemap
 ├── style.css                          # Global styles + design tokens
 ├── pages.css                          # Page-specific overrides
-├── components.js                      # Shared component loader (fetch header/footer/newsletter)
+├── components.js                      # Shared component loader (fetch header/footer)
 ├── header.html                        # Shared header + mega menu
 ├── footer.html                        # Shared footer + WhatsApp widget
-├── newsletter.html                    # Newsletter signup component
 ├── image/                             # Static image assets
 ├── api/                               # Vercel serverless functions (deploy as /api/*)
 │   ├── get-featured-hampers.js        # Featured product grid
@@ -50,7 +49,7 @@ Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS 
 │   ├── get-occasions.js               # Published occasion tags (explore page)
 │   ├── get-collections.js             # Published collections (explore page)
 │   ├── get-categories.js              # Published categories (explore page)
-│   ├── submit-lead.js                 # Quote/proposal/newsletter leads
+│   ├── submit-lead.js                 # Quote/proposal leads
 │   └── _lib/cors.js                   # Shared origin allowlist for all api/*.js
 ├── explore/                           # Explore hub pages
 │   ├── index.html                     # Main explore hub (7 sections)
@@ -74,7 +73,7 @@ Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS 
 5. **Never commit API keys** — Airtable credentials go in Vercel environment variables only
 6. **Design tokens are the source of truth** — no hardcoded colors, spacing, or typography values; source lives in `docs/tokens/*.json`
 7. **Reuse before creating** — check existing components (`header.html`, `footer.html`, `components.js`) and CSS patterns first
-8. **Shared components load via fetch()** — `components.js` injects header, footer, and newsletter into placeholder `<div>` elements
+8. **Shared components load via fetch()** — `components.js` injects header and footer into placeholder `<div>` elements
 9. **Mock data on localhost** — `hamper.js` detects localhost/127.0.0.1 and renders built-in `MOCK_DATA` instead of calling the API
 10. **Design system is frozen** — design.md v1.2 is the canonical reference; do not invent new components, tokens, or patterns without consulting it
 

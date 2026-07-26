@@ -1216,84 +1216,6 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   14. NEWSLETTER
-   -------------------------------------------------------------------------- */
-.section-newsletter {
-  padding: 5rem var(--space-layout);
-  background-color: var(--bg-ivory);
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.newsletter-container {
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.newsletter-container h3 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-card-title);
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
-}
-
-.newsletter-container p {
-  font-size: var(--font-size-nav);
-  color: var(--text-muted);
-  font-weight: 300;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 0.75rem;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.newsletter-form input {
-  flex: 1;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-small);
-  padding: 0.8rem 1.25rem;
-  border: 1px solid var(--border-light);
-  background: var(--surface-white);
-  color: var(--text-dark);
-  outline: none;
-  border-radius: var(--radius-full);
-  transition: border-color var(--transition-fast);
-  min-height: 48px;
-}
-
-.newsletter-form input:focus {
-  border-color: var(--accent-bronze);
-}
-
-.newsletter-form button {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-button);
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  background: var(--accent-bronze);
-  color: var(--bg-charcoal);
-  border: none;
-  padding: 0 1.75rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: background var(--transition-fast);
-  white-space: nowrap;
-  min-height: 48px;
-}
-
-.newsletter-form button:hover {
-  background: var(--accent-copper);
-  color: var(--text-light);
-}
-
-/* --------------------------------------------------------------------------
    15. SCROLL REVEAL
    -------------------------------------------------------------------------- */
 .reveal {
@@ -1593,16 +1515,6 @@ img {
 
   .planning-guide-specs {
     grid-template-columns: 1fr;
-  }
-
-  .newsletter-form {
-    flex-direction: column;
-  }
-
-  .newsletter-form button {
-    width: 100%;
-    justify-content: center;
-    padding: 0.8rem;
   }
 
   .footer-compact {

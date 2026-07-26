@@ -61,7 +61,6 @@ Open http://localhost:4321. Product pages use mock data locally; forms simulate 
 ├── components.js
 ├── header.html
 ├── footer.html
-├── newsletter.html
 ├── image/
 ├── api/                             ← Serverless functions → /api/*
 │   ├── get-featured-hampers.js

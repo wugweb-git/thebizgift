@@ -123,7 +123,6 @@ Taxonomy is how content is organised and discovered.
 |---------------------|----------|
 | Header & mega menu trigger | `header.html` |
 | Footer | `footer.html` |
-| Newsletter form | Inside footer |
 | WhatsApp widget | Inside footer |
 | About page | `about.html` |
 | Customisation page | `customisation.html` |
@@ -266,7 +265,6 @@ Occasion ──< contains >───┘
 | Block ID | Copy | Location |
 |----------|------|----------|
 | `footer_intro` | "Thoughtful corporate gifting, designed to be remembered." | Footer |
-| `newsletter_label` | "Occasional inspiration, not noise." | Newsletter |
 | `quote_eyebrow` | "Start the conversation" | Quote page |
 | `quote_headline` | "Let's create something memorable." | Quote page |
 | `whatsapp_cta` | "Chat with us on WhatsApp" | Sticky widget |
@@ -422,7 +420,7 @@ No `Order` field exists on this table (unlike Collections/Occasions) — `api/ge
 
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| `Type` | Single select | Yes | `quote` / `proposal` / `newsletter` |
+| `Type` | Single select | Yes | `quote` / `proposal` |
 | `Name` | Single line text | Yes | Full name |
 | `Company` | Single line text | Yes | Company name |
 | `Email` | Email | Yes | Contact email |
@@ -457,7 +455,6 @@ What copy each component requires. Helps content authors know exactly what to wr
 | **FAQ Item** | Question, Answer | Question ≤80, Answer ≤200 words |
 | **Quote Form** | Title, Subtitle, Field Labels, Privacy Note, Submit Button | Title ≤40 |
 | **Proposal Form** | Title, Highlights (3), Field Labels, Submit Button, Success Message | Highlights ≤20 words each |
-| **Newsletter** | Label, Placeholder, Button | Label ≤30 |
 | **Section Header** | Heading, Intro | Heading ≤60, Intro ≤120 |
 | **Trust Pillar** | Title, Description | Title ≤20, Description ≤60 |
 | **CTA Block** | Headline, CTA Primary, CTA Secondary | Headline ≤50 |

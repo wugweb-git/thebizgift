@@ -68,7 +68,7 @@ See [build.md](build.md) for:
 ## Setup & Development
 
 1. Clone the repository.
-2. Use a local server from the **repo root** (e.g. `python3 -m http.server 4321` or `npx serve . -l 4321`, or VS Code Live Server). Component loading (`fetch()` of header/footer/newsletter) and absolute `/...` asset paths require an HTTP server — opening files via `file://` will not work.
+2. Use a local server from the **repo root** (e.g. `python3 -m http.server 4321` or `npx serve . -l 4321`, or VS Code Live Server). Component loading (`fetch()` of header/footer) and absolute `/...` asset paths require an HTTP server — opening files via `file://` will not work.
 3. **Local behaviour:** on `localhost`/`127.0.0.1`, product pages render from built-in mock data and all forms simulate a successful submit (no Airtable calls). In production the live API is used automatically.
 4. **Optional:** To test live Airtable locally, copy `.env.example` to `.env.local` and add real credentials (see Deployment section).
 
@@ -85,14 +85,15 @@ Airtable is the **CMS and database** for this project — there is no separate C
 - `Collections` — curated groups (e.g. Executive Welcome, Festive Celebration)
 - `Occasions` — use-cases (e.g. Employee Onboarding, Client Appreciation)
 - `Categories` — product types (e.g. Diaries, Drinkware, Wellness)
-- `Leads` — quote requests & newsletter signups (already wired)
+- `Leads` — quote requests & product proposals (already wired)
 
 See [content-architecture.md](content-architecture.md) for full field schemas.
 
 **API Endpoints:**
 - `GET /api/get-featured-hampers.js` — featured product grid
 - `GET /api/get-hamper.js?slug=...` — single product detail + related
-- `POST /api/submit-lead` — quote/proposal/newsletter leads
+- `GET /api/get-occasions.js`, `get-collections.js`, `get-categories.js` — explore page taxonomy, filtered on Published
+- `POST /api/submit-lead` — quote/proposal leads
 
 ## Deployment (Vercel)
 
@@ -128,16 +129,15 @@ When migrating to the client's own Vercel account:
 
 5. **Pre-launch validation**
    - Run through staging URL first
-   - Test 3 form submissions (quote, proposal, newsletter)
+   - Test both form submissions (quote, proposal)
    - Verify product pages load from live Airtable
    - Check all images resolve
 
 ## Forms & Lead Capture
 
-All three forms POST JSON to the single serverless endpoint `/api/submit-lead`, which writes one row to the Airtable **Leads** table:
+Both forms POST JSON to the single serverless endpoint `/api/submit-lead`, which writes one row to the Airtable **Leads** table:
 - Quote form (`/quote.html`) — `type: "quote"`
 - Product proposal (hamper detail pages) — `type: "proposal"`
-- Newsletter signup (site-wide footer block) — `type: "newsletter"`
 
 **Leads table columns required** (names must match exactly):
 `Type` (single select), `Name`, `Company`, `Email`, `Phone`, `Quantity`, `Budget`, `Occasion`, `Required By`, `Branding`, `Message`, `Product`, `Product URL`, `Collection`, `Category`, `Source Page`.
