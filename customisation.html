@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/style.css?v=3">
-  <link rel="stylesheet" href="/pages.css?v=7">
+  <link rel="stylesheet" href="/pages.css?v=8">
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
   <link rel="preload" href="/footer.html" as="fetch" crossorigin>
 </head>
@@ -21,66 +21,13 @@
   <div id="header-placeholder"></div>
 
   <main>
-    <!-- SECTION 01: HERO — FROM BRIEF TO BOX CAROUSEL -->
-    <section class="custom-hero">
-      <section class="brief-carousel" id="briefCarousel">
-        <div class="brief-carousel-track" id="briefCarouselTrack">
-          <div class="brief-carousel-slide is-active" style="background-image:url('/image/Customisation/Brief-to-box/BAU-Brew-And-Unwind.png')">
-            <div class="brief-carousel-content">
-              <span class="eyebrow eyebrow--hero">From Brief to Box</span>
-              <h1 class="brief-carousel-title">Brew and Unwind (BAU) Hamper</h1>
-              <p class="brief-carousel-tagline">Business as usual</p>
-              <p class="brief-carousel-contents">Coffee Compressor + Book + Coffee Mug</p>
-              <button type="button" class="btn-action btn-primary" data-brief-gallery-open>Start Customising <span class="arrow">→</span></button>
-            </div>
-          </div>
-          <div class="brief-carousel-slide" style="background-image:url('/image/Customisation/Brief-to-box/OOO%20Hamper.png')">
-            <div class="brief-carousel-content">
-              <span class="eyebrow eyebrow--hero">From Brief to Box</span>
-              <h2 class="brief-carousel-title">Out Of Office (OOO) Hamper</h2>
-              <p class="brief-carousel-tagline">Time to disconnect</p>
-              <p class="brief-carousel-contents">Travel Mug + Notebook + Desk Plant</p>
-              <button type="button" class="btn-action btn-primary" data-brief-gallery-open>Start Customising <span class="arrow">→</span></button>
-            </div>
-          </div>
-          <div class="brief-carousel-slide" style="background-image:url('/image/Customisation/Brief-to-box/Gemini_Generated_Image_dpv57edpv57edpv5.png')">
-            <div class="brief-carousel-content">
-              <span class="eyebrow eyebrow--hero">From Brief to Box</span>
-              <h2 class="brief-carousel-title">Coffee Combo (CC) Hamper</h2>
-              <p class="brief-carousel-tagline">Brewed for productivity</p>
-              <p class="brief-carousel-contents">Coffee Mug + Coffee Sachets + Coaster</p>
-              <button type="button" class="btn-action btn-primary" data-brief-gallery-open>Start Customising <span class="arrow">→</span></button>
-            </div>
-          </div>
-          <div class="brief-carousel-slide" style="background-image:url('/image/Customisation/Brief-to-box/Premium%20Joining%20Kit.png')">
-            <div class="brief-carousel-content">
-              <span class="eyebrow eyebrow--hero">From Brief to Box</span>
-              <h2 class="brief-carousel-title">Brass &amp; Candle Combo (BCC) Hamper</h2>
-              <p class="brief-carousel-tagline">Warmth, refined</p>
-              <p class="brief-carousel-contents">Brass Diya + Scented Candle + Gift Box</p>
-              <button type="button" class="btn-action btn-primary" data-brief-gallery-open>Start Customising <span class="arrow">→</span></button>
-            </div>
-          </div>
-        </div>
-
-        <button type="button" class="brief-carousel-arrow brief-carousel-prev" aria-label="Previous hamper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button type="button" class="brief-carousel-arrow brief-carousel-next" aria-label="Next hamper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-
-        <div class="brief-carousel-dots" id="briefCarouselDots">
-          <span class="active" data-i="0" aria-label="Slide 1"></span>
-          <span data-i="1" aria-label="Slide 2"></span>
-          <span data-i="2" aria-label="Slide 3"></span>
-          <span data-i="3" aria-label="Slide 4"></span>
-        </div>
-      </section>
-    </section>
-
-    <!-- SECTION 02: BRAND CTA (restored -- shuffled down below the carousel hero, not removed) -->
-    <section class="custom-brand-cta">
+    <!-- SECTION 01: HERO — BRAND CTA (promoted to full-width hero; the old
+         "From Brief to Box" carousel that used to sit above this was removed) -->
+    <section class="custom-brand-cta custom-brand-cta--hero">
       <div class="hamper-cta-block">
         <div class="dark">
           <span class="eyebrow eyebrow--hero" style="margin-bottom:0">Bespoke Gifting</span>
-          <h2>Create a hamper that speaks for your brand.</h2>
+          <h1>Create a hamper that speaks for your brand.</h1>
           <p>Tell us your story, your audience and your moment — we'll curate something extraordinary.</p>
           <div class="hamper-cta-pills">
             <span class="hamper-cta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.2"/></svg> Brand it your way</span>
@@ -89,7 +36,37 @@
           </div>
           <button type="button" class="btn-action btn-primary" style="align-self:flex-start" data-brief-gallery-open>Start Customising <span class="arrow">→</span></button>
         </div>
-        <div class="visual" style="background-image:url('/image/Customisation/brand-cta-visual.jpeg')"></div>
+        <div class="visual" style="background-image:url('/image/customisation/brand-cta-visual.jpeg')"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: FROM BRIEF TO BOX — executed client work -->
+    <section class="custom-brief-gallery">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Portfolio</span>
+          <h2>From Brief To Box</h2>
+        </div>
+        <div class="bento-grid">
+          <div class="bento-unit">
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Celebration%20Hamper.png" alt="Celebration Hamper" loading="lazy"><figcaption class="bento-caption">Celebration Hamper</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Client%20Appreciation%20Gift%201.jpg" alt="Client Appreciation Gift 1" loading="lazy"><figcaption class="bento-caption">Client Appreciation Gift 1</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Client%20Appreciation%20Gift.jpg" alt="Client Appreciation Gift" loading="lazy"><figcaption class="bento-caption">Client Appreciation Gift</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Client%20Appreciation%20Hamper.jpg" alt="Client Appreciation Hamper" loading="lazy"><figcaption class="bento-caption">Client Appreciation Hamper</figcaption></figure>
+            <figure class="bento-item bento-item--large"><img src="/image/customisation/Brief-to-box/Diwali%20Gift1.jpeg" alt="Diwali Gift1" loading="lazy"><figcaption class="bento-caption">Diwali Gift1</figcaption></figure>
+          </div>
+          <div class="bento-unit bento-unit--reverse">
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/ICICI%20Celebration%20Hamper.png" alt="ICICI Celebration Hamper" loading="lazy"><figcaption class="bento-caption">ICICI Celebration Hamper</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/ICICI%20Client%20Appreciation%20Hamper.png" alt="ICICI Client Appreciation Hamper" loading="lazy"><figcaption class="bento-caption">ICICI Client Appreciation Hamper</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/ICICI%20Team%20Gratification.png" alt="ICICI Team Gratification" loading="lazy"><figcaption class="bento-caption">ICICI Team Gratification</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/South%20India%20Bank%20-%20Sales%20Team.png" alt="South India Bank - Sales Team" loading="lazy"><figcaption class="bento-caption">South India Bank - Sales Team</figcaption></figure>
+            <figure class="bento-item bento-item--large"><img src="/image/customisation/Brief-to-box/Foreign%20Delegate%20Gift.png" alt="Foreign Delegate Gift" loading="lazy"><figcaption class="bento-caption">Foreign Delegate Gift</figcaption></figure>
+          </div>
+          <div class="bento-duo">
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Team%20Appreciation%20Gift.jpeg" alt="Team Appreciation Gift" loading="lazy"><figcaption class="bento-caption">Team Appreciation Gift</figcaption></figure>
+            <figure class="bento-item"><img src="/image/customisation/Brief-to-box/Team%20Appreciation%20Hamper.jpeg" alt="Team Appreciation Hamper" loading="lazy"><figcaption class="bento-caption">Team Appreciation Hamper</figcaption></figure>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -110,17 +87,17 @@
               <p>Every project starts with a conversation. Here's where it ends up.</p>
             </figcaption>
           </figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-01-client-appreciation.jpeg" alt="Client appreciation hamper" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-02-team-appreciation.jpeg" alt="Team appreciation hamper" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-03-diwali-gifting.jpeg" alt="Diwali gifting project" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-04-diwali-gift.jpeg" alt="Diwali gift box" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-05-mobile-stand-power-bank.png" alt="Mobile stand power bank corporate gift" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-06-team-appreciation-gift.jpeg" alt="Team appreciation gift" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-07.jpeg" alt="Executed corporate gifting project" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-08.jpeg" alt="Branded gifting execution" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-09.jpeg" alt="Corporate hamper detail" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-10.jpeg" alt="Corporate gift presentation" loading="lazy"></figure>
-          <figure class="brief-gallery-card"><img src="/image/Customisation/gallery-11.jpeg" alt="Finished gifting project" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-01-client-appreciation.jpeg" alt="Client appreciation hamper" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-02-team-appreciation.jpeg" alt="Team appreciation hamper" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-03-diwali-gifting.jpeg" alt="Diwali gifting project" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-04-diwali-gift.jpeg" alt="Diwali gift box" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-05-mobile-stand-power-bank.png" alt="Mobile stand power bank corporate gift" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-06-team-appreciation-gift.jpeg" alt="Team appreciation gift" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-07.jpeg" alt="Executed corporate gifting project" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-08.jpeg" alt="Branded gifting execution" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-09.jpeg" alt="Corporate hamper detail" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-10.jpeg" alt="Corporate gift presentation" loading="lazy"></figure>
+          <figure class="brief-gallery-card"><img src="/image/customisation/gallery-11.jpeg" alt="Finished gifting project" loading="lazy"></figure>
         </div>
       </div>
     </div>
@@ -136,7 +113,7 @@
             <p>That's why we think beyond branding techniques and focus on creating complete gifting experiences that feel thoughtful, cohesive and unmistakably yours.</p>
           </div>
           <div class="why-image">
-            <img src="/image/Customisation/more-than-a-logo.png" alt="Premium Branded Gift Presentation" loading="eager" onerror="this.onerror=null;this.src='/image/placeholder.png'">
+            <img src="/image/customisation/more-than-a-logo.png" alt="Premium Branded Gift Presentation" loading="eager" onerror="this.onerror=null;this.src='/image/placeholder.png'">
           </div>
         </div>
       </div>
@@ -194,7 +171,6 @@
             <span class="eyebrow">Branding Capabilities</span>
             <h2>A finish for every product and purpose.</h2>
             <p>Every product and material requires a different approach. We select branding methods that balance durability, appearance and overall presentation quality.</p>
-            <a href="/quote.html" class="link-arrow">discuss your branding needs <span class="arrow">→</span></a>
           </div>
 
           <div class="branding-scroll-wrap">
@@ -260,40 +236,134 @@
           <h2>Don't Take Our Word For It</h2>
           <p class="section-intro">Every hamper we build carries our reputation along with it. These are the people who trusted us with theirs.</p>
         </div>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
-            <p>The hampers felt premium, thoughtful and completely aligned with our brand. The process was smooth from the first call to final delivery.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
-              <div>
-                <h4>Placeholder Name</h4>
-                <span>Head of People &middot; Placeholder Company</span>
+        <div class="testimonial-scroll-wrap">
+          <div class="testimonial-scroll" id="testimonialScroll">
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>The hampers felt premium, thoughtful and completely aligned with our brand. The process was smooth from the first call to final delivery.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Head of People &middot; Placeholder Company</span>
+                </div>
               </div>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
-            <p>We needed a large employee gifting program with custom packaging and tight timelines. The team handled the details beautifully.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
-              <div>
-                <h4>Placeholder Name</h4>
-                <span>Admin Lead &middot; Placeholder Company</span>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>We needed a large employee gifting program with custom packaging and tight timelines. The team handled the details beautifully.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Admin Lead &middot; Placeholder Company</span>
+                </div>
               </div>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
-            <p>The final boxes looked exactly like the proposal. It was reassuring to work with a team that understood presentation and logistics.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
-              <div>
-                <h4>Placeholder Name</h4>
-                <span>Marketing Manager &middot; Placeholder Company</span>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>The final boxes looked exactly like the proposal. It was reassuring to work with a team that understood presentation and logistics.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Marketing Manager &middot; Placeholder Company</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>We gave TBG a vague brief and a tight budget. What came back was a hamper we'd never have thought of ourselves — beautifully curated and packaged. Our clients were genuinely impressed.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Brand Manager &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>Two weeks. 200 hampers. Pan-India delivery. I was skeptical — but every single one arrived on time and in perfect condition. TBG delivered, quite literally.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Operations Manager &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>Diwali gifting is always a nightmare to coordinate. This year it wasn't — because TBG handled everything from curation to last-mile delivery across four cities. Completely stress-free.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>HR Business Partner &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>We have always done generic gift vouchers for client appreciation. TBG showed us what was possible within the same budget — the difference was night and day. Never going back to vouchers.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Key Accounts Manager &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>Fast, affordable, and genuinely good. TBG is the kind of vendor you stop looking for alternatives to. We've already referred them to two other teams within our organisation.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Procurement Manager &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>We were a bit confused about what to gift our clients this Diwali. TBG came back with three options, all within budget. We picked one, they handled the rest. Simple as that.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Client Relationship Manager &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>What we liked most was the communication. We always knew where the order was. No chasing, no guessing. That alone sets TBG apart from vendors we've used before.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Executive Assistant &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial-card">
+              <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p>We needed our logo on everything — the box, the notebook, the bag. TBG made it happen without making it feel like a big deal. Clean execution.</p>
+              <div class="testimonial-author">
+                <span class="testimonial-author-avatar" aria-hidden="true">PN</span>
+                <div>
+                  <h4>Placeholder Name</h4>
+                  <span>Creative Lead &middot; Placeholder Company</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="testimonial-pager">
+            <button type="button" class="prev" aria-label="Previous testimonials"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button>
+            <button type="button" class="next" aria-label="Next testimonials"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button>
+          </div>
         </div>
       </div>
     </section>
@@ -345,7 +415,7 @@
               <p>Our gifting consultants are happy to help you find the perfect solution for your needs.</p>
               <a href="/quote.html" class="btn-action btn-primary btn-small">Talk to Us <span class="arrow">→</span></a>
             </div>
-            <div class="sg-faq-side-image" style="background-image:url('/image/Customisation/faq-sidebar.jpeg')"></div>
+            <div class="sg-faq-side-image" style="background-image:url('/image/customisation/faq-sidebar.jpeg')"></div>
           </div>
         </div>
       </div>
@@ -355,15 +425,15 @@
     <section class="custom-cta" id="quote">
       <div class="container">
         <div class="dual-cta">
-          <div class="dual-cta-dark" style="background-image:url('/image/Customisation/dual-cta-dark.jpeg')">
-            <span class="eyebrow">Executed Projects</span>
-            <h2>Have a unique requirement?</h2>
-            <p>We create experiences as unique as your brand.</p>
+          <div class="dual-cta-dark" style="background-image:url('/image/customisation/dual-cta-dark.jpeg')">
+            <span class="eyebrow">Real Projects, Real Brands</span>
+            <h2>Every Brand Has A Story. Let's Box Yours.</h2>
+            <p>From first brief to final unboxing, see how we've turned other briefs into gifts people remember.</p>
             <button type="button" class="btn-action btn-primary" data-brief-gallery-open>See Our Work <span class="arrow">→</span></button>
           </div>
           <div class="dual-cta-light">
             <div class="dual-cta-light-text">
-              <h2>Let's Create Something Memorable</h2>
+              <h2>Ready To Start Your Gifting Story?</h2>
               <ul class="dual-cta-checklist">
                 <li>Dedicated Relationship Manager</li>
                 <li>Volume Based Pricing</li>
@@ -372,7 +442,7 @@
               </ul>
               <a href="/quote.html" class="btn-action btn-primary">Request A Proposal <span class="arrow">→</span></a>
             </div>
-            <div class="dual-cta-light-visual" style="background-image:url('/image/Customisation/dual-cta-light.png')"></div>
+            <div class="dual-cta-light-visual" style="background-image:url('/image/customisation/dual-cta-light.png')"></div>
           </div>
         </div>
       </div>
@@ -400,41 +470,6 @@
         document.body.classList.remove('modal-open');
       }
 
-      // From Brief to Box hero carousel
-      var carousel = document.getElementById('briefCarousel');
-      var track = document.getElementById('briefCarouselTrack');
-      if (carousel && track) {
-        var slides = track.querySelectorAll('.brief-carousel-slide');
-        var dots = document.querySelectorAll('#briefCarouselDots span');
-        var prevBtn = carousel.querySelector('.brief-carousel-prev');
-        var nextBtn = carousel.querySelector('.brief-carousel-next');
-        var current = 0;
-        var autoTimer;
-
-        var goTo = function(i) {
-          current = (i + slides.length) % slides.length;
-          slides.forEach(function(slide, idx) { slide.classList.toggle('is-active', idx === current); });
-          dots.forEach(function(dot, idx) { dot.classList.toggle('active', idx === current); });
-        };
-
-        var stopAuto = function() { if (autoTimer) clearInterval(autoTimer); };
-        var startAuto = function() {
-          stopAuto();
-          autoTimer = setInterval(function() { goTo(current + 1); }, 6000);
-        };
-
-        if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); startAuto(); });
-        if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); startAuto(); });
-        dots.forEach(function(dot) {
-          dot.addEventListener('click', function() { goTo(parseInt(dot.getAttribute('data-i'), 10)); startAuto(); });
-        });
-
-        carousel.addEventListener('mouseenter', stopAuto);
-        carousel.addEventListener('mouseleave', startAuto);
-
-        startAuto();
-      }
-
       openers.forEach(function(button) {
         button.addEventListener('click', openModal);
       });
@@ -454,18 +489,39 @@
         });
       });
 
+      // Shared horizontal-scroll prev/next wiring, reused by both the
+      // branding-methods scroller and the testimonials scroller below.
+      function wireScrollButtons(scrollerEl, prevBtn, nextBtn) {
+        if (!scrollerEl || !prevBtn || !nextBtn) return;
+        var step = function () {
+          var first = scrollerEl.firstElementChild;
+          return first ? first.getBoundingClientRect().width + 24 : 300;
+        };
+        prevBtn.addEventListener('click', function () {
+          scrollerEl.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', function () {
+          scrollerEl.scrollBy({ left: step(), behavior: 'smooth' });
+        });
+      }
+
+      wireScrollButtons(
+        document.getElementById('testimonialScroll'),
+        document.querySelector('.testimonial-pager .prev'),
+        document.querySelector('.testimonial-pager .next')
+      );
+
       var scroller = document.getElementById('brandingScroll');
       var nums = document.querySelectorAll('#brandingNums span');
       if (scroller && nums.length) {
         var cards = scroller.querySelectorAll('.branding-card');
-        var step = function () { return cards[0] ? cards[0].getBoundingClientRect().width + 20 : 230; };
 
-        document.querySelector('.branding-pager .prev').addEventListener('click', function () {
-          scroller.scrollBy({ left: -step(), behavior: 'smooth' });
-        });
-        document.querySelector('.branding-pager .next').addEventListener('click', function () {
-          scroller.scrollBy({ left: step(), behavior: 'smooth' });
-        });
+        wireScrollButtons(
+          scroller,
+          document.querySelector('.branding-pager .prev'),
+          document.querySelector('.branding-pager .next')
+        );
+
         nums.forEach(function (span) {
           span.addEventListener('click', function () {
             var i = parseInt(span.getAttribute('data-i'), 10);
