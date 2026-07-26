@@ -7,7 +7,6 @@ dist/
 # Ignore sensitive API configs
 config.js
 CLAUDE.local.md
-claude.md
 
 # Claude Code local tooling
 .claude/

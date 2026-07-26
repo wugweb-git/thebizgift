@@ -392,14 +392,19 @@ Field names below match `api/get-hamper.js` and `api/get-featured-hampers.js` ex
 
 ### 15.4 Categories
 
+Table name in Airtable is `Category` (singular), not `Categories`.
+
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | `Name` | Single line text | Yes | Category display name |
 | `Slug` | Single line text | Yes | URL slug |
 | `Description` | Long text | No | Category description |
+| `Image` | Attachment | No | Not `Hero Image` — Category uses a plain `Image` field |
+| `Sub Categories` | Link to Sub Category | No | — |
 | `Products` | Link to Products | Yes | Linked products |
 | `Published` | Checkbox | Yes | Controls visibility |
-| `Order` | Number | No | Sort order in navigation |
+
+No `Order` field exists on this table (unlike Collections/Occasions) — `api/get-categories.js` sorts alphabetically by `Name` instead.
 
 ### 15.5 FAQs
 

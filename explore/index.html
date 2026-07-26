@@ -40,7 +40,7 @@
           <p class="section-intro">The most meaningful gifts begin with understanding the moment they're created for.</p>
         </div>
         
-        <div class="occasion-grid">
+        <div class="occasion-grid" id="exploreOccasionsGrid">
           <a id="employee-joining-kits" href="/quote.html?occasion=Employee%20Joining%20Kits" class="occasion-card-overlay">
             <img class="occasion-card-overlay-img" src="/image/occasion/employee-joining-kits.png" alt="Employee Joining Kits" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
             <span class="occasion-card-overlay-title">Employee Joining Kits</span>
@@ -88,7 +88,7 @@
           <p class="section-intro">Thoughtfully assembled gifting experiences designed around different objectives, audiences and budgets — or jump straight to a product type.</p>
         </div>
 
-        <div class="collection-tag-row">
+        <div class="collection-tag-row" id="exploreCollectionTags">
           <a id="new-arrivals" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">New Arrivals</a>
           <a id="best-sellers" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Best Sellers</a>
           <a id="premium-picks" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Premium Picks</a>
@@ -297,9 +297,76 @@
     (function () {
       'use strict';
 
+      var IS_LOCAL = window.TBG_IS_LOCAL;
+
+      // Shared HTML-escaping helper for the taxonomy sections below.
+      var escapeScratch = document.createElement('div');
+      function escapeHtml(str) {
+        escapeScratch.textContent = str == null ? '' : String(str);
+        return escapeScratch.innerHTML;
+      }
+
+      // Occasions, Collections, and Category — fetch Published records from
+      // Airtable in production so unpublishing a taxonomy record there
+      // removes it here too. On localhost (or if the API errors), leave the
+      // static fallback cards already in the markup.
+      var occasionsGrid = document.getElementById('exploreOccasionsGrid');
+      if (occasionsGrid && !IS_LOCAL) {
+        fetch('/api/get-occasions')
+          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+          .then(function (occasions) {
+            if (!Array.isArray(occasions) || occasions.length === 0) return;
+            var html = occasions.map(function (o) {
+              var name = escapeHtml(o.name);
+              return (
+                '<a id="' + escapeHtml(o.slug) + '" href="/quote.html?occasion=' + encodeURIComponent(o.name) + '" class="occasion-card-overlay">' +
+                  '<img class="occasion-card-overlay-img" src="' + escapeHtml(o.image) + '" alt="' + name + '" loading="lazy" onerror="this.onerror=null;this.src=\'/image/placeholder.svg\'">' +
+                  '<span class="occasion-card-overlay-title">' + name + '</span>' +
+                  '<span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>' +
+                '</a>'
+              );
+            }).join('');
+            occasionsGrid.innerHTML = html;
+          })
+          .catch(function () { /* leave the static fallback cards in place */ });
+      }
+
+      var collectionTags = document.getElementById('exploreCollectionTags');
+      if (collectionTags && !IS_LOCAL) {
+        fetch('/api/get-collections')
+          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+          .then(function (collections) {
+            if (!Array.isArray(collections) || collections.length === 0) return;
+            var html = collections.map(function (c) {
+              return '<a id="' + escapeHtml(c.slug) + '" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">' + escapeHtml(c.name) + '</a>';
+            }).join('');
+            collectionTags.innerHTML = html;
+          })
+          .catch(function () { /* leave the static fallback cards in place */ });
+      }
+
+      var categoryScroll = document.getElementById('categories');
+      if (categoryScroll && !IS_LOCAL) {
+        fetch('/api/get-categories')
+          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+          .then(function (categories) {
+            if (!Array.isArray(categories) || categories.length === 0) return;
+            var html = categories.map(function (cat) {
+              return (
+                '<a id="' + escapeHtml(cat.slug) + '" href="/explore/#featured-experiences" class="category-scroll-card">' +
+                  '<span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span>' +
+                  '<span class="category-scroll-title">' + escapeHtml(cat.name) + '</span>' +
+                  '<span class="category-scroll-arrow">→</span>' +
+                '</a>'
+              );
+            }).join('');
+            categoryScroll.innerHTML = html;
+          })
+          .catch(function () { /* leave the static fallback cards in place */ });
+      }
+
       // Featured Experiences — fetch from Airtable in production; on localhost
       // (or if the API errors) leave the static fallback cards already in the markup.
-      var IS_LOCAL = window.TBG_IS_LOCAL;
       var grid = document.getElementById('exploreFeaturedGrid');
 
       if (grid && !IS_LOCAL) {
