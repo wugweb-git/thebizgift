@@ -2,11 +2,12 @@
  * get-collections.js — Vercel Serverless Function
  *
  * Fetches Published collections from Airtable for the explore page's
- * "Browse By Collection & Category" tag row. Mirrors get-featured-hampers.js's
- * shape and error handling.
+ * sidebar filter and the header mega menu. Collections render as
+ * icon-based chips (no photography), so no image field is exposed.
+ * Mirrors get-featured-hampers.js's shape and error handling.
  *
  * Required Airtable "Collections" table fields:
- *   Name, Slug, Description, Hero Image, Published, Order
+ *   Name, Slug, Description, Published, Order
  */
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
@@ -44,13 +45,11 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
 
     const collections = data.records.map(function (record) {
-      const images = record.fields['Hero Image'];
       return {
         id: record.id,
         slug: record.fields['Slug'] || '',
         name: record.fields['Name'] || 'Collection',
-        description: record.fields['Description'] || '',
-        image: (images && images.length > 0) ? images[0].url : '/image/placeholder.svg'
+        description: record.fields['Description'] || ''
       };
     });
 

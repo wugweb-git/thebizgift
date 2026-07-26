@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explore Gifts | The Biz Gift</title>
   <meta name="description" content="Discover curated corporate gifting experiences. Find the perfect gift for employee joining, events, client appreciation, festive gifting and more.">
-  
+
   <link rel="icon" type="image/svg+xml" href="/image/The Biz Gift (Logo).svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="/style.css?v=3">
-  <link rel="stylesheet" href="/pages.css?v=7">
+  <link rel="stylesheet" href="/pages.css?v=8">
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
   <link rel="preload" href="/footer.html" as="fetch" crossorigin>
 </head>
@@ -32,219 +32,192 @@
       </div>
     </section>
 
-    <!-- SECTION 02: START WITH THE OCCASION -->
-    <section class="explore-occasions" id="occasions">
+    <!-- SECTION 02: CATALOG (sidebar filters + toolbar + product grid) -->
+    <section class="explore-catalog">
       <div class="container">
-        <div class="section-header">
-          <h2>Start With The Occasion</h2>
-          <p class="section-intro">The most meaningful gifts begin with understanding the moment they're created for.</p>
-        </div>
-        
-        <div class="occasion-grid occasion-grid--overlay" id="exploreOccasionsGrid">
-          <a id="employee-joining-kits" href="/quote.html?occasion=Employee%20Joining%20Kits" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/employee-joining-kits.png" alt="Employee Joining Kits" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Employee Joining Kits</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
 
-          <a id="event-giveaways" href="/quote.html?occasion=Event%20Giveaways" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/event-giveaways.png" alt="Event Giveaways" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Event Giveaways</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
+        <button type="button" class="explore-filters-toggle" id="exploreFiltersToggle" aria-expanded="false" aria-controls="exploreFilters">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          Filters
+          <span class="explore-filters-toggle-count" id="exploreFiltersToggleCount" hidden></span>
+        </button>
 
-          <a id="client-appreciation-gifts" href="/quote.html?occasion=Client%20Appreciation%20Gifts" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/client-appreciation-gifts.jpeg" alt="Client Appreciation Gifts" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Client Appreciation Gifts</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
+        <div class="explore-shell">
 
-          <a id="festive-corporate-gifting" href="/quote.html?occasion=Festive%20Corporate%20Gifting" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/festive-corporate-gifting.png" alt="Festive Corporate Gifting" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Festive Corporate Gifting</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
+          <div class="explore-filters-backdrop" id="exploreFiltersBackdrop" hidden></div>
 
-          <a id="festive-gifting" href="/quote.html?occasion=Festive%20Gifting" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/festive-gifting.png" alt="Festive Gifting" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Festive Gifting</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-
-          <a id="wedding-gifting" href="/quote.html?occasion=Wedding%20Gifting" class="occasion-card-overlay">
-            <img class="occasion-card-overlay-img" src="/image/occasion/wedding-gifting.png" alt="Wedding Gifting" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            <span class="occasion-card-overlay-title">Wedding Gifting</span>
-            <span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 03: BROWSE BY COLLECTION & CATEGORY (merged — was two near-identical sections) -->
-    <section class="explore-collections" id="collections">
-      <div class="container">
-        <div class="section-header">
-          <h2>Browse By Collection &amp; Category</h2>
-          <p class="section-intro">Thoughtfully assembled gifting experiences designed around different objectives, audiences and budgets — or jump straight to a product type.</p>
-        </div>
-
-        <div class="collection-tag-row" id="exploreCollectionTags">
-          <a id="new-arrivals" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">New Arrivals</a>
-          <a id="best-sellers" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Best Sellers</a>
-          <a id="premium-picks" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Premium Picks</a>
-          <a id="budget-gifting" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Budget Gifting</a>
-          <a id="trending-products" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Trending Products</a>
-          <a id="sustainable-choices" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Sustainable Choices</a>
-          <a id="staff-favorites" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Staff Favorites</a>
-          <a id="under-500" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Under ₹500</a>
-          <a id="minimalist-gifts" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Minimalist Gifts</a>
-          <a id="budget" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">Budget</a>
-        </div>
-
-        <p class="category-subheader">Product Type</p>
-        <div class="category-scroll" id="categories">
-          <a id="office-accessories" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
-            <span class="category-scroll-title">Office Accessories</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="office-essentials" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></span>
-            <span class="category-scroll-title">Office Essentials</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="drinkware" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg></span>
-            <span class="category-scroll-title">Drinkware</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="tech" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M2 20h20"/></svg></span>
-            <span class="category-scroll-title">Tech</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="bags" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-            <span class="category-scroll-title">Bags</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="transit-luggage" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
-            <span class="category-scroll-title">Transit Luggage</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="combo" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></span>
-            <span class="category-scroll-title">Combo</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-
-          <a id="more" href="/explore/#featured-experiences" class="category-scroll-card">
-            <span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></span>
-            <span class="category-scroll-title">More</span>
-            <span class="category-scroll-arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 05: SELECTED EXPERIENCES -->
-    <section class="explore-selected" id="featured-experiences">
-      <div class="container">
-        <div class="section-header">
-          <h2>Featured Experiences</h2>
-          <p class="section-intro">A selection of gifting experiences frequently chosen by companies across onboarding, events and client engagement programs.</p>
-        </div>
-        
-        <div class="selected-grid" id="exploreFeaturedGrid">
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add The CC Hamper to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="The CC Hamper" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+          <aside class="explore-filters" id="exploreFilters" aria-label="Filter products">
+            <span id="collections" aria-hidden="true"></span>
+            <div class="explore-filters-header">
+              <h2>Filters</h2>
+              <button type="button" class="explore-filters-close" id="exploreFiltersClose" aria-label="Close filters">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
             </div>
-            <h4>The CC Hamper</h4>
-            <p class="selected-card-sub">Curated Gifting</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 25 Boxes</span>
-              <a href="/hamper/cc-hamper/" class="selected-card-arrow" aria-label="View The CC Hamper"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </div>
 
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add Executive Welcome Kit to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/BCC Hamper.png" alt="Executive Welcome Kit" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            </div>
-            <h4>Executive Welcome Kit</h4>
-            <p class="selected-card-sub">Onboarding Kit</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 50 Boxes</span>
-              <a href="/hamper/executive-welcome-kit/" class="selected-card-arrow" aria-label="View Executive Welcome Kit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </div>
+            <div class="explore-filters-body">
+              <fieldset class="explore-filters-group" id="filterGroupOccasion">
+                <legend class="category-subheader">Occasions</legend>
+                <div class="explore-filters-options" id="occasionFilterOptions">
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="employee-joining-kits"><span>Employee Joining Kits</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="event-giveaways"><span>Event Giveaways</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="client-appreciation-gifts"><span>Client Appreciation Gifts</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="festive-corporate-gifting"><span>Festive Corporate Gifting</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="festive-gifting"><span>Festive Gifting</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="occasion" data-slug="wedding-gifting"><span>Wedding Gifting</span></label>
+                </div>
+              </fieldset>
 
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add Premium Desk Set to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/Bottle Hamper.png" alt="Premium Desk Set" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
-            </div>
-            <h4>Premium Desk Set</h4>
-            <p class="selected-card-sub">Office Gifting</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 25 Boxes</span>
-              <a href="/hamper/premium-desk-set/" class="selected-card-arrow" aria-label="View Premium Desk Set"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </div>
+              <fieldset class="explore-filters-group" id="filterGroupCategory">
+                <legend class="category-subheader">Categories</legend>
+                <div class="explore-filters-options" id="categoryFilterOptions">
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="office-accessories"><span>Office Accessories</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="office-essentials"><span>Office Essentials</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="drinkware"><span>Drinkware</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="tech"><span>Tech</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="bags"><span>Bags</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="transit-luggage"><span>Transit Luggage</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="combo"><span>Combo</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="category" data-slug="more"><span>More</span></label>
+                </div>
+              </fieldset>
 
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add Coffee & Calm to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/BCC Hamper 2.png" alt="Coffee & Calm" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+              <fieldset class="explore-filters-group" id="filterGroupCollection">
+                <legend class="category-subheader">Collections</legend>
+                <div class="explore-filters-options" id="collectionFilterOptions">
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="new-arrivals"><span>New Arrivals</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="best-sellers"><span>Best Sellers</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="premium-picks"><span>Premium Picks</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="budget-gifting"><span>Budget Gifting</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="trending-products"><span>Trending Products</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="sustainable-choices"><span>Sustainable Choices</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="staff-favorites"><span>Staff Favorites</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="under-500"><span>Under ₹500</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="minimalist-gifts"><span>Minimalist Gifts</span></label>
+                  <label class="explore-filter-option"><input type="checkbox" class="explore-filter-checkbox" data-group="collection" data-slug="budget"><span>Budget</span></label>
+                </div>
+              </fieldset>
             </div>
-            <h4>Coffee & Calm</h4>
-            <p class="selected-card-sub">Coffee & Comfort</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 50 Boxes</span>
-              <a href="/hamper/coffee-calm/" class="selected-card-arrow" aria-label="View Coffee & Calm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </div>
 
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add Heritage Box to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Heritage Box" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+            <div class="explore-filters-footer">
+              <button type="button" class="btn-action btn-secondary explore-filters-clear" id="exploreFiltersClear" hidden>Clear All</button>
+              <button type="button" class="btn-action btn-primary explore-filters-apply" id="exploreFiltersApply">Show Results</button>
             </div>
-            <h4>Heritage Box</h4>
-            <p class="selected-card-sub">Curated Gifting</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 25 Boxes</span>
-              <a href="/hamper/heritage-box/" class="selected-card-arrow" aria-label="View Heritage Box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </div>
+          </aside>
 
-          <div class="media-card selected-card selected-card--v2">
-            <div class="media-card-image selected-image">
-              <button type="button" class="wishlist-btn" aria-label="Add Festive Celebration Box to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-              <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebration Box" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+          <div class="explore-results">
+            <div class="explore-toolbar">
+              <p class="explore-result-count" id="exploreResultCount" aria-live="polite"></p>
+              <div class="form-group explore-sort">
+                <label for="exploreSort">Sort by</label>
+                <select id="exploreSort">
+                  <option value="featured">Featured</option>
+                  <option value="name-asc">Name: A&ndash;Z</option>
+                  <option value="name-desc">Name: Z&ndash;A</option>
+                  <option value="moq-asc">MOQ: Low to High</option>
+                  <option value="moq-desc">MOQ: High to Low</option>
+                </select>
+              </div>
             </div>
-            <h4>Festive Celebration Box</h4>
-            <p class="selected-card-sub">Seasonal Gifting</p>
-            <div class="selected-card-row">
-              <span class="moq-pill">MOQ 25 Boxes</span>
-              <a href="/hamper/festive-celebration-box/" class="selected-card-arrow" aria-label="View Festive Celebration Box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+
+            <div class="explore-active-filters" id="exploreActiveFilters" aria-live="polite"></div>
+
+            <div class="section-header" id="featured-experiences">
+              <h2>Featured Experiences</h2>
+              <p class="section-intro">A selection of gifting experiences frequently chosen by companies across onboarding, events and client engagement programs.</p>
+            </div>
+
+            <div class="selected-grid" id="exploreFeaturedGrid">
+              <div class="media-card selected-card selected-card--v2" data-categories="more" data-occasions="client-appreciation-gifts" data-collections="new-arrivals,staff-favorites">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add The CC Hamper to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/Gemini_Generated_Image_6eurqm6eurqm6eur.png" alt="The CC Hamper" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>The CC Hamper</h4>
+                <p class="selected-card-sub">Curated Gifting</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 25 Boxes</span>
+                  <a href="/hamper/cc-hamper/" class="selected-card-arrow" aria-label="View The CC Hamper"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+
+              <div class="media-card selected-card selected-card--v2" data-categories="office-essentials" data-occasions="employee-joining-kits" data-collections="best-sellers,premium-picks">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add Executive Welcome Kit to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/BCC Hamper.png" alt="Executive Welcome Kit" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>Executive Welcome Kit</h4>
+                <p class="selected-card-sub">Onboarding Kit</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 50 Boxes</span>
+                  <a href="/hamper/executive-welcome-kit/" class="selected-card-arrow" aria-label="View Executive Welcome Kit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+
+              <div class="media-card selected-card selected-card--v2" data-categories="office-accessories" data-occasions="client-appreciation-gifts" data-collections="premium-picks">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add Premium Desk Set to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/Bottle Hamper.png" alt="Premium Desk Set" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>Premium Desk Set</h4>
+                <p class="selected-card-sub">Office Gifting</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 25 Boxes</span>
+                  <a href="/hamper/premium-desk-set/" class="selected-card-arrow" aria-label="View Premium Desk Set"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+
+              <div class="media-card selected-card selected-card--v2" data-categories="drinkware" data-occasions="event-giveaways" data-collections="trending-products">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add Coffee & Calm to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/BCC Hamper 2.png" alt="Coffee & Calm" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>Coffee & Calm</h4>
+                <p class="selected-card-sub">Coffee & Comfort</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 50 Boxes</span>
+                  <a href="/hamper/coffee-calm/" class="selected-card-arrow" aria-label="View Coffee & Calm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+
+              <div class="media-card selected-card selected-card--v2" data-categories="more" data-occasions="festive-gifting" data-collections="sustainable-choices">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add Heritage Box to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Heritage Box" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>Heritage Box</h4>
+                <p class="selected-card-sub">Curated Gifting</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 25 Boxes</span>
+                  <a href="/hamper/heritage-box/" class="selected-card-arrow" aria-label="View Heritage Box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+
+              <div class="media-card selected-card selected-card--v2" data-categories="combo" data-occasions="festive-corporate-gifting" data-collections="budget-gifting,under-500">
+                <div class="media-card-image selected-image">
+                  <button type="button" class="wishlist-btn" aria-label="Add Festive Celebration Box to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+                  <img src="/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png" alt="Festive Celebration Box" loading="lazy" onerror="this.onerror=null;this.src='/image/placeholder.svg'">
+                </div>
+                <h4>Festive Celebration Box</h4>
+                <p class="selected-card-sub">Seasonal Gifting</p>
+                <div class="selected-card-row">
+                  <span class="moq-pill">MOQ 25 Boxes</span>
+                  <a href="/hamper/festive-celebration-box/" class="selected-card-arrow" aria-label="View Festive Celebration Box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="empty-state" id="exploreEmptyState" hidden>
+              <h3>No gifts match these filters</h3>
+              <p>Try removing a filter or clearing everything to see the full catalog.</p>
+              <button type="button" class="btn-action btn-primary" id="exploreEmptyClear">Clear All Filters</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 07: DISCOVERY CTA -->
+    <!-- SECTION 03: DISCOVERY CTA -->
     <section class="explore-cta">
       <div class="container">
         <div class="dual-cta">
@@ -281,131 +254,434 @@
 
       var IS_LOCAL = window.TBG_IS_LOCAL;
 
-      // Shared HTML-escaping helper for the taxonomy sections below.
       var escapeScratch = document.createElement('div');
       function escapeHtml(str) {
         escapeScratch.textContent = str == null ? '' : String(str);
         return escapeScratch.innerHTML;
       }
 
-      // If the page loaded with a #hash (e.g. from the header nav or a mega
-      // menu link), the browser scrolls to it once, immediately, based on
-      // whatever the DOM looks like at that instant -- before any of the
-      // fetches below have replaced the static fallback content. If a swap
-      // changes the height of anything above the target, the already-applied
-      // scroll position drifts off target. Re-verify once every started
-      // fetch has settled (success or failure) and correct it if needed.
+      // Same drift-correction mechanism as before: re-verify hash scroll
+      // position once every started fetch has settled (success or failure).
       var pendingSettles = 0;
       function trackSettle(promise) {
         pendingSettles++;
         promise.then(onSettle, onSettle);
+        return promise;
       }
       function onSettle() {
         pendingSettles--;
         if (pendingSettles > 0) return;
-        var hash = window.location.hash;
-        if (!hash || hash.length < 2) return;
-        var target = document.getElementById(hash.slice(1));
-        if (target) target.scrollIntoView({ block: 'start' });
+        translateHashIfNeeded();
+        render();
+        var target = document.getElementById('featured-experiences');
+        if (window.location.hash && target) target.scrollIntoView({ block: 'start' });
       }
 
-      // Occasions, Collections, and Category — fetch Published records from
-      // Airtable in production so unpublishing a taxonomy record there
-      // removes it here too. On localhost (or if the API errors), leave the
-      // static fallback cards already in the markup.
-      var occasionsGrid = document.getElementById('exploreOccasionsGrid');
-      if (occasionsGrid && !IS_LOCAL) {
-        trackSettle(fetch('/api/get-occasions')
+      /* ----------------------------------------------------------------
+         DATA: taxonomy (occasion/category/collection) + products
+         ---------------------------------------------------------------- */
+      var taxonomy = { occasion: [], category: [], collection: [] }; // [{slug,name}]
+      var products = [];
+
+      var GROUP_CONTAINERS = {
+        occasion: document.getElementById('occasionFilterOptions'),
+        category: document.getElementById('categoryFilterOptions'),
+        collection: document.getElementById('collectionFilterOptions')
+      };
+      var GROUP_ENDPOINTS = {
+        occasion: '/api/get-occasions',
+        category: '/api/get-categories',
+        collection: '/api/get-collections'
+      };
+
+      function optionRowHtml(group, item) {
+        return (
+          '<label class="explore-filter-option">' +
+            '<input type="checkbox" class="explore-filter-checkbox" data-group="' + group + '" data-slug="' + escapeHtml(item.slug) + '">' +
+            '<span>' + escapeHtml(item.name) + '</span>' +
+          '</label>'
+        );
+      }
+
+      function readFallbackTaxonomy(group) {
+        var container = GROUP_CONTAINERS[group];
+        if (!container) return [];
+        return Array.prototype.map.call(container.querySelectorAll('input[data-slug]'), function (input) {
+          var span = input.nextElementSibling;
+          return { slug: input.getAttribute('data-slug'), name: span ? span.textContent : input.getAttribute('data-slug') };
+        });
+      }
+
+      function readFallbackProducts() {
+        var grid = document.getElementById('exploreFeaturedGrid');
+        if (!grid) return [];
+        return Array.prototype.map.call(grid.querySelectorAll('.selected-card--v2'), function (card) {
+          var arrow = card.querySelector('.selected-card-arrow');
+          var slugMatch = arrow ? /\/hamper\/([^/]+)\/?/.exec(arrow.getAttribute('href') || '') : null;
+          var img = card.querySelector('img');
+          var moqText = (card.querySelector('.moq-pill') || {}).textContent || '';
+          function splitAttr(name) {
+            var raw = card.getAttribute(name) || '';
+            return raw.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+          }
+          return {
+            slug: slugMatch ? slugMatch[1] : '',
+            name: (card.querySelector('h4') || {}).textContent || 'Curated Hamper',
+            sub: (card.querySelector('.selected-card-sub') || {}).textContent || 'Curated Gifting',
+            image: img ? img.getAttribute('src') : '/image/placeholder.svg',
+            imageAlt: img ? img.getAttribute('alt') : 'Product image',
+            moq: moqText.replace(/^MOQ\s*/, '') || 'Contact Us',
+            featured: false,
+            categorySlugs: splitAttr('data-categories'),
+            occasionSlugs: splitAttr('data-occasions'),
+            collectionSlugs: splitAttr('data-collections')
+          };
+        });
+      }
+
+      function loadTaxonomyGroup(group) {
+        var container = GROUP_CONTAINERS[group];
+        if (!container) return;
+        if (IS_LOCAL) {
+          taxonomy[group] = readFallbackTaxonomy(group);
+          return;
+        }
+        trackSettle(fetch(GROUP_ENDPOINTS[group])
           .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
-          .then(function (occasions) {
-            if (!Array.isArray(occasions) || occasions.length === 0) return;
-            var html = occasions.map(function (o) {
-              var name = escapeHtml(o.name);
-              return (
-                '<a id="' + escapeHtml(o.slug) + '" href="/quote.html?occasion=' + encodeURIComponent(o.name) + '" class="occasion-card-overlay">' +
-                  '<img class="occasion-card-overlay-img" src="' + escapeHtml(o.image) + '" alt="' + name + '" loading="lazy" onerror="this.onerror=null;this.src=\'/image/placeholder.svg\'">' +
-                  '<span class="occasion-card-overlay-title">' + name + '</span>' +
-                  '<span class="occasion-card-overlay-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>' +
-                '</a>'
-              );
-            }).join('');
-            occasionsGrid.innerHTML = html;
+          .then(function (items) {
+            if (!Array.isArray(items) || items.length === 0) { taxonomy[group] = readFallbackTaxonomy(group); return; }
+            taxonomy[group] = items.map(function (i) { return { slug: i.slug, name: i.name }; });
+            container.innerHTML = items.map(function (i) { return optionRowHtml(group, i); }).join('');
           })
-          .catch(function () { /* leave the static fallback cards in place */ }));
+          .catch(function () { taxonomy[group] = readFallbackTaxonomy(group); }));
       }
 
-      var collectionTags = document.getElementById('exploreCollectionTags');
-      if (collectionTags && !IS_LOCAL) {
-        trackSettle(fetch('/api/get-collections')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
-          .then(function (collections) {
-            if (!Array.isArray(collections) || collections.length === 0) return;
-            var html = collections.map(function (c) {
-              return '<a id="' + escapeHtml(c.slug) + '" href="/explore/#featured-experiences" class="tag-chip tag-chip--outline">' + escapeHtml(c.name) + '</a>';
-            }).join('');
-            collectionTags.innerHTML = html;
-          })
-          .catch(function () { /* leave the static fallback cards in place */ }));
-      }
-
-      var categoryScroll = document.getElementById('categories');
-      if (categoryScroll && !IS_LOCAL) {
-        trackSettle(fetch('/api/get-categories')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
-          .then(function (categories) {
-            if (!Array.isArray(categories) || categories.length === 0) return;
-            var html = categories.map(function (cat) {
-              return (
-                '<a id="' + escapeHtml(cat.slug) + '" href="/explore/#featured-experiences" class="category-scroll-card">' +
-                  '<span class="category-scroll-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span>' +
-                  '<span class="category-scroll-title">' + escapeHtml(cat.name) + '</span>' +
-                  '<span class="category-scroll-arrow">→</span>' +
-                '</a>'
-              );
-            }).join('');
-            categoryScroll.innerHTML = html;
-          })
-          .catch(function () { /* leave the static fallback cards in place */ }));
-      }
-
-      // Featured Experiences — fetch from Airtable in production; on localhost
-      // (or if the API errors) leave the static fallback cards already in the markup.
-      var grid = document.getElementById('exploreFeaturedGrid');
-
-      if (grid && !IS_LOCAL) {
+      function loadProducts() {
+        if (IS_LOCAL) {
+          products = readFallbackProducts();
+          return;
+        }
         trackSettle(fetch('/api/get-featured-hampers')
           .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
           .then(function (hampers) {
-            if (!Array.isArray(hampers) || hampers.length === 0) return;
-            var html = hampers.slice(0, 12).map(function (h) {
-              var div = document.createElement('div');
-              div.textContent = h.name || 'Curated Hamper';
-              var safeName = div.innerHTML;
-              div.textContent = h.imageAlt || h.name || 'Product image';
-              var safeAlt = div.innerHTML;
-              div.textContent = (h.categories && h.categories[0]) || 'Curated Gifting';
-              var safeSub = div.innerHTML;
-              div.textContent = h.moq || 'Contact Us';
-              var safeMoq = div.innerHTML;
-              return (
-                '<div class="media-card selected-card selected-card--v2">' +
-                  '<div class="media-card-image selected-image">' +
-                    '<button type="button" class="wishlist-btn" aria-label="Add ' + safeName + ' to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>' +
-                    '<img src="' + h.image + '" alt="' + safeAlt + '" onerror="this.onerror=null;this.src=\'/image/placeholder.svg\'" loading="lazy">' +
-                  '</div>' +
-                  '<h4>' + safeName + '</h4>' +
-                  '<p class="selected-card-sub">' + safeSub + '</p>' +
-                  '<div class="selected-card-row">' +
-                    '<span class="moq-pill">MOQ ' + safeMoq + '</span>' +
-                    '<a href="/hamper/' + encodeURIComponent(h.slug) + '/" class="selected-card-arrow" aria-label="View ' + safeName + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
-                  '</div>' +
-                '</div>'
-              );
-            }).join('');
-            grid.innerHTML = html;
+            if (!Array.isArray(hampers) || hampers.length === 0) { products = readFallbackProducts(); return; }
+            products = hampers.map(function (h) {
+              return {
+                slug: h.slug,
+                name: h.name || 'Curated Hamper',
+                sub: (h.categories && h.categories[0]) || 'Curated Gifting',
+                image: h.image,
+                imageAlt: h.imageAlt || h.name || 'Product image',
+                moq: h.moq || 'Contact Us',
+                featured: !!h.featured,
+                categorySlugs: h.categorySlugs || [],
+                occasionSlugs: h.occasionSlugs || [],
+                collectionSlugs: h.collectionSlugs || []
+              };
+            });
           })
-          .catch(function () { /* leave the static fallback cards in place */ }));
+          .catch(function () { products = readFallbackProducts(); }));
       }
+
+      /* ----------------------------------------------------------------
+         STATE (occasion/category/collection slugs + sort), URL-backed
+         ---------------------------------------------------------------- */
+      var state = { occasion: [], category: [], collection: [], sort: 'featured' };
+
+      function parseStateFromLocation() {
+        var params = new URLSearchParams(window.location.search);
+        function group(name) {
+          var raw = params.get(name);
+          return raw ? raw.split(',').filter(Boolean) : [];
+        }
+        state.occasion = group('occasion');
+        state.category = group('category');
+        state.collection = group('collection');
+        state.sort = params.get('sort') || 'featured';
+      }
+      parseStateFromLocation();
+
+      loadTaxonomyGroup('occasion');
+      loadTaxonomyGroup('category');
+      loadTaxonomyGroup('collection');
+      loadProducts();
+      if (IS_LOCAL) {
+        // No fetches were tracked -- run the load path synchronously once.
+        translateHashIfNeeded();
+      }
+
+      function writeStateToURL(replace) {
+        var params = new URLSearchParams();
+        ['occasion', 'category', 'collection'].forEach(function (group) {
+          if (state[group].length > 0) params.set(group, state[group].join(','));
+        });
+        if (state.sort !== 'featured') params.set('sort', state.sort);
+        var qs = params.toString();
+        var url = window.location.pathname + (qs ? '?' + qs : '');
+        if (replace) window.history.replaceState(null, '', url);
+        else window.history.pushState(null, '', url);
+      }
+
+      function translateHashIfNeeded() {
+        var hash = window.location.hash ? window.location.hash.slice(1) : '';
+        var hasQueryState = window.location.search.length > 1;
+        if (!hash || hasQueryState) return;
+        if (hash === 'collections') return; // sidebar itself carries this id
+        var matchedAny = false;
+        ['occasion', 'category', 'collection'].forEach(function (group) {
+          var known = taxonomy[group].some(function (item) { return item.slug === hash; });
+          if (known && state[group].indexOf(hash) === -1) {
+            state[group] = [hash];
+            matchedAny = true;
+          }
+        });
+        if (matchedAny) writeStateToURL(true);
+      }
+
+      /* ----------------------------------------------------------------
+         FILTER + SORT
+         ---------------------------------------------------------------- */
+      function groupMatches(selected, productSlugs) {
+        if (selected.length === 0) return true;
+        return selected.some(function (s) { return productSlugs.indexOf(s) !== -1; });
+      }
+      function matchesFilters(product) {
+        return groupMatches(state.occasion, product.occasionSlugs) &&
+               groupMatches(state.category, product.categorySlugs) &&
+               groupMatches(state.collection, product.collectionSlugs);
+      }
+
+      function parseMoq(str) {
+        var m = /(\d+(?:\.\d+)?)/.exec(str || '');
+        return m ? parseFloat(m[1]) : NaN;
+      }
+      function compareMoq(a, b, dir) {
+        var na = parseMoq(a.moq), nb = parseMoq(b.moq);
+        if (isNaN(na) && isNaN(nb)) return 0;
+        if (isNaN(na)) return 1;
+        if (isNaN(nb)) return -1;
+        return dir * (na - nb);
+      }
+      function sortProducts(list) {
+        var copy = list.slice();
+        if (state.sort === 'name-asc') copy.sort(function (a, b) { return a.name.localeCompare(b.name); });
+        else if (state.sort === 'name-desc') copy.sort(function (a, b) { return b.name.localeCompare(a.name); });
+        else if (state.sort === 'moq-asc') copy.sort(function (a, b) { return compareMoq(a, b, 1); });
+        else if (state.sort === 'moq-desc') copy.sort(function (a, b) { return compareMoq(a, b, -1); });
+        else copy.sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
+        return copy;
+      }
+
+      /* ----------------------------------------------------------------
+         RENDER
+         ---------------------------------------------------------------- */
+      var grid = document.getElementById('exploreFeaturedGrid');
+      var emptyState = document.getElementById('exploreEmptyState');
+      var resultCount = document.getElementById('exploreResultCount');
+      var activeFiltersEl = document.getElementById('exploreActiveFilters');
+      var sortSelect = document.getElementById('exploreSort');
+      var sidebarClear = document.getElementById('exploreFiltersClear');
+      var toggleCount = document.getElementById('exploreFiltersToggleCount');
+
+      function cardHtml(h) {
+        var safeName = escapeHtml(h.name);
+        var safeAlt = escapeHtml(h.imageAlt);
+        var safeSub = escapeHtml(h.sub);
+        var safeMoq = escapeHtml(h.moq);
+        return (
+          '<div class="media-card selected-card selected-card--v2">' +
+            '<div class="media-card-image selected-image">' +
+              '<button type="button" class="wishlist-btn" aria-label="Add ' + safeName + ' to wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>' +
+              '<img src="' + h.image + '" alt="' + safeAlt + '" onerror="this.onerror=null;this.src=\'/image/placeholder.svg\'" loading="lazy">' +
+            '</div>' +
+            '<h4>' + safeName + '</h4>' +
+            '<p class="selected-card-sub">' + safeSub + '</p>' +
+            '<div class="selected-card-row">' +
+              '<span class="moq-pill">MOQ ' + safeMoq + '</span>' +
+              '<a href="/hamper/' + encodeURIComponent(h.slug) + '/" class="selected-card-arrow" aria-label="View ' + safeName + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+      function renderGrid(list) {
+        grid.innerHTML = list.map(cardHtml).join('');
+      }
+
+      var SORT_LABELS = {
+        'name-asc': 'Sort: Name A–Z',
+        'name-desc': 'Sort: Name Z–A',
+        'moq-asc': 'Sort: MOQ Low to High',
+        'moq-desc': 'Sort: MOQ High to Low'
+      };
+
+      function chipHtml(group, value, label) {
+        return (
+          '<span class="tag-chip tag-chip--removable">' + escapeHtml(label) +
+            '<button type="button" class="tag-chip-remove" data-remove-group="' + group + '" data-remove-value="' + escapeHtml(value) + '" aria-label="Remove ' + escapeHtml(label) + ' filter">' +
+              '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
+            '</button>' +
+          '</span>'
+        );
+      }
+
+      function nameForSlug(group, slug) {
+        var found = taxonomy[group].filter(function (i) { return i.slug === slug; })[0];
+        return found ? found.name : slug;
+      }
+
+      function renderChips() {
+        var chips = [];
+        ['occasion', 'category', 'collection'].forEach(function (group) {
+          state[group].forEach(function (slug) {
+            chips.push(chipHtml(group, slug, nameForSlug(group, slug)));
+          });
+        });
+        if (state.sort !== 'featured') {
+          chips.push(chipHtml('sort', state.sort, SORT_LABELS[state.sort]));
+        }
+        activeFiltersEl.innerHTML = chips.join('');
+      }
+
+      function syncCheckboxes() {
+        Array.prototype.forEach.call(document.querySelectorAll('.explore-filter-checkbox'), function (input) {
+          var group = input.getAttribute('data-group');
+          var slug = input.getAttribute('data-slug');
+          input.checked = state[group].indexOf(slug) !== -1;
+        });
+      }
+
+      function hasActiveFilters() {
+        return state.occasion.length > 0 || state.category.length > 0 || state.collection.length > 0 || state.sort !== 'featured';
+      }
+
+      function render() {
+        syncCheckboxes();
+        sortSelect.value = state.sort;
+        renderChips();
+        sidebarClear.hidden = !hasActiveFilters();
+
+        var filtered = sortProducts(products.filter(matchesFilters));
+        renderGrid(filtered);
+
+        var isEmpty = filtered.length === 0 && products.length > 0;
+        emptyState.hidden = !isEmpty;
+        grid.hidden = isEmpty;
+
+        resultCount.textContent = products.length === 0 ? '' :
+          (filtered.length + (filtered.length === 1 ? ' gifting experience' : ' gifting experiences'));
+
+        var activeCount = state.occasion.length + state.category.length + state.collection.length;
+        if (activeCount > 0) {
+          toggleCount.hidden = false;
+          toggleCount.textContent = String(activeCount);
+        } else {
+          toggleCount.hidden = true;
+        }
+      }
+
+      /* ----------------------------------------------------------------
+         EVENTS
+         ---------------------------------------------------------------- */
+      function clearAll() {
+        state = { occasion: [], category: [], collection: [], sort: 'featured' };
+        writeStateToURL(false);
+        render();
+      }
+
+      document.getElementById('exploreFilters').addEventListener('change', function (e) {
+        var input = e.target;
+        if (!input.classList || !input.classList.contains('explore-filter-checkbox')) return;
+        var group = input.getAttribute('data-group');
+        var slug = input.getAttribute('data-slug');
+        var idx = state[group].indexOf(slug);
+        if (input.checked && idx === -1) state[group].push(slug);
+        else if (!input.checked && idx !== -1) state[group].splice(idx, 1);
+        writeStateToURL(false);
+        render();
+      });
+
+      sortSelect.addEventListener('change', function () {
+        state.sort = sortSelect.value;
+        writeStateToURL(false);
+        render();
+      });
+
+      activeFiltersEl.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.tag-chip-remove') : null;
+        if (!btn) return;
+        var group = btn.getAttribute('data-remove-group');
+        var value = btn.getAttribute('data-remove-value');
+        if (group === 'sort') state.sort = 'featured';
+        else {
+          var idx = state[group].indexOf(value);
+          if (idx !== -1) state[group].splice(idx, 1);
+        }
+        writeStateToURL(false);
+        render();
+      });
+
+      sidebarClear.addEventListener('click', clearAll);
+      document.getElementById('exploreEmptyClear').addEventListener('click', clearAll);
+
+      window.addEventListener('popstate', function () {
+        parseStateFromLocation();
+        render();
+      });
+
+      /* ----------------------------------------------------------------
+         MOBILE FILTER DRAWER (open/close, backdrop, Escape, focus trap)
+         ---------------------------------------------------------------- */
+      var filtersToggle = document.getElementById('exploreFiltersToggle');
+      var filtersPanel = document.getElementById('exploreFilters');
+      var filtersBackdrop = document.getElementById('exploreFiltersBackdrop');
+      var filtersClose = document.getElementById('exploreFiltersClose');
+      var filtersApply = document.getElementById('exploreFiltersApply');
+      var lastFocused = null;
+
+      function focusableIn(container) {
+        return Array.prototype.filter.call(
+          container.querySelectorAll('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])'),
+          function (el) { return el.offsetParent !== null; }
+        );
+      }
+
+      function openDrawer() {
+        lastFocused = document.activeElement;
+        filtersPanel.classList.add('is-open');
+        filtersBackdrop.classList.add('is-open');
+        filtersBackdrop.hidden = false;
+        filtersToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        var focusables = focusableIn(filtersPanel);
+        if (focusables.length > 0) focusables[0].focus();
+      }
+      function closeDrawer() {
+        filtersPanel.classList.remove('is-open');
+        filtersBackdrop.classList.remove('is-open');
+        filtersToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        window.setTimeout(function () { filtersBackdrop.hidden = true; }, 300);
+        if (lastFocused) lastFocused.focus();
+      }
+
+      filtersToggle.addEventListener('click', openDrawer);
+      filtersClose.addEventListener('click', closeDrawer);
+      filtersApply.addEventListener('click', closeDrawer);
+      filtersBackdrop.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', function (e) {
+        if (!filtersPanel.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeDrawer(); return; }
+        if (e.key !== 'Tab') return;
+        var focusables = focusableIn(filtersPanel);
+        if (focusables.length === 0) return;
+        var first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+
+      // Initial paint (fetches, if any, will re-render via trackSettle/onSettle).
+      if (IS_LOCAL) render();
     })();
   </script>
 </body>

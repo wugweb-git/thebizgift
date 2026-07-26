@@ -131,8 +131,8 @@ Each document has a distinct responsibility with minimal overlap:
 |------|--------|-------|
 | Homepage | Working | 15 sections, scroll-reveal animations |
 | About | Working | 9 sections, static content |
-| Explore Hub | Working | 7 sections; Occasions/Collections/Categories + Featured grid live from Airtable in production |
-| Hamper Detail | Working (mock) | 6 sections (Product Introduction and Make It Yours removed), renders from mock data on localhost |
+| Explore Hub | Working | Ecommerce-style catalog: hero + sidebar filters (Occasion/Category/Collection) + sort + removable filter chips + product grid, live from Airtable in production |
+| Hamper Detail | Working (mock) | Hero, Planning, Related, Proposal blocks (see docs/design.md for removed-block history), renders from mock data on localhost |
 | Customisation | Working | 10 sections |
 | Quote | Working | Form with 14 fields, simulates success on localhost |
 | Legal (Privacy/Terms) | Working | Static content |

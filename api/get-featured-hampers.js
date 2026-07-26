@@ -48,6 +48,12 @@ module.exports = async function handler(req, res) {
         categories: record.fields['Category Name (from Category)'] || [],
         occasions: record.fields['Name (from Occasion)'] || [],
         collections: record.fields['Name (from Collections)'] || [],
+        // Slug arrays, index-aligned with the name arrays above, for exact
+        // client-side filtering that's immune to display-name drift (same
+        // lookup fields already read by get-hamper.js's zipTaxonomy()).
+        categorySlugs: record.fields['Category Slug (from Category)'] || [],
+        occasionSlugs: record.fields['Slug (from Occasion)'] || [],
+        collectionSlugs: record.fields['Slug (from Collections)'] || [],
         moq: record.fields['MOQ'] || '50',
         material: record.fields['Material'] || 'Mixed',
         branding: record.fields['Branding Option'] || [],

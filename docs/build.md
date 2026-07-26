@@ -686,14 +686,12 @@ All forms POST to `/api/submit-lead` with JSON body:
 
 ## 17. Search & Filtering
 
-**Current phase:** No site-wide search UI. Navigation via mega menu and taxonomy pages only.
+**Built:** `explore/index.html` is a faceted catalog page — sidebar checkbox filters for Category/Occasion/Collection, a sort dropdown (Featured/Name/MOQ), removable filter chips, and a live result count. All filtering/sorting runs client-side over one `/api/get-featured-hampers` fetch (92 published products, no pagination needed at this catalog size). Filter/sort state is reflected in the URL (`?occasion=&category=&collection=&sort=`) and preserved on back/forward via the History API, matching the plan below. Legacy `/explore/#slug` links (mega menu, homepage cards) auto-translate into a pre-applied filter on load.
 
-**Planned (for handoff):**
-- Search endpoint: `/api/search?q=...`
-- Filterable fields: Category, Occasion, Collection, Product Tags.
+**Still planned (for handoff):**
+- Site-wide text search endpoint: `/api/search?q=...` (Product Tags aren't filterable yet either — only Category/Occasion/Collection).
 - Ranking: exact name > tag exact > tag partial > category/occasion boost.
-- Pagination: 12 per page.
-- URL state: query params preserved on back/forward via History API.
+- Pagination: 12 per page (only needed once the catalog grows well beyond current size).
 
 ---
 

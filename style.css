@@ -539,6 +539,20 @@ img {
   align-items: stretch;
 }
 
+.mega-menu-container--two {
+  grid-template-columns: 1fr 1fr;
+}
+
+.mega-menu-container--one {
+  grid-template-columns: 1fr;
+}
+
+.mega-menu-links--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem 2rem;
+}
+
 .mega-menu-strip {
   max-width: var(--container-max);
   margin: 2rem auto 0;
@@ -571,18 +585,6 @@ img {
 .mega-menu-strip-item span {
   font-size: var(--font-size-small-button);
   color: var(--text-footer-muted);
-}
-
-.mega-menu-featured-tag {
-  display: inline-block;
-  font-size: var(--font-size-eyebrow);
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 0.75rem;
 }
 
 .mega-menu-column h4 {
@@ -639,61 +641,6 @@ img {
 
 .mega-menu-links a:hover .mega-link-icon {
   opacity: 1;
-}
-
-/* Featured thumbnail in mega menu */
-.mega-menu-featured {
-  background: var(--bg-footer-tint);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.mega-menu-featured-image {
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--bg-charcoal);
-}
-
-.mega-menu-featured-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-premium);
-}
-
-.mega-menu-featured:hover .mega-menu-featured-image img {
-  transform: scale(1.05);
-}
-
-.mega-menu-featured-body {
-  padding: 1.25rem;
-}
-
-.mega-menu-featured-body h4 {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-body);
-  font-weight: 400;
-  color: var(--text-light);
-  margin-bottom: 0.3rem;
-}
-
-.mega-menu-featured-body p {
-  font-size: var(--font-size-small-button);
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 300;
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
-}
-
-.mega-menu-featured-body .mega-cta {
-  font-size: var(--font-size-overline);
-  letter-spacing: 0.1em;
-  color: var(--accent-bronze);
-  font-weight: 500;
 }
 
 
@@ -1477,14 +1424,6 @@ img {
   .planning-guide-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
-  }
-
-  .mega-menu-container {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .mega-menu-container > :last-child {
-    display: none;
   }
 
   .mega-menu-grid {

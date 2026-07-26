@@ -310,11 +310,6 @@
     // 04 Planning Information (Apple-style spec panel)
     html += buildPlanning(product);
 
-    // 05 Perfect For (occasion cards + collection cards)
-    if ((product.occasions && product.occasions.length > 0) || (product.collections && product.collections.length > 0)) {
-      html += buildPerfectFor(product);
-    }
-
     // 08 Related Hampers
     if (product.related && product.related.length > 0) {
       html += buildRelated(product);
@@ -479,54 +474,6 @@
               (p.productionWorkflow ? '<p class="hamper-planning-workflow">' + escapeHtml(p.productionWorkflow) + '</p>' : '') +
             '</div>' +
             '<div class="hamper-planning-specs">' + rows + '</div>' +
-          '</div>' +
-        '</div>' +
-      '</section>'
-    );
-  }
-
-  // --- 05 Perfect For (occasion cards + collection cards, left-aligned) ---
-  var PERFECT_ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-
-  function buildPerfectFor(p) {
-    // Occasion/collection images are expected at /image/occasion/<slug>.png
-    // and /image/collection/<slug>.png respectively (falls back to the
-    // shared placeholder if a given slug's image hasn't been supplied yet).
-    function cardsFor(items, imageBase, linkBuilder) {
-      return (items || []).map(function (item) {
-        var img = item.image || (imageBase + encodeURIComponent(item.slug || '') + '.png');
-        return (
-          '<a href="' + linkBuilder(item) + '" class="hamper-perfect-card-overlay">' +
-            '<img class="hamper-perfect-card-overlay-img" src="' + img + '" alt="' + escapeHtml(item.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + CONFIG.FALLBACK_IMAGE + '\'">' +
-            '<span class="hamper-perfect-card-overlay-title">' + escapeHtml(item.name) + '</span>' +
-            '<span class="hamper-perfect-card-overlay-arrow">' + PERFECT_ARROW + '</span>' +
-          '</a>'
-        );
-      }).join('');
-    }
-
-    // Occasion names in Airtable's Occasions table match quote.html's
-    // #occasion dropdown values exactly, so no translation map is needed.
-    var occasionCards = cardsFor(p.occasions, '/image/occasion/', function (occ) {
-      return '/quote.html?occasion=' + encodeURIComponent(occ.name);
-    });
-    var collectionCards = cardsFor(p.collections, '/image/collection/', function (col) {
-      return '/explore/#' + encodeURIComponent(col.slug || '');
-    });
-
-    // Occasions and collections render as one combined row, sharing the
-    // same card treatment -- no separate sub-headings.
-    var allCards = occasionCards + collectionCards;
-
-    return (
-      '<section class="hamper-perfect hamper-reveal" aria-label="Perfect For">' +
-        '<div class="container">' +
-          '<div class="section-header">' +
-            '<h2>Perfect For</h2>' +
-            '<p class="section-intro">This hamper is designed for the following gifting scenarios and collections.</p>' +
-          '</div>' +
-          '<div class="hamper-perfect-group">' +
-            '<div class="hamper-perfect-cards">' + allCards + '</div>' +
           '</div>' +
         '</div>' +
       '</section>'

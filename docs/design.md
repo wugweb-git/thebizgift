@@ -440,15 +440,15 @@ Hero → What We Create → Featured Collections → Customisation Studio → Br
 | 9 | CTA | Dark, dual buttons |
 
 ### Explore Hub
+Rebuilt as an ecommerce-style catalog page (Shopify collection-page pattern) rather than stacked browse rows:
+
 | Order | Block | Purpose |
 |-------|-------|---------|
 | 1 | Hero | Full-width editorial |
-| 2 | Occasion | 2 featured cards |
-| 3 | Collections | 7 editorial cards |
-| 4 | Categories | 5 visual cards |
-| 5 | Featured | 6 product cards |
-| 6 | Customisation | 4 branding grid |
-| 7 | CTA | Dark, split buttons |
+| 2 | Catalog | Sidebar filters (Occasion/Category/Collection checkboxes) + toolbar (sort dropdown, result count) + removable active-filter chips + product grid, all client-side over one `/api/get-featured-hampers` fetch |
+| 3 | CTA | Dark, split buttons |
+
+Filter/sort state is reflected in the URL (`?occasion=&category=&collection=&sort=`) via the History API; the ~40 pre-existing `/explore/#slug` links sitewide (mega menu, homepage cards) auto-translate into a pre-applied filter on load.
 
 ### Hamper Detail v2 (B2B Editorial Product Page)
 
@@ -457,12 +457,11 @@ Hero → What We Create → Featured Collections → Customisation Studio → Br
 | 01 | Breadcrumb | Hierarchy w/ collection/category fallback | Yes | No |
 | 02 | Hero | 55/45 split gallery + premium chips + quick facts | Yes | No |
 | 04 | Planning Information | 2-column spec panel, thin dividers | Mixed | No — show with fallbacks |
-| 05 | Perfect For | Icon cards + CTA link | Yes | Yes — if no occasion tags |
 | 07 | FAQ | Single-open accordion, 200ms | Yes | Yes — if no FAQ |
 | 08 | Related Hampers | Algorithmic, 4 max, 100ms stagger | Yes | Yes — if none found |
 | 09 | Proposal / Customisation | Editorial left + validated form right | Yes | No |
 
-Blocks 03 (Product Introduction) and 06 (Make It Yours) were removed from the live page — numbering kept stable rather than renumbering the rest.
+Blocks 03 (Product Introduction), 05 (Perfect For), and 06 (Make It Yours) were removed from the live page — numbering kept stable rather than renumbering the rest.
 
 ### Page Library
 
@@ -470,7 +469,7 @@ Blocks 03 (Product Introduction) and 06 (Make It Yours) were removed from the li
 |------|------|----------|--------|
 | Homepage | `index.html` | 10 | Built |
 | About | `about.html` | 9 | Built |
-| Explore Hub | `explore/index.html` | 7 | Built |
+| Explore Hub | `explore/index.html` | 3 | Built |
 | Hamper Detail | `hamper/template.html` | 9 | Built |
 | Customisation | `customisation.html` | 10 | Built |
 | Quote | `quote.html` | 6 | Built |
@@ -528,7 +527,6 @@ Components are classified by role. Every component must define the states from �
 - **Specifications** — label + value rows with hover tint
 - **Customisation Matrix** — branding options grid
 - **Branding Gallery** — horizontal scroll, pinned section
-- **Perfect For Cards** — emoji icon + text + CTA link
 - **Related Products** — algorithmic, 4 max, staggered entrance
 - **Proposal Form** — editorial left + validated form right
 - **Sticky CTA** — reveals after hero, hides at proposal
@@ -566,10 +564,10 @@ Components are classified by role. Every component must define the states from �
 - **Tag** — internal taxonomy label
 - **Divider** — thin border-default line
 - **Skeleton Loader** — shimmer pulse animation
-- **Pagination** — future: numbered page navigation
+- **Pagination** — future: numbered page navigation (not needed yet at current catalog size — Explore Hub fetches all published products in one call)
 - **Search** — future: search input + results
-- **Filters** — future: faceted filtering
-- **Sort** — future: sort controls
+- **Filters** — built: Explore Hub sidebar checkbox facets (Occasion/Category/Collection), URL-backed, off-canvas drawer on mobile
+- **Sort** — built: Explore Hub toolbar dropdown (Featured/Name/MOQ)
 - **Empty State** — editorial message + explore CTA
 - **404 Page** — "This page has been wrapped" + explore CTA
 
@@ -607,7 +605,6 @@ Header, footer, WhatsApp widget, About page, Customisation page, Quote page, leg
 1 image             → disable gallery controls
 no FAQ              → hide FAQ section
 no related          → hide Related section
-no occasion tags    → hide Perfect For
 no collection tag   → hide hero badge
 no material         → omit Material spec row
 no response time    → omit Response Time row
@@ -689,7 +686,7 @@ LCP < 2.5s · CLS < 0.1 · INP < 200ms (see build.md §22)
 
 **Known debt (v1):** testimonials placeholder, client logo wall, advanced search, AI Gift Finder, saved collections, Gift Builder.
 
-**Future Components:** Search · Filters · Sort · Pagination · Statistics · Timeline · Announcement Bar · Gift Builder · AI Concierge
+**Future Components:** Search · Pagination · Statistics · Timeline · Announcement Bar · Gift Builder · AI Concierge
 
 **Versioned Roadmap:**
 - **v1.0** — Editorial showroom with mock data
@@ -712,7 +709,7 @@ LCP < 2.5s · CLS < 0.1 · INP < 200ms (see build.md §22)
 | `SEO Description` | `seoDescription` | meta description *(Phase 2)* |
 | `Parent Category` | `parentCategory` | Breadcrumb fallback |
 | `Category` | `category` | Breadcrumb fallback + Planning row |
-| `Occasion Tags` | `occasionTags[]` | Perfect For |
+| `Occasion Tags` | `occasionTags[]` | Not currently rendered (Perfect For block removed) — still returned by the API |
 | `Curated Gift Tags` | `collectionTag` | Collection badge + breadcrumb + Planning |
 | `Product Tags` | `productTags[]` | Hero premium chips |
 | `MOQ` | `moq` | Quick facts + Planning row |
@@ -782,8 +779,6 @@ A constrained icon system — not decorative illustration.
 - **Sizes:** 24px (default), 20px (compact), 16px (inline)
 - **Stroke:** 1.75px
 - **Style:** Outline only — no filled, no duotone, no emoji in chrome, no decorative icons
-
-**Exception:** "Perfect For" cards use elegant emoji glyphs as editorial accents.
 
 ---
 

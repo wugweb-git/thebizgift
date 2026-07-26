@@ -2095,18 +2095,306 @@ body.modal-open {
   flex-wrap: wrap;
 }
 
-/* Explore Sections — shared layout */
-.explore-occasions,
-.explore-collections,
-.explore-selected {
-  padding: 8rem var(--space-layout);
+/* Explore Catalog — sidebar filters + toolbar + product grid
+   (styleguide has no prior art for this; built from existing tokens only) */
+.explore-catalog {
+  padding: 6rem var(--space-layout) 8rem;
 }
 
-.explore-occasions .container,
-.explore-collections .container,
-.explore-selected .container {
+.explore-catalog .container {
   max-width: var(--container-max);
   margin: 0 auto;
+}
+
+.explore-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Sidebar — static column ≥901px; off-canvas drawer ≤900px (see media query) */
+.explore-filters {
+  position: sticky;
+  top: 7rem;
+}
+
+.explore-filters-header,
+.explore-filters-close,
+.explore-filters-footer,
+.explore-filters-backdrop,
+.explore-filters-toggle {
+  display: none;
+}
+
+fieldset.explore-filters-group {
+  border: 0;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  min-width: 0;
+}
+
+.explore-filters-group legend {
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+
+.explore-filters-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.explore-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--font-size-small);
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.explore-filter-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.explore-filter-checkbox::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 45% 68%);
+  background: var(--text-light);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.explore-filter-checkbox:checked {
+  background: var(--accent-bronze);
+  border-color: var(--accent-bronze);
+}
+
+.explore-filter-checkbox:checked::after {
+  transform: scale(1);
+}
+
+.explore-filter-checkbox:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(197, 154, 127, 0.25);
+}
+
+/* Toolbar — result count + sort */
+.explore-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.explore-result-count {
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.explore-sort {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.explore-sort label {
+  white-space: nowrap;
+}
+
+.explore-sort select {
+  min-width: 190px;
+}
+
+/* Active filter chips */
+.explore-active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.explore-active-filters:empty {
+  display: none;
+  margin-bottom: 0;
+}
+
+.tag-chip--removable {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--warm-beige);
+  border: none;
+  color: var(--text-dark);
+}
+
+.tag-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.tag-chip-remove:hover {
+  color: var(--accent-copper);
+}
+
+@media (max-width: 1100px) {
+  .explore-shell {
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .explore-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .explore-filters-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--accent-bronze);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--accent-copper);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+  }
+
+  .explore-filters-toggle-count {
+    background: var(--accent-bronze);
+    color: var(--text-light);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-overline);
+    padding: 0.1rem 0.5rem;
+  }
+
+  .explore-filters-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 13, 11, 0.55);
+    z-index: calc(var(--z-drawer) - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .explore-filters-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .explore-filters {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(360px, 86vw);
+    background: var(--surface-white);
+    z-index: var(--z-drawer);
+    padding: 1.5rem var(--space-layout) 2rem;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s var(--ease-standard);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .explore-filters.is-open {
+    transform: translateX(0);
+  }
+
+  .explore-filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .explore-filters-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    color: var(--text-dark);
+    cursor: pointer;
+  }
+
+  .explore-filters-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .explore-filters-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    margin-top: auto;
+  }
+
+  .explore-filters-footer .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* .btn-action's own display:inline-flex (style.css) has equal specificity
+     to the UA [hidden] rule and, as an author rule, wins the cascade --
+     without this override a hidden Clear-All button stays visible. */
+  .explore-filters-footer .btn-action[hidden] {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .explore-sort {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-catalog {
+    padding: 4rem var(--space-layout) 5rem;
+  }
 }
 
 /* Homepage section wrappers — matches the 6rem vertical rhythm used by
@@ -2470,6 +2758,10 @@ body.modal-open {
   gap: 2.5rem;
 }
 
+.selected-grid[hidden] {
+  display: none;
+}
+
 .selected-card:hover {
   transform: translateY(-8px);
 }
@@ -2603,9 +2895,6 @@ body.modal-open {
     font-size: var(--font-size-h3);
   }
 
-  .explore-occasions,
-  .explore-collections,
-  .explore-selected,
   .explore-customisation {
     padding: 5rem var(--space-layout);
   }

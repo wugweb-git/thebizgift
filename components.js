@@ -209,6 +209,23 @@ const CATEGORY_ICON_PATHS = {
 };
 const CATEGORY_ICON_FALLBACK = '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>';
 
+// Collection icon paths, mirroring CATEGORY_ICON_PATHS above -- collections
+// are generic groupings (Best Sellers, Budget, etc.) rather than real
+// products, so they get a symbolic icon instead of a photo. Keyed by
+// Airtable slug; unknown slugs fall back to the same generic glyph.
+const COLLECTION_ICON_PATHS = {
+  'new-arrivals': '<path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/>',
+  'best-sellers': '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+  'premium-picks': '<path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/>',
+  'budget-gifting': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+  'trending-products': '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  'sustainable-choices': '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-11 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  'staff-favorites': '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  'under-500': '<line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+  'minimalist-gifts': '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>',
+  'budget': '<path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>'
+};
+
 function initTaxonomyNav() {
   if (window.TBG_IS_LOCAL) return;
 
@@ -218,22 +235,22 @@ function initTaxonomyNav() {
     return scratch.innerHTML;
   };
 
-  const svg = (slug) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
-    (CATEGORY_ICON_PATHS[slug] || CATEGORY_ICON_FALLBACK) + '</svg>';
+  const svg = (slug, iconPaths) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
+    (iconPaths[slug] || CATEGORY_ICON_FALLBACK) + '</svg>';
 
-  const renderLinks = (items, linkClass, withIcons) => items.map((item) => {
+  const renderLinks = (items, linkClass, iconPaths) => items.map((item) => {
     const name = escapeHtml(item.name);
     const slug = escapeHtml(item.slug);
-    var marker = withIcons ? '<span class="mega-link-icon">' + svg(item.slug) + '</span>' : '<span class="mega-link-dot"></span>';
-    var cls = linkClass ? ' class="' + linkClass + (withIcons ? ' mobile-sub-link--icon' : '') + '"' : '';
-    var prefix = linkClass ? (withIcons ? svg(item.slug) : '') : marker;
+    var marker = iconPaths ? '<span class="mega-link-icon">' + svg(item.slug, iconPaths) + '</span>' : '<span class="mega-link-dot"></span>';
+    var cls = linkClass ? ' class="' + linkClass + (iconPaths ? ' mobile-sub-link--icon' : '') + '"' : '';
+    var prefix = linkClass ? (iconPaths ? svg(item.slug, iconPaths) : '') : marker;
     return '<a href="/explore/#' + slug + '"' + cls + '>' + prefix + name + '</a>';
   }).join('');
 
   const targets = [
-    { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks', icons: true },
+    { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks', iconPaths: CATEGORY_ICON_PATHS },
     { endpoint: '/api/get-occasions', mega: 'megaOccasionLinks', mobile: 'mobileOccasionLinks' },
-    { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', megaSuffix: '<a href="/explore/#collections"><span class="mega-link-dot"></span>View All →</a>' }
+    { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', iconPaths: COLLECTION_ICON_PATHS, megaSuffix: '<a href="/explore/#collections"><span class="mega-link-dot"></span>View All →</a>' }
   ];
 
   targets.forEach((t) => {
@@ -245,8 +262,8 @@ function initTaxonomyNav() {
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('bad status'))))
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) return;
-        if (megaEl) megaEl.innerHTML = renderLinks(items, null, t.icons) + (t.megaSuffix || '');
-        if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link', t.icons);
+        if (megaEl) megaEl.innerHTML = renderLinks(items, null, t.iconPaths) + (t.megaSuffix || '');
+        if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link', t.iconPaths);
       })
       .catch(() => { /* leave the static fallback links in place */ });
   });

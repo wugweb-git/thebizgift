@@ -509,98 +509,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. PERFECT FOR (occasion + collection overlay cards, left-aligned)
-   -------------------------------------------------------------------------- */
-.hamper-perfect {
-  padding: 6rem var(--space-layout);
-  background-color: var(--text-light);
-}
-
-.hamper-perfect-group {
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.hamper-perfect-cards {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
-}
-
-.hamper-perfect-card-overlay {
-  position: relative;
-  display: block;
-  flex: 0 0 260px;
-  scroll-snap-align: start;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--hamper-card-radius);
-  overflow: hidden;
-  text-decoration: none;
-  transition: transform 0.4s var(--ease-standard);
-}
-
-.hamper-perfect-card-overlay:hover {
-  transform: translateY(-6px);
-}
-
-.hamper-perfect-card-overlay-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-premium);
-}
-
-.hamper-perfect-card-overlay:hover .hamper-perfect-card-overlay-img {
-  transform: scale(1.05);
-}
-
-.hamper-perfect-card-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15, 13, 11, 0) 45%, rgba(15, 13, 11, 0.85) 100%);
-}
-
-.hamper-perfect-card-overlay-title {
-  position: absolute;
-  left: 1.25rem;
-  right: 3.5rem;
-  bottom: 1.25rem;
-  z-index: 1;
-  color: var(--text-light);
-  font-family: var(--font-serif);
-  font-size: var(--font-size-subtitle);
-  font-weight: 500;
-  line-height: 1.25;
-  text-align: left;
-}
-
-.hamper-perfect-card-overlay-arrow {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 1;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  color: var(--accent-copper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 480px) {
-  .hamper-perfect-card-overlay {
-    flex-basis: 210px;
-  }
-}
-
-/* --------------------------------------------------------------------------
    7. FAQ ACCORDION
    -------------------------------------------------------------------------- */
 /* Hamper FAQ — extends canonical .faq-* (style.css §2c) */
@@ -1205,10 +1113,6 @@
     gap: 3rem;
   }
 
-  .hamper-perfect-grid {
-    gap: 1rem;
-  }
-
   .hamper-related-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1303,19 +1207,6 @@
 
   .hamper-planning-row-value {
     font-size: var(--font-size-small);
-  }
-
-  /* Perfect For */
-  .hamper-perfect {
-    padding: 4rem var(--space-layout);
-  }
-
-  .hamper-perfect-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hamper-perfect-card {
-    padding: 1.25rem;
   }
 
   /* FAQ */

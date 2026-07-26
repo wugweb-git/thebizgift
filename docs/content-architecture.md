@@ -281,7 +281,6 @@ Occasion ──< contains >───┘
 | Product has 1 image in gallery | Disable prev/next arrows |
 | Product has no FAQ | Hide FAQ section |
 | Product has no related | Hide "You May Also Like" |
-| Product has no occasion tags | Hide "Perfect For" |
 | Collection/Occasion has 0 products | Show empty state with explore link |
 | Airtable API timeout | Error panel with retry + WhatsApp CTA |
 | Image fails to load | Replace with placeholder SVG |
