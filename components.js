@@ -268,10 +268,20 @@ function initTaxonomyNav() {
     return '<a href="/explore/#' + slug + '"' + cls + '>' + prefix + name + '</a>';
   }).join('');
 
+  // Occasions get a photo-thumbnail row in the mega menu (per-occasion Hero
+  // Image from Airtable, see get-occasions.js) instead of an icon/dot --
+  // the mobile nav keeps the plain text list via renderLinks() above.
+  const renderThumbLinks = (items) => items.map((item) => {
+    const name = escapeHtml(item.name);
+    const slug = escapeHtml(item.slug);
+    const img = escapeHtml(item.image || '/image/placeholder.png');
+    return '<a href="/explore/#' + slug + '" class="mega-link-thumb"><span class="mega-thumb-img"><img src="' + img + '" alt="" loading="lazy"></span><span class="mega-thumb-label">' + name + '</span><span class="mega-thumb-arrow">→</span></a>';
+  }).join('');
+
   const targets = [
     { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks', iconPaths: CATEGORY_ICON_PATHS },
-    { endpoint: '/api/get-occasions', mega: 'megaOccasionLinks', mobile: 'mobileOccasionLinks' },
-    { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', iconPaths: COLLECTION_ICON_PATHS, megaSuffix: '<a href="/explore/#collections"><span class="mega-link-dot"></span>View All →</a>' }
+    { endpoint: '/api/get-occasions', mega: 'megaOccasionLinks', mobile: 'mobileOccasionLinks', thumb: true },
+    { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', iconPaths: COLLECTION_ICON_PATHS }
   ];
 
   targets.forEach((t) => {
@@ -283,7 +293,9 @@ function initTaxonomyNav() {
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('bad status'))))
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) return;
-        if (megaEl) megaEl.innerHTML = renderLinks(items, null, t.iconPaths) + (t.megaSuffix || '');
+        // The "View All" link sits outside #mega*Links as its own footer
+        // line (see header.html), so only the item list itself is replaced.
+        if (megaEl) megaEl.innerHTML = t.thumb ? renderThumbLinks(items) : renderLinks(items, null, t.iconPaths);
         if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link', t.iconPaths);
       })
       .catch(() => { /* leave the static fallback links in place */ });
