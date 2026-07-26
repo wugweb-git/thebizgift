@@ -521,19 +521,6 @@
   margin: 0 auto;
 }
 
-.hamper-perfect-group + .hamper-perfect-group {
-  margin-top: 3rem;
-}
-
-.hamper-perfect-group-title {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-subtitle);
-  font-weight: 500;
-  color: var(--text-dark);
-  margin: 0 0 1.25rem;
-  text-align: left;
-}
-
 .hamper-perfect-cards {
   display: flex;
   gap: 1.25rem;
@@ -767,33 +754,29 @@
 }
 
 /* --------------------------------------------------------------------------
-   9. PROPOSAL / CUSTOMISATION (Split)
+   9. PROPOSAL / CUSTOMISATION (styleguide.html #quote .quote-form —
+      single warm-beige card, form + pills on the left, full-bleed image
+      on the right)
    -------------------------------------------------------------------------- */
 .hamper-proposal {
-  padding: 0;
-  background-color: var(--bg-charcoal);
-  color: var(--text-light);
+  padding: 6rem var(--space-layout);
+  background-color: var(--bg-ivory);
 }
 
-.hamper-proposal-grid {
+.hamper-proposal-card {
+  max-width: 1300px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 550px;
-}
-
-/* Left: Editorial — styleguide.html .pdp-sidebar-cta warm-beige card treatment */
-.hamper-proposal-editorial {
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 480px;
-  margin: 2.5rem 2rem 2.5rem auto;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: center;
   background: var(--warm-beige);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-2xl);
+  padding: 4rem;
+  overflow: hidden;
 }
 
-.hamper-proposal-editorial h2 {
+.hamper-proposal-content h2 {
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
   font-weight: 600;
@@ -802,62 +785,29 @@
   color: var(--text-dark);
 }
 
-.hamper-proposal-editorial > p {
+.hamper-proposal-content > p {
   font-size: 14px;
   color: var(--text-muted);
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.hamper-proposal-highlights {
+.hamper-proposal-pills {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.625rem;
   margin-bottom: 2rem;
 }
 
-.hamper-proposal-highlight {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 14px;
-  color: var(--text-dark);
-  font-weight: 400;
-}
-
-.hamper-proposal-highlight .check-icon {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: rgba(197, 154, 127, 0.15);
-  color: var(--accent-bronze);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hamper-proposal-highlight .check-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* Right: Form */
-.hamper-proposal-form-wrapper {
-  padding: 5rem 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 520px;
-  margin-right: auto;
-  width: 100%;
+.hamper-proposal-visual {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background-size: cover;
+  background-position: center;
 }
 
 .hamper-proposal-form {
-  background: var(--surface-white);
-  padding: 2.5rem;
-  border-radius: var(--hamper-card-radius);
   text-align: left;
 }
 
@@ -1263,21 +1213,14 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .hamper-proposal-grid {
+  .hamper-proposal-card {
     grid-template-columns: 1fr;
+    padding: 2.5rem;
   }
 
-  .hamper-proposal-editorial {
-    max-width: 100%;
-    margin: 0;
-    padding: 4rem var(--space-layout) 2rem;
-    border-radius: 0;
-  }
-
-  .hamper-proposal-form-wrapper {
-    max-width: 100%;
-    margin: 0;
-    padding: 0 var(--space-layout) 4rem;
+  .hamper-proposal-visual {
+    order: -1;
+    aspect-ratio: 16 / 9;
   }
 
   .hamper-planning-editorial p {
@@ -1416,20 +1359,16 @@
   }
 
   /* Proposal */
-  .hamper-proposal-editorial {
-    padding: 3rem var(--space-layout) 1.5rem;
+  .hamper-proposal {
+    padding: 4rem var(--space-layout);
   }
 
-  .hamper-proposal-editorial h2 {
-    font-size: var(--font-size-h4);
-  }
-
-  .hamper-proposal-form-wrapper {
-    padding: 0 var(--space-layout) 3rem;
-  }
-
-  .hamper-proposal-form {
+  .hamper-proposal-card {
     padding: 1.5rem;
+  }
+
+  .hamper-proposal-content h2 {
+    font-size: var(--font-size-h4);
   }
 
   .hamper-proposal-form .form-row {

@@ -514,23 +514,9 @@
       return '/explore/#' + encodeURIComponent(col.slug || '');
     });
 
-    var groups = '';
-    if (occasionCards) {
-      groups += (
-        '<div class="hamper-perfect-group">' +
-          '<h3 class="hamper-perfect-group-title">Occasions</h3>' +
-          '<div class="hamper-perfect-cards">' + occasionCards + '</div>' +
-        '</div>'
-      );
-    }
-    if (collectionCards) {
-      groups += (
-        '<div class="hamper-perfect-group">' +
-          '<h3 class="hamper-perfect-group-title">Collections</h3>' +
-          '<div class="hamper-perfect-cards">' + collectionCards + '</div>' +
-        '</div>'
-      );
-    }
+    // Occasions and collections render as one combined row, sharing the
+    // same card treatment -- no separate sub-headings.
+    var allCards = occasionCards + collectionCards;
 
     return (
       '<section class="hamper-perfect hamper-reveal" aria-label="Perfect For">' +
@@ -539,7 +525,9 @@
             '<h2>Perfect For</h2>' +
             '<p class="section-intro">This hamper is designed for the following gifting scenarios and collections.</p>' +
           '</div>' +
-          groups +
+          '<div class="hamper-perfect-group">' +
+            '<div class="hamper-perfect-cards">' + allCards + '</div>' +
+          '</div>' +
         '</div>' +
       '</section>'
     );
@@ -584,23 +572,21 @@
 
   // --- 09 Proposal / Customisation (merged split) ---
   function buildProposalSection(p) {
+    var heroImg = (p.images && p.images.length > 0) ? p.images[0].url : CONFIG.FALLBACK_IMAGE;
     return (
       '<section class="hamper-proposal" id="hamper-proposal" aria-label="Request a Proposal">' +
-        '<div class="hamper-proposal-grid">' +
-          // Left: Editorial
-          '<div class="hamper-proposal-editorial">' +
+        '<div class="container">' +
+        '<div class="hamper-proposal-card">' +
+          // Left: heading, description, pills, form
+          '<div class="hamper-proposal-content">' +
             '<h2>Interested in this hamper?</h2>' +
             '<p>Let\'s create a version tailored to your organisation. Our team can customise branding, packaging, inserts and quantities for your requirements.</p>' +
-            '<div class="hamper-proposal-highlights">' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.2H4a1 1 0 0 0-1 1v5.59a2 2 0 0 0 .59 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span> Branding</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg></span> Packaging</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span> Bulk Orders</div>' +
-              '<div class="hamper-proposal-highlight"><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span> Dedicated Account Support</div>' +
+            '<div class="hamper-proposal-pills">' +
+              '<span class="tag-chip tag-chip--outline">Branding</span>' +
+              '<span class="tag-chip tag-chip--outline">Packaging</span>' +
+              '<span class="tag-chip tag-chip--outline">Bulk Orders</span>' +
+              '<span class="tag-chip tag-chip--outline">Dedicated Account Support</span>' +
             '</div>' +
-          '</div>' +
-
-          // Right: Form
-          '<div class="hamper-proposal-form-wrapper">' +
             '<form class="hamper-proposal-form" id="proposal-form" novalidate>' +
               '<input type="hidden" name="productName" value="' + escapeHtml(p.name) + '">' +
               '<input type="hidden" name="productUrl" value="' + escapeHtml(window.location.href) + '">' +
@@ -677,6 +663,8 @@
               '</a>' +
             '</div>' +
           '</div>' +
+          '<div class="hamper-proposal-visual" style="background-image:url(\'' + heroImg + '\')"></div>' +
+        '</div>' +
         '</div>' +
       '</section>'
     );
