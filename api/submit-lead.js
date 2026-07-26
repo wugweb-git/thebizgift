@@ -131,17 +131,23 @@ module.exports = async function handler(req, res) {
   }
 
   var fields = buildFields(body);
+  var type = (body.type || '').toLowerCase();
 
-  // Minimum viable lead: name, company, phone, and a valid email address.
-  if (!fields.Name) {
-    res.status(400).json({ error: 'Your name is required.' });
-    return;
+  // Required fields mirror each form's own client-side validation:
+  //  - quote.html requires fullName, companyName, phoneNumber, workEmail
+  //  - the hamper PDP proposal form requires name, company, email but leaves phone optional
+  //  - the newsletter form only collects email
+  if (type !== 'newsletter') {
+    if (!fields.Name) {
+      res.status(400).json({ error: 'Your name is required.' });
+      return;
+    }
+    if (!fields.Company) {
+      res.status(400).json({ error: 'Company name is required.' });
+      return;
+    }
   }
-  if (!fields.Company) {
-    res.status(400).json({ error: 'Company name is required.' });
-    return;
-  }
-  if (!fields.Phone) {
+  if (type === 'quote' && !fields.Phone) {
     res.status(400).json({ error: 'A phone number is required.' });
     return;
   }
