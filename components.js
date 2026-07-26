@@ -54,6 +54,7 @@ window.TBG_IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location
     initMobileMenu();
     initDropdowns();
     initNewsletter();
+    initTaxonomyNav();
   });
 })();
 
@@ -182,13 +183,13 @@ function initMobileMenu() {
     document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
   });
 
-  // Close on link click
-  overlay.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      toggle.classList.remove('active');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+  // Close on link click — delegated so links injected later (live taxonomy
+  // fetch replacing the static fallback) close the overlay too.
+  overlay.addEventListener('click', (e) => {
+    if (!e.target.closest('a')) return;
+    toggle.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
   });
 }
 
@@ -238,5 +239,49 @@ function initDropdowns() {
         panel.querySelector('a')?.focus();
       }
     });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   TAXONOMY NAV — mega menu + mobile nav Category/Occasion/Collections lists,
+   fetched live from Airtable in production so unpublishing a record there
+   removes it from the nav too. On localhost (or if the API errors), the
+   static fallback links already in header.html are left in place.
+   -------------------------------------------------------------------------- */
+function initTaxonomyNav() {
+  if (window.TBG_IS_LOCAL) return;
+
+  const scratch = document.createElement('div');
+  const escapeHtml = (str) => {
+    scratch.textContent = str == null ? '' : String(str);
+    return scratch.innerHTML;
+  };
+
+  const renderLinks = (items, linkClass) => items.map((item) => {
+    const name = escapeHtml(item.name);
+    const dot = linkClass ? '' : '<span class="mega-link-dot"></span>';
+    const cls = linkClass ? ' class="' + linkClass + '"' : '';
+    return '<a href="/explore/#' + escapeHtml(item.slug) + '"' + cls + '>' + dot + name + '</a>';
+  }).join('');
+
+  const targets = [
+    { endpoint: '/api/get-categories', mega: 'megaCategoryLinks', mobile: 'mobileCategoryLinks' },
+    { endpoint: '/api/get-occasions', mega: 'megaOccasionLinks', mobile: 'mobileOccasionLinks' },
+    { endpoint: '/api/get-collections', mega: 'megaCollectionLinks', mobile: 'mobileCollectionLinks', megaSuffix: '<a href="/explore/#collections"><span class="mega-link-dot"></span>View All →</a>' }
+  ];
+
+  targets.forEach((t) => {
+    const megaEl = document.getElementById(t.mega);
+    const mobileEl = document.getElementById(t.mobile);
+    if (!megaEl && !mobileEl) return;
+
+    fetch(t.endpoint)
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('bad status'))))
+      .then((items) => {
+        if (!Array.isArray(items) || items.length === 0) return;
+        if (megaEl) megaEl.innerHTML = renderLinks(items, null) + (t.megaSuffix || '');
+        if (mobileEl) mobileEl.innerHTML = renderLinks(items, 'mobile-sub-link');
+      })
+      .catch(() => { /* leave the static fallback links in place */ });
   });
 }

@@ -359,7 +359,8 @@ Field names below match `api/get-hamper.js` and `api/get-featured-hampers.js` ex
 | `CTA Button Label` | Single line text | No | — |
 | `SEO Title` | Single line text | No | Phase 2 — `<title>` override |
 | `SEO Description` | Long text | No | Phase 2 — meta description |
-| `Website Ready` | Checkbox | Yes | Controls visibility on site — gates the `filterByFormula` query in both `api/get-hamper.js` and `api/get-featured-hampers.js` |
+| `Published` | Checkbox | Yes | Controls visibility on site — gates the `filterByFormula` query in both `api/get-hamper.js` and `api/get-featured-hampers.js` |
+| `Website Ready` | Checkbox | No | Stricter completeness gate (Published + all required fields filled); not currently used by the live API — `Published` is the source of truth |
 | `Featured on Homepage` | Checkbox | No | Appears in homepage Selected Gifts |
 | `Created` | Created time | Auto | — |
 | `Updated` | Last modified time | Auto | — |

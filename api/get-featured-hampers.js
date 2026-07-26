@@ -10,9 +10,10 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // URL encoding the filter to only pull products the client marked as ready
+  // Published is the source of truth for live visibility (Website Ready is a
+  // stricter completeness gate that under-counts otherwise-complete products).
   var TABLE_NAME = 'Products';
-  var FILTER = encodeURIComponent('{Website Ready}=TRUE()');
+  var FILTER = encodeURIComponent('{Published}=TRUE()');
 
   if (!AIRTABLE_API_KEY || !BASE_ID) {
     res.status(500).json({ error: 'Server configuration error' });

@@ -311,10 +311,11 @@ module.exports = async function handler(req, res) {
 
   try {
     // Fetch ALL products (needed for related algorithm)
-    // We use a filter to only get Website Ready products
-    var filterFormula = encodeURIComponent('{Website Ready}=TRUE()');
-    var url = 'https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_NAME + 
-              '?filterByFormula=' + filterFormula + '&maxRecords=100';
+    // Published is the source of truth for live visibility (Website Ready is a
+    // stricter completeness gate that under-counts otherwise-complete products).
+    var filterFormula = encodeURIComponent('{Published}=TRUE()');
+    var url = 'https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_NAME +
+              '?filterByFormula=' + filterFormula + '&maxRecords=200';
 
     var response = await fetch(url, {
       headers: {

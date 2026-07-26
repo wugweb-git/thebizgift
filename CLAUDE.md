@@ -95,7 +95,7 @@ On localhost, product pages render from built-in mock data and forms simulate su
 
 ## Airtable Integration
 
-- **Status:** Products, Occasions, Collections, and Categories are live-synced (read-only, gated on each table's `Published`/`Website Ready` flag). FAQs are not yet wired up — see content-architecture.md §15.
+- **Status:** Products, Occasions, Collections, and Categories are live-synced (read-only, gated on each table's `Published` flag). FAQs are not yet wired up — see content-architecture.md §15.
 - **Base ID:** Set as `AIRTABLE_BASE_ID` env var in Vercel (`appG2IVjN168FLoqT`)
 - **API Key:** Set as `AIRTABLE_API_KEY` env var in Vercel (PAT) — must have read access to Products, Occasions, Collections, Category, and Leads
 - **Tables:** Products, Collections, Occasions, Category, Sub Category, FAQs, Leads
