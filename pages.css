@@ -2183,16 +2183,23 @@ body.modal-open {
   }
 }
 
-/* Collection Tag Row (styleguide.html #taxonomy-tags .tag-chip) */
+/* Collection Tag Row (styleguide.html #taxonomy-tags .tag-chip) —
+   horizontal-scroll row, matching .category-scroll immediately below it. */
 .collection-tag-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 0.75rem;
   margin-bottom: 4rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
 }
 
 .tag-chip {
   display: inline-block;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  white-space: nowrap;
   padding: 0.6rem 1.25rem;
   border-radius: var(--radius-full);
   font-size: var(--font-size-small);
