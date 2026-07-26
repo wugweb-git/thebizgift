@@ -57,6 +57,23 @@ window.TBG_IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', ''].indexOf(location
 })();
 
 /* --------------------------------------------------------------------------
+   CLICKABLE PRODUCT CARDS — clicking anywhere on a .selected-card (product
+   grid card, explore/index.html + index.html) navigates to the product via
+   its own arrow link, not just the small arrow button. Real interactive
+   elements inside the card (the arrow link itself, the wishlist button)
+   keep their native click behavior and are excluded here. Delegated on
+   document so it covers cards rendered statically and those swapped in
+   later by a page's own fetch -- no per-page wiring needed.
+   -------------------------------------------------------------------------- */
+document.addEventListener('click', (e) => {
+  if (e.target.closest('a, button')) return;
+  const card = e.target.closest('.selected-card');
+  if (!card) return;
+  const link = card.querySelector('.selected-card-arrow');
+  if (link && link.href) window.location.href = link.href;
+});
+
+/* --------------------------------------------------------------------------
    HEADER SCROLL STATE
    -------------------------------------------------------------------------- */
 function initHeaderScroll() {
@@ -208,6 +225,10 @@ const CATEGORY_ICON_PATHS = {
   'combo': '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/>'
 };
 const CATEGORY_ICON_FALLBACK = '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>';
+
+// Exposed so other same-page scripts (e.g. index.html's homepage category
+// scroll) can reuse the same icon set instead of duplicating it.
+window.TBG_CATEGORY_ICONS = { paths: CATEGORY_ICON_PATHS, fallback: CATEGORY_ICON_FALLBACK };
 
 // Collection icon paths, mirroring CATEGORY_ICON_PATHS above -- collections
 // are generic groupings (Best Sellers, Budget, etc.) rather than real

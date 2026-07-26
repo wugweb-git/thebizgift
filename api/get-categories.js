@@ -57,6 +57,16 @@ module.exports = async function handler(req, res) {
       };
     });
 
+    // "More" is a catch-all category and should always render last,
+    // regardless of where it falls alphabetically. Stable sort preserves
+    // the existing alphabetical order for everything else.
+    categories.sort(function (a, b) {
+      var aMore = a.slug === 'more';
+      var bMore = b.slug === 'more';
+      if (aMore === bMore) return 0;
+      return aMore ? 1 : -1;
+    });
+
     res.status(200).json(categories);
   } catch (error) {
     console.error(error);

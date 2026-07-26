@@ -357,6 +357,7 @@ Field names below match `api/get-hamper.js` and `api/get-featured-hampers.js` ex
 | `Published` | Checkbox | Yes | Controls visibility on site — gates the `filterByFormula` query in both `api/get-hamper.js` and `api/get-featured-hampers.js` |
 | `Website Ready` | Checkbox | No | Stricter completeness gate (Published + all required fields filled); not currently used by the live API — `Published` is the source of truth |
 | `Featured on Homepage` | Checkbox | No | Appears in homepage Selected Gifts |
+| `Priority` | Number | No | Manual sort order among Featured on Homepage hampers — lower number shows first; blank sorts after all prioritized hampers (see `api/get-featured-hampers.js`) |
 | `Created` | Created time | Auto | — |
 | `Updated` | Last modified time | Auto | — |
 

@@ -61,16 +61,31 @@ module.exports = async function handler(req, res) {
         seoDesc: record.fields['SEO Description'] || '',
         productCode: record.fields['TBG Product Code'] || '',
         featured: !!record.fields['Featured on Homepage'],
+        // Manual display-order hint set by the site owner in Airtable;
+        // absent for most products (sorted below).
+        priority: (typeof record.fields['Priority'] === 'number') ? record.fields['Priority'] : null,
         // Extract the first image URL safely; Website Image Alt Text is a
         // single field covering the primary image, other filenames are ignored here.
         image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
                ? record.fields['Product Images'][0].url
-               : '/image/placeholder.svg',
+               : '/image/placeholder.png',
         imageAlt: record.fields['Website Image Alt Text'] || record.fields['Product Website Name'] || 'Product image'
       };
     });
 
-    // 3. Send the clean data back to your HTML frontend
+    // 3. Manual Priority (ascending; Priority=1 shows first). Blank-priority
+    // products sort after all prioritized ones and keep their original
+    // Airtable order among themselves -- Array.prototype.sort is stable.
+    formattedHampers.sort(function (a, b) {
+      var aHas = a.priority !== null;
+      var bHas = b.priority !== null;
+      if (aHas && bHas) return a.priority - b.priority;
+      if (aHas) return -1;
+      if (bHas) return 1;
+      return 0;
+    });
+
+    // 4. Send the clean data back to your HTML frontend
     res.status(200).json(formattedHampers);
 
   } catch (error) {

@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
         slug: record.fields['Slug'] || '',
         name: record.fields['Name'] || 'Occasion',
         description: record.fields['Description'] || '',
-        image: (images && images.length > 0) ? images[0].url : '/image/placeholder.svg'
+        image: (images && images.length > 0) ? images[0].url : '/image/placeholder.png'
       };
     });
 

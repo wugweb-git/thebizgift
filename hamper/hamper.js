@@ -20,7 +20,7 @@
     SKELETON_DELAY: 400,
     STAGGER_DELAY: 100,
     GALLERY_INTERVAL: 5000,
-    FALLBACK_IMAGE: '/image/placeholder.svg'
+    FALLBACK_IMAGE: '/image/placeholder.png'
   };
 
   /* -----------------------------------------------------------------------

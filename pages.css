@@ -2762,6 +2762,10 @@ fieldset.explore-filters-group {
   display: none;
 }
 
+.selected-card {
+  cursor: pointer;
+}
+
 .selected-card:hover {
   transform: translateY(-8px);
 }
@@ -2771,7 +2775,8 @@ fieldset.explore-filters-group {
 }
 
 .selected-card h4 {
-  font-size: var(--font-size-subtitle);
+  font-size: var(--font-size-h4);
+  font-weight: 600;
   padding: 1.25rem 2rem 0.5rem;
 }
 
