@@ -474,7 +474,7 @@ Blocks 03 (Product Introduction) and 06 (Make It Yours) were removed from the li
 | Hamper Detail | `hamper/template.html` | 9 | Built |
 | Customisation | `customisation.html` | 10 | Built |
 | Quote | `quote.html` | 6 | Built |
-| Collection Page | `explore/explore.html` | — | Template |
+| Collection Page | — | — | Future |
 | Occasion Page | — | — | Future |
 | Category Page | — | — | Future |
 | Privacy | `privacy.html` | — | Built |
