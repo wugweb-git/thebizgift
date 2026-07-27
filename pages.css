@@ -1398,6 +1398,13 @@ body.modal-open {
   height: 30px;
 }
 
+.testimonial-author-avatar--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .testimonial-card:nth-child(4n+1) .testimonial-author-avatar {
   background: var(--accent-bronze);
   color: #fff;
