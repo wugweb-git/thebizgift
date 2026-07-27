@@ -1386,10 +1386,16 @@ body.modal-open {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   font-family: var(--font-serif);
   font-size: 1.125rem;
   font-weight: 600;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55);
+}
+
+.testimonial-author-avatar svg {
+  width: 30px;
+  height: 30px;
 }
 
 .testimonial-card:nth-child(4n+1) .testimonial-author-avatar {
