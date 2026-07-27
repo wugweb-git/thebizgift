@@ -247,6 +247,23 @@ const COLLECTION_ICON_PATHS = {
   'budget': '<path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>'
 };
 
+// Shared fetch de-duplication: the header (this file) and a page's own body
+// (e.g. explore/index.html) both independently need Category/Occasion/
+// Collection data on the same page load. Without this, that's up to 6+
+// near-simultaneous Airtable calls from a single visit alone, blowing
+// through Airtable's 5 requests/second cap regardless of any other
+// traffic. Concurrent/rapid callers for the same URL now share one
+// in-flight request instead of firing their own.
+window.TBG_fetchJSON = window.TBG_fetchJSON || function (url) {
+  var cache = window.__tbgFetchCache || (window.__tbgFetchCache = {});
+  if (cache[url]) return cache[url];
+  var promise = fetch(url)
+    .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+    .catch(function (err) { delete cache[url]; throw err; });
+  cache[url] = promise;
+  return promise;
+};
+
 function initTaxonomyNav() {
   if (window.TBG_IS_LOCAL) return;
 
@@ -289,8 +306,7 @@ function initTaxonomyNav() {
     const mobileEl = document.getElementById(t.mobile);
     if (!megaEl && !mobileEl) return;
 
-    fetch(t.endpoint)
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('bad status'))))
+    window.TBG_fetchJSON(t.endpoint)
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) return;
         // The "View All" link sits outside #mega*Links as its own footer

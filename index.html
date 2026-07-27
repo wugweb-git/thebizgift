@@ -470,7 +470,7 @@
   <div id="footer-placeholder"></div>
 
 
-  <script src="/components.js?v=3"></script>
+  <script src="/components.js?v=4"></script>
   <script>
     (function() {
       'use strict';
@@ -481,8 +481,7 @@
       var featuredGrid = document.getElementById('featuredHampersGrid');
 
       if (featuredGrid && !IS_LOCAL) {
-        fetch('/api/get-featured-hampers')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+        window.TBG_fetchJSON('/api/get-featured-hampers')
           .then(function (hampers) {
             if (!Array.isArray(hampers) || hampers.length === 0) return;
             var featured = hampers.filter(function (h) { return h.featured; });
@@ -523,8 +522,7 @@
       var occasionGrid = document.getElementById('homeOccasionGrid');
 
       if (occasionGrid && !IS_LOCAL) {
-        fetch('/api/get-occasions')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+        window.TBG_fetchJSON('/api/get-occasions')
           .then(function (occasions) {
             if (!Array.isArray(occasions) || occasions.length === 0) return;
             var div = document.createElement('div');
@@ -555,8 +553,7 @@
       var categoryIcons = window.TBG_CATEGORY_ICONS || { paths: {}, fallback: '' };
 
       if (categoryScroll && !IS_LOCAL) {
-        fetch('/api/get-categories')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+        window.TBG_fetchJSON('/api/get-categories')
           .then(function (categories) {
             if (!Array.isArray(categories) || categories.length === 0) return;
             var div = document.createElement('div');

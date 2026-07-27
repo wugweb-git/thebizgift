@@ -247,7 +247,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="/components.js?v=3"></script>
+  <script src="/components.js?v=4"></script>
   <script>
     (function () {
       'use strict';
@@ -346,8 +346,7 @@
           taxonomy[group] = readFallbackTaxonomy(group);
           return;
         }
-        trackSettle(fetch(GROUP_ENDPOINTS[group])
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+        trackSettle(window.TBG_fetchJSON(GROUP_ENDPOINTS[group])
           .then(function (items) {
             if (!Array.isArray(items) || items.length === 0) { taxonomy[group] = readFallbackTaxonomy(group); return; }
             taxonomy[group] = items.map(function (i) { return { slug: i.slug, name: i.name }; });
@@ -361,8 +360,7 @@
           products = readFallbackProducts();
           return;
         }
-        trackSettle(fetch('/api/get-featured-hampers')
-          .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error('bad status')); })
+        trackSettle(window.TBG_fetchJSON('/api/get-featured-hampers')
           .then(function (hampers) {
             if (!Array.isArray(hampers) || hampers.length === 0) { products = readFallbackProducts(); return; }
             products = hampers.map(function (h) {
