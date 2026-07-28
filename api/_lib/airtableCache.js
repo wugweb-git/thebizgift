@@ -28,7 +28,14 @@
 
 var AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 var BASE_ID = process.env.AIRTABLE_BASE_ID;
-var DEFAULT_TTL_MS = 5 * 60 * 1000; // 5 minutes
+// 25 hours: with the Airtable-webhook push-sync (api/register-airtable-webhook.js
+// + api/cron/refresh-cache.js) as the primary refresh path and the daily
+// Vercel Cron as the worst-case-only backstop, this needs to comfortably
+// outlast a full day between cron runs -- if it were the old 5 minutes, any
+// single missed refresh (a webhook that didn't fire, a transient error)
+// would fall through to a live Airtable call that might still be
+// rate-limited, exactly the fragility this is meant to avoid.
+var DEFAULT_TTL_MS = 25 * 60 * 60 * 1000;
 var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 
 // Optional durable cross-instance buffer (Upstash Redis, plain REST calls --
@@ -91,6 +98,30 @@ async function kvSet(key, value, ttlSeconds) {
   if (!KV_ENABLED) return;
   try {
     await kvCommand(['SET', key, JSON.stringify(value), 'EX', String(ttlSeconds)]);
+  } catch (error) {
+    console.error('airtableCache: KV set failed for ' + key + ':', error.message);
+  }
+}
+
+// Raw (non-JSON, no TTL) get/set for permanent small metadata values -- e.g.
+// api/register-airtable-webhook.js storing the registered Airtable webhook
+// id, and api/cron/refresh-cache.js's attachment-id -> Blob-URL mirror map.
+// Exported so those callers share one KV implementation/env-var resolution
+// instead of each rolling their own.
+async function kvGetRaw(key) {
+  if (!KV_ENABLED) return null;
+  try {
+    return await kvCommand(['GET', key]);
+  } catch (error) {
+    console.error('airtableCache: KV get failed for ' + key + ':', error.message);
+    return null;
+  }
+}
+
+async function kvSetRaw(key, value) {
+  if (!KV_ENABLED) return;
+  try {
+    await kvCommand(['SET', key, value]);
   } catch (error) {
     console.error('airtableCache: KV set failed for ' + key + ':', error.message);
   }
@@ -241,5 +272,8 @@ module.exports = {
   fetchAllRecords: fetchAllRecords,
   getCachedTable: getCachedTable,
   refreshTable: refreshTable,
-  setTable: setTable
+  setTable: setTable,
+  kvGetRaw: kvGetRaw,
+  kvSetRaw: kvSetRaw,
+  isKvEnabled: function () { return KV_ENABLED; }
 };

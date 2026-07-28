@@ -57,56 +57,15 @@ const MIRROR_FIELDS = {
 
 var BLOB_ENABLED = !!process.env.BLOB_READ_WRITE_TOKEN;
 
-// Raw string KV get/set for the attachment-id -> Blob-URL map. Deliberately
-// separate from airtableCache.js's JSON-array-of-records cache: this is a
-// permanent mapping (Airtable attachment ids are stable, so no TTL/eviction
-// needed), not a refreshable table snapshot. Fails open exactly like
-// airtableCache.js's own KV helpers -- any error just means "mirror again",
-// never a hard failure.
-// Accepts either Upstash's own naming or Vercel's native Storage-integration
-// naming (KV_REST_API_*) -- see the matching comment in airtableCache.js.
-var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
-var KV_ENABLED = !!(UPSTASH_URL && UPSTASH_TOKEN);
-
-async function kvCommand(args) {
-  var response = await fetch(UPSTASH_URL, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + UPSTASH_TOKEN, 'Content-Type': 'application/json' },
-    body: JSON.stringify(args)
-  });
-  if (!response.ok) throw new Error('Upstash command failed: ' + response.status);
-  var data = await response.json();
-  if (data.error) throw new Error('Upstash error: ' + data.error);
-  return data.result;
-}
-
-async function getBlobMapping(attachmentId) {
-  if (!KV_ENABLED) return null;
-  try {
-    return await kvCommand(['GET', 'blobmap::' + attachmentId]);
-  } catch (error) {
-    console.error('refresh-cache: blob-map GET failed for ' + attachmentId + ':', error.message);
-    return null;
-  }
-}
-
-async function setBlobMapping(attachmentId, blobUrl) {
-  if (!KV_ENABLED) return;
-  try {
-    await kvCommand(['SET', 'blobmap::' + attachmentId, blobUrl]);
-  } catch (error) {
-    console.error('refresh-cache: blob-map SET failed for ' + attachmentId + ':', error.message);
-  }
-}
-
 // Mirrors one Airtable attachment into Vercel Blob storage, idempotently --
 // if this attachment's id has already been mirrored, the existing Blob URL
 // is reused with no re-download/re-upload. Keyed by attachment id (not
 // record id), which stays stable even if the parent record's other fields
-// change.
+// change. The mapping is permanent (no TTL) -- Airtable attachment ids don't
+// change -- so it uses airtableCache's raw KV helpers rather than the
+// JSON+TTL table cache.
 async function mirrorAttachment(attachment) {
-  var existing = await getBlobMapping(attachment.id);
+  var existing = await airtableCache.kvGetRaw('blobmap::' + attachment.id);
   if (existing) return existing;
 
   var imageResponse = await fetch(attachment.url);
@@ -124,7 +83,7 @@ async function mirrorAttachment(attachment) {
     addRandomSuffix: false
   });
 
-  await setBlobMapping(attachment.id, blob.url);
+  await airtableCache.kvSetRaw('blobmap::' + attachment.id, blob.url);
   return blob.url;
 }
 
@@ -161,7 +120,25 @@ async function mirrorImages(tableName, records) {
   return records;
 }
 
-function isAuthorized(req) {
+// Airtable's own Webhooks API (registered once via
+// api/register-airtable-webhook.js) is separate from the Automations UI's
+// "Send webhook" action -- it's available on every Airtable plan, including
+// ones where Automations' webhook action is gated to Team+. Airtable POSTs
+// a lightweight ping here on any base change: {"base":{"id":...},
+// "webhook":{"id":...},"timestamp":...} -- no record diff, just "something
+// changed, go refresh". Authorized by checking the ping's webhook.id against
+// the one we registered and stored, rather than full HMAC verification of
+// the X-Airtable-Content-MAC header: the worst case of accepting a forged
+// ping is just an extra (harmless, read-only) refresh cycle, so the added
+// complexity of raw-body MAC verification isn't worth it here.
+async function isAirtableWebhookPing(req) {
+  var body = req.body;
+  if (!body || !body.webhook || !body.webhook.id) return false;
+  var registeredId = await airtableCache.kvGetRaw('airtable-webhook::id');
+  return !!registeredId && body.webhook.id === registeredId;
+}
+
+async function isAuthorized(req) {
   var webhookSecret = process.env.WEBHOOK_SECRET;
   var cronSecret = process.env.CRON_SECRET;
 
@@ -172,11 +149,35 @@ function isAuthorized(req) {
   // those plans; the header check above still wins when it's usable.
   if (webhookSecret && req.query && req.query.secret === webhookSecret) return true;
   if (cronSecret && req.headers['authorization'] === 'Bearer ' + cronSecret) return true;
+  if (await isAirtableWebhookPing(req)) return true;
   return false;
 }
 
+// Airtable webhooks created via a personal access token expire after 7 days
+// unless refreshed. Called on every successful trigger (ping, cron, or
+// manual) below -- since the daily Vercel Cron always fires at least once a
+// day, this guarantees the registered webhook never expires even during a
+// stretch with no actual Airtable edits, without needing its own separate
+// schedule. Best-effort: a failure here doesn't fail the refresh itself.
+async function keepWebhookAlive() {
+  var webhookId = await airtableCache.kvGetRaw('airtable-webhook::id');
+  if (!webhookId) return;
+  try {
+    var url = 'https://api.airtable.com/v0/bases/' + process.env.AIRTABLE_BASE_ID + '/webhooks/' + webhookId + '/refresh';
+    var response = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + process.env.AIRTABLE_API_KEY }
+    });
+    if (!response.ok) {
+      console.error('refresh-cache: webhook keep-alive refresh failed:', response.status);
+    }
+  } catch (error) {
+    console.error('refresh-cache: webhook keep-alive refresh failed:', error.message);
+  }
+}
+
 async function handler(req, res) {
-  if (!isAuthorized(req)) {
+  if (!(await isAuthorized(req))) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -197,6 +198,8 @@ async function handler(req, res) {
       console.error('refresh-cache: failed to refresh ' + t.name + ':', error.message);
     }
   }
+
+  await keepWebhookAlive();
 
   res.status(hadError ? 207 : 200).json({ refreshedAt: new Date().toISOString(), results: results });
 }
