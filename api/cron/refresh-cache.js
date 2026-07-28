@@ -63,8 +63,10 @@ var BLOB_ENABLED = !!process.env.BLOB_READ_WRITE_TOKEN;
 // needed), not a refreshable table snapshot. Fails open exactly like
 // airtableCache.js's own KV helpers -- any error just means "mirror again",
 // never a hard failure.
-var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
-var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+// Accepts either Upstash's own naming or Vercel's native Storage-integration
+// naming (KV_REST_API_*) -- see the matching comment in airtableCache.js.
+var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 var KV_ENABLED = !!(UPSTASH_URL && UPSTASH_TOKEN);
 
 async function kvCommand(args) {
@@ -164,6 +166,11 @@ function isAuthorized(req) {
   var cronSecret = process.env.CRON_SECRET;
 
   if (webhookSecret && req.headers['x-webhook-secret'] === webhookSecret) return true;
+  // Fallback for Airtable plans/UIs whose Automation "Send webhook" action
+  // doesn't expose custom headers -- only a plain URL. Less ideal (the
+  // secret can end up in logs/history) but the only option available on
+  // those plans; the header check above still wins when it's usable.
+  if (webhookSecret && req.query && req.query.secret === webhookSecret) return true;
   if (cronSecret && req.headers['authorization'] === 'Bearer ' + cronSecret) return true;
   return false;
 }

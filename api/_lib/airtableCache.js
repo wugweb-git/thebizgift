@@ -37,8 +37,15 @@ var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 // integration yet), every KV call below fails open to a no-op/null and this
 // module behaves exactly like the in-memory-only Layer 1/2 cache. This keeps
 // the project's zero-config default intact.
-var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
-var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+//
+// Two naming conventions are accepted: UPSTASH_REDIS_REST_URL/TOKEN (what
+// you get copying values directly from Upstash's own dashboard) and
+// KV_REST_API_URL/TOKEN (what Vercel auto-generates when you attach Upstash
+// via its native Storage integration instead). KV_REST_API_TOKEN is the
+// read-write token -- KV_REST_API_READ_ONLY_TOKEN is intentionally not used
+// here, since this module both reads and writes the buffer.
+var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 var KV_ENABLED = !!(UPSTASH_URL && UPSTASH_TOKEN);
 
 var cacheStore = {}; // key -> { records, fetchedAt, inFlight }
