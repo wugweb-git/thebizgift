@@ -42,6 +42,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const TABLE_NAME = 'Products';
 const applyCors = require('./_lib/cors').applyCors;
+const airtableCache = require('./_lib/airtableCache');
 
 // Helper: safe array access
 function asArray(val) {
@@ -310,31 +311,20 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Fetch ALL products (needed for related algorithm)
+    // Fetch ALL products (needed for related algorithm) -- shared cache key
+    // with get-featured-hampers.js, so on a warm instance whichever endpoint
+    // is hit first within the TTL populates it for the other too. See
+    // airtableCache.js for the pagination-following + stale-on-error logic.
     // Published is the source of truth for live visibility (Website Ready is a
     // stricter completeness gate that under-counts otherwise-complete products).
-    var filterFormula = encodeURIComponent('{Published}=TRUE()');
-    var url = 'https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_NAME +
-              '?filterByFormula=' + filterFormula + '&maxRecords=200';
-
-    var response = await fetch(url, {
-      headers: {
-        Authorization: 'Bearer ' + AIRTABLE_API_KEY
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('Airtable connection failed: ' + response.status);
-    }
-
-    var data = await response.json();
-    if (!data.records || data.records.length === 0) {
+    var records = await airtableCache.getCachedTable(TABLE_NAME, '{Published}=TRUE()');
+    if (!records || records.length === 0) {
       res.status(404).json({ error: 'No products found' });
       return;
     }
 
     // Format all products
-    var allProducts = data.records.map(formatProduct);
+    var allProducts = records.map(formatProduct);
 
     // Find the requested product
     var requestedProduct = null;

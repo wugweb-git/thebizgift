@@ -50,7 +50,11 @@ Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS 
 │   ├── get-collections.js             # Published collections (explore page)
 │   ├── get-categories.js              # Published categories (explore page)
 │   ├── submit-lead.js                 # Quote/proposal leads
-│   └── _lib/cors.js                   # Shared origin allowlist for all api/*.js
+│   ├── cron/refresh-cache.js          # Airtable→cache/KV/Blob push-sync (webhook + cron trigger)
+│   └── _lib/
+│       ├── cors.js                    # Shared origin allowlist for all api/*.js
+│       └── airtableCache.js           # Shared read cache (in-memory + optional KV buffer)
+├── package.json                       # Minimal -- only @vercel/blob, used solely by refresh-cache.js
 ├── explore/                           # Explore hub pages
 │   ├── index.html                     # Main explore hub (7 sections)
 │   └── explore.html                   # Alternate taxonomy template
@@ -67,7 +71,7 @@ Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS 
 ## Key Rules
 
 1. **Site is served from the repo root** — all site files (pages, `style.css`, `api/`, `image/`, components) live at the repo root. Absolute paths (`/style.css`, `/image/...`, `/api/...`) resolve from there. No Vercel "Root Directory" setting is required — this keeps deploys zero-config and transferable to any Vercel account. `docs/` is excluded from deploys via `.vercelignore`.
-2. **No framework** — vanilla HTML/CSS/JS only, no build step
+2. **No framework** — vanilla HTML/CSS/JS only, no build step. One narrow, deliberate exception: `package.json` exists solely so `api/cron/refresh-cache.js` can use `@vercel/blob` (Layer 5 image mirroring, see "Airtable Integration" below). Vercel runs `npm install` for that one dependency; nothing else in the repo depends on it, there is no build/start script, and the site's HTML/CSS/JS is still served exactly as-is, no bundler.
 3. **Airtable integration is Phase 2** — site currently runs on static content and mock data in `hamper.js`
 4. **SEO is out of scope** for the current phase
 5. **Never commit API keys** — Airtable credentials go in Vercel environment variables only
@@ -101,12 +105,36 @@ On localhost, product pages render from built-in mock data and forms simulate su
 - **API endpoints:** `/api/get-featured-hampers.js`, `/api/get-hamper.js`, `/api/get-occasions.js`, `/api/get-collections.js`, `/api/get-categories.js`, `/api/submit-lead.js`
 - **Mock data swap:** `hamper.js` and `explore/index.html` both key off `window.TBG_IS_LOCAL` (set once by `components.js`) — localhost renders static/mock fallback content, production fetches live from Airtable
 
+### Caching / rate-limit architecture
+
+Airtable enforces a **5 requests/second cap per base** (not per caller). The 5 read endpoints above all go through `api/_lib/airtableCache.js` rather than calling Airtable directly, in 3 additive layers — all zero-config by default, each opt-in env var upgrades the next layer without touching endpoint code:
+
+1. **In-memory cache + pagination fix** (always on, no config). Module-scope cache keyed by `table::filter`, ~5 min TTL, with in-flight de-duplication so concurrent callers on the same warm instance share one Airtable fetch. `get-hamper.js` and `get-featured-hampers.js` both read the same `Products` cache key, so they no longer duplicate each other's fetch. Also follows Airtable's `offset` pagination token across pages — Airtable caps each *page* at 100 records regardless of `maxRecords`, so this prevents silent catalog truncation past 100 published rows.
+2. **Stale-on-error** (always on, no config). If a refresh fails (including a 429), the last known-good result is served instead of a 500 — a transient Airtable outage/rate-limit becomes invisible staleness, not a visible error.
+3. **Durable cross-instance buffer** (opt-in via `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`). Without these, the in-memory cache above is the only cache, and each concurrent/cold Vercel instance has its own copy. With an Upstash Redis store attached, all instances share one buffer via plain HTTPS REST calls (no SDK) — the biggest gap the in-memory-only cache can't close on its own. Absent/unreachable → silently falls through to Airtable directly, exactly like layers 1-2 alone.
+
+**Push-based sync** (`api/cron/refresh-cache.js`) proactively keeps the buffer warm so reads almost never fall through to a live Airtable call at all:
+- **Airtable Automation webhook** (primary, real-time) — configure directly in the Airtable base UI: on Products/Category/Occasions/Collections, "record created or updated" → call this endpoint's URL, with a custom header `X-Webhook-Secret: <WEBHOOK_SECRET>`. **This is manual, client-side setup that does not travel with a git clone** — re-create it if the base is ever duplicated.
+- **Vercel Cron** (safety net only) — `vercel.json`'s `crons` entry hits the same endpoint daily, authenticated via Vercel's own auto-injected `Authorization: Bearer <CRON_SECRET>` header (set a `CRON_SECRET` env var to enable). Vercel Cron frequency is plan-tier-gated (Hobby has historically capped it at once/day) — treat this as a coarse reconciliation pass, not the freshness mechanism.
+- Without `WEBHOOK_SECRET` or `CRON_SECRET` set, this endpoint rejects every request (fails closed).
+
+**Image mirroring** (also `refresh-cache.js`, opt-in via `BLOB_READ_WRITE_TOKEN`): every synced Product/Category/Occasion image attachment gets downloaded once and re-uploaded to Vercel Blob storage, with the cached record's `url` rewritten to the permanent Blob URL instead of Airtable's own attachment URL (which isn't meant for long-term hotlinking). Idempotent — an attachment already mirrored (tracked by its stable Airtable attachment id in the KV buffer) is never re-downloaded/re-uploaded. Without `BLOB_READ_WRITE_TOKEN`, this step is skipped and images keep pointing at Airtable directly, same as today.
+
+**New env vars, all optional/opt-in** (site works with none of them set, exactly as before):
+
+| Env var | Enables | Where it comes from |
+|---|---|---|
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Cross-instance buffer | Attach an Upstash Redis integration to the Vercel project |
+| `WEBHOOK_SECRET` | Airtable Automation → sync trigger | Pick any random string; put the same value in the Airtable Automation's custom header config |
+| `CRON_SECRET` | Vercel Cron → sync trigger | Pick any random string; Vercel auto-sends it as `Authorization: Bearer <value>` to cron-triggered requests once set |
+| `BLOB_READ_WRITE_TOKEN` | Image mirroring to Vercel Blob | Attach a Vercel Blob store to the project (auto-injected) |
+
 ## Vercel Deployment
 
 - **Root Directory = repo root (leave blank)** — site files are at the root, so no Root Directory setting is needed. This is intentional: it makes the project transferable to any Vercel account with zero config (import → deploy).
 - Framework Preset = Other (static)
 - Config: `vercel.json` at repo root (security headers, image + CSS/JS caching); `.vercelignore` keeps `docs/` out of the bundle
-- Environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_LEADS_TABLE`
+- Environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_LEADS_TABLE` (required); `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `WEBHOOK_SECRET`, `CRON_SECRET`, `BLOB_READ_WRITE_TOKEN` (all optional, see "Caching / rate-limit architecture" above — the site works with none of these set)
 - **Live:** https://thebizgift.vercel.app
 
 ## Client Migration Checklist

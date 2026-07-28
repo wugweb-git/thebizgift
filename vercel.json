@@ -40,6 +40,15 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-store" }
       ]
+    },
+    {
+      "source": "/api/cron/refresh-cache",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
     }
+  ],
+  "crons": [
+    { "path": "/api/cron/refresh-cache", "schedule": "0 3 * * *" }
   ]
 }

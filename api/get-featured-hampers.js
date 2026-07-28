@@ -1,6 +1,13 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
+const airtableCache = require('./_lib/airtableCache');
+
+// Published is the source of truth for live visibility (Website Ready is a
+// stricter completeness gate that under-counts otherwise-complete products).
+// Shared key with get-hamper.js's own Products fetch -- see airtableCache.js.
+var TABLE_NAME = 'Products';
+var FILTER = '{Published}=TRUE()';
 
 module.exports = async function handler(req, res) {
   applyCors(req, res, 'GET, OPTIONS');
@@ -10,32 +17,17 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Published is the source of truth for live visibility (Website Ready is a
-  // stricter completeness gate that under-counts otherwise-complete products).
-  var TABLE_NAME = 'Products';
-  var FILTER = encodeURIComponent('{Published}=TRUE()');
-
   if (!AIRTABLE_API_KEY || !BASE_ID) {
     res.status(500).json({ error: 'Server configuration error' });
     return;
   }
 
   try {
-    // 1. Make the secure request to Airtable
-    var response = await fetch('https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_NAME + '?filterByFormula=' + FILTER, {
-      headers: {
-        Authorization: 'Bearer ' + AIRTABLE_API_KEY
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('Airtable connection failed');
-    }
-
-    var data = await response.json();
+    // 1. Get the (possibly cached, possibly shared with get-hamper.js) records
+    var records = await airtableCache.getCachedTable(TABLE_NAME, FILTER);
 
     // 2. Map the messy Airtable payload into clean, frontend-ready JSON
-    var formattedHampers = data.records.map(function (record) {
+    var formattedHampers = records.map(function (record) {
       return {
         id: record.id,
         slug: record.fields['website URL Slug'] || 'unknown-product',

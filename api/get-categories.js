@@ -15,6 +15,7 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
+const airtableCache = require('./_lib/airtableCache');
 
 module.exports = async function handler(req, res) {
   applyCors(req, res, 'GET, OPTIONS');
@@ -25,7 +26,7 @@ module.exports = async function handler(req, res) {
   }
 
   const TABLE_NAME = 'Category';
-  const FILTER = encodeURIComponent('{Published}=TRUE()');
+  const FILTER = '{Published}=TRUE()';
 
   if (!AIRTABLE_API_KEY || !BASE_ID) {
     res.status(500).json({ error: 'Server configuration error' });
@@ -33,20 +34,11 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const url = 'https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_NAME +
-      '?filterByFormula=' + FILTER + '&sort%5B0%5D%5Bfield%5D=Name&sort%5B0%5D%5Bdirection%5D=asc';
-
-    const response = await fetch(url, {
-      headers: { Authorization: 'Bearer ' + AIRTABLE_API_KEY }
+    const records = await airtableCache.getCachedTable(TABLE_NAME, FILTER, {
+      extraParams: 'sort%5B0%5D%5Bfield%5D=Name&sort%5B0%5D%5Bdirection%5D=asc'
     });
 
-    if (!response.ok) {
-      throw new Error('Airtable connection failed');
-    }
-
-    const data = await response.json();
-
-    const categories = data.records.map(function (record) {
+    const categories = records.map(function (record) {
       const images = record.fields['Image'];
       return {
         id: record.id,
