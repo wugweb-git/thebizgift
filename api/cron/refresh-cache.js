@@ -208,3 +208,8 @@ async function handler(req, res) {
 // Vercel invokes this as a serverless function.
 module.exports = handler;
 module.exports.mirrorImages = mirrorImages;
+// Exposed so scripts/seed-*-from-csv.js write into the exact same cache key
+// (table + filter + extraParams) this handler itself uses -- one source of
+// truth, no risk of a seed script drifting out of sync with the real sort/
+// filter params and silently seeding a key no read endpoint ever looks at.
+module.exports.TABLES = TABLES;
