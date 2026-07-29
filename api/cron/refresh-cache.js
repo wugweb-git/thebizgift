@@ -1,12 +1,10 @@
 /**
  * api/cron/refresh-cache.js — Vercel Serverless Function
  *
- * Layers 4-5 of the caching architecture (see CLAUDE.md): proactively
- * refreshes every table's cache/KV-buffer entry -- and mirrors Airtable's
- * image attachments into Vercel Blob storage along the way -- so read
- * requests (get-categories.js, get-hamper.js, etc.) almost always find an
- * already-warm, Airtable-independent entry instead of triggering their own
- * live Airtable fetch or hotlinking Airtable's attachment URLs.
+ * Synchronizes the durable content buffer after Airtable signals a change.
+ * It mirrors every Airtable attachment into Vercel Blob before committing
+ * the corresponding records to KV, so no live website response depends on
+ * Airtable URLs.
  *
  * Two trusted triggers call this (Layer 4):
  *
@@ -28,10 +26,8 @@
  * unauthenticated cache-invalidation endpoint should never be exposed by
  * accident.
  *
- * Image mirroring (Layer 5) is opt-in via BLOB_READ_WRITE_TOKEN -- if unset,
- * mirrorImages() is a no-op and records keep Airtable's own attachment URLs
- * (identical to today's behavior), so this degrades gracefully exactly like
- * the KV buffer (Layer 3) does.
+ * BLOB_READ_WRITE_TOKEN and the KV credentials are required for a content
+ * update. If either storage write fails, the existing live buffer is kept.
  */
 
 const { put } = require('@vercel/blob');
@@ -46,8 +42,7 @@ const TABLES = [
 
 // Which attachment fields on each table get mirrored to Blob storage.
 // Collections has no image field today (get-collections.js renders icon
-// chips, not photography) so it's absent -- mirrorImages() is a no-op for
-// any table not listed here.
+// chips, not photography) so it is absent.
 const MIRROR_FIELDS = {
   Products: ['Product Images'],
   Category: ['Image'],
@@ -90,11 +85,13 @@ async function mirrorAttachment(attachment) {
 // replaces each attachment's `url` with its mirrored Vercel Blob URL,
 // leaving every other property (filename, id, type, etc.) intact so
 // downstream code (get-hamper.js etc., which just reads `.url`) needs no
-// changes. If Blob isn't configured, or this table has no mirrored fields,
-// this is a no-op and records keep Airtable's own URLs.
+// changes. A mirroring failure aborts this table's update so the existing
+// Blob-backed live records remain in place; an Airtable URL is never written
+// into the durable website buffer.
 async function mirrorImages(tableName, records) {
   var fields = MIRROR_FIELDS[tableName];
-  if (!BLOB_ENABLED || !fields || fields.length === 0) return records;
+  if (!fields || fields.length === 0) return records;
+  if (!BLOB_ENABLED) throw new Error('Blob storage is not configured');
 
   for (var i = 0; i < records.length; i++) {
     var record = records[i];
@@ -104,14 +101,8 @@ async function mirrorImages(tableName, records) {
       if (!Array.isArray(attachments) || attachments.length === 0) continue;
 
       for (var k = 0; k < attachments.length; k++) {
-        try {
-          var mirroredUrl = await mirrorAttachment(attachments[k]);
-          attachments[k] = Object.assign({}, attachments[k], { url: mirroredUrl });
-        } catch (error) {
-          // Fail open per-attachment: keep the original Airtable URL for
-          // this one image rather than failing the whole sync run over it.
-          console.error('refresh-cache: mirroring failed for attachment ' + attachments[k].id + ', keeping Airtable URL:', error.message);
-        }
+        var mirroredUrl = await mirrorAttachment(attachments[k]);
+        attachments[k] = Object.assign({}, attachments[k], { url: mirroredUrl });
       }
     }
   }
