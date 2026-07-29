@@ -22,7 +22,9 @@ const csvUtils = require('./_lib/csvSeedUtils');
 // See seed-products-from-csv.js for why this is much longer than the
 // cache's normal 5-minute default -- this is a bridge/outage-recovery
 // seed, not a steady sync cycle.
-var SEED_TTL_MS = 24 * 60 * 60 * 1000;
+// Use a longer TTL so restored buffer state stays live until Airtable or
+// cron/webhook refreshes it, instead of expiring in one day.
+var SEED_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 function rowToRecord(row) {
   return {

@@ -44,9 +44,10 @@ const csvUtils = require('./_lib/csvSeedUtils');
 // normal 5-minute default TTL (tuned for "refresh often, stay fresh" once a
 // real sync is running) would expire long before anything else refreshes
 // it, since the webhook is blocked on this Airtable plan and the daily
-// cron is the only other writer. 24h gives enough runway to actually fix
-// the underlying issue without the seed silently vanishing mid-diagnosis.
-var SEED_TTL_MS = 24 * 60 * 60 * 1000;
+// cron is the only other writer. 30 days gives enough runway to actually fix
+// the underlying issue without the seed silently vanishing mid-diagnosis,
+// while still allowing real Airtable ping/cron refreshes to overwrite it.
+var SEED_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 function rowToRecord(row) {
   var categoryName = (row['Category'] || '').trim();
