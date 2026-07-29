@@ -39,11 +39,11 @@ var DEFAULT_TTL_MS = 400 * 24 * 60 * 60 * 1000;
 var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 
 // Optional durable cross-instance buffer (Upstash Redis, plain REST calls --
-// no SDK, no package.json). Purely opt-in: if these env vars are absent
-// (e.g. a fresh clone on a Vercel account that hasn't attached the Upstash
-// integration yet), every KV call below fails open to a no-op/null and this
-// module behaves exactly like the in-memory-only Layer 1/2 cache. This keeps
-// the project's zero-config default intact.
+// no SDK, no package.json). Purely opt-in: if these env vars are absent,
+// this module behaves exactly like the in-memory-only Layer 1/2 cache. If
+// KV is enabled, the Redis buffer is authoritative and durable: keys are
+// written without expiry, and a missing/unreadable KV entry is treated as a
+// hard error rather than silently falling back to live Airtable.
 //
 // Two naming conventions are accepted: UPSTASH_REDIS_REST_URL/TOKEN (what
 // you get copying values directly from Upstash's own dashboard) and
@@ -86,20 +86,19 @@ async function kvGet(key) {
     var raw = await kvCommand(['GET', key]);
     return raw ? JSON.parse(raw) : null;
   } catch (error) {
-    console.error('airtableCache: KV get failed for ' + key + ', treating as miss:', error.message);
-    return null;
+    throw new Error('airtableCache: KV get failed for ' + key + ': ' + error.message);
   }
 }
 
-// Fails open (swallows the error) -- a KV write failure shouldn't break the
-// request that's already got good data to return; the in-memory cache for
-// this instance still works regardless.
-async function kvSet(key, value, ttlSeconds) {
+// Writes without expiry into the durable KV buffer. When KV is enabled,
+// failures are treated as fatal so updates are only accepted when the
+// underlying durable buffer write actually succeeds.
+async function kvSet(key, value) {
   if (!KV_ENABLED) return;
   try {
-    await kvCommand(['SET', key, JSON.stringify(value), 'EX', String(ttlSeconds)]);
+    await kvCommand(['SET', key, JSON.stringify(value)]);
   } catch (error) {
-    console.error('airtableCache: KV set failed for ' + key + ':', error.message);
+    throw new Error('airtableCache: KV set failed for ' + key + ': ' + error.message);
   }
 }
 
@@ -223,16 +222,18 @@ function getCachedTable(tableName, filterFormula, opts) {
   return fetchPromise;
 }
 
-// Cache-aside against the (optional) KV buffer before falling back to a live
-// Airtable fetch: check KV -> check Airtable -> populate KV. When KV is
-// unset/unreachable, kvGet's fail-open null makes this behave exactly like a
-// direct Airtable fetch (Layer 1/2 behavior).
+// Cache-aside behavior when KV is disabled. When KV is enabled, the
+// durable buffer is authoritative: a missing or unreadable key is a hard
+// error, not a fallback to live Airtable.
 async function resolveRecords(key, tableName, filterFormula, extraParams, ttlMs) {
   var buffered = await kvGet(key);
   if (buffered) return buffered;
+  if (KV_ENABLED) {
+    throw new Error('Durable KV buffer enabled and key missing for ' + key);
+  }
 
   var records = await fetchAllRecords(tableName, filterFormula, extraParams);
-  await kvSet(key, records, Math.ceil(ttlMs / 1000));
+  await kvSet(key, records);
   return records;
 }
 
@@ -245,11 +246,11 @@ async function refreshTable(tableName, filterFormula, extraParams, ttlMs) {
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
   var records = await fetchAllRecords(tableName, filterFormula, extraParams);
 
+  await kvSet(key, records);
+
   var entry = cacheStore[key] || (cacheStore[key] = { records: null, fetchedAt: 0, inFlight: null });
   entry.records = records;
   entry.fetchedAt = Date.now();
-
-  await kvSet(key, records, Math.ceil(ttlMs / 1000));
   return records;
 }
 
@@ -262,10 +263,10 @@ async function refreshTable(tableName, filterFormula, extraParams, ttlMs) {
 async function setTable(tableName, filterFormula, extraParams, records, ttlMs) {
   ttlMs = ttlMs || DEFAULT_TTL_MS;
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
+  await kvSet(key, records);
   var entry = cacheStore[key] || (cacheStore[key] = { records: null, fetchedAt: 0, inFlight: null });
   entry.records = records;
   entry.fetchedAt = Date.now();
-  await kvSet(key, records, Math.ceil(ttlMs / 1000));
 }
 
 module.exports = {

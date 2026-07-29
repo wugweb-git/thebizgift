@@ -97,6 +97,7 @@ async function mirrorImages(tableName, records) {
   var fields = MIRROR_FIELDS[tableName];
   if (!BLOB_ENABLED || !fields || fields.length === 0) return records;
 
+  var errors = [];
   for (var i = 0; i < records.length; i++) {
     var record = records[i];
     for (var j = 0; j < fields.length; j++) {
@@ -109,12 +110,14 @@ async function mirrorImages(tableName, records) {
           var mirroredUrl = await mirrorAttachment(attachments[k]);
           attachments[k] = Object.assign({}, attachments[k], { url: mirroredUrl });
         } catch (error) {
-          // Fail open per-attachment: keep the original Airtable URL for
-          // this one image rather than failing the whole sync run over it.
-          console.error('refresh-cache: mirroring failed for attachment ' + attachments[k].id + ', keeping Airtable URL:', error.message);
+          errors.push('attachment ' + attachments[k].id + ': ' + error.message);
         }
       }
     }
+  }
+
+  if (errors.length > 0) {
+    throw new Error('refresh-cache: failed to mirror one or more images for ' + tableName + ': ' + errors.join('; '));
   }
 
   return records;
