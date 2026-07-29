@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=5">
-  <link rel="stylesheet" href="/pages.css?v=11">
+  <link rel="stylesheet" href="/style.css?v=6">
+  <link rel="stylesheet" href="/pages.css?v=12">
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
   <link rel="preload" href="/footer.html" as="fetch" crossorigin>
 </head>
@@ -156,10 +156,10 @@
       </div>
     </section>
 
-    <!-- SECTION 03: WHAT HAPPENS NEXT -->
-    <section class="quote-process">
+    <!-- SECTION 03: WHAT HAPPENS NEXT — full width, white background, no image -->
+    <section class="quote-process" style="background-color: var(--surface-white);">
       <div class="container">
-        <div class="process-block">
+        <div class="process-block" style="background: transparent; border-radius: 0; grid-template-columns: 1.2fr 2fr; box-shadow: none;">
           <div class="process-intro">
             <h2>What happens next.</h2>
             <hr class="rule">
@@ -195,23 +195,6 @@
               <p>We refine the proposal together until it's exactly right.</p>
             </div>
           </div>
-
-          <div class="process-visual" style="background-image:url('/image/Customisation/gallery-03-diwali-gifting.jpeg')"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 04: EDITORIAL QUOTE -->
-    <section class="quote-editorial">
-      <div class="container">
-        <div class="editorial-quote-block">
-          <div class="text">
-            <span class="eyebrow">Editorial Quote</span>
-            <div class="mark">&ldquo;</div>
-            <blockquote>Gifting is not about the object, it's about the emotion it creates.</blockquote>
-            <hr class="rule">
-          </div>
-          <div class="visual" style="background-image:url('/image/placeholder.png')"></div>
         </div>
       </div>
     </section>
@@ -220,7 +203,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="/components.js?v=4"></script>
+  <script src="/components.js?v=5"></script>
   <script>
     // Capture product context from URL params
     document.addEventListener('DOMContentLoaded', function() {

@@ -18,6 +18,11 @@ const airtableCache = require('../api/_lib/airtableCache');
 const refreshCache = require('../api/cron/refresh-cache');
 const csvUtils = require('./_lib/csvSeedUtils');
 
+// See seed-products-from-csv.js for why this is much longer than the
+// cache's normal 5-minute default -- this is a bridge/outage-recovery
+// seed, not a steady sync cycle.
+var SEED_TTL_MS = 24 * 60 * 60 * 1000;
+
 function rowToRecord(row) {
   return {
     id: 'csvseed-' + csvUtils.slugify(row['Slug'] || row['Name'] || Math.random().toString(36).slice(2)),
@@ -51,7 +56,7 @@ async function main() {
   var mirrored = await refreshCache.mirrorImages('Category', records);
 
   var tableConfig = refreshCache.TABLES.filter(function (t) { return t.name === 'Category'; })[0];
-  await airtableCache.setTable('Category', tableConfig.filter, tableConfig.extraParams, mirrored);
+  await airtableCache.setTable('Category', tableConfig.filter, tableConfig.extraParams, mirrored, SEED_TTL_MS);
 
   console.log('Seeded ' + mirrored.length + ' categories into the cache/KV buffer.');
 }

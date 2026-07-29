@@ -58,7 +58,6 @@
     ],
     moq: '50 Units',
     material: 'Premium Kraft, Velvet Lining',
-    leadTime: '7–14 Business Days',
     delivery: 'Pan India',
     packaging: 'Rigid Gift Box',
     branding: [
@@ -225,9 +224,11 @@
     'MOQ': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>',
     'Branding': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
     'Delivery': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
-    'Lead Time': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
     'Product Code': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
   };
+
+  // NOTE: "Lead Time" has been intentionally removed from all displays per
+  // client feedback. The icon entries below no longer include it.
 
   // Icon set for hero product-tag chips (Sustainable / Eco Friendly / Branding
   // Possible etc.) — matched by keyword, falling back to a generic tag icon.
@@ -412,11 +413,6 @@
                 '<span class="hamper-info-text"><span class="hamper-info-label">Delivery</span>' +
                 '<span class="hamper-info-value">' + escapeHtml(p.delivery || 'Pan India') + '</span></span>' +
               '</div>' +
-              '<div class="hamper-info-item">' +
-                '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Lead Time'] + '</span>' +
-                '<span class="hamper-info-text"><span class="hamper-info-label">Lead Time</span>' +
-                '<span class="hamper-info-value">' + escapeHtml(p.leadTime || '7–14 Days') + '</span></span>' +
-              '</div>' +
               (p.productCode ? (
               '<div class="hamper-info-item">' +
                 '<span class="hamper-info-icon">' + QUICK_INFO_ICONS['Product Code'] + '</span>' +
@@ -434,7 +430,6 @@
   function buildPlanning(p) {
     var iconSvgs = {
       'MOQ': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>',
-      'Lead Time': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
       'Branding': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
       'Packaging': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>',
       'Delivery': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
@@ -469,9 +464,8 @@
           '<div class="hamper-planning-layout">' +
             '<div class="hamper-planning-editorial">' +
               '<span class="hamper-planning-eyebrow">Planning Information</span>' +
-              '<h2>Ready To Order?</h2>' +
+              '<h2>About the hamper</h2>' +
               '<p>Everything your procurement and marketing teams need before requesting a proposal.</p>' +
-              (p.productionWorkflow ? '<p class="hamper-planning-workflow">' + escapeHtml(p.productionWorkflow) + '</p>' : '') +
             '</div>' +
             '<div class="hamper-planning-specs">' + rows + '</div>' +
           '</div>' +
@@ -603,12 +597,6 @@
               '<a href="/explore/" class="btn-action btn-secondary btn-small">Explore More Hampers</a>' +
             '</div>' +
 
-            '<div class="hamper-proposal-whatsapp">' +
-              '<a href="https://wa.me/' + CONFIG.WHATSAPP_NUMBER + '?text=Hi%20The%20Biz%20Gift%20team%2C%20I%20am%20interested%20in%20' + encodeURIComponent(p.name) + '" class="btn-whatsapp-large" target="_blank" rel="noopener">' +
-                '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.739-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.01-5.091-2.854-6.941C16.636 2.016 14.17 1.01 11.552 1.01 6.115 1.01 1.692 5.379 1.688 10.81c-.001 1.73.468 3.424 1.36 4.947L2.009 21.08l5.638-1.478z"/></svg>' +
-                'Chat on WhatsApp' +
-              '</a>' +
-            '</div>' +
           '</div>' +
           '<div class="hamper-proposal-visual" style="background-image:url(\'' + heroImg + '\')"></div>' +
         '</div>' +

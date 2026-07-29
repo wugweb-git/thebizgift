@@ -238,6 +238,27 @@
   margin-bottom: 0;
 }
 
+.editorial-quote-block--single {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.editorial-quote-block--single .text {
+  align-items: center;
+  padding: 4rem 3rem;
+}
+
+.editorial-quote-block--single blockquote {
+  max-width: 100%;
+}
+
+.editorial-quote-block--single .rule {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 900px) {
   .editorial-quote-block {
     grid-template-columns: 1fr;

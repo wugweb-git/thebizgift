@@ -528,6 +528,7 @@ img {
   box-shadow: var(--elevation-3);
   max-height: 80vh;
   overflow-y: auto;
+  border-radius: 0;
 }
 
 .nav-item-dropdown:hover .mega-menu {
@@ -630,7 +631,7 @@ img {
   max-width: var(--container-max);
   margin: 2rem auto 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   padding: 1.5rem var(--space-layout);
   background-color: var(--ivory-soft);
@@ -685,9 +686,9 @@ img {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: var(--text-muted);
+  color: var(--text-dark);
   font-size: var(--font-size-nav);
-  font-weight: 300;
+  font-weight: 400;
   transition: color var(--transition-fast), padding-left 0.2s ease;
   padding: 0.25rem 0;
 }
@@ -719,7 +720,7 @@ img {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: none;
   color: var(--text-dark);
   font-size: var(--font-size-nav);
   font-weight: 400;
@@ -940,11 +941,20 @@ img {
 .hero-container {
   position: relative;
   z-index: 2;
-  /* Same box model as .container (max-width + padding), so hero content
-     lines up with every section below it. */
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--space-layout) 6rem;
+}
+
+/* Hero content alignment: shift left to align with section titles below */
+.hero-container .hero-script-line,
+.hero-container .hero-title,
+.hero-container .hero-subtitle,
+.hero-container .hero-actions,
+.hero-container .hero-brief-link {
+  max-width: 900px;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .hero-title,
@@ -1097,8 +1107,8 @@ img {
 }
 
 @keyframes chevronPulse {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(6px); opacity: 1; }
+   0%, 100% { transform: translateY(0); opacity: 0.4; }
+   50% { transform: translateY(6px); opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1741,3 +1751,212 @@ img {
   }
 }
 
+/* ==========================================================================
+   ADDED: SECTION SPACING FIXES
+   ========================================================================== */
+
+/* Reduce spacing between Browse by Category and Browse by Occasion on homepage */
+.section-browse-occasion + .section-browse-collection {
+  padding-top: 0;
+}
+
+/* ==========================================================================
+   ADDED: IMAGE HOVER EFFECTS
+   ========================================================================== */
+img[loading="lazy"]:not(.no-hover):hover,
+.hover-zoom img:hover,
+.media-card-image img:hover,
+.occasion-card-overlay-img:hover,
+.category-scroll-card .category-scroll-icon svg:hover {
+  transition: transform 0.6s var(--ease-premium);
+}
+
+/* ==========================================================================
+   ADDED: CARD HOVER EFFECTS (consistent across site)
+   ========================================================================== */
+.media-card,
+.create-card,
+.occasion-card-overlay,
+.category-scroll-card,
+.testimonial-card,
+.personalisation-card,
+.branding-card,
+.selected-card {
+  will-change: transform;
+}
+
+/* ==========================================================================
+   ADDED: EXPLORE SIDEBAR SCROLL FIX
+   ========================================================================== */
+.explore-filters-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Ensure the explore filters sidebar body can scroll to bottom */
+@media (min-width: 901px) {
+  .explore-filters {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+}
+
+/* ==========================================================================
+   ADDED: MOBILE UI/UX FIXES
+   ========================================================================== */
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+  .mobile-nav-overlay a {
+    padding: 1.25rem 0;
+    font-size: 1.5rem;
+  }
+
+  .mobile-nav-overlay .mobile-sub-link {
+    font-size: 1.125rem;
+    padding: 0.75rem 0 0.75rem 1rem;
+  }
+
+  .mobile-nav-overlay .nav-dropdown-label {
+    font-size: 0.75rem;
+    padding-top: 2rem;
+  }
+
+  /* Footer mobile improvements */
+  .footer-col {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-col a {
+    padding: 0.4rem 0;
+    font-size: 0.875rem;
+  }
+
+  .footer-contact-item {
+    padding: 0.4rem 0;
+  }
+
+  /* Section spacing balance on mobile */
+  .section-what-we-create,
+  .section-featured-collections,
+  .section-process,
+  .section-browse-occasion,
+  .section-browse-collection,
+  .section-planning-guide,
+  .section-dual-cta {
+    padding: 4rem var(--space-layout);
+  }
+
+  .about-origin,
+  .about-editorial,
+  .about-details,
+  .about-cta {
+    padding: 4rem var(--space-layout);
+  }
+
+  .quote-form-section,
+  .quote-process {
+    padding: 4rem var(--space-layout);
+  }
+
+  .explore-catalog {
+    padding: 4rem var(--space-layout) 5rem;
+  }
+
+  .custom-why,
+  .custom-personalisation,
+  .custom-methods,
+  .custom-testimonials,
+  .custom-faq,
+  .custom-cta {
+    padding: 4rem var(--space-layout);
+  }
+
+  .custom-brief-gallery {
+    padding: 4rem var(--space-layout) 5rem;
+  }
+
+  .hamper-hero {
+    padding: 3rem 0;
+  }
+
+  .hamper-planning,
+  .hamper-faq,
+  .hamper-related,
+  .hamper-proposal {
+    padding: 4rem var(--space-layout);
+  }
+
+  /* Better card spacing on mobile */
+  .selected-grid {
+    gap: 1rem;
+  }
+
+  .occasion-grid--overlay {
+    gap: 0.75rem;
+  }
+
+  .category-scroll {
+    gap: 0.75rem;
+  }
+
+  /* Improved readability on mobile */
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-intro {
+    font-size: 0.875rem;
+  }
+}
+
+/* ==========================================================================
+   ADDED: SECTION SPACING BALANCE (Desktop)
+   ========================================================================== */
+
+/* Consistent 6rem vertical rhythm across all pages */
+.section-what-we-create,
+.section-featured-collections,
+.section-process,
+.section-browse-occasion,
+.section-browse-collection,
+.section-planning-guide,
+.section-dual-cta {
+  padding: 6rem var(--space-layout);
+}
+
+.about-origin,
+.about-editorial,
+.about-details,
+.about-cta {
+  padding: 6rem var(--space-layout);
+}
+
+.quote-form-section,
+.quote-process {
+  padding: 6rem var(--space-layout);
+}
+
+.explore-catalog {
+  padding: 6rem var(--space-layout) 8rem;
+}
+
+.custom-why,
+.custom-personalisation,
+.custom-methods,
+.custom-testimonials,
+.custom-faq,
+.custom-cta {
+  padding: 6rem var(--space-layout);
+}
+
+.custom-brief-gallery {
+  padding: 6rem var(--space-layout) 8rem;
+}
+
+.hamper-planning,
+.hamper-faq,
+.hamper-related,
+.hamper-proposal {
+  padding: 6rem var(--space-layout);
+}

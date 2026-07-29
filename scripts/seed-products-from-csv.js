@@ -40,6 +40,14 @@ const airtableCache = require('../api/_lib/airtableCache');
 const refreshCache = require('../api/cron/refresh-cache');
 const csvUtils = require('./_lib/csvSeedUtils');
 
+// This is a bridge/outage-recovery seed, not a steady sync cycle -- the
+// normal 5-minute default TTL (tuned for "refresh often, stay fresh" once a
+// real sync is running) would expire long before anything else refreshes
+// it, since the webhook is blocked on this Airtable plan and the daily
+// cron is the only other writer. 24h gives enough runway to actually fix
+// the underlying issue without the seed silently vanishing mid-diagnosis.
+var SEED_TTL_MS = 24 * 60 * 60 * 1000;
+
 function rowToRecord(row) {
   var categoryName = (row['Category'] || '').trim();
   var occasionNames = csvUtils.splitMulti(row['Occasion']);
@@ -116,7 +124,7 @@ async function main() {
   var mirrored = await refreshCache.mirrorImages('Products', published);
 
   var tableConfig = refreshCache.TABLES.filter(function (t) { return t.name === 'Products'; })[0];
-  await airtableCache.setTable('Products', tableConfig.filter, tableConfig.extraParams, mirrored);
+  await airtableCache.setTable('Products', tableConfig.filter, tableConfig.extraParams, mirrored, SEED_TTL_MS);
 
   var withImages = mirrored.filter(function (r) {
     return r.fields['Product Images'] && r.fields['Product Images'].length > 0;
