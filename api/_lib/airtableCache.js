@@ -1,50 +1,20 @@
 /**
- * Shared Airtable read cache for api/*.js — one module-scope entry per
- * (table, filter) combination, reused across all read endpoints. Two
- * problems this solves at once:
- *
- * 1. get-hamper.js and get-featured-hampers.js both need the full list of
- *    Published Products (one for its "related products" algorithm, one for
- *    the homepage/explore grid) but used to fetch it independently on every
- *    request. Since both call getCachedTable('Products', SAME_FILTER, ...),
- *    they now transparently share one cached fetch.
- * 2. Every warm Vercel serverless instance keeps its own copy of this cache,
- *    so repeat/concurrent requests hitting the same warm instance stop
- *    re-fetching Airtable within the TTL window -- a major contributor to
- *    the 429 (rate-limit) outages this base has hit, since Airtable's 5
- *    requests/second cap is base-wide, not per-caller.
- *
- * Also fixes a latent correctness bug: Airtable caps each *page* of a list
- * request at 100 records regardless of maxRecords -- maxRecords only bounds
- * a multi-page fetch, it doesn't make a single page return more than 100.
- * fetchAllRecords() below follows the `offset` pagination token across
- * pages instead, so a table that grows past 100 published rows won't
- * silently truncate.
+ * Durable content-buffer access for api/*.js. Upstash KV is the website's
+ * authoritative middle database: catalog records have no expiry and every
+ * visitor-facing read comes from it. Airtable is contacted only by the
+ * protected change-sync endpoint after Airtable signals a content change.
  *
  * Files/folders prefixed with "_" are ignored by Vercel's filesystem
- * routing, so this is a plain module, not its own endpoint (same
- * convention as _lib/cors.js).
+ * routing, so this is a plain module, not its own endpoint.
  */
 
 var AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 var BASE_ID = process.env.AIRTABLE_BASE_ID;
-// ~13 months: every Airtable change triggers an immediate refresh via
-// webhook, and the daily Vercel Cron acts as a safety net. This cache
-// entry is therefore refreshed on every data change, and the TTL only
-// matters if *both* refresh paths fail simultaneously for weeks. This
-// makes the TTL effectively "lasts until the next Airtable ping" in
-// normal operation, while still bounding the worst-case stale-read
-// window to a safe fallback.
-var DEFAULT_TTL_MS = 400 * 24 * 60 * 60 * 1000;
 var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 
-// Optional durable cross-instance buffer (Upstash Redis, plain REST calls --
-// no SDK, no package.json). Purely opt-in: if these env vars are absent,
-// this module behaves exactly like the in-memory-only Layer 1/2 cache. If
-// KV is enabled, the Redis buffer is authoritative and durable: keys are
-// written without expiry, and a missing/unreadable KV entry is treated as a
-// hard error rather than silently falling back to live Airtable.
-//
+// Durable cross-instance buffer (Upstash Redis, plain REST calls -- no SDK,
+// no package.json). The production site requires these variables: it has no
+// direct Airtable fallback for visitor requests.
 // Two naming conventions are accepted: UPSTASH_REDIS_REST_URL/TOKEN (what
 // you get copying values directly from Upstash's own dashboard) and
 // KV_REST_API_URL/TOKEN (what Vercel auto-generates when you attach Upstash
@@ -54,11 +24,10 @@ var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
 var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 var KV_ENABLED = !!(UPSTASH_URL && UPSTASH_TOKEN);
-
-var cacheStore = {}; // key -> { records, fetchedAt, inFlight }
+var inFlightReads = {}; // key -> Promise, used only to coalesce concurrent KV reads
 
 // Issues one Redis command via Upstash's generic REST passthrough (POST a
-// JSON array mirroring the raw command, e.g. ["SET","key","value","EX","60"])
+// JSON array mirroring the raw command, e.g. ["SET","key","value"])
 // rather than path-segment-encoded commands -- avoids any URL-encoding
 // ambiguity for values that may contain special characters.
 async function kvCommand(args) {
@@ -78,8 +47,8 @@ async function kvCommand(args) {
   return data.result;
 }
 
-// Fails open (returns null, i.e. "treat as cache miss") on any KV error so a
-// KV outage/misconfiguration falls through to Airtable rather than erroring.
+// Fails closed for website reads: callers return an error instead of querying
+// Airtable or substituting an unknown source of truth.
 async function kvGet(key) {
   if (!KV_ENABLED) return null;
   try {
@@ -94,11 +63,12 @@ async function kvGet(key) {
 // failures are treated as fatal so updates are only accepted when the
 // underlying durable buffer write actually succeeds.
 async function kvSet(key, value) {
-  if (!KV_ENABLED) return;
+  if (!KV_ENABLED) throw new Error('Content buffer is not configured');
   try {
     await kvCommand(['SET', key, JSON.stringify(value)]);
   } catch (error) {
-    throw new Error('airtableCache: KV set failed for ' + key + ': ' + error.message);
+    console.error('airtableCache: KV set failed for ' + key + ':', error.message);
+    throw error;
   }
 }
 
@@ -174,83 +144,42 @@ async function fetchAllRecords(tableName, filterFormula, extraParams) {
   return allRecords;
 }
 
-// Returns cached records for (tableName, filterFormula[, extraParams]):
-// - fresh cache hit -> resolves immediately, no network call
-// - stale/missing, no fetch in flight -> starts one, caches the result
-// - stale/missing, fetch already in flight (e.g. two endpoints on the same
-//   warm instance both asked at once) -> both callers share that one promise
-// - fetch fails but a previous successful result exists -> serves that
-//   stale result instead of throwing, so a transient Airtable outage/429
-//   becomes invisible staleness rather than a user-visible 500
+// Returns the authoritative buffered records. There is deliberately no
+// process-local TTL cache: an Airtable change can update the durable state on
+// a different serverless instance, and the next read must see that update.
 function getCachedTable(tableName, filterFormula, opts) {
   opts = opts || {};
-  var ttlMs = opts.ttlMs || DEFAULT_TTL_MS;
   var extraParams = opts.extraParams || null;
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
-  var entry = cacheStore[key];
-  var now = Date.now();
+  if (inFlightReads[key]) return inFlightReads[key];
 
-  if (entry && entry.records && (now - entry.fetchedAt) < ttlMs) {
-    return Promise.resolve(entry.records);
-  }
+  var fetchPromise = resolveRecords(key, tableName, filterFormula, extraParams)
+    .finally(function () { delete inFlightReads[key]; });
 
-  if (entry && entry.inFlight) {
-    return entry.inFlight;
-  }
-
-  if (!entry) {
-    entry = cacheStore[key] = { records: null, fetchedAt: 0, inFlight: null };
-  }
-
-  var fetchPromise = resolveRecords(key, tableName, filterFormula, extraParams, ttlMs)
-    .then(function (records) {
-      entry.records = records;
-      entry.fetchedAt = Date.now();
-      entry.inFlight = null;
-      return records;
-    })
-    .catch(function (error) {
-      entry.inFlight = null;
-      if (entry.records) {
-        console.error('airtableCache: refresh failed for ' + key + ', serving stale data:', error.message);
-        return entry.records;
-      }
-      throw error;
-    });
-
-  entry.inFlight = fetchPromise;
+  inFlightReads[key] = fetchPromise;
   return fetchPromise;
 }
 
-// Cache-aside behavior when KV is disabled. When KV is enabled, the
-// durable buffer is authoritative: a missing or unreadable key is a hard
-// error, not a fallback to live Airtable.
-async function resolveRecords(key, tableName, filterFormula, extraParams, ttlMs) {
+// Read the durable KV snapshot. Visitor requests intentionally do not fall
+// back to Airtable: a cache miss must be visible as an operational error,
+// rather than silently creating unbounded Airtable traffic. Airtable reads
+// happen only in refreshTable()/fetchAllRecords(), invoked by the protected
+// change-sync endpoint after Airtable reports a content change.
+async function resolveRecords(key, tableName, filterFormula, extraParams) {
   var buffered = await kvGet(key);
   if (buffered) return buffered;
-  if (KV_ENABLED) {
-    throw new Error('Durable KV buffer enabled and key missing for ' + key);
-  }
-
-  var records = await fetchAllRecords(tableName, filterFormula, extraParams);
-  await kvSet(key, records);
-  return records;
+  throw new Error('Content buffer has no snapshot for ' + key);
 }
 
 // Forces a fresh Airtable fetch (bypassing the in-memory TTL and any KV
 // buffer read) and writes the result into both -- used by the Layer 4 push
 // sync (api/cron/refresh-cache.js) so readers' getCachedTable() calls find
 // an already-warm entry instead of triggering their own Airtable fetch.
-async function refreshTable(tableName, filterFormula, extraParams, ttlMs) {
-  ttlMs = ttlMs || DEFAULT_TTL_MS;
+async function refreshTable(tableName, filterFormula, extraParams) {
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
   var records = await fetchAllRecords(tableName, filterFormula, extraParams);
 
   await kvSet(key, records);
-
-  var entry = cacheStore[key] || (cacheStore[key] = { records: null, fetchedAt: 0, inFlight: null });
-  entry.records = records;
-  entry.fetchedAt = Date.now();
   return records;
 }
 
@@ -260,13 +189,9 @@ async function refreshTable(tableName, filterFormula, extraParams, ttlMs) {
 // (Layer 5) into the records *before* they're cached -- fetchAllRecords()
 // and setTable() are the two halves refreshTable() composes for callers
 // that don't need to transform records in between.
-async function setTable(tableName, filterFormula, extraParams, records, ttlMs) {
-  ttlMs = ttlMs || DEFAULT_TTL_MS;
+async function setTable(tableName, filterFormula, extraParams, records) {
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
   await kvSet(key, records);
-  var entry = cacheStore[key] || (cacheStore[key] = { records: null, fetchedAt: 0, inFlight: null });
-  entry.records = records;
-  entry.fetchedAt = Date.now();
 }
 
 module.exports = {
@@ -276,5 +201,6 @@ module.exports = {
   setTable: setTable,
   kvGetRaw: kvGetRaw,
   kvSetRaw: kvSetRaw,
-  isKvEnabled: function () { return KV_ENABLED; }
+  isKvEnabled: function () { return KV_ENABLED; },
+  hasContentSource: function () { return KV_ENABLED; }
 };

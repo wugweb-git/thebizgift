@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
   const TABLE_NAME = 'Occasions';
   const FILTER = '{Published}=TRUE()';
 
-  if (!AIRTABLE_API_KEY || !BASE_ID) {
+  if (!airtableCache.hasContentSource()) {
     res.status(500).json({ error: 'Server configuration error' });
     return;
   }

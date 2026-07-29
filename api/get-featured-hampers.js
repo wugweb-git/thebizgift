@@ -17,7 +17,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (!AIRTABLE_API_KEY || !BASE_ID) {
+  if (!airtableCache.hasContentSource()) {
     res.status(500).json({ error: 'Server configuration error' });
     return;
   }
