@@ -454,18 +454,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem 1rem;
-  position: relative;
-}
-
-.hamper-planning-specs::before {
-  content: '';
-  position: absolute;
-  top: 22px;
-  left: 5%;
-  right: 5%;
-  height: 1px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
-  z-index: 0;
 }
 
 .hamper-planning-row {
@@ -1195,10 +1183,6 @@
 
   .hamper-planning-row {
     min-width: 42%;
-  }
-
-  .hamper-planning-specs::before {
-    display: none;
   }
 
   .hamper-planning-row-label {
