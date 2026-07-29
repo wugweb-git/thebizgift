@@ -3,6 +3,7 @@
   "private": true,
   "description": "The Biz Gift -- static site, no build step. This package.json exists solely so api/cron/refresh-cache.js can use @vercel/blob to mirror Airtable images into Vercel Blob storage (Layer 5 of the Airtable caching architecture -- see CLAUDE.md). No other file in this repo depends on it, and there is no build/start script -- the site itself remains plain HTML/CSS/JS with no bundler.",
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
     "@vercel/blob": "^2.6.1",
     "@vercel/speed-insights": "^2.0.0"
   },
