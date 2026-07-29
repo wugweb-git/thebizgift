@@ -54,6 +54,12 @@ var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 var UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
 var UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 var KV_ENABLED = !!(UPSTASH_URL && UPSTASH_TOKEN);
+// Catalog reads use the durable KV snapshot by default. Airtable is read
+// only by the authenticated change-sync endpoint after Airtable notifies us
+// of a base change; visitor requests must never create a live Airtable read.
+// CONTENT_SOURCE=airtable is an explicit, temporary escape hatch for a
+// migration/recovery only -- it must not be used for normal website traffic.
+var BUFFER_ONLY = process.env.CONTENT_SOURCE !== 'airtable';
 
 var cacheStore = {}; // key -> { records, fetchedAt, inFlight }
 
@@ -223,13 +229,18 @@ function getCachedTable(tableName, filterFormula, opts) {
   return fetchPromise;
 }
 
-// Cache-aside against the (optional) KV buffer before falling back to a live
-// Airtable fetch: check KV -> check Airtable -> populate KV. When KV is
-// unset/unreachable, kvGet's fail-open null makes this behave exactly like a
-// direct Airtable fetch (Layer 1/2 behavior).
+// Read the durable KV snapshot. Visitor requests intentionally do not fall
+// back to Airtable: a cache miss must be visible as an operational error,
+// rather than silently creating unbounded Airtable traffic. Airtable reads
+// happen only in refreshTable()/fetchAllRecords(), invoked by the protected
+// change-sync endpoint after Airtable reports a content change.
 async function resolveRecords(key, tableName, filterFormula, extraParams, ttlMs) {
   var buffered = await kvGet(key);
   if (buffered) return buffered;
+
+  if (BUFFER_ONLY) {
+    throw new Error('Content buffer has no snapshot for ' + key);
+  }
 
   var records = await fetchAllRecords(tableName, filterFormula, extraParams);
   await kvSet(key, records, Math.ceil(ttlMs / 1000));
@@ -275,5 +286,7 @@ module.exports = {
   setTable: setTable,
   kvGetRaw: kvGetRaw,
   kvSetRaw: kvSetRaw,
-  isKvEnabled: function () { return KV_ENABLED; }
+  isKvEnabled: function () { return KV_ENABLED; },
+  isBufferOnly: function () { return BUFFER_ONLY; },
+  hasContentSource: function () { return KV_ENABLED || (!BUFFER_ONLY && !!(AIRTABLE_API_KEY && BASE_ID)); }
 };

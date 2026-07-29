@@ -19,11 +19,10 @@
  *    and needs re-creating if the base is ever duplicated.
  * 2. Vercel's own Cron scheduler (see the "crons" entry in vercel.json),
  *    which Vercel authenticates by auto-adding `Authorization: Bearer
- *    <CRON_SECRET>` to the request when a CRON_SECRET env var is set. This
- *    is a coarse daily safety net, not the primary freshness mechanism --
- *    Vercel Cron frequency is plan-tier-gated (Hobby has historically
- *    capped it at once/day), so this must not be relied on for real-time
- *    updates.
+ *    <CRON_SECRET>` to the request when a CRON_SECRET env var is set. It
+ *    only renews the Airtable webhook subscription; it never refreshes
+ *    catalog data or writes the buffer. Buffer writes happen exclusively
+ *    after an Airtable change notification.
  *
  * If neither secret is configured, every request is rejected -- an
  * unauthenticated cache-invalidation endpoint should never be exposed by
@@ -138,7 +137,7 @@ async function isAirtableWebhookPing(req) {
   return !!registeredId && body.webhook.id === registeredId;
 }
 
-async function isAuthorized(req) {
+async function isAuthorized(req, isChangeEvent) {
   var webhookSecret = process.env.WEBHOOK_SECRET;
   var cronSecret = process.env.CRON_SECRET;
 
@@ -149,7 +148,7 @@ async function isAuthorized(req) {
   // those plans; the header check above still wins when it's usable.
   if (webhookSecret && req.query && req.query.secret === webhookSecret) return true;
   if (cronSecret && req.headers['authorization'] === 'Bearer ' + cronSecret) return true;
-  if (await isAirtableWebhookPing(req)) return true;
+  if (isChangeEvent) return true;
   return false;
 }
 
@@ -177,8 +176,17 @@ async function keepWebhookAlive() {
 }
 
 async function handler(req, res) {
-  if (!(await isAuthorized(req))) {
+  var isChangeEvent = await isAirtableWebhookPing(req);
+  if (!(await isAuthorized(req, isChangeEvent))) {
     res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  // The scheduled heartbeat only keeps Airtable's seven-day webhook lease
+  // alive. It must not read Airtable tables or mutate the website snapshot.
+  if (!isChangeEvent && req.headers['authorization'] === 'Bearer ' + process.env.CRON_SECRET) {
+    await keepWebhookAlive();
+    res.status(200).json({ refreshed: false, reason: 'Webhook heartbeat only' });
     return;
   }
 
