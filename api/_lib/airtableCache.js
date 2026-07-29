@@ -1,4 +1,4 @@
-all /**
+/**
  * Shared Airtable read cache for api/*.js — one module-scope entry per
  * (table, filter) combination, reused across all read endpoints. Two
  * problems this solves at once:
