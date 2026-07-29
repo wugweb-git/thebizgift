@@ -1,4 +1,4 @@
-/**
+all /**
  * Shared Airtable read cache for api/*.js — one module-scope entry per
  * (table, filter) combination, reused across all read endpoints. Two
  * problems this solves at once:
@@ -28,14 +28,14 @@
 
 var AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 var BASE_ID = process.env.AIRTABLE_BASE_ID;
-// 25 hours: with the Airtable-webhook push-sync (api/register-airtable-webhook.js
-// + api/cron/refresh-cache.js) as the primary refresh path and the daily
-// Vercel Cron as the worst-case-only backstop, this needs to comfortably
-// outlast a full day between cron runs -- if it were the old 5 minutes, any
-// single missed refresh (a webhook that didn't fire, a transient error)
-// would fall through to a live Airtable call that might still be
-// rate-limited, exactly the fragility this is meant to avoid.
-var DEFAULT_TTL_MS = 25 * 60 * 60 * 1000;
+// ~13 months: every Airtable change triggers an immediate refresh via
+// webhook, and the daily Vercel Cron acts as a safety net. This cache
+// entry is therefore refreshed on every data change, and the TTL only
+// matters if *both* refresh paths fail simultaneously for weeks. This
+// makes the TTL effectively "lasts until the next Airtable ping" in
+// normal operation, while still bounding the worst-case stale-read
+// window to a safe fallback.
+var DEFAULT_TTL_MS = 400 * 24 * 60 * 60 * 1000;
 var MAX_PAGES = 10; // 1000-record ceiling; generous for this catalog's scale
 
 // Optional durable cross-instance buffer (Upstash Redis, plain REST calls --
