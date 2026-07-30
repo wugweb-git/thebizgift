@@ -40,9 +40,9 @@ module.exports = async function handler(req, res) {
     const collections = records.map(function (record) {
       return {
         id: record.id,
-        slug: compatFields.getField(record, 'Slug') || '',
-        name: compatFields.getField(record, 'Name') || 'Collection',
-        description: compatFields.getField(record, 'Description') || ''
+        slug: compatFields.getField(record, 'Slug', 'Collections') || '',
+        name: compatFields.getField(record, 'Name', 'Collections') || 'Collection',
+        description: compatFields.getField(record, 'Description', 'Collections') || ''
       };
     });
 

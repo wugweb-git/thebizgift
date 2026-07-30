@@ -54,13 +54,13 @@ module.exports = async function handler(req, res) {
     });
 
     const occasions = records.map(function (record) {
-      var slug = compatFields.getField(record, 'Slug') || '';
+      var slug = compatFields.getField(record, 'Slug', 'Occasions') || '';
       return {
         id: record.id,
         slug: slug,
-        name: compatFields.getField(record, 'Name') || 'Occasion',
-        description: compatFields.getField(record, 'Description') || '',
-        image: compatFields.getFirstImageUrl(record, 'Hero Image')
+        name: compatFields.getField(record, 'Name', 'Occasions') || 'Occasion',
+        description: compatFields.getField(record, 'Description', 'Occasions') || '',
+        image: compatFields.getFirstImageUrl(record, 'Hero Image', 'Occasions')
           || (STATIC_OCCASION_IMAGES[slug] || '/image/placeholder.png')
       };
     });

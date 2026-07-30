@@ -42,10 +42,10 @@ module.exports = async function handler(req, res) {
     const categories = records.map(function (record) {
       return {
         id: record.id,
-        slug: compatFields.getField(record, 'Slug') || '',
-        name: compatFields.getField(record, 'Name') || 'Category',
-        description: compatFields.getField(record, 'Description') || '',
-        image: compatFields.getFirstImageUrl(record, 'Image') || null
+        slug: compatFields.getField(record, 'Slug', 'Category') || '',
+        name: compatFields.getField(record, 'Name', 'Category') || 'Category',
+        description: compatFields.getField(record, 'Description', 'Category') || '',
+        image: compatFields.getFirstImageUrl(record, 'Image', 'Category') || null
       };
     });
 

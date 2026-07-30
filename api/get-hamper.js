@@ -134,78 +134,78 @@ function parseBranding(branding) {
 function formatProduct(record) {
   return {
     id: record.id,
-    slug: compatFields.getField(record, 'website URL Slug') || 'unknown',
-    name: compatFields.getField(record, 'Product Website Name') || 'Curated Experience',
-    description: compatFields.getField(record, 'Product Website Description') || 'A thoughtfully curated gifting experience.',
+    slug: compatFields.getField(record, 'website URL Slug', 'Products') || 'unknown',
+    name: compatFields.getField(record, 'Product Website Name', 'Products') || 'Curated Experience',
+    description: compatFields.getField(record, 'Product Website Description', 'Products') || 'A thoughtfully curated gifting experience.',
 
     // SEO
-    seoTitle: compatFields.getField(record, 'SEO Title') || null,
-    seoDescription: compatFields.getField(record, 'SEO Description') || null,
+    seoTitle: compatFields.getField(record, 'SEO Title', 'Products') || null,
+    seoDescription: compatFields.getField(record, 'SEO Description', 'Products') || null,
 
     // Reference
-    productCode: compatFields.getField(record, 'TBG Product Code') || null,
+    productCode: compatFields.getField(record, 'TBG Product Code', 'Products') || null,
 
     // Taxonomy — a product can have multiple Categories, Collections, and
     // Occasions at once. Category/Sub Category/Occasion/Collections are
     // linked-record fields; names/slugs/images come from their paired lookup
     // fields, not the raw link field itself (which only holds record IDs).
     categories: zipTaxonomy(
-      compatFields.getField(record, 'Category Name (from Category)'),
-      compatFields.getField(record, 'Category Slug (from Category)'),
-      compatFields.getField(record, 'Category Image (from Category)')
+      compatFields.getField(record, 'Category Name (from Category)', 'Products'),
+      compatFields.getField(record, 'Category Slug (from Category)', 'Products'),
+      compatFields.getField(record, 'Category Image (from Category)', 'Products')
     ),
-    subCategory: asArray(compatFields.getField(record, 'Sub Category Name (from Sub Category)'))[0] || null,
+    subCategory: asArray(compatFields.getField(record, 'Sub Category Name (from Sub Category)', 'Products'))[0] || null,
     collections: zipTaxonomy(
-      compatFields.getField(record, 'Name (from Collections)'),
-      compatFields.getField(record, 'Slug (from Collections)'),
-      compatFields.getField(record, 'Collection Image (from Collections Linked)')
+      compatFields.getField(record, 'Name (from Collections)', 'Products'),
+      compatFields.getField(record, 'Slug (from Collections)', 'Products'),
+      compatFields.getField(record, 'Collection Image (from Collections Linked)', 'Products')
     ),
     occasions: zipTaxonomy(
-      compatFields.getField(record, 'Name (from Occasion)'),
-      compatFields.getField(record, 'Slug (from Occasion)'),
-      compatFields.getField(record, 'Occasion Image (from Occasion Tags Linked)')
+      compatFields.getField(record, 'Name (from Occasion)', 'Products'),
+      compatFields.getField(record, 'Slug (from Occasion)', 'Products'),
+      compatFields.getField(record, 'Occasion Image (from Occasion Tags Linked)', 'Products')
     ),
-    productTags: asArray(compatFields.getField(record, 'Product Tags')),
+    productTags: asArray(compatFields.getField(record, 'Product Tags', 'Products')),
     
     // Media
-    images: extractAllImageUrls(compatFields.getField(record, 'Product Images'), compatFields.getField(record, 'Website Image Alt Text')),
+    images: extractAllImageUrls(compatFields.getField(record, 'Product Images', 'Products'), compatFields.getField(record, 'Website Image Alt Text', 'Products')),
     
     // Editorial
-    whyTitle: compatFields.getField(record, 'Editorial Title') || 'Why This Gift Exists',
+    whyTitle: compatFields.getField(record, 'Editorial Title', 'Products') || 'Why This Gift Exists',
     whyParagraphs: (function() {
-      var p = compatFields.getField(record, 'Editorial Paragraphs');
+      var p = compatFields.getField(record, 'Editorial Paragraphs', 'Products');
       if (p) {
         return Array.isArray(p) ? p : [p];
       }
       return ['This gifting experience was thoughtfully curated for meaningful corporate moments.'];
     })(),
-    whyImage: extractImageUrl(compatFields.getField(record, 'Editorial Image')),
+    whyImage: extractImageUrl(compatFields.getField(record, 'Editorial Image', 'Products')),
     
     // Contents
-    items: parseItems(compatFields.getField(record, 'Product Contents')),
+    items: parseItems(compatFields.getField(record, 'Product Contents', 'Products')),
     
     // Procurement
-    moq: compatFields.getField(record, 'MOQ') || null,
-    productType: compatFields.getField(record, 'Product Type') || null,
-    usp: compatFields.getField(record, 'USP') || null,
-    material: compatFields.getField(record, 'Material') || null,
-    leadTime: compatFields.getField(record, 'Lead Time') || null,
-    delivery: compatFields.getField(record, 'Delivery') || null,
-    responseTime: compatFields.getField(record, 'Response Time') || null,
-    productionWorkflow: compatFields.getField(record, 'Production Workflow') || null,
+    moq: compatFields.getField(record, 'MOQ', 'Products') || null,
+    productType: compatFields.getField(record, 'Product Type', 'Products') || null,
+    usp: compatFields.getField(record, 'USP', 'Products') || null,
+    material: compatFields.getField(record, 'Material', 'Products') || null,
+    leadTime: compatFields.getField(record, 'Lead Time', 'Products') || null,
+    delivery: compatFields.getField(record, 'Delivery', 'Products') || null,
+    responseTime: compatFields.getField(record, 'Response Time', 'Products') || null,
+    productionWorkflow: compatFields.getField(record, 'Production Workflow', 'Products') || null,
     
     // Branding
-    branding: parseBranding(compatFields.getField(record, 'Branding Option')),
+    branding: parseBranding(compatFields.getField(record, 'Branding Option', 'Products')),
     
     // FAQ
-    faq: parseFAQ(compatFields.getField(record, 'FAQ')),
+    faq: parseFAQ(compatFields.getField(record, 'FAQ', 'Products')),
     
     // Lead Gen
-    ctaTitle: compatFields.getField(record, 'CTA Title') || null,
-    ctaDescription: compatFields.getField(record, 'CTA Description') || null,
-    ctaImage: extractImageUrl(compatFields.getField(record, 'CTA Image')),
-    ctaBackground: compatFields.getField(record, 'CTA Background') || null,
-    ctaButtonLabel: compatFields.getField(record, 'CTA Button Label') || null,
+    ctaTitle: compatFields.getField(record, 'CTA Title', 'Products') || null,
+    ctaDescription: compatFields.getField(record, 'CTA Description', 'Products') || null,
+    ctaImage: extractImageUrl(compatFields.getField(record, 'CTA Image', 'Products')),
+    ctaBackground: compatFields.getField(record, 'CTA Background', 'Products') || null,
+    ctaButtonLabel: compatFields.getField(record, 'CTA Button Label', 'Products') || null,
     
     // Related (will be populated by algorithm)
     related: [],
@@ -213,10 +213,10 @@ function formatProduct(record) {
     // Raw data for algorithm matching — these are now linked-record IDs
     // (Airtable REST API returns bare record ID strings for link fields),
     // so matching is by true taxonomy record identity, not display name.
-    _rawOccasionTags: asArray(compatFields.getField(record, 'Occasion')),
-    _rawCategories: asArray(compatFields.getField(record, 'Category')),
-    _rawCollectionTags: asArray(compatFields.getField(record, 'Collections')),
-    _rawProductTags: asArray(compatFields.getField(record, 'Product Tags'))
+    _rawOccasionTags: asArray(compatFields.getField(record, 'Occasion', 'Products')),
+    _rawCategories: asArray(compatFields.getField(record, 'Category', 'Products')),
+    _rawCollectionTags: asArray(compatFields.getField(record, 'Collections', 'Products')),
+    _rawProductTags: asArray(compatFields.getField(record, 'Product Tags', 'Products'))
   };
 }
 
