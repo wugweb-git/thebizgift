@@ -243,8 +243,24 @@ async function handler(req, res) {
   var results = {};
   var hadError = false;
 
-  for (var i = 0; i < TABLES.length; i++) {
-    var t = TABLES[i];
+  // Optional `?tables=Occasions,Collections` query parameter limits
+  // refresh to only the named tables. When absent, all 4 tables are
+  // refreshed (backward compatible). Used by one-time targeted repair
+  // without touching Products or Category.
+  var tablesToRefresh = TABLES;
+  if (req.query && req.query.tables) {
+    var requestedNames = req.query.tables.split(',').map(function(s) { return s.trim(); });
+    tablesToRefresh = TABLES.filter(function(t) {
+      return requestedNames.indexOf(t.name) !== -1;
+    });
+    if (tablesToRefresh.length === 0) {
+      res.status(400).json({ error: 'No matching tables for ' + req.query.tables });
+      return;
+    }
+  }
+
+  for (var i = 0; i < tablesToRefresh.length; i++) {
+    var t = tablesToRefresh[i];
     try {
       var rawRecords = await airtableCache.fetchAllRecords(t.name, t.filter, t.extraParams);
       var mirroredRecords = await mirrorImages(t.name, rawRecords);
