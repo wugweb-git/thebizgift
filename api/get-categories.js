@@ -16,6 +16,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
 const airtableCache = require('./_lib/airtableCache');
+const compatFields = require('./_lib/compatFields');
 
 module.exports = async function handler(req, res) {
   applyCors(req, res, 'GET, OPTIONS');
@@ -39,13 +40,12 @@ module.exports = async function handler(req, res) {
     });
 
     const categories = records.map(function (record) {
-      const images = record.fields['Image'];
       return {
         id: record.id,
-        slug: record.fields['Slug'] || '',
-        name: record.fields['Name'] || 'Category',
-        description: record.fields['Description'] || '',
-        image: (images && images.length > 0) ? images[0].url : null
+        slug: compatFields.getField(record, 'Slug') || '',
+        name: compatFields.getField(record, 'Name') || 'Category',
+        description: compatFields.getField(record, 'Description') || '',
+        image: compatFields.getFirstImageUrl(record, 'Image') || null
       };
     });
 

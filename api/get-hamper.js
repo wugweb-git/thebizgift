@@ -43,6 +43,7 @@ const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const TABLE_NAME = 'Products';
 const applyCors = require('./_lib/cors').applyCors;
 const airtableCache = require('./_lib/airtableCache');
+const compatFields = require('./_lib/compatFields');
 
 // Helper: safe array access
 function asArray(val) {
@@ -54,7 +55,7 @@ function asArray(val) {
 // Helper: extract first image URL from Airtable attachment array
 function extractImageUrl(images) {
   if (!images || !Array.isArray(images) || images.length === 0) return null;
-  return images[0].url || images[0].thumbnails?.large?.url || null;
+  return images[0].url || (images[0].thumbnails && images[0].thumbnails.large && images[0].thumbnails.large.url) || null;
 }
 
 // Helper: extract all image URLs. Airtable only has one Image Alt Text field
@@ -131,78 +132,80 @@ function parseBranding(branding) {
 
 // Format a single Airtable record into our frontend-friendly schema
 function formatProduct(record) {
-  var f = record.fields || {};
-
   return {
     id: record.id,
-    slug: f['website URL Slug'] || 'unknown',
-    name: f['Product Website Name'] || 'Curated Experience',
-    description: f['Product Website Description'] || 'A thoughtfully curated gifting experience.',
+    slug: compatFields.getField(record, 'website URL Slug') || 'unknown',
+    name: compatFields.getField(record, 'Product Website Name') || 'Curated Experience',
+    description: compatFields.getField(record, 'Product Website Description') || 'A thoughtfully curated gifting experience.',
 
     // SEO
-    seoTitle: f['SEO Title'] || null,
-    seoDescription: f['SEO Description'] || null,
+    seoTitle: compatFields.getField(record, 'SEO Title') || null,
+    seoDescription: compatFields.getField(record, 'SEO Description') || null,
 
     // Reference
-    productCode: f['TBG Product Code'] || null,
+    productCode: compatFields.getField(record, 'TBG Product Code') || null,
 
     // Taxonomy — a product can have multiple Categories, Collections, and
     // Occasions at once. Category/Sub Category/Occasion/Collections are
     // linked-record fields; names/slugs/images come from their paired lookup
     // fields, not the raw link field itself (which only holds record IDs).
     categories: zipTaxonomy(
-      f['Category Name (from Category)'],
-      f['Category Slug (from Category)'],
-      f['Category Image (from Category)']
+      compatFields.getField(record, 'Category Name (from Category)'),
+      compatFields.getField(record, 'Category Slug (from Category)'),
+      compatFields.getField(record, 'Category Image (from Category)')
     ),
-    subCategory: asArray(f['Sub Category Name (from Sub Category)'])[0] || null,
+    subCategory: asArray(compatFields.getField(record, 'Sub Category Name (from Sub Category)'))[0] || null,
     collections: zipTaxonomy(
-      f['Name (from Collections)'],
-      f['Slug (from Collections)'],
-      f['Collection Image (from Collections Linked)']
+      compatFields.getField(record, 'Name (from Collections)'),
+      compatFields.getField(record, 'Slug (from Collections)'),
+      compatFields.getField(record, 'Collection Image (from Collections Linked)')
     ),
     occasions: zipTaxonomy(
-      f['Name (from Occasion)'],
-      f['Slug (from Occasion)'],
-      f['Occasion Image (from Occasion Tags Linked)']
+      compatFields.getField(record, 'Name (from Occasion)'),
+      compatFields.getField(record, 'Slug (from Occasion)'),
+      compatFields.getField(record, 'Occasion Image (from Occasion Tags Linked)')
     ),
-    productTags: asArray(f['Product Tags']),
+    productTags: asArray(compatFields.getField(record, 'Product Tags')),
     
     // Media
-    images: extractAllImageUrls(f['Product Images'], f['Website Image Alt Text']),
+    images: extractAllImageUrls(compatFields.getField(record, 'Product Images'), compatFields.getField(record, 'Website Image Alt Text')),
     
     // Editorial
-    whyTitle: f['Editorial Title'] || 'Why This Gift Exists',
-    whyParagraphs: f['Editorial Paragraphs'] 
-      ? (Array.isArray(f['Editorial Paragraphs']) ? f['Editorial Paragraphs'] : [f['Editorial Paragraphs']])
-      : ['This gifting experience was thoughtfully curated for meaningful corporate moments.'],
-    whyImage: extractImageUrl(f['Editorial Image']),
+    whyTitle: compatFields.getField(record, 'Editorial Title') || 'Why This Gift Exists',
+    whyParagraphs: (function() {
+      var p = compatFields.getField(record, 'Editorial Paragraphs');
+      if (p) {
+        return Array.isArray(p) ? p : [p];
+      }
+      return ['This gifting experience was thoughtfully curated for meaningful corporate moments.'];
+    })(),
+    whyImage: extractImageUrl(compatFields.getField(record, 'Editorial Image')),
     
     // Contents
-    items: parseItems(f['Product Contents']),
+    items: parseItems(compatFields.getField(record, 'Product Contents')),
     
     // Procurement
-    moq: f['MOQ'] || null,
-    productType: f['Product Type'] || null,
-    usp: f['USP'] || null,
-    material: f['Material'] || null,
-    leadTime: f['Lead Time'] || null,
-    delivery: f['Delivery'] || null,
-    responseTime: f['Response Time'] || null,
-    productionWorkflow: f['Production Workflow'] || null,
+    moq: compatFields.getField(record, 'MOQ') || null,
+    productType: compatFields.getField(record, 'Product Type') || null,
+    usp: compatFields.getField(record, 'USP') || null,
+    material: compatFields.getField(record, 'Material') || null,
+    leadTime: compatFields.getField(record, 'Lead Time') || null,
+    delivery: compatFields.getField(record, 'Delivery') || null,
+    responseTime: compatFields.getField(record, 'Response Time') || null,
+    productionWorkflow: compatFields.getField(record, 'Production Workflow') || null,
     
     // Branding
-    branding: parseBranding(f['Branding Option']),
+    branding: parseBranding(compatFields.getField(record, 'Branding Option')),
     
     // FAQ
-    faq: parseFAQ(f['FAQ']),
+    faq: parseFAQ(compatFields.getField(record, 'FAQ')),
     
     // Lead Gen
-    ctaTitle: f['CTA Title'] || null,
-    ctaDescription: f['CTA Description'] || null,
-    ctaImage: extractImageUrl(f['CTA Image']),
-    ctaBackground: f['CTA Background'] || null,
-    ctaButtonLabel: f['CTA Button Label'] || null,
+    ctaTitle: compatFields.getField(record, 'CTA Title') || null,
+    ctaDescription: compatFields.getField(record, 'CTA Description') || null,
+    ctaImage: extractImageUrl(compatFields.getField(record, 'CTA Image')),
+    ctaBackground: compatFields.getField(record, 'CTA Background') || null,
+    ctaButtonLabel: compatFields.getField(record, 'CTA Button Label') || null,
     
     // Related (will be populated by algorithm)
     related: [],
@@ -210,10 +213,10 @@ function formatProduct(record) {
     // Raw data for algorithm matching — these are now linked-record IDs
     // (Airtable REST API returns bare record ID strings for link fields),
     // so matching is by true taxonomy record identity, not display name.
-    _rawOccasionTags: asArray(f['Occasion']),
-    _rawCategories: asArray(f['Category']),
-    _rawCollectionTags: asArray(f['Collections']),
-    _rawProductTags: asArray(f['Product Tags'])
+    _rawOccasionTags: asArray(compatFields.getField(record, 'Occasion')),
+    _rawCategories: asArray(compatFields.getField(record, 'Category')),
+    _rawCollectionTags: asArray(compatFields.getField(record, 'Collections')),
+    _rawProductTags: asArray(compatFields.getField(record, 'Product Tags'))
   };
 }
 

@@ -13,6 +13,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
 const airtableCache = require('./_lib/airtableCache');
+const compatFields = require('./_lib/compatFields');
 
 // No Occasion record in Airtable has a Hero Image uploaded yet -- the site's
 // real per-occasion photography instead lives as static files in
@@ -53,16 +54,14 @@ module.exports = async function handler(req, res) {
     });
 
     const occasions = records.map(function (record) {
-      const images = record.fields['Hero Image'];
-      const slug = record.fields['Slug'] || '';
+      var slug = compatFields.getField(record, 'Slug') || '';
       return {
         id: record.id,
         slug: slug,
-        name: record.fields['Name'] || 'Occasion',
-        description: record.fields['Description'] || '',
-        image: (images && images.length > 0)
-          ? images[0].url
-          : (STATIC_OCCASION_IMAGES[slug] || '/image/placeholder.png')
+        name: compatFields.getField(record, 'Name') || 'Occasion',
+        description: compatFields.getField(record, 'Description') || '',
+        image: compatFields.getFirstImageUrl(record, 'Hero Image')
+          || (STATIC_OCCASION_IMAGES[slug] || '/image/placeholder.png')
       };
     });
 

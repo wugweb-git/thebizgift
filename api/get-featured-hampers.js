@@ -2,6 +2,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
 const airtableCache = require('./_lib/airtableCache');
+const compatFields = require('./_lib/compatFields');
 
 // Published is the source of truth for live visibility (Website Ready is a
 // stricter completeness gate that under-counts otherwise-complete products).
@@ -30,38 +31,36 @@ module.exports = async function handler(req, res) {
     var formattedHampers = records.map(function (record) {
       return {
         id: record.id,
-        slug: record.fields['website URL Slug'] || 'unknown-product',
-        name: record.fields['Product Website Name'] || 'Curated Hamper',
-        description: record.fields['Product Website Description'] || '',
+        slug: compatFields.getField(record, 'website URL Slug') || 'unknown-product',
+        name: compatFields.getField(record, 'Product Website Name') || 'Curated Hamper',
+        description: compatFields.getField(record, 'Product Website Description') || '',
         // Category/Occasion/Collections are linked-record fields — Airtable's
         // REST API returns bare record IDs for these, so names are read from
         // their paired lookup fields instead. A product can have several of
         // each (many-to-many linked records), so all are kept as arrays.
-        categories: record.fields['Category Name (from Category)'] || [],
-        occasions: record.fields['Name (from Occasion)'] || [],
-        collections: record.fields['Name (from Collections)'] || [],
+        categories: compatFields.getField(record, 'Category Name (from Category)') || [],
+        occasions: compatFields.getField(record, 'Name (from Occasion)') || [],
+        collections: compatFields.getField(record, 'Name (from Collections)') || [],
         // Slug arrays, index-aligned with the name arrays above, for exact
         // client-side filtering that's immune to display-name drift (same
         // lookup fields already read by get-hamper.js's zipTaxonomy()).
-        categorySlugs: record.fields['Category Slug (from Category)'] || [],
-        occasionSlugs: record.fields['Slug (from Occasion)'] || [],
-        collectionSlugs: record.fields['Slug (from Collections)'] || [],
-        moq: record.fields['MOQ'] || '50',
-        material: record.fields['Material'] || 'Mixed',
-        branding: record.fields['Branding Option'] || [],
-        seoTitle: record.fields['SEO Title'] || '',
-        seoDesc: record.fields['SEO Description'] || '',
-        productCode: record.fields['TBG Product Code'] || '',
-        featured: !!record.fields['Featured on Homepage'],
+        categorySlugs: compatFields.getField(record, 'Category Slug (from Category)') || [],
+        occasionSlugs: compatFields.getField(record, 'Slug (from Occasion)') || [],
+        collectionSlugs: compatFields.getField(record, 'Slug (from Collections)') || [],
+        moq: compatFields.getField(record, 'MOQ') || '50',
+        material: compatFields.getField(record, 'Material') || 'Mixed',
+        branding: compatFields.getField(record, 'Branding Option') || [],
+        seoTitle: compatFields.getField(record, 'SEO Title') || '',
+        seoDesc: compatFields.getField(record, 'SEO Description') || '',
+        productCode: compatFields.getField(record, 'TBG Product Code') || '',
+        featured: !!compatFields.getField(record, 'Featured on Homepage'),
         // Manual display-order hint set by the site owner in Airtable;
         // absent for most products (sorted below).
-        priority: (typeof record.fields['Priority'] === 'number') ? record.fields['Priority'] : null,
+        priority: (typeof compatFields.getField(record, 'Priority') === 'number') ? compatFields.getField(record, 'Priority') : null,
         // Extract the first image URL safely; Website Image Alt Text is a
         // single field covering the primary image, other filenames are ignored here.
-        image: (record.fields['Product Images'] && record.fields['Product Images'].length > 0)
-               ? record.fields['Product Images'][0].url
-               : '/image/placeholder.png',
-        imageAlt: record.fields['Website Image Alt Text'] || record.fields['Product Website Name'] || 'Product image'
+        image: compatFields.getFirstImageUrl(record, 'Product Images') || '/image/placeholder.png',
+        imageAlt: compatFields.getField(record, 'Website Image Alt Text') || compatFields.getField(record, 'Product Website Name') || 'Product image'
       };
     });
 
