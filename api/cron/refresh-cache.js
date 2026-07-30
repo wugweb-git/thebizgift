@@ -85,15 +85,17 @@ async function mirrorAttachment(attachment) {
 // replaces each attachment's `url` with its mirrored Vercel Blob URL,
 // leaving every other property (filename, id, type, etc.) intact so
 // downstream code (get-hamper.js etc., which just reads `.url`) needs no
-// changes. A mirroring failure aborts this table's update so the existing
-// Blob-backed live records remain in place; an Airtable URL is never written
-// into the durable website buffer.
+// changes. A single image mirroring failure is logged but does NOT abort
+// the table refresh — the original Airtable URL is kept so the site
+// remains functional (images load from Airtable directly). Only a total
+// absence of Blob configuration aborts, since that indicates a deployment
+// misconfiguration rather than a transient image failure.
 async function mirrorImages(tableName, records) {
   var fields = MIRROR_FIELDS[tableName];
   if (!fields || fields.length === 0) return records;
   if (!BLOB_ENABLED) throw new Error('Blob storage is not configured');
 
-  var errors = [];
+  var imageErrors = 0;
   for (var i = 0; i < records.length; i++) {
     var record = records[i];
     for (var j = 0; j < fields.length; j++) {
@@ -106,14 +108,62 @@ async function mirrorImages(tableName, records) {
           var mirroredUrl = await mirrorAttachment(attachments[k]);
           attachments[k] = Object.assign({}, attachments[k], { url: mirroredUrl });
         } catch (error) {
-          errors.push('attachment ' + attachments[k].id + ': ' + error.message);
+          imageErrors++;
+          console.error('refresh-cache: image mirror failed for ' + tableName +
+            ' attachment ' + attachments[k].id + ': ' + error.message +
+            ' — keeping original Airtable URL');
+          // Keep the original Airtable URL — the site still works, just
+          // loads images from Airtable instead of Blob for this attachment.
         }
       }
     }
   }
 
-  if (errors.length > 0) {
-    throw new Error('refresh-cache: failed to mirror one or more images for ' + tableName + ': ' + errors.join('; '));
+  if (imageErrors > 0) {
+    console.warn('refresh-cache: ' + imageErrors + ' image(s) failed to mirror for ' +
+      tableName + ' — records written with original Airtable URLs for those images');
+  }
+
+  return records;
+}
+
+// Validates that records are in the canonical schema format before they
+// are written to Redis. Rejects legacy formats (cellValuesByFieldId,
+// fields keyed by fldXXX Airtable field IDs) that would cause API readers
+// to crash or return empty data. This is the last line of defense against
+// malformed data entering the durable cache.
+function validateCanonicalRecords(records, tableName) {
+  if (!Array.isArray(records)) {
+    throw new Error('validateCanonicalRecords: records is not an array for ' + tableName);
+  }
+  if (records.length === 0) {
+    throw new Error('validateCanonicalRecords: records array is empty for ' + tableName);
+  }
+
+  for (var i = 0; i < records.length; i++) {
+    var record = records[i];
+
+    // Reject cellValuesByFieldId format (legacy Airtable backup format)
+    if (record.cellValuesByFieldId && !record.fields) {
+      throw new Error('validateCanonicalRecords: record ' + record.id +
+        ' in ' + tableName + ' uses cellValuesByFieldId format — expected fields with human-readable names');
+    }
+
+    // Reject records with no fields object
+    if (!record.fields || typeof record.fields !== 'object' || Array.isArray(record.fields)) {
+      throw new Error('validateCanonicalRecords: record ' + record.id +
+        ' in ' + tableName + ' is missing fields object');
+    }
+
+    // Reject fields keyed by Airtable field IDs (fldXXX) instead of names
+    var fieldKeys = Object.keys(record.fields);
+    for (var j = 0; j < fieldKeys.length; j++) {
+      if (/^fld[A-Za-z0-9]+$/.test(fieldKeys[j])) {
+        throw new Error('validateCanonicalRecords: record ' + record.id +
+          ' in ' + tableName + ' has field ID key "' + fieldKeys[j] +
+          '" — expected human-readable field name');
+      }
+    }
   }
 
   return records;
@@ -198,6 +248,7 @@ async function handler(req, res) {
     try {
       var rawRecords = await airtableCache.fetchAllRecords(t.name, t.filter, t.extraParams);
       var mirroredRecords = await mirrorImages(t.name, rawRecords);
+      validateCanonicalRecords(mirroredRecords, t.name);
       await airtableCache.setTable(t.name, t.filter, t.extraParams, mirroredRecords);
       results[t.name] = { ok: true, count: mirroredRecords.length };
     } catch (error) {
