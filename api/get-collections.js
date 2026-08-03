@@ -37,14 +37,23 @@ module.exports = async function handler(req, res) {
       extraParams: 'sort%5B0%5D%5Bfield%5D=Order&sort%5B0%5D%5Bdirection%5D=asc'
     });
 
-    const collections = records.map(function (record) {
-      return {
-        id: record.id,
-        slug: compatFields.getField(record, 'Slug', 'Collections') || '',
-        name: compatFields.getField(record, 'Name', 'Collections') || 'Collection',
-        description: compatFields.getField(record, 'Description', 'Collections') || ''
-      };
-    });
+    // Collections with zero published products are dead filter options —
+    // hide them rather than showing an empty result set when selected.
+    const productRecords = await airtableCache.getCachedTable('Products', '{Published}=TRUE()');
+    const slugsWithProducts = compatFields.getLinkedSlugSet(productRecords, 'Slug (from Collections)');
+
+    const collections = records
+      .map(function (record) {
+        return {
+          id: record.id,
+          slug: compatFields.getField(record, 'Slug', 'Collections') || '',
+          name: compatFields.getField(record, 'Name', 'Collections') || 'Collection',
+          description: compatFields.getField(record, 'Description', 'Collections') || ''
+        };
+      })
+      .filter(function (collection) {
+        return slugsWithProducts.has(collection.slug);
+      });
 
     res.status(200).json(collections);
   } catch (error) {

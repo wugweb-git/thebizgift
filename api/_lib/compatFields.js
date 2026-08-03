@@ -217,8 +217,32 @@ function getFirstImageUrl(record, fieldName, tableName) {
   return null;
 }
 
+/**
+ * Collects the distinct slugs referenced by a lookup field across a set of
+ * product records (e.g. every "Category Slug (from Category)" value any
+ * published product actually links to). Used to hide taxonomy entries
+ * (Category, Collections) that have zero matching products, since an empty
+ * filter option is dead weight in the explore page's sidebar.
+ *
+ * @param {Array} productRecords - Records from the Products table
+ * @param {string} lookupFieldName - The Products lookup field name to read
+ * @returns {Set<string>} Distinct, non-empty slug values referenced by any record
+ */
+function getLinkedSlugSet(productRecords, lookupFieldName) {
+  var slugs = new Set();
+  for (var i = 0; i < productRecords.length; i++) {
+    var value = getField(productRecords[i], lookupFieldName, 'Products');
+    if (!Array.isArray(value)) continue;
+    for (var j = 0; j < value.length; j++) {
+      if (value[j]) slugs.add(value[j]);
+    }
+  }
+  return slugs;
+}
+
 module.exports = {
   getField: getField,
   getAttachments: getAttachments,
-  getFirstImageUrl: getFirstImageUrl
+  getFirstImageUrl: getFirstImageUrl,
+  getLinkedSlugSet: getLinkedSlugSet
 };

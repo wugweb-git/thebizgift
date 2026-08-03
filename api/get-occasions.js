@@ -53,17 +53,26 @@ module.exports = async function handler(req, res) {
       extraParams: 'sort%5B0%5D%5Bfield%5D=Order&sort%5B0%5D%5Bdirection%5D=asc'
     });
 
-    const occasions = records.map(function (record) {
-      var slug = compatFields.getField(record, 'Slug', 'Occasions') || '';
-      return {
-        id: record.id,
-        slug: slug,
-        name: compatFields.getField(record, 'Name', 'Occasions') || 'Occasion',
-        description: compatFields.getField(record, 'Description', 'Occasions') || '',
-        image: compatFields.getFirstImageUrl(record, 'Hero Image', 'Occasions')
-          || (STATIC_OCCASION_IMAGES[slug] || '/image/placeholder.png')
-      };
-    });
+    // Occasions with zero published products are dead filter options —
+    // hide them rather than showing an empty result set when selected.
+    const productRecords = await airtableCache.getCachedTable('Products', '{Published}=TRUE()');
+    const slugsWithProducts = compatFields.getLinkedSlugSet(productRecords, 'Slug (from Occasion)');
+
+    const occasions = records
+      .map(function (record) {
+        var slug = compatFields.getField(record, 'Slug', 'Occasions') || '';
+        return {
+          id: record.id,
+          slug: slug,
+          name: compatFields.getField(record, 'Name', 'Occasions') || 'Occasion',
+          description: compatFields.getField(record, 'Description', 'Occasions') || '',
+          image: compatFields.getFirstImageUrl(record, 'Hero Image', 'Occasions')
+            || (STATIC_OCCASION_IMAGES[slug] || '/image/placeholder.png')
+        };
+      })
+      .filter(function (occasion) {
+        return slugsWithProducts.has(occasion.slug);
+      });
 
     res.status(200).json(occasions);
   } catch (error) {

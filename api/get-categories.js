@@ -39,15 +39,24 @@ module.exports = async function handler(req, res) {
       extraParams: 'sort%5B0%5D%5Bfield%5D=Name&sort%5B0%5D%5Bdirection%5D=asc'
     });
 
-    const categories = records.map(function (record) {
-      return {
-        id: record.id,
-        slug: compatFields.getField(record, 'Slug', 'Category') || '',
-        name: compatFields.getField(record, 'Name', 'Category') || 'Category',
-        description: compatFields.getField(record, 'Description', 'Category') || '',
-        image: compatFields.getFirstImageUrl(record, 'Image', 'Category') || null
-      };
-    });
+    // Categories with zero published products are dead filter options —
+    // hide them rather than showing an empty result set when selected.
+    const productRecords = await airtableCache.getCachedTable('Products', '{Published}=TRUE()');
+    const slugsWithProducts = compatFields.getLinkedSlugSet(productRecords, 'Category Slug (from Category)');
+
+    const categories = records
+      .map(function (record) {
+        return {
+          id: record.id,
+          slug: compatFields.getField(record, 'Slug', 'Category') || '',
+          name: compatFields.getField(record, 'Name', 'Category') || 'Category',
+          description: compatFields.getField(record, 'Description', 'Category') || '',
+          image: compatFields.getFirstImageUrl(record, 'Image', 'Category') || null
+        };
+      })
+      .filter(function (category) {
+        return slugsWithProducts.has(category.slug);
+      });
 
     // "More" is a catch-all category and should always render last,
     // regardless of where it falls alphabetically. Stable sort preserves
