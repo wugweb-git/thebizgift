@@ -107,11 +107,19 @@ On localhost, product pages render from built-in mock data and forms simulate su
 
 ### Caching / rate-limit architecture
 
-Airtable enforces a **5 requests/second cap per base** (not per caller). The 5 read endpoints above all go through `api/_lib/airtableCache.js` rather than calling Airtable directly, in 3 additive layers — all zero-config by default, each opt-in env var upgrades the next layer without touching endpoint code:
+Airtable enforces a **5 requests/second cap per base** (not per caller). The architecture's answer is blunt: **visitor-facing reads never touch Airtable at all.**
 
-1. **In-memory cache + pagination fix** (always on, no config). Module-scope cache keyed by `table::filter`, with in-flight de-duplication so concurrent callers on the same warm instance share one Airtable fetch. `get-hamper.js` and `get-featured-hampers.js` both read the same `Products` cache key, so they no longer duplicate each other's fetch. Also follows Airtable's `offset` pagination token across pages — Airtable caps each *page* at 100 records regardless of `maxRecords`, so this prevents silent catalog truncation past 100 published rows. Default TTL is 25 hours — long enough that a single missed refresh (a skipped webhook ping, a transient error) can't expire the cache before the next one, since the daily Vercel Cron is the worst-case backstop and needs a full day of headroom.
-2. **Stale-on-error** (always on, no config). If a refresh fails (including a 429), the last known-good result is served instead of a 500 — a transient Airtable outage/rate-limit becomes invisible staleness, not a visible error.
-3. **Durable cross-instance buffer** (opt-in via `UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or Vercel's native Storage-integration naming `KV_REST_API_URL`+`KV_REST_API_TOKEN`). Without these, the in-memory cache above is the only cache, and each concurrent/cold Vercel instance has its own copy. With an Upstash Redis store attached, all instances share one buffer via plain HTTPS REST calls (no SDK) — the biggest gap the in-memory-only cache can't close on its own. Absent/unreachable → silently falls through to Airtable directly, exactly like layers 1-2 alone.
+The durable KV buffer (Upstash Redis) is the website's authoritative content store. The 5 read endpoints above go through `api/_lib/airtableCache.js`, which reads *only* from KV. Airtable is contacted exclusively by the protected sync endpoint (`api/cron/refresh-cache.js`) after Airtable itself signals a change.
+
+**KV is required, not optional.** Set `UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or Vercel's native Storage-integration naming `KV_REST_API_URL`+`KV_REST_API_TOKEN`. Without them the site has no content source and read endpoints return a 500 — `hasContentSource()` gates every one of them.
+
+Three deliberate design choices worth knowing before editing this module:
+
+1. **No process-local TTL cache.** `getCachedTable()` hits KV on every request rather than memoising in module scope. This is intentional (see the comment above `getCachedTable`): a sync can update KV on a *different* serverless instance, and a local cache would let stale content survive on warm instances that never saw the write. Concurrent requests for the same key are still coalesced via an in-flight promise map, so a burst produces one KV round-trip, not N.
+2. **A cache miss fails loudly.** `resolveRecords()` throws `Content buffer has no snapshot for <key>` rather than falling back to a live Airtable fetch. A missing snapshot is an operational problem that should be visible and fixed, not silently papered over with unbounded Airtable traffic — which is exactly what the 5 req/s cap punishes.
+3. **Pagination is followed properly.** `fetchAllRecords()` (sync path only) follows Airtable's `offset` token across pages, up to `MAX_PAGES` (1000 records). Airtable caps each *page* at 100 records regardless of `maxRecords`, so without this the catalog would silently truncate past 100 published rows.
+
+**Write path (lead submissions)** mirrors this shape in reverse — see `api/_lib/leadsQueue.js`. A lead is pushed onto a durable Redis list *before* Airtable is contacted; if the Airtable write then fails, the visitor still sees success because the lead is safely captured, and `refresh-cache.js` retries it on the next webhook ping or cron heartbeat.
 
 **Push-based sync** (`api/cron/refresh-cache.js`) proactively keeps the buffer warm so reads almost never fall through to a live Airtable call at all. Two real triggers, both genuinely event-driven or persistent (no session-dependent polling, no third-party service):
 
@@ -124,11 +132,11 @@ Airtable enforces a **5 requests/second cap per base** (not per caller). The 5 r
 
 **Manual one-time bridge** (`scripts/seed-*-from-csv.js`, one per table): for bootstrapping the buffer from a CSV export when Airtable's REST API itself is rate-limited — parses a Grid View CSV export and writes straight into the same cache/KV buffer and Blob-mirror pipeline above, without ever calling `api.airtable.com` (image downloads go through Airtable's separate, non-rate-limited attachment CDN). Not part of normal operation; see the header comment in `scripts/seed-products-from-csv.js` for usage and caveats (CSV attachment URLs are signed/time-limited).
 
-**New env vars, all optional/opt-in** (site works with none of them set, exactly as before):
+**Env vars** — the KV pair is **required**; the rest are opt-in:
 
 | Env var | Enables | Where it comes from |
 |---|---|---|
-| `UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or `KV_REST_API_URL`+`KV_REST_API_TOKEN` | Cross-instance buffer | Attach an Upstash Redis integration to the Vercel project (the latter naming is what Vercel auto-generates via its native Storage integration) |
+| `UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or `KV_REST_API_URL`+`KV_REST_API_TOKEN` | **Required** — the content buffer every read endpoint serves from. Without it, all 5 read endpoints 500 | Attach an Upstash Redis integration to the Vercel project (the latter naming is what Vercel auto-generates via its native Storage integration) |
 | `WEBHOOK_SECRET` | Airtable webhook registration + manual sync trigger | Pick any random string; used both to authorize `register-airtable-webhook.js` and as the manual-trigger secret |
 | `CRON_SECRET` | Vercel Cron → sync trigger | Pick any random string with **no leading/trailing whitespace**; Vercel auto-sends it as `Authorization: Bearer <value>` to cron-triggered requests once set |
 | `BLOB_READ_WRITE_TOKEN` | Image mirroring to Vercel Blob | Attach a Vercel Blob store to the project (auto-injected) |
@@ -138,7 +146,7 @@ Airtable enforces a **5 requests/second cap per base** (not per caller). The 5 r
 - **Root Directory = repo root (leave blank)** — site files are at the root, so no Root Directory setting is needed. This is intentional: it makes the project transferable to any Vercel account with zero config (import → deploy).
 - Framework Preset = Other (static)
 - Config: `vercel.json` at repo root (security headers, image + CSS/JS caching); `.vercelignore` keeps `docs/` out of the bundle
-- Environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_LEADS_TABLE` (required); `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `WEBHOOK_SECRET`, `CRON_SECRET`, `BLOB_READ_WRITE_TOKEN` (all optional, see "Caching / rate-limit architecture" above — the site works with none of these set)
+- Environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and the KV pair (`UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or `KV_REST_API_URL`+`KV_REST_API_TOKEN`) are **required** — without KV every read endpoint returns a 500. `AIRTABLE_LEADS_TABLE`, `WEBHOOK_SECRET`, `CRON_SECRET`, `BLOB_READ_WRITE_TOKEN` are optional (see "Caching / rate-limit architecture" above)
 - **Live:** https://thebizgift.vercel.app
 
 ## Client Migration Checklist

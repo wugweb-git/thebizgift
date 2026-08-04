@@ -76,7 +76,7 @@
 
               <div class="form-group">
                 <label for="phoneNumber">Phone Number *</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[+]?[\d\s()-]{7,15}" placeholder="+91 99999 99999" aria-describedby="phoneNumber-error">
+                <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+91 99999 99999" aria-describedby="phoneNumber-error">
                 <span class="field-error" id="phoneNumber-error" role="alert"></span>
               </div>
             </div>
@@ -103,7 +103,6 @@
                   <option value="Employee Joining Kits">Employee Joining Kits</option>
                   <option value="Event Giveaways">Event Giveaways</option>
                   <option value="Client Appreciation Gifts">Client Appreciation Gifts</option>
-                  <option value="Festive Corporate Gifting">Festive Corporate Gifting</option>
                   <option value="Festive Gifting">Festive Gifting</option>
                   <option value="Wedding Gifting">Wedding Gifting</option>
                   <option value="Other">Other</option>
@@ -113,7 +112,8 @@
 
               <div class="form-group">
                 <label for="budget">Estimated Budget Per Gift</label>
-                <input type="text" id="budget" name="budget" inputmode="numeric" placeholder="e.g. ₹1,500">
+                <input type="text" id="budget" name="budget" inputmode="decimal" placeholder="e.g. ₹1,500" aria-describedby="budget-error">
+                <span class="field-error" id="budget-error" role="alert"></span>
               </div>
             </div>
 
@@ -138,8 +138,10 @@
             </div>
             
             <div class="form-group full-width">
-              <label for="message">Tell Us More</label>
-              <textarea id="message" name="message" rows="5" maxlength="2000" placeholder="Tell us about your audience, timeline, branding requirements, delivery locations, or any specific ideas you have in mind."></textarea>
+              <label for="message">Tell Us More * <span class="field-note">Min. 50 words</span></label>
+              <textarea id="message" name="message" rows="5" required maxlength="2000" aria-describedby="message-error message-counter" placeholder="Tell us about your audience, timeline, branding requirements, delivery locations, or any specific ideas you have in mind."></textarea>
+              <span class="field-counter" id="message-counter">0 / 50 words minimum</span>
+              <span class="field-error" id="message-error" role="alert"></span>
             </div>
             
             <!-- Hidden fields for product context -->
@@ -215,6 +217,7 @@
   <div id="footer-placeholder"></div>
 
   <script src="/components.js?v=5"></script>
+  <script src="/form-validation.js?v=1"></script>
   <script>
     // Capture product context from URL params
     document.addEventListener('DOMContentLoaded', function() {
@@ -271,11 +274,46 @@
         });
       }
 
-      // Friendlier message than the browser's generic pattern-mismatch text.
+      // Phone must include an ISD/country code (a bare 10-digit number is
+      // rejected on purpose -- see form-validation.js).
+      const V = window.TBGFormValidation;
       const phoneField = document.getElementById('phoneNumber');
       if (phoneField) {
         phoneField.addEventListener('input', function () {
-          this.setCustomValidity(this.validity.patternMismatch ? 'Enter a valid phone number (at least 7 digits).' : '');
+          this.setCustomValidity(this.value && !V.isValidPhone(this.value) ? 'Include your country code, e.g. +91 98765 43210.' : '');
+        });
+      }
+
+      // Budget is optional, but if filled it must be a plain number (an INR
+      // symbol/"Rs"/commas are stripped before checking).
+      const budgetField = document.getElementById('budget');
+      if (budgetField) {
+        budgetField.addEventListener('input', function () {
+          this.setCustomValidity(!V.isValidBudget(this.value) ? 'Enter a number, e.g. 1500 or ₹1,500.' : '');
+        });
+      }
+
+      // Tell Us More requires a real answer -- at least 50 words -- with a
+      // live counter so the requirement isn't a surprise at submit time.
+      const messageField = document.getElementById('message');
+      const messageCounter = document.getElementById('message-counter');
+      if (messageField && messageCounter) {
+        const updateMessageState = function () {
+          const count = V.wordCount(messageField.value);
+          messageCounter.textContent = count + ' / ' + V.MIN_MESSAGE_WORDS + ' words minimum';
+          messageCounter.classList.toggle('met', count >= V.MIN_MESSAGE_WORDS);
+          messageField.setCustomValidity(V.isValidMessage(messageField.value) ? '' : 'Please write at least ' + V.MIN_MESSAGE_WORDS + ' words.');
+        };
+        messageField.addEventListener('input', updateMessageState);
+        updateMessageState();
+      }
+
+      // Quantity must never be 0 -- belt-and-suspenders alongside the
+      // native min attribute (MOQ 50).
+      const quantityField = document.getElementById('quantity');
+      if (quantityField) {
+        quantityField.addEventListener('input', function () {
+          this.setCustomValidity(this.value !== '' && Number(this.value) <= 0 ? 'Quantity must be greater than 0.' : '');
         });
       }
 

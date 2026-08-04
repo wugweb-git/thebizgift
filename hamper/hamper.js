@@ -51,8 +51,8 @@
     ],
     productTags: ['Employee Gifting', 'Client Appreciation', 'Premium Picks', 'Eco Friendly'],
     images: [
-      { url: '/image/BCC Hamper 2.png', alt: 'The CC Hamper — Hero view' },
-      { url: '/image/BCC Hamper.png', alt: 'The CC Hamper — Detail view' },
+      { url: '/image/home/featured-coffee-calm-hamper.webp', alt: 'The CC Hamper — Hero view' },
+      { url: '/image/home/featured-executive-essentials-hamper.webp', alt: 'The CC Hamper — Detail view' },
       { url: '/image/Hamper 3.webp', alt: 'The CC Hamper — Packaging view' },
       { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'The CC Hamper — Lifestyle view' }
     ],
@@ -62,18 +62,18 @@
     packaging: 'Rigid Gift Box',
     branding: [
       { name: 'Logo Branding', description: 'Precision logo placement on packaging and products.', image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp' },
-      { name: 'Laser Engraving', description: 'Permanent premium finish on wooden and metal surfaces.', image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png' },
-      { name: 'Screen Printing', description: 'Ideal for high-volume gifting with consistent results.', image: '/image/Gemini_Generated_Image_ate3jcate3jcate3.png' },
-      { name: 'Custom Inserts', description: 'Welcome letters, guides and campaign collateral.', image: '/image/Gemini_Generated_Image_bemqj4bemqj4bemq.png' },
-      { name: 'Corporate Colour Matching', description: 'Packaging aligned to your brand identity.', image: '/image/Gemini_Generated_Image_dpv57edpv57edpv5.png' },
-      { name: 'Gift Notes', description: 'Personalised messages that add a human touch.', image: '/image/BCC Hamper 2.png' },
+      { name: 'Laser Engraving', description: 'Permanent premium finish on wooden and metal surfaces.', image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp' },
+      { name: 'Screen Printing', description: 'Ideal for high-volume gifting with consistent results.', image: '/image/Customisation/more-than-a-logo.webp' },
+      { name: 'Custom Inserts', description: 'Welcome letters, guides and campaign collateral.', image: '/image/Customisation/faq-sidebar.webp' },
+      { name: 'Corporate Colour Matching', description: 'Packaging aligned to your brand identity.', image: '/image/Customisation/brand-cta-visual.webp' },
+      { name: 'Gift Notes', description: 'Personalised messages that add a human touch.', image: '/image/home/featured-coffee-calm-hamper.webp' },
       { name: 'Ribbon Colours', description: 'Custom ribbon colours to match your brand palette.', image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp' }
     ],
     related: [
       {
         name: 'Executive Welcome Kit',
         slug: 'executive-welcome-kit',
-        image: '/image/BCC Hamper.png',
+        image: '/image/home/featured-executive-essentials-hamper.webp',
         description: 'A premium onboarding experience for new leadership hires.',
         collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }],
         moq: '50 Boxes'
@@ -81,7 +81,7 @@
       {
         name: 'Coffee & Calm',
         slug: 'coffee-calm',
-        image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png',
+        image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp',
         description: 'Mindful gifting for wellness-focused corporate programs.',
         collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }],
         moq: '25 Boxes'
@@ -119,8 +119,8 @@
       collections: [{ name: 'Premium Picks', slug: 'premium-picks', image: null }],
       usp: 'Designed for high-touch onboarding moments with executive stationery, drinkware and premium packaging tailored to your brand.',
       images: [
-        { url: '/image/BCC Hamper.png', alt: 'Executive Welcome Kit — Hero view' },
-        { url: '/image/BCC Hamper 2.png', alt: 'Executive Welcome Kit — Packaging view' },
+        { url: '/image/home/featured-executive-essentials-hamper.webp', alt: 'Executive Welcome Kit — Hero view' },
+        { url: '/image/home/featured-coffee-calm-hamper.webp', alt: 'Executive Welcome Kit — Packaging view' },
         { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp', alt: 'Executive Welcome Kit — Branding detail' }
       ]
     }),
@@ -149,8 +149,8 @@
       collections: [{ name: 'Sustainable Choices', slug: 'sustainable-choices', image: null }],
       usp: 'Pairs premium coffee cues with relaxing add-ons and brandable packaging for calm, memorable gifting.',
       images: [
-        { url: '/image/BCC Hamper 2.png', alt: 'Coffee & Calm — Hero view' },
-        { url: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png', alt: 'Coffee & Calm — Packaging view' },
+        { url: '/image/home/featured-coffee-calm-hamper.webp', alt: 'Coffee & Calm — Hero view' },
+        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp', alt: 'Coffee & Calm — Packaging view' },
         { url: '/image/Self Care Hamper V2.webp', alt: 'Coffee & Calm — Wellness detail' }
       ]
     }),
@@ -166,7 +166,7 @@
       images: [
         { url: '/image/Hamper 3.webp', alt: 'Heritage Box — Hero view' },
         { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'Heritage Box — Festive detail' },
-        { url: '/image/BCC Hamper.png', alt: 'Heritage Box — Packaging view' }
+        { url: '/image/home/featured-executive-essentials-hamper.webp', alt: 'Heritage Box — Packaging view' }
       ]
     }),
     'festive-celebration-box': Object.assign({}, MOCK_PRODUCT, {
@@ -180,8 +180,8 @@
       usp: 'Built for seasonal scale with custom sleeves, cards, inserts and pan India logistics support.',
       images: [
         { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'Festive Celebration Box — Hero view' },
-        { url: '/image/BCC Hamper 2.png', alt: 'Festive Celebration Box — Packaging view' },
-        { url: '/image/Gemini_Generated_Image_sx0cy0sx0cy0sx0c.png', alt: 'Festive Celebration Box — Detail view' }
+        { url: '/image/home/featured-coffee-calm-hamper.webp', alt: 'Festive Celebration Box — Packaging view' },
+        { url: '/image/featured-festive-celebrations-hamper.webp', alt: 'Festive Celebration Box — Detail view' }
       ]
     })
   };
@@ -561,7 +561,7 @@
                 '<div class="form-group">' +
                   '<label for="field-phone">Phone</label>' +
                   '<input type="tel" id="field-phone" name="phone" placeholder="+91 99999 99999">' +
-                  '<span class="field-error" id="error-phone">Please enter a valid phone number</span>' +
+                  '<span class="field-error" id="error-phone">Include your country code, e.g. +91 98765 43210</span>' +
                 '</div>' +
               '</div>' +
 
@@ -579,8 +579,10 @@
               '</div>' +
 
               '<div class="form-group full-width">' +
-                '<label for="field-message">Message</label>' +
-                '<textarea id="field-message" name="message" maxlength="2000" placeholder="Tell us about your gifting requirements, audience and any specific preferences..."></textarea>' +
+                '<label for="field-message">Message * <span class="field-note">Min. 50 words</span></label>' +
+                '<textarea id="field-message" name="message" required maxlength="2000" placeholder="Tell us about your gifting requirements, audience and any specific preferences..."></textarea>' +
+                '<span class="field-counter" id="message-counter">0 / 50 words minimum</span>' +
+                '<span class="field-error" id="error-message">Please write at least 50 words</span>' +
               '</div>' +
 
               '<div class="form-submit">' +
@@ -814,15 +816,34 @@
       return valid;
     }
 
+    // Shared with quote.html's rules -- see form-validation.js. Phone still
+    // optional here (only quote.html requires it), but must include an ISD
+    // code if filled in.
+    var V = window.TBGFormValidation;
+
     // Shared per-field validators — same rules used on blur/input and on submit.
     var VALIDATORS = {
       'field-name': { errorId: 'error-name', validator: function (v) { return v.trim().length > 0; } },
       'field-company': { errorId: 'error-company', validator: function (v) { return v.trim().length > 0; } },
-      'field-email': { errorId: 'error-email', validator: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
-      'field-phone': { errorId: 'error-phone', validator: function (v) { return v.trim().length === 0 || /^[+]?[\d\s()-]{7,15}$/.test(v); } },
-      'field-quantity': { errorId: 'error-quantity', validator: function (v) { return v.trim().length === 0 || (Number(v) >= 1 && Number(v) <= 100000); } },
-      'field-required-date': { errorId: 'error-required-date', validator: function (v) { return v.trim().length === 0 || v >= todayIso; } }
+      'field-email': { errorId: 'error-email', validator: function (v) { return V.isValidEmail(v); } },
+      'field-phone': { errorId: 'error-phone', validator: function (v) { return v.trim().length === 0 || V.isValidPhone(v); } },
+      'field-quantity': { errorId: 'error-quantity', validator: function (v) { return v.trim().length === 0 || (Number(v) > 0 && Number(v) <= 100000); } },
+      'field-required-date': { errorId: 'error-required-date', validator: function (v) { return v.trim().length === 0 || v >= todayIso; } },
+      'field-message': { errorId: 'error-message', validator: function (v) { return V.isValidMessage(v); } }
     };
+
+    // Live word counter for the message field, mirroring quote.html.
+    var messageField = getField('field-message');
+    var messageCounter = getField('message-counter');
+    if (messageField && messageCounter) {
+      var updateMessageCounter = function () {
+        var count = V.wordCount(messageField.value);
+        messageCounter.textContent = count + ' / ' + V.MIN_MESSAGE_WORDS + ' words minimum';
+        messageCounter.classList.toggle('met', count >= V.MIN_MESSAGE_WORDS);
+      };
+      messageField.addEventListener('input', updateMessageCounter);
+      updateMessageCounter();
+    }
 
     function validateAll() {
       var valid = true;
@@ -918,10 +939,18 @@
     }
   }
 
-  // --- Connect popup: shows after a 5s dwell, capped at 3 shows per session ---
+  // --- Connect popup: fires once the visitor has scrolled past the halfway
+  // point, and only once per session.
+  //
+  // This replaced a 5-second dwell timer capped at 3 shows/session. The timer
+  // fired while people were still reading the hero -- it interrupted the
+  // product before they'd seen it, and could do so on three separate PDPs in
+  // one visit. Scroll depth is a far better proxy for "this person is actually
+  // interested", so the prompt now lands after genuine engagement rather than
+  // after mere elapsed time.
   function initConnectPopup() {
-    var MAX_SHOWS = 3;
-    var DWELL_MS = 5000;
+    var MAX_SHOWS = 1;
+    var SCROLL_TRIGGER_RATIO = 0.5;
     var STORAGE_KEY = 'bizgift_connect_popup_shown';
 
     var modal = $('#connectPopup');
@@ -930,11 +959,28 @@
     var shownCount = parseInt(sessionStorage.getItem(STORAGE_KEY) || '0', 10);
     if (shownCount >= MAX_SHOWS) return;
 
-    var timer = setTimeout(function () {
+    var fired = false;
+
+    function scrolledPastTrigger() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return false; // page too short to scroll -- never fire
+      return (window.scrollY / scrollable) >= SCROLL_TRIGGER_RATIO;
+    }
+
+    function show() {
+      if (fired) return;
+      fired = true;
+      window.removeEventListener('scroll', onScroll);
       modal.hidden = false;
       document.body.classList.add('modal-open');
       sessionStorage.setItem(STORAGE_KEY, String(shownCount + 1));
-    }, DWELL_MS);
+    }
+
+    function onScroll() {
+      if (scrolledPastTrigger()) show();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     function dismiss() {
       modal.hidden = true;
@@ -946,7 +992,7 @@
     });
 
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) clearTimeout(timer);
+      if (document.hidden) window.removeEventListener('scroll', onScroll);
     });
   }
 

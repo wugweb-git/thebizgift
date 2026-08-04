@@ -1,5 +1,17 @@
 # Backup and Restore Architecture
 
+## Status: no backup files present
+
+The dated snapshots this directory used to hold (2026-07-12, created during
+a buffer-corruption incident) were deleted on 2026-08-04 — restoring from
+them today would have rolled live Airtable-synced data back several weeks.
+The restore machinery below (`scripts/restore-kv-cache.js` etc.) is kept
+intentionally and fails gracefully with a "Missing backup" warning per table
+when no file is present at the paths in `BACKUP_FILES`. To make it usable
+again, generate a fresh self-describing backup per table (see "Migration
+Process" below, or extend `api/cron/refresh-cache.js` to write one) and
+drop it at the corresponding path.
+
 ## Overview
 
 The Buffer layer (Redis + Vercel Blob) is the **only** data source for the frontend. Airtable is the authoritative CMS but is never queried directly by frontend API routes.
@@ -207,15 +219,3 @@ API Routes → Frontend
 4. **Single canonical schema** — one source of truth for all data entering Redis.
 5. **Separation of concerns** — migration (Airtable-dependent) is separate from restore (Airtable-independent).
 6. **Version tracking** — schema changes are tracked via `schemaVersion`.
-</arg_value>
-<task_progress>
-- [x] Investigate Redis data structure
-- [x] Identify schema mismatches
-- [x] Determine root cause
-- [x] Implement canonical schema layer
-- [x] Implement backup validator
-- [x] Implement migration tool
-- [x] Update restore pipeline
-- [x] Add documentation
-</task_progress>
-</write_to_file></tool_call>

@@ -27,6 +27,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const applyCors = require('./_lib/cors').applyCors;
 const leadsQueue = require('./_lib/leadsQueue');
+const formValidation = require('./_lib/formValidation');
 
 // Best-effort per-IP rate limit: 5 submissions/hour. Held in module-scope memory,
 // so it only holds across warm invocations of the same lambda instance (resets on
@@ -65,10 +66,6 @@ function firstNonEmpty() {
     if (v !== undefined && v !== null && String(v).trim() !== '') return String(v).trim();
   }
   return '';
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // Map any of the three form payloads into the common Airtable schema.
@@ -136,8 +133,10 @@ module.exports = async function handler(req, res) {
   var type = (body.type || '').toLowerCase();
 
   // Required fields mirror each form's own client-side validation:
-  //  - quote.html requires fullName, companyName, phoneNumber, workEmail
-  //  - the hamper PDP proposal form requires name, company, email but leaves phone optional
+  //  - quote.html requires fullName, companyName, phoneNumber, workEmail, message
+  //  - the hamper PDP proposal form requires name, company, email, message but leaves phone optional
+  // Re-checked here (not just trusted from the browser) since this endpoint
+  // is a public URL any client can POST to directly.
   if (!fields.Name) {
     res.status(400).json({ error: 'Your name is required.' });
     return;
@@ -150,8 +149,24 @@ module.exports = async function handler(req, res) {
     res.status(400).json({ error: 'A phone number is required.' });
     return;
   }
-  if (!fields.Email || !isValidEmail(fields.Email)) {
+  if (fields.Phone && !formValidation.isValidPhone(fields.Phone)) {
+    res.status(400).json({ error: 'Enter a valid phone number with country code, e.g. +91 98765 43210.' });
+    return;
+  }
+  if (!fields.Email || !formValidation.isValidEmail(fields.Email)) {
     res.status(400).json({ error: 'A valid email address is required.' });
+    return;
+  }
+  if (fields.Budget && !formValidation.isValidBudget(fields.Budget)) {
+    res.status(400).json({ error: 'Enter a numeric budget, e.g. 1500 or ₹1,500.' });
+    return;
+  }
+  if (fields.Quantity && (!/^\d+(\.\d+)?$/.test(String(fields.Quantity).trim()) || Number(fields.Quantity) <= 0)) {
+    res.status(400).json({ error: 'Quantity must be greater than 0.' });
+    return;
+  }
+  if (!fields.Message || !formValidation.isValidMessage(fields.Message)) {
+    res.status(400).json({ error: 'Please tell us more — at least ' + formValidation.MIN_MESSAGE_WORDS + ' words.' });
     return;
   }
 

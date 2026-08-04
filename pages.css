@@ -1680,6 +1680,16 @@ body.modal-open {
   display: block;
 }
 
+.field-counter {
+  display: block;
+  font-size: var(--font-size-overline);
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+.field-counter.met {
+  color: var(--color-success);
+}
+
 .form-group.full-width {
   grid-column: 1 / -1;
 }
