@@ -76,7 +76,7 @@
 
               <div class="form-group">
                 <label for="phoneNumber">Phone Number *</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+91 99999 99999" aria-describedby="phoneNumber-error">
+                <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[+]?[\d\s()-]{7,15}" placeholder="+91 99999 99999" aria-describedby="phoneNumber-error">
                 <span class="field-error" id="phoneNumber-error" role="alert"></span>
               </div>
             </div>
@@ -84,13 +84,14 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="quantity">Approximate Quantity * <span class="field-note">MOQ 50</span></label>
-                <input type="number" id="quantity" name="quantity" required min="50" step="1" placeholder="50 or more" aria-describedby="quantity-error">
+                <input type="number" id="quantity" name="quantity" required min="50" max="100000" step="1" placeholder="50 or more" aria-describedby="quantity-error">
                 <span class="field-error" id="quantity-error" role="alert"></span>
               </div>
 
               <div class="form-group">
                 <label for="requiredByDate">Required By Date</label>
-                <input type="date" id="requiredByDate" name="requiredByDate">
+                <input type="date" id="requiredByDate" name="requiredByDate" aria-describedby="requiredByDate-error">
+                <span class="field-error" id="requiredByDate-error" role="alert"></span>
               </div>
             </div>
 
@@ -138,7 +139,7 @@
             
             <div class="form-group full-width">
               <label for="message">Tell Us More</label>
-              <textarea id="message" name="message" rows="5" placeholder="Tell us about your audience, timeline, branding requirements, delivery locations, or any specific ideas you have in mind."></textarea>
+              <textarea id="message" name="message" rows="5" maxlength="2000" placeholder="Tell us about your audience, timeline, branding requirements, delivery locations, or any specific ideas you have in mind."></textarea>
             </div>
             
             <!-- Hidden fields for product context -->
@@ -155,7 +156,11 @@
           <div class="quote-success" id="quote-success" hidden>
             <div class="success-icon">✓</div>
             <h3>Thank You</h3>
-            <p>Your gifting brief is in good hands. We'll be back with something worth the wait.</p>
+            <p>Your gifting brief is in good hands. We typically respond within 24 hours with something worth the wait.</p>
+            <div class="quote-success-actions">
+              <a href="/explore/" class="btn-action btn-secondary btn-small">Explore More Hampers</a>
+              <a href="https://wa.me/917303700929" class="btn-action btn-secondary btn-small" target="_blank" rel="noopener">Chat on WhatsApp</a>
+            </div>
           </div>
         </div>
         <div class="quote-form-visual" style="background-image:url('/image/Customisation/brand-cta-visual.webp')"></div>
@@ -250,6 +255,28 @@
           const collectionName = collectionId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
           document.getElementById('collectionName').value = collectionName;
         }
+      }
+
+      // Required By Date can't be in the past. Kept as the native ISO value
+      // (YYYY-MM-DD) all the way to Airtable -- "Required By" is a real Date
+      // column there, and Airtable's API only parses ISO dates, not
+      // DD-MM-YYYY (confirmed: it 422s on anything else). To display it as
+      // DD-MM-YYYY in the base, set that on the field itself in Airtable
+      // (Required By column -> Formatting -> Date format), not here.
+      const requiredByDateField = document.getElementById('requiredByDate');
+      if (requiredByDateField) {
+        requiredByDateField.min = new Date().toISOString().slice(0, 10);
+        requiredByDateField.addEventListener('input', function () {
+          this.setCustomValidity(this.value && this.value < this.min ? 'Please choose today or a future date.' : '');
+        });
+      }
+
+      // Friendlier message than the browser's generic pattern-mismatch text.
+      const phoneField = document.getElementById('phoneNumber');
+      if (phoneField) {
+        phoneField.addEventListener('input', function () {
+          this.setCustomValidity(this.validity.patternMismatch ? 'Enter a valid phone number (at least 7 digits).' : '');
+        });
       }
 
       // --- Submit handler -> /api/submit-lead (Airtable) ---

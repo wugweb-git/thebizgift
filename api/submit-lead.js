@@ -8,6 +8,10 @@
  * Writes a row to the Airtable "Leads" table. Both forms are normalised
  * into one common schema so the sales team has a single inbox.
  *
+ * Every submission is buffered into a durable KV queue (api/_lib/leadsQueue.js)
+ * before Airtable is contacted, and retried by api/cron/refresh-cache.js if
+ * the direct write fails -- see that module's header comment for why.
+ *
  * Required env vars (set in Vercel dashboard, never in code):
  *   AIRTABLE_API_KEY      Airtable personal access token
  *   AIRTABLE_BASE_ID      Base id (same base as the Products table)
@@ -21,8 +25,8 @@
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
-const LEADS_TABLE = process.env.AIRTABLE_LEADS_TABLE || 'Leads';
 const applyCors = require('./_lib/cors').applyCors;
+const leadsQueue = require('./_lib/leadsQueue');
 
 // Best-effort per-IP rate limit: 5 submissions/hour. Held in module-scope memory,
 // so it only holds across warm invocations of the same lambda instance (resets on
@@ -151,35 +155,44 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  // Buffer first, write to Airtable second -- see leadsQueue.js for why.
+  // This happens even before the config check below: a lead buffered while
+  // the server is misconfigured still gets delivered once someone fixes the
+  // env vars and the next reconciliation pass runs.
+  var buffered = await leadsQueue.enqueue(fields, type);
+
   if (!AIRTABLE_API_KEY || !BASE_ID) {
+    if (buffered.buffered) {
+      res.status(200).json({ ok: true, buffered: true });
+      return;
+    }
     res.status(500).json({ error: 'Server configuration error' });
     return;
   }
 
   try {
-    var url = 'https://api.airtable.com/v0/' + BASE_ID + '/' + encodeURIComponent(LEADS_TABLE);
-    var response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + AIRTABLE_API_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        records: [{ fields: fields }],
-        typecast: true
-      })
-    });
+    var ok = await leadsQueue.postToAirtable(fields);
 
-    if (!response.ok) {
-      var detail = await response.text();
-      console.error('Airtable write failed:', response.status, detail);
+    if (!ok) {
+      // Airtable rejected/errored, but the lead is safely durable -- tell
+      // the visitor it succeeded rather than asking them to resubmit.
+      // api/cron/refresh-cache.js retries it automatically.
+      if (buffered.buffered) {
+        res.status(200).json({ ok: true, buffered: true });
+        return;
+      }
       res.status(502).json({ error: 'Could not save your request. Please try again.' });
       return;
     }
 
+    await leadsQueue.dequeue(buffered.serialized);
     res.status(200).json({ ok: true });
   } catch (error) {
     console.error('submit-lead error:', error);
+    if (buffered.buffered) {
+      res.status(200).json({ ok: true, buffered: true });
+      return;
+    }
     res.status(500).json({ error: 'Failed to submit. Please try again or reach us on WhatsApp.' });
   }
 };

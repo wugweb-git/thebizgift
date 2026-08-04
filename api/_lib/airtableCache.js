@@ -96,6 +96,42 @@ async function kvSetRaw(key, value) {
   }
 }
 
+// Genuine Redis list primitives (Upstash is real Redis under the REST
+// passthrough) -- used by api/_lib/leadsQueue.js as an append-only durable
+// queue. RPUSH/LREM are atomic on the Redis side, so concurrent submissions
+// can't race each other the way a read-modify-write JSON blob would. Like
+// kvGetRaw/kvSetRaw, failures are caught and logged rather than thrown --
+// callers get a safe default (false/[]) and decide how to react.
+async function kvListPush(key, value) {
+  if (!KV_ENABLED) return false;
+  try {
+    await kvCommand(['RPUSH', key, value]);
+    return true;
+  } catch (error) {
+    console.error('airtableCache: KV list push failed for ' + key + ':', error.message);
+    return false;
+  }
+}
+
+async function kvListRange(key) {
+  if (!KV_ENABLED) return [];
+  try {
+    return (await kvCommand(['LRANGE', key, '0', '-1'])) || [];
+  } catch (error) {
+    console.error('airtableCache: KV list range failed for ' + key + ':', error.message);
+    return [];
+  }
+}
+
+async function kvListRemove(key, value) {
+  if (!KV_ENABLED) return;
+  try {
+    await kvCommand(['LREM', key, '1', value]);
+  } catch (error) {
+    console.error('airtableCache: KV list remove failed for ' + key + ':', error.message);
+  }
+}
+
 function sleep(ms) {
   return new Promise(function (resolve) { setTimeout(resolve, ms); });
 }
@@ -201,6 +237,9 @@ module.exports = {
   setTable: setTable,
   kvGetRaw: kvGetRaw,
   kvSetRaw: kvSetRaw,
+  kvListPush: kvListPush,
+  kvListRange: kvListRange,
+  kvListRemove: kvListRemove,
   isKvEnabled: function () { return KV_ENABLED; },
   hasContentSource: function () { return KV_ENABLED; }
 };

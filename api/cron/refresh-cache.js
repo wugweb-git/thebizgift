@@ -28,10 +28,17 @@
  *
  * BLOB_READ_WRITE_TOKEN and the KV credentials are required for a content
  * update. If either storage write fails, the existing live buffer is kept.
+ *
+ * Every trigger (both of the above, including the webhook-heartbeat-only
+ * path) also calls leadsQueue.flushPending() to retry any lead submissions
+ * that got buffered but couldn't reach Airtable directly -- see
+ * api/_lib/leadsQueue.js for the write-side counterpart to this read-side
+ * cache.
  */
 
 const { put } = require('@vercel/blob');
 const airtableCache = require('../_lib/airtableCache');
+const leadsQueue = require('../_lib/leadsQueue');
 
 const TABLES = [
   { name: 'Products', filter: '{Published}=TRUE()' },
@@ -233,10 +240,14 @@ async function handler(req, res) {
   }
 
   // The scheduled heartbeat only keeps Airtable's seven-day webhook lease
-  // alive. It must not read Airtable tables or mutate the website snapshot.
+  // alive. It must not read Airtable tables or mutate the website snapshot --
+  // but flushing buffered leads is a separate concern (sales pipeline, not
+  // the catalog snapshot), so it still runs here as the daily backstop for
+  // any lead a webhook retry hasn't picked up yet.
   if (!isChangeEvent && req.headers['authorization'] === 'Bearer ' + process.env.CRON_SECRET) {
     await keepWebhookAlive();
-    res.status(200).json({ refreshed: false, reason: 'Webhook heartbeat only' });
+    var heartbeatLeadsSync = await leadsQueue.flushPending();
+    res.status(200).json({ refreshed: false, reason: 'Webhook heartbeat only', leadsSync: heartbeatLeadsSync });
     return;
   }
 
@@ -275,8 +286,9 @@ async function handler(req, res) {
   }
 
   await keepWebhookAlive();
+  var leadsSync = await leadsQueue.flushPending();
 
-  res.status(hadError ? 207 : 200).json({ refreshedAt: new Date().toISOString(), results: results });
+  res.status(hadError ? 207 : 200).json({ refreshedAt: new Date().toISOString(), results: results, leadsSync: leadsSync });
 }
 
 // Vercel needs module.exports to be the callable handler directly -- but a

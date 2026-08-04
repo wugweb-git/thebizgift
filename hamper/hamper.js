@@ -568,18 +568,19 @@
               '<div class="form-row">' +
                 '<div class="form-group">' +
                   '<label for="field-quantity">Approximate Quantity</label>' +
-                  '<input type="number" id="field-quantity" name="quantity" placeholder="e.g. 100" min="1">' +
+                  '<input type="number" id="field-quantity" name="quantity" placeholder="e.g. 100" min="1" max="100000">' +
                   '<span class="field-error" id="error-quantity">Please enter a quantity of 1 or more</span>' +
                 '</div>' +
                 '<div class="form-group">' +
                   '<label for="field-required-date">Required Date</label>' +
-                  '<input type="text" id="field-required-date" name="requiredDate" placeholder="e.g. Dec 2024">' +
+                  '<input type="date" id="field-required-date" name="requiredDate">' +
+                  '<span class="field-error" id="error-required-date">Please choose today or a future date</span>' +
                 '</div>' +
               '</div>' +
 
               '<div class="form-group full-width">' +
                 '<label for="field-message">Message</label>' +
-                '<textarea id="field-message" name="message" placeholder="Tell us about your gifting requirements, audience and any specific preferences..."></textarea>' +
+                '<textarea id="field-message" name="message" maxlength="2000" placeholder="Tell us about your gifting requirements, audience and any specific preferences..."></textarea>' +
               '</div>' +
 
               '<div class="form-submit">' +
@@ -792,6 +793,16 @@
 
     function getField(id) { return document.getElementById(id); }
 
+    // Required Date can't be in the past. Kept as the native ISO value
+    // (YYYY-MM-DD) all the way to Airtable -- "Required By" is a real Date
+    // column there, and Airtable's API only parses ISO dates, not
+    // DD-MM-YYYY (confirmed: it 422s on anything else). To display it as
+    // DD-MM-YYYY in the base, set that on the field itself in Airtable
+    // (Required By column -> Formatting -> Date format), not here.
+    var requiredDateField = getField('field-required-date');
+    var todayIso = new Date().toISOString().slice(0, 10);
+    if (requiredDateField) requiredDateField.min = todayIso;
+
     function validateField(id, errorId, validator) {
       var field = getField(id);
       var error = getField(errorId);
@@ -808,8 +819,9 @@
       'field-name': { errorId: 'error-name', validator: function (v) { return v.trim().length > 0; } },
       'field-company': { errorId: 'error-company', validator: function (v) { return v.trim().length > 0; } },
       'field-email': { errorId: 'error-email', validator: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
-      'field-phone': { errorId: 'error-phone', validator: function (v) { return v.trim().length === 0 || /^[+]?[\d\s()-]{7,}$/.test(v); } },
-      'field-quantity': { errorId: 'error-quantity', validator: function (v) { return v.trim().length === 0 || Number(v) >= 1; } }
+      'field-phone': { errorId: 'error-phone', validator: function (v) { return v.trim().length === 0 || /^[+]?[\d\s()-]{7,15}$/.test(v); } },
+      'field-quantity': { errorId: 'error-quantity', validator: function (v) { return v.trim().length === 0 || (Number(v) >= 1 && Number(v) <= 100000); } },
+      'field-required-date': { errorId: 'error-required-date', validator: function (v) { return v.trim().length === 0 || v >= todayIso; } }
     };
 
     function validateAll() {
