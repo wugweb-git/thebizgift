@@ -24,12 +24,12 @@ const compatFields = require('./_lib/compatFields');
 // this is a real filename map, not a guessed pattern -- keep it in sync
 // with image/occasion/ if a slug is renamed or a new occasion is published.
 const STATIC_OCCASION_IMAGES = {
-  'employee-joining-kits': '/image/occasion/employee-joining-kits.png',
-  'event-giveaways': '/image/occasion/event-giveaways.png',
+  'employee-joining-kits': '/image/occasion/employee-joining-kits.webp',
+  'event-giveaways': '/image/occasion/event-giveaways.webp',
   'client-appreciation-gifts': '/image/occasion/client-appreciation-gifts.jpeg',
-  'festive-corporate-gifting': '/image/occasion/festive-corporate-gifting.png',
-  'festive-gifting': '/image/occasion/festive-gifting.png',
-  'wedding-gifting': '/image/occasion/wedding-gifting.png'
+  'festive-corporate-gifting': '/image/occasion/festive-corporate-gifting.webp',
+  'festive-gifting': '/image/occasion/festive-gifting.webp',
+  'wedding-gifting': '/image/occasion/wedding-gifting.webp'
 };
 
 module.exports = async function handler(req, res) {

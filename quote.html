@@ -12,7 +12,10 @@
   <link rel="stylesheet" href="/pages.css?v=12">
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
   <link rel="preload" href="/footer.html" as="fetch" crossorigin>
-  
+
+  <!-- Preload hero image -->
+  <link rel="preload" as="image" href="/image/home/featured-coffee-calm-hamper.webp">
+
   <!-- Vercel Speed Insights -->
   <script type="module" src="/speed-insights-init.js"></script>
 </head>
@@ -24,7 +27,7 @@
     <!-- SECTION 01: HERO -->
     <section class="quote-hero-section">
       <div class="quote-hero-bg">
-        <img src="/image/BCC Hamper 2.png" alt="" aria-hidden="true" loading="eager">
+        <img src="/image/home/featured-coffee-calm-hamper.webp" alt="" aria-hidden="true" loading="eager" fetchpriority="high">
       </div>
       <div class="quote-hero-container">
         <span class="eyebrow eyebrow--hero">Get In Touch</span>
@@ -155,7 +158,7 @@
             <p>Your gifting brief is in good hands. We'll be back with something worth the wait.</p>
           </div>
         </div>
-        <div class="quote-form-visual" style="background-image:url('/image/Customisation/gallery-01-client-appreciation.jpeg')"></div>
+        <div class="quote-form-visual" style="background-image:url('/image/Customisation/brand-cta-visual.webp')"></div>
       </div>
     </section>
 

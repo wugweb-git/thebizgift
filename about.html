@@ -16,7 +16,10 @@
   <link rel="stylesheet" href="/pages.css?v=12">
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
   <link rel="preload" href="/footer.html" as="fetch" crossorigin>
-  
+
+  <!-- Preload hero image -->
+  <link rel="preload" as="image" href="/image/about/hero.webp">
+
   <!-- Vercel Speed Insights -->
   <script type="module" src="/speed-insights-init.js"></script>
 </head>
@@ -28,7 +31,7 @@
     <!-- SECTION 01: HERO -->
     <section class="about-hero-section">
       <div class="about-hero-bg">
-        <img src="/image/about/hero.png" alt="" aria-hidden="true" loading="eager">
+        <img src="/image/about/hero.webp" alt="" aria-hidden="true" loading="eager" fetchpriority="high">
       </div>
       <div class="about-hero-container">
         <span class="eyebrow eyebrow--hero">THE BIZ GIFT</span>
@@ -41,7 +44,7 @@
     <section class="about-origin">
       <div class="origin-grid">
         <div class="origin-image">
-          <img src="/image/about/origin.png" alt="Executive Premium Hamper" loading="eager" onerror="this.onerror=null;this.src='/image/placeholder.png'">
+          <img src="/image/about/origin.webp" alt="Executive Premium Hamper" loading="eager" onerror="this.onerror=null;this.src='/image/placeholder.png'">
         </div>
         <div class="origin-content">
           <h2>It Started With A Simple Observation.</h2>
@@ -55,10 +58,10 @@
       </div>
     </section>
 
-    <!-- SECTION 03: EDITORIAL QUOTE (styleguide.html #editorial-quote) -->
+    <!-- SECTION 03: EDITORIAL QUOTE -->
     <section class="about-editorial">
       <div class="container">
-        <div class="editorial-quote-block editorial-quote-block--single">
+        <div class="editorial-quote-block">
           <div class="text">
             <span class="eyebrow">Our Philosophy</span>
             <div class="mark" aria-hidden="true">&ldquo;</div>
@@ -66,6 +69,11 @@
               <p>"A gift is rarely just a gift. It's a message about how much a relationship matters, and how much thought went into showing it."</p>
             </blockquote>
             <hr class="rule">
+          </div>
+          <div class="today">
+            <h2>The Biz Gift, Today</h2>
+            <p>We work with HR, admin and marketing teams across India to turn routine corporate gifting into a considered brand moment — onboarding kits, festive celebrations, client appreciation and everything in between.</p>
+            <p>Every hamper is curated, every detail reviewed, and every delivery tracked end-to-end. Reliability is as much a part of the gift as what's inside the box.</p>
           </div>
         </div>
       </div>
@@ -98,7 +106,7 @@
           </div>
         </div>
 
-        <div class="about-details-image" style="background-image:url('/image/about/details-matter.png')"></div>
+        <div class="about-details-image" style="background-image:url('/image/about/details-matter.webp')"></div>
       </div>
     </section>
 
@@ -123,7 +131,7 @@
               </ul>
               <a href="/quote.html" class="btn-action btn-primary">Request A Proposal <span class="arrow">→</span></a>
             </div>
-            <div class="dual-cta-light-visual" style="background-image:url('/image/about/dual-cta-light.png')"></div>
+            <div class="dual-cta-light-visual" style="background-image:url('/image/about/dual-cta-light.webp')"></div>
           </div>
         </div>
       </div>

@@ -53,21 +53,21 @@
     images: [
       { url: '/image/BCC Hamper 2.png', alt: 'The CC Hamper — Hero view' },
       { url: '/image/BCC Hamper.png', alt: 'The CC Hamper — Detail view' },
-      { url: '/image/Hamper 3.png', alt: 'The CC Hamper — Packaging view' },
-      { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'The CC Hamper — Lifestyle view' }
+      { url: '/image/Hamper 3.webp', alt: 'The CC Hamper — Packaging view' },
+      { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'The CC Hamper — Lifestyle view' }
     ],
     moq: '50 Units',
     material: 'Premium Kraft, Velvet Lining',
     delivery: 'Pan India',
     packaging: 'Rigid Gift Box',
     branding: [
-      { name: 'Logo Branding', description: 'Precision logo placement on packaging and products.', image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png' },
+      { name: 'Logo Branding', description: 'Precision logo placement on packaging and products.', image: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp' },
       { name: 'Laser Engraving', description: 'Permanent premium finish on wooden and metal surfaces.', image: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png' },
       { name: 'Screen Printing', description: 'Ideal for high-volume gifting with consistent results.', image: '/image/Gemini_Generated_Image_ate3jcate3jcate3.png' },
       { name: 'Custom Inserts', description: 'Welcome letters, guides and campaign collateral.', image: '/image/Gemini_Generated_Image_bemqj4bemqj4bemq.png' },
       { name: 'Corporate Colour Matching', description: 'Packaging aligned to your brand identity.', image: '/image/Gemini_Generated_Image_dpv57edpv57edpv5.png' },
       { name: 'Gift Notes', description: 'Personalised messages that add a human touch.', image: '/image/BCC Hamper 2.png' },
-      { name: 'Ribbon Colours', description: 'Custom ribbon colours to match your brand palette.', image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png' }
+      { name: 'Ribbon Colours', description: 'Custom ribbon colours to match your brand palette.', image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp' }
     ],
     related: [
       {
@@ -89,7 +89,7 @@
       {
         name: 'Heritage Box',
         slug: 'heritage-box',
-        image: '/image/Hamper 3.png',
+        image: '/image/Hamper 3.webp',
         description: 'Artisanal selection celebrating craft and tradition.',
         collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }],
         moq: '25 Boxes'
@@ -97,7 +97,7 @@
       {
         name: 'Festive Celebration Box',
         slug: 'festive-celebration-box',
-        image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png',
+        image: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp',
         description: 'Diwali and festive season gifting at scale.',
         collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }],
         moq: '50 Boxes'
@@ -121,7 +121,7 @@
       images: [
         { url: '/image/BCC Hamper.png', alt: 'Executive Welcome Kit — Hero view' },
         { url: '/image/BCC Hamper 2.png', alt: 'Executive Welcome Kit — Packaging view' },
-        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png', alt: 'Executive Welcome Kit — Branding detail' }
+        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp', alt: 'Executive Welcome Kit — Branding detail' }
       ]
     }),
     'premium-desk-set': Object.assign({}, MOCK_PRODUCT, {
@@ -134,9 +134,9 @@
       collections: [{ name: 'Best Sellers', slug: 'best-sellers', image: null }],
       usp: 'A useful desk-first gift experience with easy logo branding and flexible item combinations for bulk programs.',
       images: [
-        { url: '/image/Bottle Hamper.png', alt: 'Premium Desk Set — Hero view' },
-        { url: '/image/Hamper 3.png', alt: 'Premium Desk Set — Detail view' },
-        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.png', alt: 'Premium Desk Set — Branding detail' }
+        { url: '/image/Bottle Hamper.webp', alt: 'Premium Desk Set — Hero view' },
+        { url: '/image/Hamper 3.webp', alt: 'Premium Desk Set — Detail view' },
+        { url: '/image/Gemini_Generated_Image_6tj4v76tj4v76tj4.webp', alt: 'Premium Desk Set — Branding detail' }
       ]
     }),
     'coffee-calm': Object.assign({}, MOCK_PRODUCT, {
@@ -151,7 +151,7 @@
       images: [
         { url: '/image/BCC Hamper 2.png', alt: 'Coffee & Calm — Hero view' },
         { url: '/image/Gemini_Generated_Image_70tv9o70tv9o70tv.png', alt: 'Coffee & Calm — Packaging view' },
-        { url: '/image/Self Care Hamper V2.png', alt: 'Coffee & Calm — Wellness detail' }
+        { url: '/image/Self Care Hamper V2.webp', alt: 'Coffee & Calm — Wellness detail' }
       ]
     }),
     'heritage-box': Object.assign({}, MOCK_PRODUCT, {
@@ -164,8 +164,8 @@
       collections: [{ name: 'Staff Favorites', slug: 'staff-favorites', image: null }],
       usp: 'A tactile festive presentation with craft-led packaging, inserts and flexible product curation.',
       images: [
-        { url: '/image/Hamper 3.png', alt: 'Heritage Box — Hero view' },
-        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'Heritage Box — Festive detail' },
+        { url: '/image/Hamper 3.webp', alt: 'Heritage Box — Hero view' },
+        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'Heritage Box — Festive detail' },
         { url: '/image/BCC Hamper.png', alt: 'Heritage Box — Packaging view' }
       ]
     }),
@@ -179,7 +179,7 @@
       collections: [{ name: 'Trending Products', slug: 'trending-products', image: null }],
       usp: 'Built for seasonal scale with custom sleeves, cards, inserts and pan India logistics support.',
       images: [
-        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.png', alt: 'Festive Celebration Box — Hero view' },
+        { url: '/image/Gemini_Generated_Image_dd7nyydd7nyydd7n.webp', alt: 'Festive Celebration Box — Hero view' },
         { url: '/image/BCC Hamper 2.png', alt: 'Festive Celebration Box — Packaging view' },
         { url: '/image/Gemini_Generated_Image_sx0cy0sx0cy0sx0c.png', alt: 'Festive Celebration Box — Detail view' }
       ]
