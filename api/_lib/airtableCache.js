@@ -96,6 +96,17 @@ async function kvSetRaw(key, value) {
   }
 }
 
+// Records "when was the buffer last written to" -- both a per-table-key
+// timestamp (lastRefreshedAt::<key>) and a single global one
+// (cache:lastRefreshedAt) that always reflects the most recent write to
+// ANY table, so a status check doesn't need to know every key up front.
+// Best-effort: a failure here must never block the actual cache write.
+async function touchLastRefreshed(key) {
+  var now = new Date().toISOString();
+  await kvSetRaw('lastRefreshedAt::' + key, now);
+  await kvSetRaw('cache:lastRefreshedAt', now);
+}
+
 // Genuine Redis list primitives (Upstash is real Redis under the REST
 // passthrough) -- used by api/_lib/leadsQueue.js as an append-only durable
 // queue. RPUSH/LREM are atomic on the Redis side, so concurrent submissions
@@ -216,6 +227,7 @@ async function refreshTable(tableName, filterFormula, extraParams) {
   var records = await fetchAllRecords(tableName, filterFormula, extraParams);
 
   await kvSet(key, records);
+  await touchLastRefreshed(key);
   return records;
 }
 
@@ -228,6 +240,17 @@ async function refreshTable(tableName, filterFormula, extraParams) {
 async function setTable(tableName, filterFormula, extraParams, records) {
   var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
   await kvSet(key, records);
+  await touchLastRefreshed(key);
+}
+
+// Reads back the timestamps touchLastRefreshed() writes. Pass no args (or
+// omit tableName) for the global "last write to any table" timestamp;
+// pass the same (tableName, filterFormula, extraParams) a caller used with
+// refreshTable()/setTable() for that specific table's timestamp.
+async function getLastRefreshedAt(tableName, filterFormula, extraParams) {
+  if (!tableName) return kvGetRaw('cache:lastRefreshedAt');
+  var key = tableName + '::' + filterFormula + '::' + (extraParams || '');
+  return kvGetRaw('lastRefreshedAt::' + key);
 }
 
 module.exports = {
@@ -235,6 +258,7 @@ module.exports = {
   getCachedTable: getCachedTable,
   refreshTable: refreshTable,
   setTable: setTable,
+  getLastRefreshedAt: getLastRefreshedAt,
   kvGetRaw: kvGetRaw,
   kvSetRaw: kvSetRaw,
   kvListPush: kvListPush,
