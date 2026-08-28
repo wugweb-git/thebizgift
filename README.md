@@ -2,6 +2,8 @@
 
 Premium B2B corporate gifting platform for the Indian market. Curated hampers designed to help companies thank their people and partners with thoughtful, memorable experiences.
 
+Built and maintained by [Wugweb](https://wugweb.com).
+
 **Live:** https://thebizgift.vercel.app
 
 ## Tech Stack
