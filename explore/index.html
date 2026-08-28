@@ -385,7 +385,7 @@
       /* ----------------------------------------------------------------
          STATE (occasion/category/collection slugs + sort), URL-backed
          ---------------------------------------------------------------- */
-      var state = { occasion: [], category: [], collection: [], sort: 'featured' };
+      var state = { occasion: [], category: [], collection: [], sort: 'featured', featured: false };
 
       function parseStateFromLocation() {
         var params = new URLSearchParams(window.location.search);
@@ -397,6 +397,7 @@
         state.category = group('category');
         state.collection = group('collection');
         state.sort = params.get('sort') || 'featured';
+        state.featured = params.get('featured') === '1';
       }
       parseStateFromLocation();
 
@@ -415,6 +416,7 @@
           if (state[group].length > 0) params.set(group, state[group].join(','));
         });
         if (state.sort !== 'featured') params.set('sort', state.sort);
+        if (state.featured) params.set('featured', '1');
         var qs = params.toString();
         var url = window.location.pathname + (qs ? '?' + qs : '');
         if (replace) window.history.replaceState(null, '', url);
@@ -426,6 +428,10 @@
         var hasQueryState = window.location.search.length > 1;
         if (!hash || hasQueryState) return;
         if (hash === 'collections') return; // sidebar itself carries this id
+        if (hash === 'featured') {
+          if (!state.featured) { state.featured = true; writeStateToURL(true); }
+          return;
+        }
         var matchedAny = false;
         ['occasion', 'category', 'collection'].forEach(function (group) {
           var known = taxonomy[group].some(function (item) { return item.slug === hash; });
@@ -447,7 +453,8 @@
       function matchesFilters(product) {
         return groupMatches(state.occasion, product.occasionSlugs) &&
                groupMatches(state.category, product.categorySlugs) &&
-               groupMatches(state.collection, product.collectionSlugs);
+               groupMatches(state.collection, product.collectionSlugs) &&
+               (!state.featured || product.featured);
       }
 
       function parseMoq(str) {
@@ -535,6 +542,9 @@
             chips.push(chipHtml(group, slug, nameForSlug(group, slug)));
           });
         });
+        if (state.featured) {
+          chips.push(chipHtml('featured', 'featured', 'Featured Hampers'));
+        }
         if (state.sort !== 'featured') {
           chips.push(chipHtml('sort', state.sort, SORT_LABELS[state.sort]));
         }
@@ -550,7 +560,7 @@
       }
 
       function hasActiveFilters() {
-        return state.occasion.length > 0 || state.category.length > 0 || state.collection.length > 0 || state.sort !== 'featured';
+        return state.occasion.length > 0 || state.category.length > 0 || state.collection.length > 0 || state.featured || state.sort !== 'featured';
       }
 
       function render() {
@@ -582,7 +592,7 @@
          EVENTS
          ---------------------------------------------------------------- */
       function clearAll() {
-        state = { occasion: [], category: [], collection: [], sort: 'featured' };
+        state = { occasion: [], category: [], collection: [], sort: 'featured', featured: false };
         writeStateToURL(false);
         render();
       }
@@ -611,6 +621,7 @@
         var group = btn.getAttribute('data-remove-group');
         var value = btn.getAttribute('data-remove-value');
         if (group === 'sort') state.sort = 'featured';
+        else if (group === 'featured') state.featured = false;
         else {
           var idx = state[group].indexOf(value);
           if (idx !== -1) state[group].splice(idx, 1);

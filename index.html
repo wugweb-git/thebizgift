@@ -236,7 +236,7 @@
         </div>
 
         <div class="section-footer">
-          <a href="/explore/" class="btn-action">View All Hampers</a>
+          <a href="/explore/#featured" class="btn-action">View All Hampers</a>
         </div>
       </div>
     </section>
@@ -428,12 +428,9 @@
         window.TBG_fetchJSON('/api/get-featured-hampers')
           .then(function (hampers) {
             if (!Array.isArray(hampers) || hampers.length === 0) return;
-            // Interim "is this a hamper" proxy: Products has no dedicated hamper
-            // flag, so restrict to the combo category until Airtable gets one
-            // (see docs/content-architecture.md).
-            var featured = hampers.filter(function (h) {
-              return h.featured && Array.isArray(h.categorySlugs) && h.categorySlugs.indexOf('combo') !== -1;
-            });
+            // "Featured on Homepage" in Airtable is the curation signal for this
+            // grid -- the same set /explore/#featured shows in full.
+            var featured = hampers.filter(function (h) { return h.featured; });
             if (featured.length === 0) return;
             var html = featured.slice(0, 6).map(function (h) {
               var div = document.createElement('div');
