@@ -940,7 +940,7 @@
   }
 
   // --- Connect popup: fires once the visitor has scrolled past the halfway
-  // point, and only once per session.
+  // point on a PDP, up to twice per session, and auto-dismisses after 10s.
   //
   // This replaced a 5-second dwell timer capped at 3 shows/session. The timer
   // fired while people were still reading the hero -- it interrupted the
@@ -949,8 +949,9 @@
   // interested", so the prompt now lands after genuine engagement rather than
   // after mere elapsed time.
   function initConnectPopup() {
-    var MAX_SHOWS = 1;
+    var MAX_SHOWS = 2;
     var SCROLL_TRIGGER_RATIO = 0.5;
+    var AUTO_DISMISS_MS = 10000;
     var STORAGE_KEY = 'bizgift_connect_popup_shown';
 
     var modal = $('#connectPopup');
@@ -960,6 +961,7 @@
     if (shownCount >= MAX_SHOWS) return;
 
     var fired = false;
+    var dismissTimer = null;
 
     function scrolledPastTrigger() {
       var scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -974,6 +976,7 @@
       modal.hidden = false;
       document.body.classList.add('modal-open');
       sessionStorage.setItem(STORAGE_KEY, String(shownCount + 1));
+      dismissTimer = setTimeout(dismiss, AUTO_DISMISS_MS);
     }
 
     function onScroll() {
@@ -983,6 +986,10 @@
     window.addEventListener('scroll', onScroll, { passive: true });
 
     function dismiss() {
+      if (dismissTimer) {
+        clearTimeout(dismissTimer);
+        dismissTimer = null;
+      }
       modal.hidden = true;
       document.body.classList.remove('modal-open');
     }
