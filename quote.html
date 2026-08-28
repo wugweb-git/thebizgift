@@ -334,22 +334,66 @@
         });
       }
 
-      // Populates each invalid field's linked .field-error span (native
-      // Constraint Validation API messages) instead of the browser's default
-      // tooltip, so screen readers pick errors up via aria-describedby.
+      // Friendly replacements for the browser's generic constraint messages
+      // ("Please fill in this field."). Fields with their own
+      // setCustomValidity rule above already carry a specific message, which
+      // messageFor() passes straight through.
+      var REQUIRED_MESSAGES = {
+        fullName: 'Please enter your name.',
+        companyName: 'Please enter your company name.',
+        workEmail: 'Please enter your work email.',
+        phoneNumber: 'Please enter your phone number.',
+        quantity: 'Please enter a quantity.',
+        occasion: 'Please select an occasion.',
+        message: 'Please tell us about your requirement.'
+      };
+
+      function messageFor(el) {
+        if (el.validity.valueMissing && REQUIRED_MESSAGES[el.id]) return REQUIRED_MESSAGES[el.id];
+        if (el.validity.typeMismatch && el.type === 'email') return 'Please enter a valid email address.';
+        if (el.validity.rangeUnderflow && el.id === 'quantity') return 'Minimum order quantity is ' + el.min + '.';
+        return el.validationMessage;
+      }
+
+      // Populates a field's linked .field-error span instead of the browser's
+      // default tooltip, so screen readers pick errors up via aria-describedby.
+      function validateElement(el) {
+        if (!el.willValidate || !el.id) return true;
+        var errorEl = document.getElementById(el.id + '-error');
+        if (el.validity.valid) {
+          el.removeAttribute('aria-invalid');
+          if (errorEl) { errorEl.textContent = ''; errorEl.classList.remove('visible'); }
+          return true;
+        }
+        el.setAttribute('aria-invalid', 'true');
+        if (errorEl) { errorEl.textContent = messageFor(el); errorEl.classList.add('visible'); }
+        return false;
+      }
+
       function showFieldErrors() {
         var firstInvalid = null;
         Array.prototype.forEach.call(form.elements, function (el) {
-          if (!el.willValidate || el.validity.valid) return;
-          el.setAttribute('aria-invalid', 'true');
-          var errorEl = document.getElementById(el.id + '-error');
-          if (errorEl) {
-            errorEl.textContent = el.validationMessage;
-            errorEl.classList.add('visible');
-          }
-          if (!firstInvalid) firstInvalid = el;
+          if (!validateElement(el) && !firstInvalid) firstInvalid = el;
         });
         return firstInvalid;
+      }
+
+      // Validate on blur so problems surface as the visitor moves through the
+      // form rather than all at once at submit time; while a field is already
+      // flagged, re-check on input so the error clears the moment it's fixed.
+      // Registered after the setCustomValidity handlers above so those rules
+      // have already run when validity is read here.
+      if (form) {
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.willValidate || !el.id) return;
+          el.addEventListener('blur', function () { validateElement(el); });
+          el.addEventListener('input', function () {
+            if (el.getAttribute('aria-invalid') === 'true') validateElement(el);
+          });
+          el.addEventListener('change', function () {
+            if (el.tagName === 'SELECT' || el.getAttribute('aria-invalid') === 'true') validateElement(el);
+          });
+        });
       }
 
       if (form) {
