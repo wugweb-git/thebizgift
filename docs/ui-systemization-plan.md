@@ -46,7 +46,7 @@ See `ui-audit.md` for the full report. Headline findings:
 ## Phases (do in order — do not jump ahead)
 
 ### Phase 0 — Production stable ✅ DONE (Session 1)
-Vercel build succeeds, all pages render, navigation works, no broken assets/CSS/JS, no console errors. Site serves from the repo root (zero-config, transferable). **Live:** https://thebizgift.vercel.app
+Vercel build succeeds, all pages render, navigation works, no broken assets/CSS/JS, no console errors. Site serves from the repo root (zero-config, transferable). **Live:** https://thebizgift.com
 
 ### Phase 1 — Materialise existing documentation ✅ DONE (Session 1–2)
 Read design.md (+ related .md), tokens/*.json, CLAUDE.md, HTML, CSS, JS. Do **not** redesign while reading — extract the system. Build a UI inventory: for every item answer *Does it exist? Where? What CSS controls it? Reusable? Duplicated? Missing?*

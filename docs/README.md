@@ -15,7 +15,7 @@ We design hampers with the same care and intentionality that goes into any good 
 
 ## Live Preview
 
-**Production:** https://thebizgift.vercel.app
+**Production:** https://thebizgift.com
 
 ## Key Features
 

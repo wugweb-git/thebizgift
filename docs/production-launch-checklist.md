@@ -129,7 +129,7 @@ When ready to enable:
 
 ## 6. Domain & DNS
 
-- [ ] Custom domain configured in Vercel (not just `thebizgift.vercel.app`)
+- [x] Custom domain configured in Vercel — production is `thebizgift.com`
 - [ ] SSL certificate active (Vercel handles this automatically)
 - [ ] `www` → root redirect (or vice versa) configured
 - [ ] Email DNS records (MX, SPF, DKIM) for `hello@thebizgift.com`

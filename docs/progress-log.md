@@ -64,7 +64,7 @@
 
 - [x] **Root cause of broken live site found:** Vercel's Root Directory was not set to `html`, so it served the repo root (no index.html) → production 404. Proof: `/html/index.html` = 200, `/` = 404.
 - [x] **Fix (transferable + scalable, per user):** moved all site files `html/* → repo root`. Now deploys on any Vercel account with default settings — zero config. `vercel.json` + `.vercelignore` at root.
-- [x] **Site is LIVE:** https://thebizgift.vercel.app returns 200; CSS/JS with new design tokens served; nav (`.html` links), `/explore/`, product pages all resolve.
+- [x] **Site is LIVE:** https://thebizgift.com returns 200; CSS/JS with new design tokens served; nav (`.html` links), `/explore/`, product pages all resolve.
 - [x] **Docs synced to new structure:** CLAUDE.md, CLAUDE.local.md, README.md (root), docs/README.md, docs/build.md (2 folder trees + 5 deploy refs), docs/decision-log.md (D009 superseded). Stripped stale `html/` path prefixes across design.md, content-architecture.md, docs/README.md.
 - [x] **Airtable LIVE access confirmed via MCP** (read). Base `appG2IVjN168FLoqT` real tables: Products (134), Category, Enquiries (real leads table), Vendor, Tag Master, Proposals, Proposal Items. Code targets non-existent Leads/Collections/Occasions — to rewire in the post-UI-approval phase.
 
@@ -95,7 +95,7 @@
 
 ### Next Steps
 1. Commit and push changes — verify Vercel deployment succeeds
-2. Test live site at https://thebizgift.vercel.app — verify explore page renders correctly
+2. Test live site at https://thebizgift.com — verify explore page renders correctly
 3. Fix remaining code-design alignment (z-index, elevation, typography tokens)
 4. Wire up Airtable read endpoints when schema is confirmed
 5. Replace placeholder contact info (WhatsApp, social links)

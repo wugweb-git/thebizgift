@@ -4,7 +4,7 @@
 
 Premium B2B corporate gifting website for the Indian market. Static HTML/CSS/JS site deployed on Vercel with Airtable as the planned CMS (currently using mock data).
 
-**Live URL:** https://thebizgift.vercel.app
+**Live URL:** https://thebizgift.com
 
 ## Tech Stack
 
@@ -147,7 +147,7 @@ Three deliberate design choices worth knowing before editing this module:
 - Framework Preset = Other (static)
 - Config: `vercel.json` at repo root (security headers, image + CSS/JS caching); `.vercelignore` keeps `docs/` out of the bundle
 - Environment variables: `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and the KV pair (`UPSTASH_REDIS_REST_URL`+`UPSTASH_REDIS_REST_TOKEN`, or `KV_REST_API_URL`+`KV_REST_API_TOKEN`) are **required** — without KV every read endpoint returns a 500. `AIRTABLE_LEADS_TABLE`, `WEBHOOK_SECRET`, `CRON_SECRET`, `BLOB_READ_WRITE_TOKEN` are optional (see "Caching / rate-limit architecture" above)
-- **Live:** https://thebizgift.vercel.app
+- **Live:** https://thebizgift.com
 
 ## Client Migration Checklist
 

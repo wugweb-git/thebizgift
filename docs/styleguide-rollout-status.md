@@ -34,7 +34,7 @@ e2d9b3f Fix hero contrast: strengthen gradient overlay + add text-shadow safety
 3522b43 Trim homepage/about/customisation sections, restyle testimonials, add category browse
 2832007 Replace FAQ content site-wide, remove redundant quote-page gallery
 ```
-All pushed to `main`, live on Vercel at https://thebizgift.vercel.app/.
+All pushed to `main`, live on Vercel at https://thebizgift.com.
 
 ---
 
